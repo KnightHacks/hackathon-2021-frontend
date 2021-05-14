@@ -1,5 +1,7 @@
-import { CgMenu, CgVolume } from "react-icons/cg";
+import { CgMenu } from "react-icons/cg";
+import { GrVolume, GrVolumeMute } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import VolumeButton from "./VolumeButton";
 
 /**
  * @desc Renders menu component containing nav menu and volume
@@ -44,12 +46,7 @@ const Menu = ({ open, setOpen }) => {
               </ul>
             ) : null}
           </div>
-          <CgVolume
-            className={
-              "text-4xl md:text-5xl cursor-pointer float-right " +
-              (open ? "invisible" : "")
-            }
-          />
+          <VolumeButton />
         </div>
       </div>
     </div>
