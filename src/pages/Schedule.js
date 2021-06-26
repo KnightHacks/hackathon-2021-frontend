@@ -9,6 +9,10 @@ import ColorHash from "color-hash";
 
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
+  useEffect(() => {
+    window.title = "Schedule";
+  });
+
   return (
     <Page onLanding={true}>
       <div className="grid w-full flex-col my-4 md:my-12">

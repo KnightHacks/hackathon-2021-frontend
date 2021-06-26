@@ -7,6 +7,10 @@ import Page from "../components/Page";
  */
 
 const Landing = () => {
+  useEffect(() => {
+    window.title = "Knight Hacks";
+  });
+
   return (
     <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto">

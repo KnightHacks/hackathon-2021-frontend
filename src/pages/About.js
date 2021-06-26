@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
 import Page from "../components/Page";
 /**
@@ -5,6 +6,10 @@ import Page from "../components/Page";
  * @author Ro-Hanna Jowallah
  */
 const About = () => {
+  useEffect(() => {
+    window.title = "About";
+  });
+
   return (
     <Page onLanding={false}>
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">

@@ -2,12 +2,17 @@ import Page from "../components/Page";
 import { Disclosure, Transition } from "@headlessui/react";
 import { HiChevronDown } from "react-icons/hi";
 import list from "../assets/content/faq.json";
+import { useEffect } from "react";
 /**
  * @desc Renders FAQ page using dropdowns
  * @author Abraham Hernandez
  */
 
 const FAQ = () => {
+  useEffect(() => {
+    window.title = "FAQ";
+  });
+  
   return (
     <Page onLanding={false}>
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">

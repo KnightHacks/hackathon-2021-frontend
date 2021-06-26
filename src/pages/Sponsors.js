@@ -8,6 +8,10 @@ import TestLogo from "../assets/KnightHacksLogo.svg";
  * @author Rob
  */
 const Sponsors = () => {
+  useEffect(() => {
+    window.title = "Sponsors";
+  });
+
   return (
     <Page onLanding={false}>
       <h1
