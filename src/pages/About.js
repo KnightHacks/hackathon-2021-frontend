@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
 import Page from "../components/Page";
 /**
  * @desc About Page
@@ -25,17 +24,6 @@ const About = () => {
             care of the rest. Create a product, learn new skills and have fun
             with friends old and new – all in 36 hours.
           </div>
-        </div>
-        <div className="flex flex-row  mb-8 space-x-8  mt-32 text-4xl sm:text-5xl md:text-6xl">
-          <a href="https://twitter.com/KnightHacks?lang=en/">
-            <FaTwitter className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
-          </a>
-          <a href="https://www.instagram.com/knighthacks/">
-            <FaInstagram className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
-          </a>
-          <a href="https://www.facebook.com/KnightHacks/">
-            <FaFacebookF className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
-          </a>
         </div>
       </div>
     </Page>
