@@ -2,6 +2,7 @@ import Page from "../components/Page";
 
 // for testing only, not for final production
 import TestLogo from "../assets/KnightHacksLogo.svg";
+import { useEffect } from "react";
 
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
@@ -9,7 +10,7 @@ import TestLogo from "../assets/KnightHacksLogo.svg";
  */
 const Sponsors = () => {
   useEffect(() => {
-    window.title = "Sponsors";
+    document.title = "Sponsors";
   });
 
   return (

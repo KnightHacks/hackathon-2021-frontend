@@ -7,7 +7,7 @@ import Page from "../components/Page";
  */
 const About = () => {
   useEffect(() => {
-    window.title = "About";
+    document.title = "About";
   });
 
   return (

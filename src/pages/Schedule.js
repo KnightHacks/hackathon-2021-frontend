@@ -1,6 +1,7 @@
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
+import { useEffect } from "react";
 
 /**
  * @desc Displays Schedule using formatted events from JSON
@@ -10,7 +11,7 @@ import ColorHash from "color-hash";
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
   useEffect(() => {
-    window.title = "Schedule";
+    document.title = "Schedule";
   });
 
   return (

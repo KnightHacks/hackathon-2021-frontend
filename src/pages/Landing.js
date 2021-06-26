@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
 
@@ -8,7 +9,7 @@ import Page from "../components/Page";
 
 const Landing = () => {
   useEffect(() => {
-    window.title = "Knight Hacks";
+    document.title = "Knight Hacks";
   });
 
   return (

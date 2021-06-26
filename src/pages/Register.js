@@ -1,8 +1,10 @@
+import { useEffect } from "react";
+
 const Register = () => {
   useEffect(() => {
-    window.title = "Register";
+    document.title = "Register";
   });
-  
+
   return <div>Register Page</div>;
 };
 
