@@ -1,5 +1,46 @@
+import { useState } from "react";
+import Page from "../components/Page";
+
 const Register = () => {
-  return <div>Register Page</div>;
+  return (
+    <Page onLanding={false}>
+      <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
+        Register
+      </h1>
+    </Page>
+  );
+};
+
+/**
+ * @desc An input box component with useful defaults. Use similarly to a
+ * controlled component, except you only have to provide a setter function using
+ * the `setter` prop if you want the typical `event =>
+ * setter(event.target.value)` pattern. You can override `onChange` if you wish,
+ * but then `setter` will have no effect and you must set `value` to the correct
+ * value yourself.
+ * @prop label
+ * @prop setter
+ * @author Rob
+ */
+const TextInputBox = ({ label, setter, ...props }) => {
+  const [value, setValue] = useState("");
+  return (
+    <div className="my-8">
+      <label>
+        <span className="mr-2">{label}</span>
+        <input
+          className="rounded-lg text-gray-800 p-2"
+          type="text"
+          onChange={(event) => {
+            setValue(event.target.value);
+            setter(event.target.value);
+          }}
+          value={value}
+          {...props}
+        />
+      </label>
+    </div>
+  );
 };
 
 /**
