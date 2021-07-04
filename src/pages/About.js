@@ -1,16 +1,11 @@
-import { useEffect } from "react";
 import Page from "../components/Page";
 /**
  * @desc About Page
  * @author Ro-Hanna Jowallah
  */
 const About = () => {
-  useEffect(() => {
-    document.title = "About";
-  });
-
   return (
-    <Page onLanding={false}>
+    <Page onLanding={false} pageTitle="About">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
         <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
           About Us

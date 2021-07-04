@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
 
@@ -8,12 +7,8 @@ import Page from "../components/Page";
  */
 
 const Landing = () => {
-  useEffect(() => {
-    document.title = "Knight Hacks";
-  });
-
   return (
-    <Page onLanding={true}>
+    <Page onLanding={true} pageTitle="Knight Hacks">
         <div className="flex justify-center items-center flex-col w-full mt-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center">
             Welcome to

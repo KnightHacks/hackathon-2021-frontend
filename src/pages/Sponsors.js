@@ -2,19 +2,14 @@ import Page from "../components/Page";
 
 // for testing only, not for final production
 import TestLogo from "../assets/KnightHacksLogo.svg";
-import { useEffect } from "react";
 
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
  */
 const Sponsors = () => {
-  useEffect(() => {
-    document.title = "Sponsors";
-  });
-
   return (
-    <Page onLanding={false}>
+    <Page onLanding={false} pageTitle="Sponsors">
       <h1
         className={`
           text-4xl w-full text-center mt-16

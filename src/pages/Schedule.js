@@ -1,7 +1,6 @@
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
-import { useEffect } from "react";
 
 /**
  * @desc Displays Schedule using formatted events from JSON
@@ -10,12 +9,8 @@ import { useEffect } from "react";
 
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
-  useEffect(() => {
-    document.title = "Schedule";
-  });
-
   return (
-    <Page onLanding={true}>
+    <Page onLanding={true} pageTitle="Schedule">
       <div className="grid w-full flex-col my-4 md:my-12">
         <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
           Schedule

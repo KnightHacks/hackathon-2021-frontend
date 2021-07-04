@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
@@ -9,8 +9,12 @@ import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
  * @author Abraham Hernandez
  */
 
-const Page = ({ children, onLanding }) => {
+const Page = ({ children, onLanding, pageTitle }) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = pageTitle;
+  });
 
   return (
     <div
