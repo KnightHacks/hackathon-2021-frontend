@@ -106,9 +106,11 @@ const Register = () => {
                         }
                       >
                         <span className="flex justify-center relative">
-                          <span className="absolute inset-y-0 left-0 flex">
-                            <IoCheckmark className="self-center" />
-                          </span>
+                          {selected ? (
+                            <span className="absolute inset-y-0 left-0 flex">
+                              <IoCheckmark className="self-center" />
+                            </span>
+                          ) : null}
                           <span className="self-center">{track}</span>
                         </span>
                       </div>
