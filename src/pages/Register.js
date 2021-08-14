@@ -1,12 +1,130 @@
 import { useState } from "react";
+import { Listbox } from "@headlessui/react";
+import { IoCheckmark } from "react-icons/io5";
 import Page from "../components/Page";
 
+/**
+ * @desc Registration page where hackers can sign up for the hackathon. After
+ * submitting, the backend is updated and they will recieve a success message
+ * on the page.
+ *
+ * @author Rob
+ */
 const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [resume, setResume] = useState("");
+  const [graduation, setGraduation] = useState("");
+  const [socials, setSocials] = useState("");
+  const [username, setUsername] = useState("");
+
+  const trackOptions = ["Beginner", "Advanced"];
+  const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
+
+  // "unset" | "success" | "failure" | "pending"
+  const [registrationState, setRegistrationState] = useState("unset");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+
+  const submitRegistration = async (event) => {
+    event.preventDefault();
+    console.log("hi");
+    return;
+    switch (registrationState) {
+      case "pending":
+        setFeedbackMessage("Registration is being processed!");
+        break;
+      case "success":
+        setFeedbackMessage("Registration already successful!");
+        break;
+      default:
+        setRegistrationState("pending");
+        setFeedbackMessage("Processing registration...");
+        const response = await createHacker(
+          firstName,
+          lastName,
+          schoolName,
+          email,
+          phoneNumber,
+          resume,
+          selectedTrack,
+          graduation,
+          socials,
+          username,
+          "hacker"
+        );
+        if (response.ok) setRegistrationState("success");
+        else setRegistrationState("failure");
+    }
+  };
+
   return (
     <Page onLanding={false}>
       <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
         Register
       </h1>
+      <form onSubmit={submitRegistration}>
+        <TextInputBox label="First Name:" setter={setFirstName} />
+        <TextInputBox label="Last Name:" setter={setLastName} />
+        <TextInputBox label="Phone:" setter={setPhoneNumber} />
+        <TextInputBox label="School Name:" setter={setSchoolName} />
+        <TextInputBox label="Email:" setter={setEmail} />
+        <TextInputBox label="Resume:" setter={setResume} />
+        <TextInputBox label="Graduation:" setter={setGraduation} />
+        <TextInputBox label="Socials:" setter={setSocials} />
+        <TextInputBox label="Username:" setter={setUsername} />
+        <div>
+          <span>Track:</span>
+          <div>
+            <Listbox value={selectedTrack} onChange={setSelectedTrack}>
+              <Listbox.Button className="rounded-lg bg-white text-gray-800 p-2 w-full">
+                <span className="capitalize">{selectedTrack}</span>
+              </Listbox.Button>
+              <Listbox.Options>
+                {trackOptions.map((track, index) => {
+                  return (
+                    <Listbox.Option key={index} value={track}>
+                      {({ active, selected }) => (
+                        <div
+                          className={
+                            `
+                      rounded-lg p-2 text-center m-1
+                      bg-white
+                    ` +
+                            (active
+                              ? "bg-blue-500 text-white"
+                              : "bg-white text-gray-800")
+                          }
+                        >
+                          <span className="flex justify-center relative">
+                            <span className="absolute inset-y-0 left-0 flex">
+                              <IoCheckmark className="self-center"/>
+                            </span>
+                            <span className="self-center">{track}</span>
+                          </span>
+                        </div>
+                      )}
+                    </Listbox.Option>
+                  );
+                })}
+              </Listbox.Options>
+            </Listbox>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <input
+            type="submit"
+            className={`
+              bg-purple-600 rounded-lg m-6 py-2 px-4
+              hover:bg-purple-700
+              active:bg-purple-800
+            `}
+            value="Submit"
+          />
+        </div>
+      </form>
     </Page>
   );
 };
@@ -27,9 +145,9 @@ const TextInputBox = ({ label, setter, ...props }) => {
   return (
     <div className="my-8">
       <label>
-        <span className="mr-2">{label}</span>
+        <span>{label}</span>
         <input
-          className="rounded-lg text-gray-800 p-2"
+          className="rounded-lg text-gray-800 p-2 w-full"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
