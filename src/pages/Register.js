@@ -65,24 +65,30 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
         Register
       </h1>
-      <form onSubmit={submitRegistration}>
-        <TextInputBox label="First Name:" setter={setFirstName} />
-        <TextInputBox label="Last Name:" setter={setLastName} />
-        <TextInputBox
-          label="Phone:"
-          pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-          setter={setPhoneNumber}
-        />
-        <TextInputBox label="School Name:" setter={setSchoolName} />
-        <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
-        <TextInputBox label="Resume:" setter={setResume} />
-        <TextInputBox
-          label="Graduation Year:"
-          pattern="^\d{4}$"
-          setter={setGraduation}
-        />
+      <form onSubmit={submitRegistration} className="flex flex-col">
+        <div className="flex flex-row space-x-4 justify-center">
+          <TextInputBox label="First Name:" setter={setFirstName} />
+          <TextInputBox label="Last Name:" setter={setLastName} />
+        </div>
+        <div className="flex flex-row space-x-4 justify-center">
+          <TextInputBox
+            label="Phone:"
+            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
+            setter={setPhoneNumber}
+          />
+          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+        </div>
+        <div className="flex flex-row space-x-4 justify-center">
+          <TextInputBox label="School Name:" setter={setSchoolName} />
+          <TextInputBox
+            label="Graduation Year:"
+            pattern="^\d{4}$"
+            setter={setGraduation}
+          />
+        </div>
         <TextInputBox label="Socials:" setter={setSocials} />
         <TextInputBox label="Username:" setter={setUsername} />
+        <TextInputBox label="Resume:" setter={setResume} />
         <div>
           <span>Track:</span>
           <Listbox value={selectedTrack} onChange={setSelectedTrack}>
@@ -151,11 +157,11 @@ const Register = () => {
 const TextInputBox = ({ label, setter, ...props }) => {
   const [value, setValue] = useState("");
   return (
-    <div className="my-8">
+    <div className="my-4 flex-1">
       <label>
         <span>{label}</span>
         <input
-          className="rounded-lg text-gray-800 p-2 w-full"
+          className="text-gray-800 p-2 w-full px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
