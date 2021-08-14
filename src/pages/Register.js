@@ -68,11 +68,19 @@ const Register = () => {
       <form onSubmit={submitRegistration}>
         <TextInputBox label="First Name:" setter={setFirstName} />
         <TextInputBox label="Last Name:" setter={setLastName} />
-        <TextInputBox label="Phone:" setter={setPhoneNumber} />
+        <TextInputBox
+          label="Phone:"
+          pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
+          setter={setPhoneNumber}
+        />
         <TextInputBox label="School Name:" setter={setSchoolName} />
-        <TextInputBox label="Email:" setter={setEmail} />
+        <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
         <TextInputBox label="Resume:" setter={setResume} />
-        <TextInputBox label="Graduation:" setter={setGraduation} />
+        <TextInputBox
+          label="Graduation Year:"
+          pattern="^\d{4}$"
+          setter={setGraduation}
+        />
         <TextInputBox label="Socials:" setter={setSocials} />
         <TextInputBox label="Username:" setter={setUsername} />
         <div>
@@ -100,7 +108,7 @@ const Register = () => {
                         >
                           <span className="flex justify-center relative">
                             <span className="absolute inset-y-0 left-0 flex">
-                              <IoCheckmark className="self-center"/>
+                              <IoCheckmark className="self-center" />
                             </span>
                             <span className="self-center">{track}</span>
                           </span>
