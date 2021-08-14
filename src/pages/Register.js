@@ -85,41 +85,39 @@ const Register = () => {
         <TextInputBox label="Username:" setter={setUsername} />
         <div>
           <span>Track:</span>
-          <div>
-            <Listbox value={selectedTrack} onChange={setSelectedTrack}>
-              <Listbox.Button className="rounded-lg bg-white text-gray-800 p-2 w-full">
-                <span className="capitalize">{selectedTrack}</span>
-              </Listbox.Button>
-              <Listbox.Options>
-                {trackOptions.map((track, index) => {
-                  return (
-                    <Listbox.Option key={index} value={track}>
-                      {({ active, selected }) => (
-                        <div
-                          className={
-                            `
+          <Listbox value={selectedTrack} onChange={setSelectedTrack}>
+            <Listbox.Button className="rounded-lg bg-white text-gray-800 p-2 w-full">
+              <span className="capitalize">{selectedTrack}</span>
+            </Listbox.Button>
+            <Listbox.Options>
+              {trackOptions.map((track, index) => {
+                return (
+                  <Listbox.Option key={index} value={track}>
+                    {({ active, selected }) => (
+                      <div
+                        className={
+                          `
                       rounded-lg p-2 text-center m-1
                       bg-white
                     ` +
-                            (active
-                              ? "bg-blue-500 text-white"
-                              : "bg-white text-gray-800")
-                          }
-                        >
-                          <span className="flex justify-center relative">
-                            <span className="absolute inset-y-0 left-0 flex">
-                              <IoCheckmark className="self-center" />
-                            </span>
-                            <span className="self-center">{track}</span>
+                          (active
+                            ? "bg-blue-500 text-white"
+                            : "bg-white text-gray-800")
+                        }
+                      >
+                        <span className="flex justify-center relative">
+                          <span className="absolute inset-y-0 left-0 flex">
+                            <IoCheckmark className="self-center" />
                           </span>
-                        </div>
-                      )}
-                    </Listbox.Option>
-                  );
-                })}
-              </Listbox.Options>
-            </Listbox>
-          </div>
+                          <span className="self-center">{track}</span>
+                        </span>
+                      </div>
+                    )}
+                  </Listbox.Option>
+                );
+              })}
+            </Listbox.Options>
+          </Listbox>
         </div>
         <div className="flex justify-center">
           <input
