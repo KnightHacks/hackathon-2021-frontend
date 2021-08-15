@@ -10,11 +10,11 @@ const Landing = () => {
   return (
     <Page onLanding={true}>
       <div className="flex justify-center items-center flex-col w-full mt-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center font-medium">
           Welcome to
         </h1>
         <div className="bg-knight-hacks-logo w-full h-20 md:h-36 bg-no-repeat my-2 md:my-4 bg-center" />
-        <p className="text-xl w-full text-center">
+        <p className="text-xl w-full text-center font-light">
           October 9th - October 11th, 2021
         </p>
         <Link
