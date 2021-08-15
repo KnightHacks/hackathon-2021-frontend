@@ -7,3 +7,7 @@
   filter: blur(0);
   transition: filter 200ms ease-in;
 }
+
+* {
+  font-family: Avenir Next Regular;
+}

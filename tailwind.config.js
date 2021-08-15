@@ -19,6 +19,15 @@ module.exports = {
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
       }),
+      fontFamily: {
+        sans: ["sans-serif"],
+        regular: ["Avenir Next Regular", "sans-serif"],
+        medium: ["Avenir Next Medium", "sans-serif"],
+        mediumitalic: ["Avenir Next Medium Italic", "sans-serif"],
+        light: ["Avenir Next Ultra Light", "sans-serif"],
+        lightitalic: ["Avenir Next Ultra Light Italic", "sans-serif"],
+        italic: ["Avenir Next Italic", "sans-serif"],
+      },
     },
   },
   variants: {
