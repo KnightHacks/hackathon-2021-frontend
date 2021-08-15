@@ -27,6 +27,7 @@ module.exports = {
         light: ["Avenir Next Ultra Light", "sans-serif"],
         lightitalic: ["Avenir Next Ultra Light Italic", "sans-serif"],
         italic: ["Avenir Next Italic", "sans-serif"],
+        heavy: ["Avenir Next Heavy", "sans-serif"],
       },
     },
   },

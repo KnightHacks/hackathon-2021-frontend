@@ -10,22 +10,22 @@ import ColorHash from "color-hash";
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
   return (
-    <Page onLanding={true}>
+    <Page onLanding={false}>
       <div className="grid w-full flex-col my-4 md:my-12">
         <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
           Schedule
         </h1>
-        {content.map((event, index) => {
+        {content.map((day, index) => {
           return (
             <div key={index} className="ml-24">
               <p className="font-medium text-2xl sm:text-3xl xl:text-4xl my-4">
-                {event.day}
+                {day.dayName}
               </p>
               {/* Mapping through the content in each events block in JSON */}
-              {event.events.map((item, index) => (
+              {day.events.map((item, index) => (
                 <div key={index} className="mb-5">
-                  <div className="font-thin mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl">
-                    <span className="font-light"> {item.time} </span>{" "}
+                  <div className="mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl">
+                    <span className="font-light"> {item.time} </span>
                     <span> {item.title} </span>
                   </div>
                   {/* Mapping through each string in the tags array in JSON */}
