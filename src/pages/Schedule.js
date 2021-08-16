@@ -10,7 +10,7 @@ import ColorHash from "color-hash";
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
   return (
-    <Page onLanding={true}>
+    <Page onLanding={false}>
       <div className="grid w-full flex-col my-4 md:my-12">
         <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
           Schedule
