@@ -16,6 +16,10 @@
 /* Track */
 ::-webkit-scrollbar-track {
   background: none;
+  margin: 9px;
+}
+
+::-webkit-scrollbar-track-piece {
 }
 
 /* Handle */
