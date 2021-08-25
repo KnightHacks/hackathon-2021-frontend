@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Listbox } from "@headlessui/react";
-import { IoCheckmark } from "react-icons/io5";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import Page from "../components/Page";
 
 /**
@@ -16,10 +16,9 @@ const Register = () => {
   const [schoolName, setSchoolName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [resume, setResume] = useState("");
+  const [resume, setResume] = useState(null);
   const [graduation, setGraduation] = useState("");
   const [socials, setSocials] = useState("");
-  const [username, setUsername] = useState("");
 
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
@@ -52,7 +51,6 @@ const Register = () => {
           selectedTrack,
           graduation,
           socials,
-          username,
           "hacker"
         );
         if (response.ok) setRegistrationState("success");
@@ -62,15 +60,15 @@ const Register = () => {
 
   return (
     <Page onLanding={false}>
-      <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
+      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
         Register
       </h1>
       <form onSubmit={submitRegistration} className="flex flex-col">
-        <div className="flex flex-row space-x-4 justify-center">
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
           <TextInputBox label="First Name:" setter={setFirstName} />
           <TextInputBox label="Last Name:" setter={setLastName} />
         </div>
-        <div className="flex flex-row space-x-4 justify-center">
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
           <TextInputBox
             label="Phone:"
             pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
@@ -78,7 +76,7 @@ const Register = () => {
           />
           <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
         </div>
-        <div className="flex flex-row space-x-4 justify-center">
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
           <TextInputBox label="School Name:" setter={setSchoolName} />
           <TextInputBox
             label="Graduation Year:"
@@ -87,53 +85,29 @@ const Register = () => {
           />
         </div>
         <TextInputBox label="Socials:" setter={setSocials} />
-        <TextInputBox label="Username:" setter={setUsername} />
-        <TextInputBox label="Resume:" setter={setResume} />
-        <div>
-          <span>Track:</span>
-          <Listbox value={selectedTrack} onChange={setSelectedTrack}>
-            <Listbox.Button className="rounded-lg bg-white text-gray-800 p-2 w-full">
-              <span className="capitalize">{selectedTrack}</span>
-            </Listbox.Button>
-            <Listbox.Options>
-              {trackOptions.map((track, index) => {
-                return (
-                  <Listbox.Option key={index} value={track}>
-                    {({ active, selected }) => (
-                      <div
-                        className={
-                          `
-                      rounded-lg p-2 text-center m-1
-                      bg-white
-                    ` +
-                          (active
-                            ? "bg-blue-500 text-white"
-                            : "bg-white text-gray-800")
-                        }
-                      >
-                        <span className="flex justify-center relative">
-                          {selected ? (
-                            <span className="absolute inset-y-0 left-0 flex">
-                              <IoCheckmark className="self-center" />
-                            </span>
-                          ) : null}
-                          <span className="self-center">{track}</span>
-                        </span>
-                      </div>
-                    )}
-                  </Listbox.Option>
-                );
-              })}
-            </Listbox.Options>
-          </Listbox>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <FileUploadBox
+            file={resume}
+            handleFile={(fileUploaded) => setResume(fileUploaded)}
+            defaultValue="Upload Resume"
+          />
+          <div className="flex flex-row flex-1 space-x-4 items-center">
+            <span>Track:</span>
+            <TrackSelector
+              trackOptions={trackOptions}
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
+            />
+          </div>
         </div>
         <div className="flex justify-center">
           <input
             type="submit"
             className={`
-              bg-purple-600 rounded-lg m-6 py-2 px-4
-              hover:bg-purple-700
-              active:bg-purple-800
+              bg-blue-600 rounded-lg m-6 py-2 px-4
+              hover:bg-blue-700
+              active:bg-blue-800 
+              w-72
             `}
             value="Submit"
           />
@@ -176,6 +150,113 @@ const TextInputBox = ({ label, setter, ...props }) => {
 };
 
 /**
+ * @desc A customizable file upload field.
+ * @prop file: the current file selected, CAN BE NULL.
+ * @prop handleFile: Callback function for when a file has been selected.
+ * @prop defaultValue: The default text shown when no file has been selected.
+ * @author Abraham Hernandez
+ */
+const FileUploadBox = ({ file, handleFile, defaultValue }) => {
+  const hiddenFileInput = useRef(null);
+
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    handleFile(fileUploaded);
+  };
+
+  return (
+    <div className="my-4 justify-center items-center flex-1">
+      <span>Resume:</span>
+      <button
+        onClick={handleClick}
+        className={`
+              bg-blue-600 rounded-lg mx-4 my-6 py-2 px-4
+              hover:bg-blue-700
+              active:bg-blue-800 max-w-xs 
+              truncate
+              `}
+      >
+        <p className="truncate">{(file && file.name) || defaultValue}</p>
+      </button>
+      <input
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        style={{ display: "none" }}
+      />
+    </div>
+  );
+};
+
+/**
+ * @desc A Listbox for selecting a hackathon track. Modified from existing code from Rob.
+ * @prop trackOptions: An array of strings containing the track options.
+ * @prop selectedTrack: A string containing the current track option selected.
+ * @prop setSelectedTrack: A state set function for selecting a track.
+ * @author Abraham Hernandez, Rob
+ */
+const TrackSelector = ({ trackOptions, selectedTrack, setSelectedTrack }) => {
+  return (
+    <div className="w-72">
+      <Listbox value={selectedTrack} onChange={setSelectedTrack}>
+        <div className="relative mt-1">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+            <span className="block truncate text-gray-900 font-medium">
+              {selectedTrack}
+            </span>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <SelectorIcon
+                className="w-5 h-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </span>
+          </Listbox.Button>
+
+          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            {trackOptions.map((track, trackIdx) => (
+              <Listbox.Option
+                key={trackIdx}
+                className={({ active }) =>
+                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-900"}
+                          cursor-default select-none relative py-2 pl-10 pr-4`
+                }
+                value={track}
+              >
+                {({ selected, active }) => (
+                  <>
+                    <span
+                      className={`${
+                        selected ? "font-medium" : "font-normal"
+                      } block truncate`}
+                    >
+                      {track}
+                    </span>
+                    {selected ? (
+                      <span
+                        className={`${
+                          active ? "text-blue-600" : "text-blue-600"
+                        }
+                                absolute inset-y-0 left-0 flex items-center pl-3`}
+                      >
+                        <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                      </span>
+                    ) : null}
+                  </>
+                )}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </div>
+      </Listbox>
+    </div>
+  );
+};
+
+/**
  * @desc attempts to create a hacker on the backend
  * @author Rob
  */
@@ -189,7 +270,6 @@ const createHacker = async (
   track,
   grad_year,
   socials,
-  username,
   password
 ) => {
   return fetch("/api/hackers/", {
@@ -208,7 +288,6 @@ const createHacker = async (
       school_name,
       socials,
       tracks: [track],
-      username,
     }),
   });
 };

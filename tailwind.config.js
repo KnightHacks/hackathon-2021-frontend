@@ -6,6 +6,9 @@ module.exports = {
       width: {
         "19/20": "95%",
       },
+      maxWidth: {
+        xs: "15rem",
+      },
       height: {
         "19/20": "95%",
         "3/20": "15%",
