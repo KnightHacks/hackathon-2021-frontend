@@ -1,5 +1,11 @@
+import Page from "../components/Page";
+
 const Register = () => {
-  return <div>Register Page</div>;
+  return (
+    <Page onLanding={false} pageTitle="Register">
+      <div>Register Page</div>
+    </Page>
+  );
 };
 
 export default Register;

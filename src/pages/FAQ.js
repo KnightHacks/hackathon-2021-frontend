@@ -9,7 +9,7 @@ import list from "../assets/content/faq.json";
 
 const FAQ = () => {
   return (
-    <Page onLanding={false}>
+    <Page onLanding={false} pageTitle="FAQ">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
         <h1 className="text-4xl sm:text-6xl md:text-8xl">FAQ</h1>
 

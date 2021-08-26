@@ -9,7 +9,7 @@ import TestLogo from "../assets/KnightHacksLogo.svg";
  */
 const Sponsors = () => {
   return (
-    <Page onLanding={false}>
+    <Page onLanding={false} pageTitle="Sponsors">
       <h1
         className={`
           text-4xl w-full text-center mt-16

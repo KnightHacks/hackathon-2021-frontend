@@ -8,7 +8,7 @@ import Page from "../components/Page";
 
 const Landing = () => {
   return (
-    <Page onLanding={true}>
+    <Page onLanding={true} pageTitle="Knight Hacks">
         <div className="flex justify-center items-center flex-col w-full mt-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center">
             Welcome to
