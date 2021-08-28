@@ -18,7 +18,8 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [resume, setResume] = useState(null);
   const [graduation, setGraduation] = useState("");
-  const [socials, setSocials] = useState("");
+  const [github, setGithub] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
 
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
@@ -50,7 +51,7 @@ const Register = () => {
           resume,
           selectedTrack,
           graduation,
-          socials,
+          [github, linkedIn],
           "hacker"
         );
         if (response.ok) setRegistrationState("success");
@@ -84,7 +85,10 @@ const Register = () => {
             setter={setGraduation}
           />
         </div>
-        <TextInputBox label="Socials:" setter={setSocials} />
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <TextInputBox label="Github:" setter={setGithub} />
+          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+        </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
           <FileUploadBox
             file={resume}
