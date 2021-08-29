@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
@@ -9,6 +10,10 @@ import ColorHash from "color-hash";
 
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
+  useEffect(() => {
+    window.title = "Knight Hacks | Schedule";
+  }, []);
+
   return (
     <Page onLanding={false} pageTitle="Schedule">
       <div className="grid w-full flex-col my-4 md:my-12">

@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import Page from "../components/Page";
+
 /**
  * @desc About Page
  * @author Ro-Hanna Jowallah
  */
 const About = () => {
+  useEffect(() => {
+    window.title = "Knight Hacks | About";
+  }, []);
+
   return (
     <Page onLanding={false} pageTitle="About">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">

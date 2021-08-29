@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import Page from "../components/Page";
@@ -58,6 +58,10 @@ const Register = () => {
         else setRegistrationState("failure");
     }
   };
+
+  useEffect(() => {
+    window.title = "Knight Hacks | Register";
+  }, []);
 
   return (
     <Page onLanding={false}>
