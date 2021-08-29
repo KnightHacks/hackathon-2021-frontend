@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Page from "../components/Page";
 
 // for testing only, not for final production
@@ -8,6 +9,10 @@ import TestLogo from "../assets/KnightHacksLogo.svg";
  * @author Rob
  */
 const Sponsors = () => {
+  useEffect(() => {
+    window.title = "Knight Hacks | Sponsors";
+  }, []);
+
   return (
     <Page onLanding={false} pageTitle="Sponsors">
       <h1
