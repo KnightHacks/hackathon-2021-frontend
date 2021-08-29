@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
@@ -9,8 +9,12 @@ import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
  * @author Abraham Hernandez
  */
 
-const Page = ({ children, onLanding }) => {
+const Page = ({ children, onLanding, pageTitle }) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = pageTitle;
+  });
 
   return (
     <div
@@ -43,7 +47,7 @@ const Page = ({ children, onLanding }) => {
       <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center">
         {!onLanding ? (
           <Link to="/" className="w-11/12 h-16">
-            <div className="bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full sm:h-32 mt-12" />
+            <div className="bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full mt-12" />
           </Link>
         ) : null}
       </div>
