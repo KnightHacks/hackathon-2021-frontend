@@ -42,7 +42,7 @@ const Menu = ({ open, setOpen }) => {
               enter="ease-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-700"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
@@ -72,13 +72,13 @@ const Menu = ({ open, setOpen }) => {
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95"
                 enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
+                leave="ease-in duration-700"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
                   <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col">
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
@@ -87,7 +87,7 @@ const Menu = ({ open, setOpen }) => {
                         Home
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/about"
                         onClick={() => setOpen(false)}
@@ -96,7 +96,7 @@ const Menu = ({ open, setOpen }) => {
                         About
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/sponsors"
                         onClick={() => setOpen(false)}
@@ -105,7 +105,7 @@ const Menu = ({ open, setOpen }) => {
                         Sponsors
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/schedule"
                         onClick={() => setOpen(false)}
@@ -114,7 +114,7 @@ const Menu = ({ open, setOpen }) => {
                         Schedule
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/faq"
                         onClick={() => setOpen(false)}
@@ -123,7 +123,7 @@ const Menu = ({ open, setOpen }) => {
                         FAQ
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-out duration-700">
                       <Link
                         to="/register"
                         onClick={() => setOpen(false)}
