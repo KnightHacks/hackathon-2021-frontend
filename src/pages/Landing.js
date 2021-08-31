@@ -14,7 +14,7 @@ const Landing = () => {
           Welcome to
         </h1>
         <div className="bg-knight-hacks-logo w-full h-20 md:h-36 bg-no-repeat my-2 md:my-4 bg-center" />
-        <p className="text-xl w-full text-center font-light">
+        <p className="text-xl w-full text-center font-palanquin">
           October 9th - October 11th, 2021
         </p>
         <Link
