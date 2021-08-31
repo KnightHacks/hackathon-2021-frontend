@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-
+@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@300&display=swap");
 /* Avenir font faces */
 
 @font-face {

@@ -28,6 +28,7 @@ module.exports = {
         lightitalic: ["Avenir Next Ultra Light Italic", "sans-serif"],
         italic: ["Avenir Next Italic", "sans-serif"],
         heavy: ["Avenir Next Heavy", "sans-serif"],
+        palanquin: ["Palanquin"],
       },
     },
   },
