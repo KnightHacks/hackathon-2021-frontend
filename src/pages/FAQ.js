@@ -11,9 +11,11 @@ const FAQ = () => {
   return (
     <Page onLanding={false}>
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12 font-palanquin">
-        <h1 className="text-4xl sm:text-6xl md:text-8xl ">FAQ</h1>
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-palanquin ">
+          FAQ
+        </h1>
 
-        <div className="my-4 flex flex-col items-center w-2/3">
+        <div className="my-4 flex flex-col items-center w-2/3 font-palanquin">
           {list.map((item, index) => (
             <Disclosure
               as="div"
@@ -26,7 +28,7 @@ const FAQ = () => {
                     as="div"
                     className={`${
                       open ? "rounded-t-lg" : "rounded-lg"
-                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75`}
+                    } flex justify-between w-full px-4 py-2 text-xl text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 font-palanquin`}
                   >
                     <span>{item.question}</span>
                     <HiChevronDown
