@@ -1,15 +1,16 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import Page from "../components/Page";
 
 const Register = () => {
-  useEffect(() => {
-    window.title = "Knight Hacks | Register";
-  }, []);
-
   return (
-    <Page onLanding={false} pageTitle="Register">
-      <div>Register Page</div>
-    </Page>
+    <>
+      <Helmet>
+        <title>Knight Hacks | Register</title>
+      </Helmet>
+      <Page onLanding={false}>
+        <div>Register Page</div>
+      </Page>
+    </>
   );
 };
 
