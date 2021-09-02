@@ -17,7 +17,7 @@ const Schedule = () => {
   return (
     <Page onLanding={false} pageTitle="Schedule">
       <div className="grid w-full flex-col my-4 md:my-12">
-        <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+        <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-sansita">
           Schedule
         </h1>
         {content.map((event, index) => {

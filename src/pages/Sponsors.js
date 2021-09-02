@@ -22,6 +22,7 @@ const Sponsors = () => {
           lg:mt-32
           xl:text-6xl xl:mt-36
           2xl:text-7xl 2xl:mt-36
+          font-sansita
         `}
       >
         Our Sponsors

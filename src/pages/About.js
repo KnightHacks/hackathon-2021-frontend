@@ -13,7 +13,7 @@ const About = () => {
   return (
     <Page onLanding={false} pageTitle="About">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
-        <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
+        <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center font-sansita">
           About Us
         </h1>
         <div className="my-2 flex flex-col items-center w-2/3">

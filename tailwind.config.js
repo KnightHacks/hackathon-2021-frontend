@@ -19,6 +19,9 @@ module.exports = {
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
       }),
+      fontFamily: {
+        sansita: "Sansita",
+      },
     },
   },
   variants: {
