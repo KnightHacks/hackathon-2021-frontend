@@ -25,7 +25,7 @@ const Schedule = () => {
               {day.events.map((item, index) => (
                 <div key={index} className="mb-5">
                   <div className="mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl font-palanquin">
-                    <span className="font-light"> {item.time} </span>
+                    <span className="font-palanquin"> {item.time} </span>
                     <span> {item.title} </span>
                   </div>
                   {/* Mapping through each string in the tags array in JSON */}
