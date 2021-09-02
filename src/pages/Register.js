@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import Page from "../components/Page";
@@ -59,73 +59,75 @@ const Register = () => {
     }
   };
 
-  useEffect(() => {
-    window.title = "Knight Hacks | Register";
-  }, []);
-
   return (
-    <Page onLanding={false}>
-      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
-        Register
-      </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col">
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
-          <TextInputBox label="First Name:" setter={setFirstName} />
-          <TextInputBox label="Last Name:" setter={setLastName} />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
-          <TextInputBox
-            label="Phone:"
-            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-            setter={setPhoneNumber}
-          />
-          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
-          <TextInputBox label="School Name:" setter={setSchoolName} />
-          <TextInputBox
-            label="Graduation Year:"
-            pattern="^\d{4}$"
-            setter={setGraduation}
-          />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
-          <TextInputBox label="Github:" setter={setGithub} />
-          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
-        </div>
-        <div className="flex flex-col justify-center">
-          <div className="flex flex-col md:flex-row items-center">
-            <FileUploadBox
-              handleFile={(fileUploaded) => setResume(fileUploaded)}
-              title="Upload Resume"
+    <>
+      <Helmet>
+        <title>Knight Hacks | Register</title>
+      </Helmet>
+      <Page onLanding={false}>
+        <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
+          Register
+        </h1>
+        <form onSubmit={submitRegistration} className="flex flex-col">
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+            <TextInputBox label="First Name:" setter={setFirstName} />
+            <TextInputBox label="Last Name:" setter={setLastName} />
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+            <TextInputBox
+              label="Phone:"
+              pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
+              setter={setPhoneNumber}
             />
-            <p className="visible md:hidden">
-              {(resume && "Filename: " + resume.name) || "(PDF file required)"}
-            </p>
-            <TrackSelector
-              trackOptions={trackOptions}
-              selectedTrack={selectedTrack}
-              setSelectedTrack={setSelectedTrack}
+            <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+            <TextInputBox label="School Name:" setter={setSchoolName} />
+            <TextInputBox
+              label="Graduation Year:"
+              pattern="^\d{4}$"
+              setter={setGraduation}
             />
           </div>
-          <p className="hidden md:block">
-            {(resume && "Filename: " + resume.name) || "(PDF file required)"}
-          </p>
-        </div>
-        <div className="flex justify-center">
-          <input
-            type="submit"
-            className={`
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+            <TextInputBox label="Github:" setter={setGithub} />
+            <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+          </div>
+          <div className="flex flex-col justify-center">
+            <div className="flex flex-col md:flex-row items-center">
+              <FileUploadBox
+                handleFile={(fileUploaded) => setResume(fileUploaded)}
+                title="Upload Resume"
+              />
+              <p className="visible md:hidden">
+                {(resume && "Filename: " + resume.name) ||
+                  "(PDF file required)"}
+              </p>
+              <TrackSelector
+                trackOptions={trackOptions}
+                selectedTrack={selectedTrack}
+                setSelectedTrack={setSelectedTrack}
+              />
+            </div>
+            <p className="hidden md:block">
+              {(resume && "Filename: " + resume.name) || "(PDF file required)"}
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <input
+              type="submit"
+              className={`
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800 
               w-72
             `}
-            value="Submit"
-          />
-        </div>
-      </form>
-    </Page>
+              value="Submit"
+            />
+          </div>
+        </form>
+      </Page>
+    </>
   );
 };
 
