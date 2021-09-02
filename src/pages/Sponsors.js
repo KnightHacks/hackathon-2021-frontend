@@ -6,7 +6,7 @@ import TestLogo from "../assets/KnightHacksLogo.svg";
 
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
- * @author Rob
+ * @author Rob, Leah
  */
 const Sponsors = () => {
   useEffect(() => {
