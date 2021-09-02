@@ -18,13 +18,13 @@ const Schedule = () => {
         {content.map((day, index) => {
           return (
             <div key={index} className="ml-24">
-              <p className="font-medium text-2xl sm:text-3xl xl:text-4xl my-4">
+              <p className="font-medium text-2xl sm:text-3xl xl:text-4xl my-4 font-palanquin">
                 {day.dayName}
               </p>
               {/* Mapping through the content in each events block in JSON */}
               {day.events.map((item, index) => (
                 <div key={index} className="mb-5">
-                  <div className="mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl">
+                  <div className="mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl font-palanquin">
                     <span className="font-light"> {item.time} </span>
                     <span> {item.title} </span>
                   </div>
@@ -33,7 +33,7 @@ const Schedule = () => {
                     <span
                       key={index}
                       style={{ backgroundColor: hash.hex(tag) }}
-                      className="font-light rounded-full px-2 py-1 mr-2 text-gray-600"
+                      className="font-palanquin rounded-full px-2 py-1 mr-2 text-gray-600"
                     >
                       {tag}
                     </span>
