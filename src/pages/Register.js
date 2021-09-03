@@ -19,6 +19,7 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [resume, setResume] = useState(null);
   const [graduation, setGraduation] = useState("");
+  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [github, setGithub] = useState("");
   const [linkedIn, setLinkedIn] = useState("");
 
@@ -55,6 +56,7 @@ const Register = () => {
       //   graduation,
       //   [github, linkedIn],
       //   attendingOption,
+      //   dietaryRestrictions
       //   "hacker"
       // );
       // if (response.ok) setRegistrationState("success");
@@ -92,6 +94,10 @@ const Register = () => {
               setter={setGraduation}
             />
           </div>
+          <TextInputBox
+            label="Dietary Restrictions"
+            setter={setDietaryRestrictions}
+          />
           <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
             <TextInputBox label="Github:" setter={setGithub} />
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
