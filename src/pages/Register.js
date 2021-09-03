@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useState, useRef } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
@@ -30,8 +31,6 @@ const Register = () => {
 
   const submitRegistration = async (event) => {
     event.preventDefault();
-    console.log("hi");
-    return;
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
@@ -42,20 +41,20 @@ const Register = () => {
       default:
         setRegistrationState("pending");
         setFeedbackMessage("Processing registration...");
-        const response = await createHacker(
-          firstName,
-          lastName,
-          schoolName,
-          email,
-          phoneNumber,
-          resume,
-          selectedTrack,
-          graduation,
-          [github, linkedIn],
-          "hacker"
-        );
-        if (response.ok) setRegistrationState("success");
-        else setRegistrationState("failure");
+      // const response = await createHacker(
+      //   firstName,
+      //   lastName,
+      //   schoolName,
+      //   email,
+      //   phoneNumber,
+      //   resume,
+      //   selectedTrack,
+      //   graduation,
+      //   [github, linkedIn],
+      //   "hacker"
+      // );
+      // if (response.ok) setRegistrationState("success");
+      // else setRegistrationState("failure");
     }
   };
 
