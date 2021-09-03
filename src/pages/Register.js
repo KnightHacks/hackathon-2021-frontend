@@ -25,6 +25,9 @@ const Register = () => {
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
+  const attendingOptions = ["In Person", "Virtual"];
+  const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -51,6 +54,7 @@ const Register = () => {
       //   selectedTrack,
       //   graduation,
       //   [github, linkedIn],
+      //   attendingOption,
       //   "hacker"
       // );
       // if (response.ok) setRegistrationState("success");
@@ -93,7 +97,7 @@ const Register = () => {
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
           </div>
           <div className="flex flex-col justify-center">
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col md:flex-row md:space-x-4 items-center">
               <FileUploadBox
                 handleFile={(fileUploaded) => setResume(fileUploaded)}
                 title="Upload Resume"
@@ -102,10 +106,17 @@ const Register = () => {
                 {(resume && "Filename: " + resume.name) ||
                   "(PDF file required)"}
               </p>
-              <TrackSelector
+              <OptionSelector
+                title="Track:"
                 trackOptions={trackOptions}
                 selectedTrack={selectedTrack}
                 setSelectedTrack={setSelectedTrack}
+              />
+              <OptionSelector
+                title="Attendance:"
+                trackOptions={attendingOptions}
+                selectedTrack={attendingOption}
+                setSelectedTrack={setAttendingOption}
               />
             </div>
             <p className="hidden md:block">
@@ -207,15 +218,21 @@ const FileUploadBox = ({ handleFile, title }) => {
 
 /**
  * @desc A Listbox for selecting a hackathon track. Modified from existing code from Rob.
+ * @prop title: A string for the title
  * @prop trackOptions: An array of strings containing the track options.
  * @prop selectedTrack: A string containing the current track option selected.
  * @prop setSelectedTrack: A state set function for selecting a track.
  * @author Abraham Hernandez, Rob
  */
-const TrackSelector = ({ trackOptions, selectedTrack, setSelectedTrack }) => {
+const OptionSelector = ({
+  title,
+  trackOptions,
+  selectedTrack,
+  setSelectedTrack,
+}) => {
   return (
     <div className="w-72 h-full mt-4 md:mt-0 flex flex-row space-x-4 items-center">
-      <span>Track:</span>
+      <span>{title}</span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
