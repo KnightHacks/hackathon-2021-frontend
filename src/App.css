@@ -8,6 +8,27 @@
   transition: filter 200ms ease-in;
 }
 
-* {
-  font-family: Avenir Next Regular;
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+  margin: 9px;
+}
+
+::-webkit-scrollbar-track-piece {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
