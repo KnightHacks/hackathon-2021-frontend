@@ -1,6 +1,6 @@
-import { Fragment } from "react";
 import { CgMenu } from "react-icons/cg";
-import { RiVolumeUpFill } from "react-icons/ri";
+import { IconContext } from "react-icons";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import VolumeButton from "./VolumeButton";
@@ -21,11 +21,11 @@ const Menu = ({ open, setOpen }) => {
         }
       >
         <CgMenu
-          className="text-4xl md:text-5xl cursor-pointer"
+          className="text-4xl md:text-5xl cursor-pointer text-white"
           onClick={() => setOpen(!open)}
         />
         <div className="flex-1 sm:flex-none flex justify-end">
-          <RiVolumeUpFill className="text-4xl md:text-5xl cursor-pointer" />
+          <VolumeButton />
         </div>
       </div>
       <Transition show={open} as={Fragment}>
@@ -65,7 +65,7 @@ const Menu = ({ open, setOpen }) => {
                     (open ? "filter blur-md" : "cursor-pointer")
                   }
                 >
-                  <RiVolumeUpFill className="text-4xl md:text-5xl" />
+                  <VolumeButton />
                 </div>
               </Dialog.Title>
               <Transition.Child
