@@ -1,6 +1,5 @@
-import { CgMenu } from "react-icons/cg";
-import { IconContext } from "react-icons";
 import { Fragment } from "react";
+import { CgMenu } from "react-icons/cg";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import VolumeButton from "./VolumeButton";

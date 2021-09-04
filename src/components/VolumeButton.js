@@ -5,7 +5,7 @@ import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
 import useSound from "use-sound";
 import BackgroundMusic from "../assets/BackgroundMusic.mp3";
 
-const VolumeButton = ({ open }) => {
+const VolumeButton = () => {
   const [volumeOn, setVolumeOn] = useState(false);
   const [play, { pause }] = useSound(BackgroundMusic);
 
@@ -13,27 +13,24 @@ const VolumeButton = ({ open }) => {
     <IconContext.Provider
       value={{
         color: "white",
-        className:
-          "text-4xl md:text-5xl cursor-pointer " + (open ? "invisible" : ""),
+        className: "text-4xl md:text-5xl cursor-pointer",
       }}
     >
-      <div>
-        {volumeOn ? (
-          <BsFillVolumeUpFill
-            onClick={() => {
-              setVolumeOn(false);
-              pause();
-            }}
-          />
-        ) : (
-          <BsFillVolumeMuteFill
-            onClick={() => {
-              setVolumeOn(true);
-              play();
-            }}
-          />
-        )}
-      </div>
+      {volumeOn ? (
+        <BsFillVolumeUpFill
+          onClick={() => {
+            setVolumeOn(false);
+            pause();
+          }}
+        />
+      ) : (
+        <BsFillVolumeMuteFill
+          onClick={() => {
+            setVolumeOn(true);
+            play();
+          }}
+        />
+      )}
     </IconContext.Provider>
   );
 };
