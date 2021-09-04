@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
 
@@ -5,10 +6,13 @@ import Page from "../components/Page";
  * @desc Renders Landing page of the site
  * @author Abraham Hernandez
  */
-
 const Landing = () => {
   return (
-    <Page onLanding={true}>
+    <>
+      <Helmet>
+        <title>Knight Hacks</title>
+      </Helmet>
+      <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center">
             Welcome to
@@ -26,7 +30,8 @@ const Landing = () => {
             </p>
           </Link>
         </div>
-    </Page>
+      </Page>
+    </>
   );
 };
 

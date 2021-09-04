@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-import { CgMenu } from "react-icons/cg";
-import { GrVolume, GrVolumeMute } from "react-icons/gr";
-=======
 import { Fragment } from "react";
 import { CgMenu } from "react-icons/cg";
 import { RiVolumeUpFill } from "react-icons/ri";
 import { Dialog, Transition } from "@headlessui/react";
->>>>>>> frontend-dev
 import { Link } from "react-router-dom";
 import VolumeButton from "./VolumeButton";
 
@@ -18,44 +13,6 @@ import VolumeButton from "./VolumeButton";
 
 const Menu = ({ open, setOpen }) => {
   return (
-<<<<<<< HEAD
-    <div
-      className={
-        "w-full " +
-        (open
-          ? "z-10 absolute w-full h-full bg-menu-transparent transition ease-in duration-300"
-          : "")
-      }
-    >
-      <div className="text-white mt-5 w-full sm:w-min px-8 lg:px-16">
-        <div className="inline-block sm:flex flex-row sm:space-x-8 w-full">
-          <div className="float-left">
-            <CgMenu
-              className="text-4xl md:text-5xl cursor-pointer"
-              onClick={() => setOpen(!open)}
-            />
-            {open ? (
-              <ul className="text-5xl text-white">
-                <li className="mt-4 hover:underline">
-                  <Link to="/about">About</Link>
-                </li>
-                <li className="mt-4 hover:underline">
-                  <Link to="/sponsors">Sponsors</Link>
-                </li>
-                <li className="mt-4 hover:underline">
-                  <Link to="/schedule">Schedule</Link>
-                </li>
-                <li className="mt-4 hover:underline">
-                  <Link to="/faq">FAQ</Link>
-                </li>
-                <li className="mt-4 hover:underline">
-                  <Link to="/register">Register</Link>
-                </li>
-              </ul>
-            ) : null}
-          </div>
-          <VolumeButton />
-=======
     <div className="flex justify-center w-screen">
       <div
         className={
@@ -69,7 +26,6 @@ const Menu = ({ open, setOpen }) => {
         />
         <div className="flex-1 sm:flex-none flex justify-end">
           <RiVolumeUpFill className="text-4xl md:text-5xl cursor-pointer" />
->>>>>>> frontend-dev
         </div>
       </div>
       <Transition show={open} as={Fragment}>

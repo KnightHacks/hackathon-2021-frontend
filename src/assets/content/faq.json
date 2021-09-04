@@ -30,12 +30,12 @@
         "<p>Previously, we’ve held workshops and talks for a range of skill levels from beginner to advanced like Intro to Web Development and Virtual Reality. We’ve also had introductory workshops to various programming tools such as APIs, databases and platforms. Whether it’s for relaxation or health, novelty or competition, our team has something exciting prepared for you!</p>"
     },
     {
+      "question": "What is the code of conduct for the event?",
+      "answer": "<p>The event uses the MLH code of conduct which can be found <a href=\"https://static.mlh.io/docs/mlh-code-of-conduct.pdf\" style=\"color: rgb(79, 70, 229);\">here</a>.</p>"
+    },
+    {
       "question": "404: Question Not Found",
       "answer":
         "<p>If your question is not listed here, please feel free to reach out to us at <a href=\"mailto:team@knighthacks.org\" style=\"color: rgb(79, 70, 229);\">team@knighthacks.org</a> or message the Knight Hacks Facebook or Instagram pages.</p>"
-    },
-    {
-      "question": "What is the code of conduct for the event?",
-      "answer": "<p>The event uses the MLH code of conduct which can be found <a href=\"https://static.mlh.io/docs/mlh-code-of-conduct.pdf\" style=\"color: rgb(79, 70, 229);\">here</a>.</p>"
     }
 ]
