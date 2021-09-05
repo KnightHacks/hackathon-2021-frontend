@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { IconContext } from "react-icons";
 import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
-
-import useSound from "use-sound";
-import BackgroundMusic from "../assets/BackgroundMusic.mp3";
+import { VolumeContext } from "../context/VolumeContext";
 
 const VolumeButton = () => {
-  const [volumeOn, setVolumeOn] = useState(false);
-  const [play, { pause }] = useSound(BackgroundMusic);
-
+  const volume = useContext(VolumeContext);
+  console.log(volume);
   return (
     <IconContext.Provider
       value={{
@@ -16,18 +13,18 @@ const VolumeButton = () => {
         className: "text-4xl md:text-5xl cursor-pointer",
       }}
     >
-      {volumeOn ? (
+      {volume.state.volumeOn ? (
         <BsFillVolumeUpFill
           onClick={() => {
-            setVolumeOn(false);
-            pause();
+            volume.dispatch({ type: "pause" });
+            volume.state.song.pause();
           }}
         />
       ) : (
         <BsFillVolumeMuteFill
           onClick={() => {
-            setVolumeOn(true);
-            play();
+            volume.dispatch({ type: "play" });
+            volume.state.song.play();
           }}
         />
       )}
