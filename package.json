@@ -6,6 +6,8 @@
     "@craco/craco": "^6.1.1",
     "@headlessui/react": "^1.0.0",
     "color-hash": "^2.0.1",
+    "dayjs": "^1.10.6",
+    "ics": "^2.31.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
