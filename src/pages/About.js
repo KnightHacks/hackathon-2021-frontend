@@ -13,11 +13,11 @@ const About = () => {
       </Helmet>
       <Page onLanding={false}>
         <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
-          <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center">
+          <h1 className="text-4xl sm:text-xl mt-20 md:text-6xl text-center">
             About Us
           </h1>
-          <div className="my-2 flex flex-col text-base items-center w-2/3 ">
-            <div className="text-left space-x-4 sm:text-lg md:text-xl xl:text-2xl  mb-2 mt-24 font-palanquin">
+          <div className="my-2 flex flex-col sm:text-base md:text-xl xl:text-xl items-center w-2/3 ">
+            <div className="text-left space-x-4  mb-2 mt-16 font-palanquin">
               Connect Collaborate and Create with 700 of the brightest
               developers, engineers, and designers in the south-east.
               <br />
