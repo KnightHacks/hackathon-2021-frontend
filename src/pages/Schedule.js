@@ -23,7 +23,7 @@ const Schedule = () => {
           {content.map((event, index) => {
             return (
               <div key={index} className="ml-24">
-                <p className="font-medium text-2xl sm:text-3xl xl:text-4xl my-4 font-palanquin">
+                <p className=" text-2xl sm:text-3xl xl:text-4xl my-4 font-palanquin">
                   {event.day}
                 </p>
                 {/* Mapping through the content in each events block in JSON */}
