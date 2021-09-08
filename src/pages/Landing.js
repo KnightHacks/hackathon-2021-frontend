@@ -19,7 +19,7 @@ const Landing = () => {
           </h1>
           <div className="bg-knight-hacks-logo w-full h-20 md:h-36 bg-no-repeat my-2 md:my-4 bg-center font-palanquin" />
           <p className="text-xl w-full text-center font-palanquin">
-            October 9th - October 11th, 2021
+            November 12th - November 14th, 2021
           </p>
           <Link
             className="px-4 sm:px-6 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
