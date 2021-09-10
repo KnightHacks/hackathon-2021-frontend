@@ -30,6 +30,8 @@ function VolumeReducer(state, action) {
  */
 function VolumeProvider({ children }) {
   const song = new Audio(BackgroundMusic);
+  song.loop = true;
+
   const [state, dispatch] = useReducer(VolumeReducer, {
     volumeOn: false,
     song,
