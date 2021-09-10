@@ -103,12 +103,12 @@ const Register = () => {
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
           </div>
           <div className="flex flex-col justify-center">
-            <div className="flex flex-col md:flex-row md:space-x-4 items-center">
+            <div className="flex flex-col 2xl:flex-row 2xl:space-y-0 space-y-4 md:space-x-4 items-center">
               <FileUploadBox
                 handleFile={(fileUploaded) => setResume(fileUploaded)}
                 title="Upload Resume"
               />
-              <p className="visible md:hidden">
+              <p className="visible 2xl:hidden">
                 {(resume && "Filename: " + resume.name) ||
                   "(PDF file required)"}
               </p>
@@ -125,7 +125,7 @@ const Register = () => {
                 setSelectedTrack={setAttendingOption}
               />
             </div>
-            <p className="hidden md:block">
+            <p className="hidden 2xl:block">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
           </div>
@@ -204,7 +204,7 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-blue-600 rounded-lg mx-4 my-6 py-2 px-4
+              bg-blue-600 rounded-lg mx-4 mt-6 2xl:my-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800 max-w-xs 
               truncate
