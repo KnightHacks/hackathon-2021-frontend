@@ -97,16 +97,16 @@ const Register = () => {
               setter={setGraduation}
             />
           </div>
-          <TextInputBox
-            label="Dietary Restrictions"
-            setter={setDietaryRestrictions}
-          />
           <OptionSelector
             title="Are you attending our hackathon in person or virtually?"
             trackOptions={attendingOptions}
             selectedTrack={attendingOption}
             setSelectedTrack={setAttendingOption}
             flex="col"
+          />
+          <TextInputBox
+            label="Dietary Restrictions"
+            setter={setDietaryRestrictions}
           />
           <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
             <TextInputBox label="Github:" setter={setGithub} />
