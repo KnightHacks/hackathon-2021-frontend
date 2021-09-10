@@ -5,7 +5,7 @@ import { VolumeContext } from "../context/VolumeContext";
 
 const VolumeButton = () => {
   const volume = useContext(VolumeContext);
-  console.log(volume);
+
   return (
     <IconContext.Provider
       value={{
