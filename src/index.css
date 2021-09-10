@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
+@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@300&display=swap");
+/* Avenir font faces */
+
+@font-face {
+  font-family: "Avenir Next Italic";
+  src: local("AvenirNext-Italic"),
+    url("../src/assets/fonts/AvenirNext-Italic.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Regular";
+  src: local("AvenirNext-Regular"),
+    url("../src/assets/fonts/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Ultra Light";
+  src: local("AvenirNext-UltraLight"),
+    url("../src/assets/fonts/AvenirNext-UltraLight.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Heavy";
+  src: local("AvenirNext-Heavy"),
+    url("../src/assets/fonts/AvenirNext-Heavy.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Medium";
+  src: local("AvenirNext-Medium"),
+    url("../src/assets/fonts/AvenirNext-Medium.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Medium Italic";
+  src: local("AvenirNext-MediumItalic"),
+    url("../src/assets/fonts/AvenirNext-MediumItalic.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next Ultra Light Italic";
+  src: local("AvenirNext-UltraLightItalic"),
+    url("../src/assets/fonts/AvenirNext-UltraLight.ttf") format("truetype");
+  font-weight: normal;
+}
+
 @tailwind utilities;
