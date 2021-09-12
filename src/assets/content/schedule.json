@@ -1,6 +1,6 @@
 [
   {
-    "day": "Friday",
+    "dayName": "Friday",
     "events": [
       {
         "time": " 6:30 PM",
@@ -35,7 +35,7 @@
     ]
   },
   {
-    "day": "Saturday",
+    "dayName": "Saturday",
     "events": [
       {
         "time": "12:00 AM",
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "day": "Sunday",
+    "dayName": "Sunday",
     "events": [
       {
         "time": "12:00 AM",
