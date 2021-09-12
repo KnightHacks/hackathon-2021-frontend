@@ -77,11 +77,11 @@ const Register = () => {
           Register
         </h1>
         <form onSubmit={submitRegistration} className="flex flex-col">
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
             <TextInputBox label="First Name:" setter={setFirstName} />
             <TextInputBox label="Last Name:" setter={setLastName} />
           </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
             <TextInputBox
               label="Phone:"
               pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
@@ -89,7 +89,7 @@ const Register = () => {
             />
             <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
           </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
             <TextInputBox label="School Name:" setter={setSchoolName} />
             <TextInputBox
               label="Graduation Year:"
@@ -108,17 +108,17 @@ const Register = () => {
             label="Dietary Restrictions"
             setter={setDietaryRestrictions}
           />
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
             <TextInputBox label="Github:" setter={setGithub} />
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
           </div>
           <div className="flex flex-col justify-center">
-            <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
+            <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
               <FileUploadBox
                 handleFile={(fileUploaded) => setResume(fileUploaded)}
                 title="Upload Resume"
               />
-              <p className="visible lg:hidden">
+              <p className="visible lg:hidden font-palanquin">
                 {(resume && "Filename: " + resume.name) ||
                   "(PDF file required)"}
               </p>
@@ -134,7 +134,7 @@ const Register = () => {
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center font-palanquin">
             <input
               type="submit"
               className={`

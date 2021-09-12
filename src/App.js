@@ -10,25 +10,27 @@ import Register from "./pages/Register";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
-
+import VolumeProvider from "./context/VolumeContext";
 /**
  * @desc See AppWithTransitions; don't make routing changes here
  * @author Abraham Hernandez, Rob
  */
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        {/*
-         * We forward to AppWithTransitions so we can animate the transitions.
-         * Don't put more routes here, instead put them in the
-         * AppWithTransitions component.
-         */}
-        <Route path="*">
-          <AppWithTransitions />
-        </Route>
-      </Switch>
-    </Router>
+    <VolumeProvider>
+      <Router>
+        <Switch>
+          {/*
+           * We forward to AppWithTransitions so we can animate the transitions.
+           * Don't put more routes here, instead put them in the
+           * AppWithTransitions component.
+           */}
+          <Route path="*">
+            <AppWithTransitions />
+          </Route>
+        </Switch>
+      </Router>
+    </VolumeProvider>
   );
 };
 
