@@ -26,7 +26,10 @@ const Register = () => {
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
-  const attendingOptions = ["In Person", "Virtual"];
+  const attendingOptions = [
+    "I will be attending Knight Hacks in person.",
+    "I will be attending Knight Hacks virtually.",
+  ];
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
 
   // "unset" | "success" | "failure" | "pending"
@@ -94,6 +97,13 @@ const Register = () => {
               setter={setGraduation}
             />
           </div>
+          <OptionSelector
+            title="Are you attending our hackathon in person or virtually?"
+            trackOptions={attendingOptions}
+            selectedTrack={attendingOption}
+            setSelectedTrack={setAttendingOption}
+            flex="col"
+          />
           <TextInputBox
             label="Dietary Restrictions"
             setter={setDietaryRestrictions}
@@ -103,12 +113,12 @@ const Register = () => {
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
           </div>
           <div className="flex flex-col justify-center">
-            <div className="flex flex-col md:flex-row md:space-x-4 items-center font-palanquin">
+            <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
               <FileUploadBox
                 handleFile={(fileUploaded) => setResume(fileUploaded)}
                 title="Upload Resume"
               />
-              <p className="visible md:hidden font-palanquin">
+              <p className="visible lg:hidden font-palanquin">
                 {(resume && "Filename: " + resume.name) ||
                   "(PDF file required)"}
               </p>
@@ -117,15 +127,10 @@ const Register = () => {
                 trackOptions={trackOptions}
                 selectedTrack={selectedTrack}
                 setSelectedTrack={setSelectedTrack}
-              />
-              <OptionSelector
-                title="Attendance:"
-                trackOptions={attendingOptions}
-                selectedTrack={attendingOption}
-                setSelectedTrack={setAttendingOption}
+                flex="row"
               />
             </div>
-            <p className="hidden md:block">
+            <p className="hidden lg:block">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
           </div>
@@ -204,7 +209,7 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-blue-600 rounded-lg mx-4 my-6 py-2 px-4
+              bg-blue-600 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800 max-w-xs 
               truncate
@@ -228,6 +233,7 @@ const FileUploadBox = ({ handleFile, title }) => {
  * @prop trackOptions: An array of strings containing the track options.
  * @prop selectedTrack: A string containing the current track option selected.
  * @prop setSelectedTrack: A state set function for selecting a track.
+ * @prop flex: A string for telling what flex direction to use.
  * @author Abraham Hernandez, Rob
  */
 const OptionSelector = ({
@@ -235,12 +241,18 @@ const OptionSelector = ({
   trackOptions,
   selectedTrack,
   setSelectedTrack,
+  flex,
 }) => {
   return (
-    <div className="w-72 h-full mt-4 md:mt-0 flex flex-row space-x-4 items-center">
-      <span>{title}</span>
+    <div
+      className={
+        `h-full mt-4 md:mt-0 flex flex-${flex} items-center ` +
+        (flex === "col" ? `w-full space-y-4` : `w-72 space-x-4`)
+      }
+    >
+      <span className={flex === "col" && "flex self-start"}>{title}</span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
-        <div className="relative mt-1 flex-1">
+        <div className="relative mt-1 flex-1 w-full">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate text-gray-900 font-medium">
               {selectedTrack}
