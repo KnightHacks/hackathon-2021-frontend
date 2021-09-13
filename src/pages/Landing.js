@@ -2,9 +2,6 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
 
-const buttonClass =
-  "px-4 sm:px-6 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none";
-
 /**
  * @desc Renders Landing page of the site
  * @author Abraham Hernandez
@@ -24,14 +21,34 @@ const Landing = () => {
           <p className="text-xl w-full text-center font-palanquin">
             November 12th - November 14th, 2021
           </p>
-          <Link className={buttonClass} to="/register">
+          <Link
+            className={
+              "px-4 sm:px-6 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
+            }
+            to="/register"
+          >
             <p className="tracking-widest select-none" unselectable="on">
               REGISTER
             </p>
           </Link>
-          <a href="mailto:sponsorship@knighthacks.org" className={buttonClass}>
-            <p>SPONSOR US</p>
-          </a>
+          <div className="flex w-50% justify-between flex-col md:flex-row">
+            <a
+              href="mailto:sponsorship@knighthacks.org"
+              className={
+                "px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
+              }
+            >
+              <p>SPONSOR US</p>
+            </a>
+            <a
+              href="https://discord.gg/CcZPUTFAuW"
+              className={
+                "px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
+              }
+            >
+              <p>JOIN DISCORD</p>
+            </a>
+          </div>
         </div>
       </Page>
     </>
