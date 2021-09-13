@@ -24,6 +24,7 @@ module.exports = {
       }),
       fontFamily: {
         sansita: "Sansita",
+        palanquin: ["Palanquin"],
       },
     },
   },

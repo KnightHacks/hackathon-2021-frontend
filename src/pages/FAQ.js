@@ -23,7 +23,7 @@ const FAQ = () => {
             {list.map((item, index) => (
               <Disclosure
                 as="div"
-                className="mb-2 w-full rounded-lg shadow-md"
+                className="mb-2 w-full rounded-lg shadow-md font-palanquin"
                 key={index}
               >
                 {({ open }) => (
@@ -32,7 +32,7 @@ const FAQ = () => {
                       as="div"
                       className={`${
                         open ? "rounded-t-lg" : "rounded-lg"
-                      } flex justify-between w-full px-4 py-2 text-xl font-medium text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75`}
+                      } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75`}
                     >
                       <span>{item.question}</span>
                       <HiChevronDown

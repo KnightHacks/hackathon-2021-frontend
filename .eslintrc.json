@@ -1,8 +1,9 @@
 {
   "env": {
+    "node": true,
     "browser": true,
-    "jest": true,
-    "node": true
+    "commonjs": true,
+    "amd": true
   },
 
   "parserOptions": {
