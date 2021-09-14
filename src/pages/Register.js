@@ -73,7 +73,7 @@ const Register = () => {
         <title>Knight Hacks | Register</title>
       </Helmet>
       <Page onLanding={false}>
-        <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
+        <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
           Register
         </h1>
         <form onSubmit={submitRegistration} className="flex flex-col">
@@ -140,7 +140,7 @@ const Register = () => {
               className={`
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
-              active:bg-blue-800 
+              active:bg-blue-800
               w-72
             `}
               value="Submit"
@@ -211,7 +211,7 @@ const FileUploadBox = ({ handleFile, title }) => {
         className={`
               bg-blue-600 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
               hover:bg-blue-700
-              active:bg-blue-800 max-w-xs 
+              active:bg-blue-800 max-w-xs
               truncate
               `}
       >

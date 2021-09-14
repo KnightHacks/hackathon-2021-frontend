@@ -15,9 +15,11 @@ const FAQ = () => {
         <title>Knight Hacks | FAQ</title>
       </Helmet>
       <Page onLanding={false}>
-        <div className="flex justify-start items-center w-full flex-col my-4 md:my-12 ">
-          <h1 className="text-4xl sm:text-6xl md:text-8xl">FAQ</h1>
-          <div className="my-4 flex flex-col items-center w-2/3 font-palanquin">
+        <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
+          <h1 className="text-4xl sm:text-4xl md:text-6xl mt-20 mb-4 font-sansita">
+            FAQ
+          </h1>
+          <div className="my-4 flex flex-col items-center w-2/3">
             {list.map((item, index) => (
               <Disclosure
                 as="div"
