@@ -195,10 +195,12 @@ const FileUploadBox = ({ handleFile, title }) => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event) => {
+    event.preventDefault();
     hiddenFileInput.current.click();
   };
 
   const handleChange = (event) => {
+    event.preventDefault();
     const fileUploaded = event.target.files[0];
     handleFile(fileUploaded);
   };
