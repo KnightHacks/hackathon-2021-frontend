@@ -1,7 +1,7 @@
-import { Helmet } from "react-helmet";
-import { useState, useRef } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import Page from "../components/Page";
 
 /**
@@ -12,19 +12,28 @@ import Page from "../components/Page";
  * @author Rob
  */
 const Register = () => {
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [resume, setResume] = useState(null);
+  const [ethnicity, setEthnicity] = useState("");
+  // TODO what options/prompting are we providing?
+  const [pronouns, setPronouns] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [major, setMajor] = useState("");
   const [graduation, setGraduation] = useState("");
-  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [github, setGithub] = useState("");
   const [linkedIn, setLinkedIn] = useState("");
+  const [whyAttend, setWhyAttend] = useState("");
+  const [whatLearn, setWhatLearn] = useState("");
+  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
+  const [resume, setResume] = useState(null);
 
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
+
+  const infoOptions = ["Yes", "No"];
+  const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
   const attendingOptions = [
     "I will be attending Knight Hacks in person.",
@@ -45,25 +54,31 @@ const Register = () => {
       case "success":
         setFeedbackMessage("Registration already successful!");
         break;
-      default:
+      default: {
         setRegistrationState("pending");
         setFeedbackMessage("Processing registration...");
-      // const response = await createHacker(
-      //   firstName,
-      //   lastName,
-      //   schoolName,
-      //   email,
-      //   phoneNumber,
-      //   resume,
-      //   selectedTrack,
-      //   graduation,
-      //   [github, linkedIn],
-      //   attendingOption,
-      //   dietaryRestrictions
-      //   "hacker"
-      // );
-      // if (response.ok) setRegistrationState("success");
-      // else setRegistrationState("failure");
+        const response = await createHacker({
+          email,
+          firstName,
+          lastName,
+          phoneNumber,
+          canShareInfo,
+          isBeginner: selectedTrack === "Beginner",
+          ethnicity,
+          pronouns,
+          college: schoolName,
+          major,
+          graduation,
+          github,
+          linkedIn,
+          whyAttend,
+          whatLearn,
+          inPerson: attendingOption === "In Person",
+          dietaryRestrictions,
+          resume,
+        });
+        setRegistrationState(response.ok ? "success" : "failure");
+      }
     }
   };
 
@@ -109,8 +124,46 @@ const Register = () => {
             setter={setDietaryRestrictions}
           />
           <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="Github:" setter={setGithub} />
+            <TextInputBox label="GitHub:" setter={setGithub} />
             <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+            <TextInputBox label="Pronouns:" setter={setPronouns} />
+            <TextInputBox label="Ethnicity:" setter={setEthnicity} />
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+            <OptionSelector
+              title="Can share info:"
+              trackOptions={infoOptions}
+              selectedTrack={canShareInfo}
+              setSelectedTrack={setCanShareInfo}
+              flex="row"
+            />
+            <TextInputBox label="Major:" setter={setMajor} />
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+            <div className="my-4 flex-1">
+              <label>
+                <span>Why are you attending Knight Hacks?</span>
+                <textarea
+                  value={whyAttend}
+                  onChange={(event) => setWhyAttend(event.target.value)}
+                  className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                />
+              </label>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+            <div className="my-4 flex-1">
+              <label>
+                <span>What do you hope to learn at Knight Hacks?</span>
+                <textarea
+                  value={whatLearn}
+                  onChange={(event) => setWhatLearn(event.target.value)}
+                  className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                />
+              </label>
+            </div>
           </div>
           <div className="flex flex-col justify-center">
             <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
@@ -311,35 +364,57 @@ const OptionSelector = ({
  * @desc attempts to create a hacker on the backend
  * @author Rob
  */
-const createHacker = async (
-  first_name,
-  last_name,
-  school_name,
+const createHacker = async ({
   email,
-  phone_number,
+  firstName: first_name,
+  lastName: last_name,
+  phoneNumber: phone_number,
+  canShareInfo: can_share_info,
+  isBeginner: beginner,
+  ethnicity,
+  pronouns,
+  college,
+  major,
+  graduation: graduation_date,
+  github,
+  linkedIn: linkedin,
+  whyAttend: why_attend,
+  whatLearn: what_learn,
+  inPerson: in_person,
+  dietaryRestrictions: dietary_restrictions,
   resume,
-  track,
-  grad_year,
-  socials,
-  password
-) => {
-  return fetch("/api/hackers/", {
-    method: "POST",
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
-    body: JSON.stringify({
-      current_status: false,
-      date: new Date().toISOString(),
+}) => {
+  const hackerFormData = new FormData();
+  hackerFormData.append(
+    "hacker",
+    JSON.stringify({
+      beginner,
+      can_share_info: can_share_info === "Yes",
+      edu_info: {
+        college,
+        graduation_date,
+        major,
+      },
       email,
+      ethnicity,
       first_name,
-      grad_year,
       last_name,
-      password,
       phone_number,
-      resume,
-      school_name,
-      socials,
-      tracks: [track],
-    }),
+      pronouns,
+      socials: {
+        github,
+        linkedin,
+      },
+      why_attend,
+      what_learn: [what_learn],
+      dietary_restrictions,
+      in_person,
+    })
+  );
+  hackerFormData.append("resume", resume);
+  return await fetch("https://api.knighthacks.org/api/hackers/", {
+    method: "POST",
+    body: hackerFormData,
   });
 };
 
