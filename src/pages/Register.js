@@ -1,7 +1,6 @@
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
-import { Helmet } from "react-helmet";
 import Page from "../components/Page";
 
 /**
@@ -83,125 +82,119 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Knight Hacks | Register</title>
-      </Helmet>
-      <Page onLanding={false}>
-        <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
-          Register
-        </h1>
-        <form onSubmit={submitRegistration} className="flex flex-col">
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="First Name:" setter={setFirstName} />
-            <TextInputBox label="Last Name:" setter={setLastName} />
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox
-              label="Phone:"
-              pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-              setter={setPhoneNumber}
-            />
-            <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="School Name:" setter={setSchoolName} />
-            <TextInputBox
-              label="Graduation Year:"
-              pattern="^\d{4}$"
-              setter={setGraduation}
-            />
-          </div>
-          <OptionSelector
-            title="Are you attending our hackathon in person or virtually?"
-            trackOptions={attendingOptions}
-            selectedTrack={attendingOption}
-            setSelectedTrack={setAttendingOption}
-            flex="col"
-          />
+    <Page title="Knight Hacks | Register" onLanding={false}>
+      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
+        Register
+      </h1>
+      <form onSubmit={submitRegistration} className="flex flex-col">
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="First Name:" setter={setFirstName} />
+          <TextInputBox label="Last Name:" setter={setLastName} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
-            label="Dietary Restrictions"
-            setter={setDietaryRestrictions}
+            label="Phone:"
+            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
+            setter={setPhoneNumber}
           />
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="GitHub:" setter={setGithub} />
-            <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="School Name:" setter={setSchoolName} />
+          <TextInputBox
+            label="Graduation Year:"
+            pattern="^\d{4}$"
+            setter={setGraduation}
+          />
+        </div>
+        <OptionSelector
+          title="Are you attending our hackathon in person or virtually?"
+          trackOptions={attendingOptions}
+          selectedTrack={attendingOption}
+          setSelectedTrack={setAttendingOption}
+          flex="col"
+        />
+        <TextInputBox
+          label="Dietary Restrictions"
+          setter={setDietaryRestrictions}
+        />
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="GitHub:" setter={setGithub} />
+          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="Pronouns:" setter={setPronouns} />
+          <TextInputBox label="Ethnicity:" setter={setEthnicity} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <OptionSelector
+            title="Can share info:"
+            trackOptions={infoOptions}
+            selectedTrack={canShareInfo}
+            setSelectedTrack={setCanShareInfo}
+            flex="row"
+          />
+          <TextInputBox label="Major:" setter={setMajor} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <div className="my-4 flex-1">
+            <label>
+              <span>Why are you attending Knight Hacks?</span>
+              <textarea
+                value={whyAttend}
+                onChange={(event) => setWhyAttend(event.target.value)}
+                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+              />
+            </label>
           </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="Pronouns:" setter={setPronouns} />
-            <TextInputBox label="Ethnicity:" setter={setEthnicity} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <div className="my-4 flex-1">
+            <label>
+              <span>What do you hope to learn at Knight Hacks?</span>
+              <textarea
+                value={whatLearn}
+                onChange={(event) => setWhatLearn(event.target.value)}
+                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+              />
+            </label>
           </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <OptionSelector
-              title="Can share info:"
-              trackOptions={infoOptions}
-              selectedTrack={canShareInfo}
-              setSelectedTrack={setCanShareInfo}
-              flex="row"
+        </div>
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
+            <FileUploadBox
+              handleFile={(fileUploaded) => setResume(fileUploaded)}
+              title="Upload Resume"
             />
-            <TextInputBox label="Major:" setter={setMajor} />
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <div className="my-4 flex-1">
-              <label>
-                <span>Why are you attending Knight Hacks?</span>
-                <textarea
-                  value={whyAttend}
-                  onChange={(event) => setWhyAttend(event.target.value)}
-                  className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <div className="my-4 flex-1">
-              <label>
-                <span>What do you hope to learn at Knight Hacks?</span>
-                <textarea
-                  value={whatLearn}
-                  onChange={(event) => setWhatLearn(event.target.value)}
-                  className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
-              <FileUploadBox
-                handleFile={(fileUploaded) => setResume(fileUploaded)}
-                title="Upload Resume"
-              />
-              <p className="visible lg:hidden font-palanquin">
-                {(resume && "Filename: " + resume.name) ||
-                  "(PDF file required)"}
-              </p>
-              <OptionSelector
-                title="Track:"
-                trackOptions={trackOptions}
-                selectedTrack={selectedTrack}
-                setSelectedTrack={setSelectedTrack}
-                flex="row"
-              />
-            </div>
-            <p className="hidden lg:block">
+            <p className="visible lg:hidden font-palanquin">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
+            <OptionSelector
+              title="Track:"
+              trackOptions={trackOptions}
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
+              flex="row"
+            />
           </div>
-          <div className="flex justify-center font-palanquin">
-            <input
-              type="submit"
-              className={`
+          <p className="hidden lg:block">
+            {(resume && "Filename: " + resume.name) || "(PDF file required)"}
+          </p>
+        </div>
+        <div className="flex justify-center font-palanquin">
+          <input
+            type="submit"
+            className={`
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800 
               w-72
             `}
-              value="Submit"
-            />
-          </div>
-        </form>
-      </Page>
-    </>
+            value="Submit"
+          />
+        </div>
+      </form>
+    </Page>
   );
 };
 
