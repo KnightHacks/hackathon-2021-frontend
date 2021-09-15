@@ -21,15 +21,15 @@ const Schedule = () => {
           <title>Knight Hacks | Schedule</title>
         </Helmet>
         <Page onLanding={false}>
-          <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="font-sansita my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
             Schedule
           </h1>
           <div className="grid place-items-center mt-20">
-            <div className="font-medium text-2xl sm:text-3xl xl:text-4xl my-4">
-              Coming soon.
+            <div className="font-sansita text-2xl sm:text-3xl xl:text-4xl my-4">
+              Coming soon!
             </div>
             <img
-              className="w-2/5"
+              className="w-3/5"
               src={loadingFish}
               alt="Loading spinner with two Koi fish swimming in a circle."
             />
