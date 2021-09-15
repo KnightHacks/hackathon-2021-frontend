@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
+import * as Sentry from "@sentry/react";
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -529,6 +530,10 @@ const createHacker = async ({
   dietaryRestrictions: dietary_restrictions,
   resume,
 }) => {
+  const transaction = Sentry.startTransaction({ name: "submitHacker" });
+
+  Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
+
   const hackerFormData = new FormData();
   hackerFormData.append(
     "hacker",
@@ -557,10 +562,24 @@ const createHacker = async ({
     })
   );
   hackerFormData.append("resume", resume);
-  return await fetch("https://api.knighthacks.org/api/hackers/", {
+
+  const span = transaction.startChild({
+    data: hackerFormData,
+    op: "http",
+    description: "POST https://api.knighthacks.org/api/hackers/",
+  });
+
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     body: hackerFormData,
   });
+
+  span.setTag("http.status_code", res.status);
+
+  span.finish();
+  transaction.finish();
+
+  return res;
 };
 
 export default Register;

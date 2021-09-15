@@ -2,10 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { setupSentry } from "./sentry";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory({ basename: "/" });
+
+setupSentry(history);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App history={history} />
   </React.StrictMode>,
   document.getElementById("root")
 );

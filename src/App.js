@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Sponsors from "./pages/Sponsors";
@@ -16,10 +16,10 @@ import VolumeProvider from "./context/VolumeContext";
  * @desc See AppWithTransitions; don't make routing changes here
  * @author Abraham Hernandez, Rob
  */
-const App = () => {
+const App = ({ history }) => {
   return (
     <VolumeProvider>
-      <Router>
+      <Router history={history}>
         <Switch>
           {/*
            * We forward to AppWithTransitions so we can animate the transitions.
