@@ -2,7 +2,8 @@ import { Helmet } from "react-helmet";
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
-import loadingFish from "../assets/loadingFish.png";
+import stillLoadingFish from "../assets/loadingFish.png";
+import loadingFish from "../assets/loadingFish.gif";
 
 /**
  * @desc Displays Schedule using formatted events from JSON
