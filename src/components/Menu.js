@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { CgMenu } from "react-icons/cg";
-import { RiVolumeUpFill } from "react-icons/ri";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import VolumeButton from "./VolumeButton";
 
 /**
  * @desc Renders menu component containing nav menu and volume
@@ -20,11 +20,11 @@ const Menu = ({ open, setOpen }) => {
         }
       >
         <CgMenu
-          className="text-4xl md:text-5xl cursor-pointer"
+          className="text-4xl md:text-5xl cursor-pointer text-white"
           onClick={() => setOpen(!open)}
         />
         <div className="flex-1 sm:flex-none flex justify-end">
-          <RiVolumeUpFill className="text-4xl md:text-5xl cursor-pointer" />
+          <VolumeButton />
         </div>
       </div>
       <Transition show={open} as={Fragment}>
@@ -64,7 +64,7 @@ const Menu = ({ open, setOpen }) => {
                     (open ? "filter blur-md" : "cursor-pointer")
                   }
                 >
-                  <RiVolumeUpFill className="text-4xl md:text-5xl" />
+                  <VolumeButton />
                 </div>
               </Dialog.Title>
               <Transition.Child
@@ -77,7 +77,7 @@ const Menu = ({ open, setOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
-                  <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col">
+                  <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col font-sansita">
                     <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
                       <Link
                         to="/"
