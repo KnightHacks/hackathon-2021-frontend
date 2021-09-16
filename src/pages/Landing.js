@@ -31,22 +31,22 @@ const Landing = () => {
               REGISTER
             </p>
           </Link>
-          <div className="flex w-50% justify-between flex-col md:flex-row">
+          <div className="flex w-50% justify-between flex-col xl:flex-row">
             <a
               href="mailto:sponsorship@knighthacks.org"
               className={
-                "px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
+                "font-palanquin px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
               }
             >
-              <p>SPONSOR US</p>
+              <p>Sponsor Us</p>
             </a>
             <a
               href="https://discord.gg/CcZPUTFAuW"
               className={
-                "px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
+                "font-palanquin px-4 sm:px-6 mx-5 md:px-12 py-2 border-white border-4 md:border-8 rounded-full text-xl sm:text-3xl md:text-4xl mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none"
               }
             >
-              <p>JOIN DISCORD</p>
+              <p>Join Discord</p>
             </a>
           </div>
         </div>
