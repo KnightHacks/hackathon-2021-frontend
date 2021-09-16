@@ -41,14 +41,14 @@ const Landing = () => {
               REGISTER
             </p>
           </Link>
-          <div className="flex w-50% justify-between flex-col xl:flex-row">
+          <div className="flex flex-col md:flex-row">
             <a
               href="mailto:sponsorship@knighthacks.org"
               className={`
-                px-4 sm:px-6 mx-5 md:px-12 py-2
-                border-white border-4 md:border-8
-                rounded-full text-xl sm:text-3xl md:text-4xl
-                mt-4 md:mt-8 font-palanquin
+                px-4 py-2 md:mx-3 mt-4
+                border-white border-4
+                rounded-full text-xl
+                font-palanquin
                 hover:bg-blue-400 focus:outline-none
               `}
             >
@@ -57,10 +57,10 @@ const Landing = () => {
             <a
               href="https://discord.gg/CcZPUTFAuW"
               className={`
-                px-4 sm:px-6 mx-5 md:px-12 py-2
-                border-white border-4 md:border-8
-                rounded-full text-xl sm:text-3xl md:text-4xl
-                mt-4 md:mt-8 font-palanquin
+                px-4 py-2 md:mx-3 mt-4
+                border-white border-4
+                rounded-full text-xl
+                font-palanquin
                 hover:bg-blue-400 focus:outline-none
               `}
             >
