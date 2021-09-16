@@ -13,10 +13,11 @@ const Sponsors = () => {
       <h1
         className={`
           text-4xl w-full text-center mt-16
-          md:text-5xl md:mt-24
+          sm:text-4xl md:text-6xl
           lg:mt-32
           xl:text-6xl xl:mt-36
           2xl:text-7xl 2xl:mt-36
+          font-sansita
         `}
       >
         Our Sponsors

@@ -12,7 +12,7 @@ const Schedule = () => {
   return (
     <Page title="Knight Hacks | Schedule" onLanding={false}>
       <div className="grid w-full flex-col my-4 md:my-12">
-        <h1 className="my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+        <h1 className="my-10 justify-self-center text-4xl sm:text-4xl md:text-6xl xl:text-7xl font-sansita">
           Schedule
         </h1>
         {content.map((event, index) => {
@@ -23,12 +23,23 @@ const Schedule = () => {
               </p>
               {/* Mapping through the content in each events block in JSON */}
               {event.events.map((item, index) => (
-                <div key={index} className="mb-5">
-                  <div className=" mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl font-palanquin">
-                    <span className="font-palanquin"> {item.time} </span>{" "}
-                    <span> {item.title} </span>
+                <>
+                  <div key={index} className="mb-5">
+                    <div className=" mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl font-palanquin">
+                      <span className="font-palanquin"> {item.time} </span>{" "}
+                      <span> {item.title} </span>
+                    </div>
+                    {/* Mapping through each string in the tags array in JSON */}
+                    {item.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        style={{ backgroundColor: hash.hex(tag) }}
+                        className="font-palanquin rounded-full px-2 py-1 mr-2 text-gray-600"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  {/* Mapping through each string in the tags array in JSON */}
                   {item.tags.map((tag, index) => (
                     <span
                       key={index}
@@ -38,7 +49,7 @@ const Schedule = () => {
                       {tag}
                     </span>
                   ))}
-                </div>
+                </>
               ))}
             </div>
           );

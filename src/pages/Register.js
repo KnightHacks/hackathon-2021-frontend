@@ -83,7 +83,7 @@ const Register = () => {
 
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
-      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center">
+      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
       <form onSubmit={submitRegistration} className="flex flex-col">
@@ -99,6 +99,22 @@ const Register = () => {
           />
           <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
         </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="School Name:" setter={setSchoolName} />
+          <TextInputBox
+            label="Graduation Year:"
+            pattern="^\d{4}$"
+            setter={setGraduation}
+          />
+        </div>
+        <OptionSelector
+          title="Are you attending our hackathon in person or virtually?"
+          trackOptions={attendingOptions}
+          selectedTrack={attendingOption}
+          setSelectedTrack={setAttendingOption}
+          flex="col"
+        />
+        <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox label="School Name:" setter={setSchoolName} />
           <TextInputBox
@@ -187,7 +203,7 @@ const Register = () => {
             className={`
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
-              active:bg-blue-800 
+              active:bg-blue-800
               w-72
             `}
             value="Submit"
@@ -259,7 +275,7 @@ const FileUploadBox = ({ handleFile, title }) => {
         className={`
               bg-blue-600 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
               hover:bg-blue-700
-              active:bg-blue-800 max-w-xs 
+              active:bg-blue-800 max-w-xs
               truncate
               `}
       >
