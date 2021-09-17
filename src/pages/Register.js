@@ -152,8 +152,8 @@ const Register = () => {
           />
           <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
         </div>
-        <TextInputBox label="School" setter={setSchoolName} />
         <div className="font-palanquin">
+          <TextInputBox label="School" setter={setSchoolName} />
           <OptionSelector
             title="When are you graduating?"
             trackOptions={graduationOptions}
@@ -177,7 +177,7 @@ const Register = () => {
           Do you have any dietary restrictions that we should be aware of?
         </p>
         <TextInputBox
-          className="font-palanquin rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+          className="font-palanquin rounded-r-lg rounded-l-lg bg-input-background border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
           setter={setDietaryRestrictions}
         />
         <div className="flex flex-col justify-center font-palanquin">
@@ -201,7 +201,7 @@ const Register = () => {
               <textarea
                 value={whyAttend}
                 onChange={(event) => setWhyAttend(event.target.value)}
-                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-input-background border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
@@ -213,18 +213,18 @@ const Register = () => {
               <textarea
                 value={whatLearn}
                 onChange={(event) => setWhatLearn(event.target.value)}
-                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-input-background border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
         </div>
-        <div className="flex flex-col justify-center">
-          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
+        <div className="flex flex-col justify-center font-palanquin">
+          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
             <FileUploadBox
               handleFile={(fileUploaded) => setResume(fileUploaded)}
               title="Upload Resume"
             />
-            <p className="visible lg:hidden font-palanquin">
+            <p className="visible lg:hidden">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
             <OptionSelector
@@ -244,6 +244,7 @@ const Register = () => {
           <input
             type="submit"
             className={`
+              cursor-pointer
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800
@@ -275,7 +276,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
       <label>
         <input
           placeholder={label}
-          className="focus:bg-white focus:text-gray-500 bg-input-background focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
+          className="bg-input-background focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
@@ -365,7 +366,7 @@ const OptionSelector = ({
       </span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-transparent rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-input-background rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
