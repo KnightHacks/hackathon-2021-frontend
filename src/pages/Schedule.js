@@ -2,6 +2,7 @@ import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
 import stillLoadingFish from "../assets/loadingFish.png";
+import { Helmet } from "react-helmet";
 
 /**
  * @desc Displays Schedule using formatted events from JSON
