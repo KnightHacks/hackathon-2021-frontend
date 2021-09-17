@@ -30,10 +30,13 @@ const Landing = () => {
           </p>
           <Link
             className={`
+              font-palanquin
               px-4 sm:px-6 md:px-12 py-2
-              border-white border-4 md:border-8
+              border-white border-4 md:border-4
               rounded-full text-xl sm:text-3xl md:text-4xl
-              mt-4 md:mt-8 hover:bg-blue-400 focus:outline-none
+              mt-4 md:mt-8 focus:outline-none
+              hover:bg-indigo-50 hover:shadow-lg
+              shadow-md
             `}
             to="/register"
           >
@@ -41,30 +44,60 @@ const Landing = () => {
               REGISTER
             </p>
           </Link>
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row sm:mb-10">
             <a
               href="mailto:sponsorship@knighthacks.org"
               className={`
+                relative group
+                overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
-                border-white border-4
+                border-indigo-50 border-4
                 rounded-full text-xl
                 font-palanquin
-                hover:bg-blue-400 focus:outline-none
+                hover:border-white
+                focus:outline-none
+                hover:shadow-md
+                hover:bg-gradient-to-r
+                ease-out duration-300
+                shadow-sm
               `}
             >
-              <p>Sponsor Us</p>
+              <span
+                className={`
+                absolute rounded-full
+                right-0 w-8 h-32 -mt-12
+                transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
+                group-hover:-translate-x-40 ease
+                `}
+              />
+              <p className="relative">Sponsor Us</p>
             </a>
             <a
               href="https://discord.gg/CcZPUTFAuW"
               className={`
+                relative group
+                overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
-                border-white border-4
+                border-indigo-50 border-4
                 rounded-full text-xl
                 font-palanquin
-                hover:bg-blue-400 focus:outline-none
+                hover:border-white
+                focus:outline-none
+                hover:shadow-md
+                hover:bg-gradient-to-r
+                ease-out duration-300
+                shadow-sm
               `}
             >
-              <p>Join Discord</p>
+              <span
+                className={`
+                absolute rounded-full
+                right-0 w-8 h-32 -mt-12
+                transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
+                group-hover:-translate-x-40 ease
+                `}
+              />
+              <p className="relative">Join Discord</p>
             </a>
           </div>
         </div>
