@@ -14,9 +14,6 @@ const Landing = () => {
       </Helmet>
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl w-full text-center ">
-            Welcome to
-          </h1>
           <div
             className={`
             bg-knight-hacks-logo
