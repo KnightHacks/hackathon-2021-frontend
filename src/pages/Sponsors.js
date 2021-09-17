@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Page from "../components/Page";
 
 // for testing only, not for final production
