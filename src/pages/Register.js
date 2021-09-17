@@ -28,7 +28,7 @@ const Register = () => {
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
 
-  const trackOptions = ["Beginner", "Advanced"];
+  const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
   const infoOptions = [
@@ -141,7 +141,7 @@ const Register = () => {
             selectedTrack={ethnicityOption}
             setSelectedTrack={setEthnicityOption}
             flex="col"
-            zIndex="10"
+            zIndex="9"
           />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
@@ -160,7 +160,7 @@ const Register = () => {
             selectedTrack={graduationOption}
             setSelectedTrack={setGraduationOption}
             flex="col"
-            zIndex="10"
+            zIndex="8"
           />
         </div>
         <div className="font-palanquin">
@@ -170,7 +170,7 @@ const Register = () => {
             selectedTrack={attendingOption}
             setSelectedTrack={setAttendingOption}
             flex="col"
-            zIndex="5"
+            zIndex="7"
           />
         </div>
         <p className="mt-4 w-full space-y-4 font-palanquin">
