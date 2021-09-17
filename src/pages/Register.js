@@ -86,7 +86,7 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col">
+      <form onSubmit={submitRegistration} className="flex flex-col m-4">
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox label="First Name:" setter={setFirstName} />
           <TextInputBox label="Last Name:" setter={setLastName} />
