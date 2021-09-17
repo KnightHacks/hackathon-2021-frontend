@@ -54,8 +54,8 @@ const Register = () => {
         break;
       case "success":
         setFeedbackMessage("Registration already successful!");
-        window.open("/success");
-        console.log("work");
+        window.open("/success ");
+        console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
