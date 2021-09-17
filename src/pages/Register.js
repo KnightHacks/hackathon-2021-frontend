@@ -28,7 +28,7 @@ const Register = () => {
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
 
-  const trackOptions = ["Beginner", "Advanced"];
+  const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
   const infoOptions = [
@@ -177,7 +177,7 @@ const Register = () => {
           Do you have any dietary restrictions that we should be aware of?
         </p>
         <TextInputBox
-          className="font-palanquin w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+          className="font-palanquin rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
           setter={setDietaryRestrictions}
         />
         <div className="flex flex-col justify-center font-palanquin">
@@ -275,7 +275,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
       <label>
         <input
           placeholder={label}
-          className="bg-input-background focus:shadow-md rounded placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
+          className="focus:bg-white focus:text-gray-500 bg-input-background focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
