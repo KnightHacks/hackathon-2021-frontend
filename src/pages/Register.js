@@ -123,22 +123,27 @@ const Register = () => {
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
-        <OptionSelector
-          className="font-palanquin"
-          trackOptions={pronounOptions}
-          selectedTrack={pronounOption}
-          setSelectedTrack={setPronounOption}
-          flex="col"
-          zIndex="10"
-        />
-        <OptionSelector
-          className="font-palanquin"
-          trackOptions={ethnicityOptions}
-          selectedTrack={ethnicityOption}
-          setSelectedTrack={setEthnicityOption}
-          flex="col"
-          zIndex="10"
-        />
+        <p className="mt-4 w-full space-y-4 font-palanquin">
+          How do you identify?
+        </p>
+        <div className="font-palanquin">
+          <OptionSelector
+            trackOptions={pronounOptions}
+            selectedTrack={pronounOption}
+            setSelectedTrack={setPronounOption}
+            flex="col"
+            zIndex="10"
+          />
+        </div>
+        <div className="font-palanquin">
+          <OptionSelector
+            trackOptions={ethnicityOptions}
+            selectedTrack={ethnicityOption}
+            setSelectedTrack={setEthnicityOption}
+            flex="col"
+            zIndex="10"
+          />
+        </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
             label="Phone"
@@ -148,30 +153,34 @@ const Register = () => {
           <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
         </div>
         <TextInputBox label="School" setter={setSchoolName} />
-        <OptionSelector
-          trackOptions={graduationOptions}
-          selectedTrack={graduationOption}
-          setSelectedTrack={setGraduationOption}
-          flex="col"
-          zIndex="10"
-        />
-        <OptionSelector
-          className="font-palanquin"
-          title="Are you attending our hackathon in person or virtually?"
-          trackOptions={attendingOptions}
-          selectedTrack={attendingOption}
-          setSelectedTrack={setAttendingOption}
-          flex="col"
-          zIndex="5"
-        />
-        <p className="mt-4 w-full space-y-4">
+        <div className="font-palanquin">
+          <OptionSelector
+            title="When are you graduating?"
+            trackOptions={graduationOptions}
+            selectedTrack={graduationOption}
+            setSelectedTrack={setGraduationOption}
+            flex="col"
+            zIndex="10"
+          />
+        </div>
+        <div className="font-palanquin">
+          <OptionSelector
+            title="Are you attending our hackathon in person or virtually?"
+            trackOptions={attendingOptions}
+            selectedTrack={attendingOption}
+            setSelectedTrack={setAttendingOption}
+            flex="col"
+            zIndex="5"
+          />
+        </div>
+        <p className="mt-4 w-full space-y-4 font-palanquin">
           Do you have any dietary restrictions that we should be aware of?
         </p>
         <TextInputBox
-          className="h-20 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+          className="font-palanquin h-20 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
           setter={setDietaryRestrictions}
         />
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+        <div className="flex flex-col justify-center font-palanquin">
           <TextInputBox label="GitHub" setter={setGithub} />
           <TextInputBox label="LinkedIn" setter={setLinkedIn} />
         </div>
@@ -186,13 +195,13 @@ const Register = () => {
           <TextInputBox label="Major" setter={setMajor} />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="my-4 flex-1">
+          <div className="mt-4 w-full space-y-4 flex-1">
             <label>
               <span>Why are you attending Knight Hacks?</span>
               <textarea
                 value={whyAttend}
                 onChange={(event) => setWhyAttend(event.target.value)}
-                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
@@ -204,7 +213,7 @@ const Register = () => {
               <textarea
                 value={whatLearn}
                 onChange={(event) => setWhatLearn(event.target.value)}
-                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
@@ -266,7 +275,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
       <label>
         <input
           placeholder={label}
-          className="bg-input-background focus:shadow-md rounded-full placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200  break-words"
+          className="bg-input-background focus:shadow-md rounded-full placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
@@ -344,7 +353,7 @@ const OptionSelector = ({
   return (
     <div
       className={
-        `h-full mt-4 md:mt-0 flex flex-${flex} items-center ` +
+        `h-full py-2 flex flex-${flex} items-center ` +
         (flex === "col"
           ? `w-full space-y-4`
           : `w-full space-y-4 md:w-72 md:space-x-4`)
