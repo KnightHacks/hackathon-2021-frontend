@@ -1,7 +1,6 @@
-import { Helmet } from "react-helmet";
-import { useState, useRef } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useRef, useState } from "react";
 import Page from "../components/Page";
 
 /**
@@ -12,19 +11,28 @@ import Page from "../components/Page";
  * @author Rob
  */
 const Register = () => {
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [resume, setResume] = useState(null);
+  const [ethnicity, setEthnicity] = useState("");
+  // TODO what options/prompting are we providing?
+  const [pronouns, setPronouns] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [major, setMajor] = useState("");
   const [graduation, setGraduation] = useState("");
-  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [github, setGithub] = useState("");
   const [linkedIn, setLinkedIn] = useState("");
+  const [whyAttend, setWhyAttend] = useState("");
+  const [whatLearn, setWhatLearn] = useState("");
+  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
+  const [resume, setResume] = useState(null);
 
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
+
+  const infoOptions = ["Yes", "No"];
+  const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
   const attendingOptions = [
     "I will be attending Knight Hacks in person.",
@@ -45,110 +53,164 @@ const Register = () => {
       case "success":
         setFeedbackMessage("Registration already successful!");
         break;
-      default:
+      default: {
         setRegistrationState("pending");
         setFeedbackMessage("Processing registration...");
-      // const response = await createHacker(
-      //   firstName,
-      //   lastName,
-      //   schoolName,
-      //   email,
-      //   phoneNumber,
-      //   resume,
-      //   selectedTrack,
-      //   graduation,
-      //   [github, linkedIn],
-      //   attendingOption,
-      //   dietaryRestrictions
-      //   "hacker"
-      // );
-      // if (response.ok) setRegistrationState("success");
-      // else setRegistrationState("failure");
+        const response = await createHacker({
+          email,
+          firstName,
+          lastName,
+          phoneNumber,
+          canShareInfo,
+          isBeginner: selectedTrack === "Beginner",
+          ethnicity,
+          pronouns,
+          college: schoolName,
+          major,
+          graduation,
+          github,
+          linkedIn,
+          whyAttend,
+          whatLearn,
+          inPerson: attendingOption === "In Person",
+          dietaryRestrictions,
+          resume,
+        });
+        setRegistrationState(response.ok ? "success" : "failure");
+      }
     }
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Knight Hacks | Register</title>
-      </Helmet>
-      <Page onLanding={false}>
-        <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
-          Register
-        </h1>
-        <form onSubmit={submitRegistration} className="flex flex-col">
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="First Name:" setter={setFirstName} />
-            <TextInputBox label="Last Name:" setter={setLastName} />
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox
-              label="Phone:"
-              pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-              setter={setPhoneNumber}
-            />
-            <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="School Name:" setter={setSchoolName} />
-            <TextInputBox
-              label="Graduation Year:"
-              pattern="^\d{4}$"
-              setter={setGraduation}
-            />
-          </div>
-          <OptionSelector
-            title="Are you attending our hackathon in person or virtually?"
-            trackOptions={attendingOptions}
-            selectedTrack={attendingOption}
-            setSelectedTrack={setAttendingOption}
-            flex="col"
-          />
+    <Page title="Knight Hacks | Register" onLanding={false}>
+      <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
+        Register
+      </h1>
+      <form onSubmit={submitRegistration} className="flex flex-col">
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="First Name:" setter={setFirstName} />
+          <TextInputBox label="Last Name:" setter={setLastName} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
-            label="Dietary Restrictions"
-            setter={setDietaryRestrictions}
+            label="Phone:"
+            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
+            setter={setPhoneNumber}
           />
-          <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-            <TextInputBox label="Github:" setter={setGithub} />
-            <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="School Name:" setter={setSchoolName} />
+          <TextInputBox
+            label="Graduation Year:"
+            pattern="^\d{4}$"
+            setter={setGraduation}
+          />
+        </div>
+        <OptionSelector
+          title="Are you attending our hackathon in person or virtually?"
+          trackOptions={attendingOptions}
+          selectedTrack={attendingOption}
+          setSelectedTrack={setAttendingOption}
+          flex="col"
+        />
+        <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="School Name:" setter={setSchoolName} />
+          <TextInputBox
+            label="Graduation Year:"
+            pattern="^\d{4}$"
+            setter={setGraduation}
+          />
+        </div>
+        <OptionSelector
+          title="Are you attending our hackathon in person or virtually?"
+          trackOptions={attendingOptions}
+          selectedTrack={attendingOption}
+          setSelectedTrack={setAttendingOption}
+          flex="col"
+        />
+        <TextInputBox
+          label="Dietary Restrictions"
+          setter={setDietaryRestrictions}
+        />
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="GitHub:" setter={setGithub} />
+          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <TextInputBox label="Pronouns:" setter={setPronouns} />
+          <TextInputBox label="Ethnicity:" setter={setEthnicity} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <OptionSelector
+            title="Can share info:"
+            trackOptions={infoOptions}
+            selectedTrack={canShareInfo}
+            setSelectedTrack={setCanShareInfo}
+            flex="row"
+          />
+          <TextInputBox label="Major:" setter={setMajor} />
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <div className="my-4 flex-1">
+            <label>
+              <span>Why are you attending Knight Hacks?</span>
+              <textarea
+                value={whyAttend}
+                onChange={(event) => setWhyAttend(event.target.value)}
+                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+              />
+            </label>
           </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
-              <FileUploadBox
-                handleFile={(fileUploaded) => setResume(fileUploaded)}
-                title="Upload Resume"
+        </div>
+        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+          <div className="my-4 flex-1">
+            <label>
+              <span>What do you hope to learn at Knight Hacks?</span>
+              <textarea
+                value={whatLearn}
+                onChange={(event) => setWhatLearn(event.target.value)}
+                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
               />
-              <p className="visible lg:hidden font-palanquin">
-                {(resume && "Filename: " + resume.name) ||
-                  "(PDF file required)"}
-              </p>
-              <OptionSelector
-                title="Track:"
-                trackOptions={trackOptions}
-                selectedTrack={selectedTrack}
-                setSelectedTrack={setSelectedTrack}
-                flex="row"
-              />
-            </div>
-            <p className="hidden lg:block">
+            </label>
+          </div>
+        </div>
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
+            <FileUploadBox
+              handleFile={(fileUploaded) => setResume(fileUploaded)}
+              title="Upload Resume"
+            />
+            <p className="visible lg:hidden font-palanquin">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
+            <OptionSelector
+              title="Track:"
+              trackOptions={trackOptions}
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
+              flex="row"
+            />
           </div>
-          <div className="flex justify-center font-palanquin">
-            <input
-              type="submit"
-              className={`
+          <p className="hidden lg:block">
+            {(resume && "Filename: " + resume.name) || "(PDF file required)"}
+          </p>
+        </div>
+        <div className="flex justify-center font-palanquin">
+          <input
+            type="submit"
+            className={`
               bg-blue-600 rounded-lg m-6 py-2 px-4
               hover:bg-blue-700
               active:bg-blue-800
               w-72
             `}
-              value="Submit"
-            />
-          </div>
-        </form>
-      </Page>
-    </>
+            value="Submit"
+          />
+        </div>
+      </form>
+    </Page>
   );
 };
 
@@ -195,10 +257,12 @@ const FileUploadBox = ({ handleFile, title }) => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event) => {
+    event.preventDefault();
     hiddenFileInput.current.click();
   };
 
   const handleChange = (event) => {
+    event.preventDefault();
     const fileUploaded = event.target.files[0];
     handleFile(fileUploaded);
   };
@@ -250,7 +314,9 @@ const OptionSelector = ({
         (flex === "col" ? `w-full space-y-4` : `w-72 space-x-4`)
       }
     >
-      <span className={flex === "col" && "flex self-start"}>{title}</span>
+      <span className={flex === "col" ? "flex self-start" : undefined}>
+        {title}
+      </span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1 w-full">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
@@ -309,35 +375,57 @@ const OptionSelector = ({
  * @desc attempts to create a hacker on the backend
  * @author Rob
  */
-const createHacker = async (
-  first_name,
-  last_name,
-  school_name,
+const createHacker = async ({
   email,
-  phone_number,
+  firstName: first_name,
+  lastName: last_name,
+  phoneNumber: phone_number,
+  canShareInfo: can_share_info,
+  isBeginner: beginner,
+  ethnicity,
+  pronouns,
+  college,
+  major,
+  graduation: graduation_date,
+  github,
+  linkedIn: linkedin,
+  whyAttend: why_attend,
+  whatLearn: what_learn,
+  inPerson: in_person,
+  dietaryRestrictions: dietary_restrictions,
   resume,
-  track,
-  grad_year,
-  socials,
-  password
-) => {
-  return fetch("/api/hackers/", {
-    method: "POST",
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
-    body: JSON.stringify({
-      current_status: false,
-      date: new Date().toISOString(),
+}) => {
+  const hackerFormData = new FormData();
+  hackerFormData.append(
+    "hacker",
+    JSON.stringify({
+      beginner,
+      can_share_info: can_share_info === "Yes",
+      edu_info: {
+        college,
+        graduation_date,
+        major,
+      },
       email,
+      ethnicity,
       first_name,
-      grad_year,
       last_name,
-      password,
       phone_number,
-      resume,
-      school_name,
-      socials,
-      tracks: [track],
-    }),
+      pronouns,
+      socials: {
+        github,
+        linkedin,
+      },
+      why_attend,
+      what_learn: [what_learn],
+      dietary_restrictions,
+      in_person,
+    })
+  );
+  hackerFormData.append("resume", resume);
+  return await fetch("https://api.knighthacks.org/api/hackers/", {
+    method: "POST",
+    body: hackerFormData,
   });
 };
 
