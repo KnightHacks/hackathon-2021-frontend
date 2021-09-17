@@ -24,6 +24,7 @@ module.exports = {
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
       }),
       fontFamily: {
+        sansita: "Sansita",
         palanquin: ["Palanquin"],
       },
     },

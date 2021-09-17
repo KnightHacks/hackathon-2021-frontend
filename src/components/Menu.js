@@ -77,7 +77,7 @@ const Menu = ({ open, setOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
-                  <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col">
+                  <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col font-sansita">
                     <li className="mt-4 inline-block hover:text-5xl sm:hover:text-7xl hover:transition ease-linear duration-200">
                       <Link
                         to="/"
