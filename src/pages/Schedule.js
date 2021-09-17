@@ -1,6 +1,7 @@
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
+import stillLoadingFish from "../assets/loadingFish.png";
 
 /**
  * @desc Displays Schedule using formatted events from JSON
@@ -9,6 +10,31 @@ import ColorHash from "color-hash";
 
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
+  const scheduleIncomplete = true;
+
+  if (scheduleIncomplete) {
+    return (
+      <>
+        <Helmet>
+          <title>Knight Hacks | Schedule</title>
+        </Helmet>
+        <Page onLanding={false}>
+          <h1 className="font-sansita my-10 justify-self-center text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+            Schedule
+          </h1>
+          <div className="grid justify-items-center my-20">
+            <div className="font-sansita text-2xl sm:text-4xl xl:text-4xl my-4">
+              Coming soon!
+            </div>
+            <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
+              Keep an eye out on this page for updates on this page in the
+              upcoming weeks.
+            </div>
+          </div>
+        </Page>
+      </>
+    );
+  }
   return (
     <Page title="Knight Hacks | Schedule" onLanding={false}>
       <div className="grid w-full flex-col my-4 md:my-12">
