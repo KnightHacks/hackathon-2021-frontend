@@ -50,11 +50,11 @@ const Register = () => {
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
-
+        console.log("in proccess");
         break;
       case "success":
         setFeedbackMessage("Registration already successful!");
-        window.open("/success ");
+        window.open("/success");
         console.log("success login");
         break;
       default: {
