@@ -45,7 +45,7 @@ const Register = () => {
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
   // registration dialog
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [response, setResponse] = useState(null);
 
