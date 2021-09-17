@@ -114,22 +114,6 @@ const Register = () => {
           setSelectedTrack={setAttendingOption}
           flex="col"
         />
-        <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="School Name:" setter={setSchoolName} />
-          <TextInputBox
-            label="Graduation Year:"
-            pattern="^\d{4}$"
-            setter={setGraduation}
-          />
-        </div>
-        <OptionSelector
-          title="Are you attending our hackathon in person or virtually?"
-          trackOptions={attendingOptions}
-          selectedTrack={attendingOption}
-          setSelectedTrack={setAttendingOption}
-          flex="col"
-        />
         <TextInputBox
           label="Dietary Restrictions"
           setter={setDietaryRestrictions}
