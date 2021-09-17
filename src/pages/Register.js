@@ -2,7 +2,7 @@ import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
 import Page from "../components/Page";
-
+import { useHistory } from "react-router-dom";
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -27,7 +27,7 @@ const Register = () => {
   const [whatLearn, setWhatLearn] = useState("");
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
-
+  let history = useHistory();
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
@@ -46,16 +46,21 @@ const Register = () => {
 
   const submitRegistration = async (event) => {
     event.preventDefault();
+
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
+
         break;
       case "success":
         setFeedbackMessage("Registration already successful!");
+        window.open("/success");
+
         break;
       default: {
         setRegistrationState("pending");
         setFeedbackMessage("Processing registration...");
+
         const response = await createHacker({
           email,
           firstName,
@@ -77,6 +82,12 @@ const Register = () => {
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
+        history.push({
+          pathname: "/success",
+          state: {
+            response: "success",
+          },
+        });
       }
     }
   };
