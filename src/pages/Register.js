@@ -58,6 +58,20 @@ const Register = () => {
 
   const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
+  const pronounOptions = ["she/her", "he/him", "they/them", "ze/zir", "Other"];
+  const [pronounOption, setPronounOption] = useState("Pronouns");
+
+  const ethnicityOptions = [
+    "American Indian or Alaska Native",
+    "Asian",
+    "Black or African American",
+    "Hispanic or Latino",
+    "Native Hawaiian or Other Pacific Islander",
+    "White",
+    "Two or more",
+  ];
+  const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -109,6 +123,22 @@ const Register = () => {
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
+        <OptionSelector
+          className="font-palanquin"
+          trackOptions={pronounOptions}
+          selectedTrack={pronounOption}
+          setSelectedTrack={setPronounOption}
+          flex="col"
+          zIndex="10"
+        />
+        <OptionSelector
+          className="font-palanquin"
+          trackOptions={ethnicityOptions}
+          selectedTrack={ethnicityOption}
+          setSelectedTrack={setEthnicityOption}
+          flex="col"
+          zIndex="10"
+        />
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
             label="Phone"
@@ -117,16 +147,14 @@ const Register = () => {
           />
           <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
         </div>
-        <div className="flex flex-col lg:flex-row justify-center font-palanquin">
-          <TextInputBox label="School" setter={setSchoolName} />
-          <OptionSelector
-            trackOptions={graduationOptions}
-            selectedTrack={graduationOption}
-            setSelectedTrack={setGraduationOption}
-            flex="row"
-            zIndex="10"
-          />
-        </div>
+        <TextInputBox label="School" setter={setSchoolName} />
+        <OptionSelector
+          trackOptions={graduationOptions}
+          selectedTrack={graduationOption}
+          setSelectedTrack={setGraduationOption}
+          flex="col"
+          zIndex="10"
+        />
         <OptionSelector
           className="font-palanquin"
           title="Are you attending our hackathon in person or virtually?"
@@ -146,10 +174,6 @@ const Register = () => {
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox label="GitHub" setter={setGithub} />
           <TextInputBox label="LinkedIn" setter={setLinkedIn} />
-        </div>
-        <div className="flex flex-col justify-center font-palanquin">
-          <TextInputBox label="Pronouns" setter={setPronouns} />
-          <TextInputBox label="Ethnicity" setter={setEthnicity} />
         </div>
         <div className="flex flex-col justify-center font-palanquin">
           <OptionSelector
