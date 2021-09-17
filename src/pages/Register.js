@@ -31,7 +31,10 @@ const Register = () => {
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
-  const infoOptions = ["Yes", "No"];
+  const infoOptions = [
+    "Yes, I'm comfortable with my information being shared.",
+    "No, I'm uncomfortable with my information being shared.",
+  ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
   const attendingOptions = [
@@ -39,6 +42,21 @@ const Register = () => {
     "I will be attending Knight Hacks virtually.",
   ];
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
+
+  const graduationOptions = [
+    "Fall 2021",
+    "Spring 2022",
+    "Summer 2022",
+    "Fall 2022",
+    "Spring 2023",
+    "Summer 2023",
+    "Fall 2023",
+    "Spring 2024",
+    "Summer 2024",
+    "Fall 2024",
+  ];
+
+  const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
@@ -86,8 +104,8 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col m-4">
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+      <form onSubmit={submitRegistration} className="flex flex-col">
+        <div className="flex flex-col justify-center font-palanquin">
           <TextInputBox label="First Name:" setter={setFirstName} />
           <TextInputBox label="Last Name:" setter={setLastName} />
         </div>
@@ -99,42 +117,52 @@ const Register = () => {
           />
           <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="School Name:" setter={setSchoolName} />
+        <div className="flex flex-col lg:flex-row justify-center font-palanquin">
           <TextInputBox
-            label="Graduation Year:"
-            pattern="^\d{4}$"
-            setter={setGraduation}
+            label="University of Central Florida"
+            setter={setSchoolName}
+          />
+          <OptionSelector
+            trackOptions={graduationOptions}
+            selectedTrack={graduationOption}
+            setSelectedTrack={setGraduationOption}
+            flex="row"
+            zIndex="10"
           />
         </div>
         <OptionSelector
+          className="font-palanquin"
           title="Are you attending our hackathon in person or virtually?"
           trackOptions={attendingOptions}
           selectedTrack={attendingOption}
           setSelectedTrack={setAttendingOption}
           flex="col"
+          zIndex="5"
         />
+        <p className="mt-4 w-full space-y-4">
+          Do you have any dietary restrictions that we should be aware of?
+        </p>
         <TextInputBox
-          label="Dietary Restrictions"
+          className="h-20 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
           setter={setDietaryRestrictions}
         />
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="GitHub:" setter={setGithub} />
-          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+          <TextInputBox label="GitHub" setter={setGithub} />
+          <TextInputBox label="LinkedIn" setter={setLinkedIn} />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="Pronouns:" setter={setPronouns} />
-          <TextInputBox label="Ethnicity:" setter={setEthnicity} />
+        <div className="flex flex-col justify-center font-palanquin">
+          <TextInputBox label="Pronouns" setter={setPronouns} />
+          <TextInputBox label="Ethnicity" setter={setEthnicity} />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+        <div className="flex flex-col justify-center font-palanquin">
           <OptionSelector
-            title="Can share info:"
+            title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
             trackOptions={infoOptions}
             selectedTrack={canShareInfo}
             setSelectedTrack={setCanShareInfo}
-            flex="row"
+            flex="col"
           />
-          <TextInputBox label="Major:" setter={setMajor} />
+          <TextInputBox label="Major" setter={setMajor} />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <div className="my-4 flex-1">
@@ -170,11 +198,12 @@ const Register = () => {
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
             <OptionSelector
-              title="Track:"
+              title="What track would you like to follow for the hackathon?"
               trackOptions={trackOptions}
               selectedTrack={selectedTrack}
               setSelectedTrack={setSelectedTrack}
-              flex="row"
+              flex="col"
+              zIndex="1"
             />
           </div>
           <p className="hidden lg:block">
@@ -214,9 +243,9 @@ const TextInputBox = ({ label, setter, ...props }) => {
   return (
     <div className="my-4 flex-1">
       <label>
-        <span>{label}</span>
         <input
-          className="text-gray-800 p-2 w-full px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+          placeholder={label}
+          className="bg-input-background focus:shadow-md rounded-full placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200  break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
@@ -295,7 +324,9 @@ const OptionSelector = ({
     <div
       className={
         `h-full mt-4 md:mt-0 flex flex-${flex} items-center ` +
-        (flex === "col" ? `w-full space-y-4` : `w-72 space-x-4`)
+        (flex === "col"
+          ? `w-full space-y-4`
+          : `w-full space-y-4 md:w-72 md:space-x-4`)
       }
     >
       <span className={flex === "col" ? "flex self-start" : undefined}>
