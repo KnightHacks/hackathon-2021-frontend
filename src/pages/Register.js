@@ -123,7 +123,7 @@ const Register = () => {
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin">
+        <p className="mt-4 w-full space-y-4 font-palanquin z-">
           How do you identify?
         </p>
         <div className="font-palanquin">
@@ -132,7 +132,7 @@ const Register = () => {
             selectedTrack={pronounOption}
             setSelectedTrack={setPronounOption}
             flex="col"
-            zIndex="10"
+            zIndex="50"
           />
         </div>
         <div className="font-palanquin">
@@ -141,7 +141,7 @@ const Register = () => {
             selectedTrack={ethnicityOption}
             setSelectedTrack={setEthnicityOption}
             flex="col"
-            zIndex="10"
+            zIndex="40"
           />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
@@ -160,7 +160,7 @@ const Register = () => {
             selectedTrack={graduationOption}
             setSelectedTrack={setGraduationOption}
             flex="col"
-            zIndex="10"
+            zIndex="30"
           />
         </div>
         <div className="font-palanquin">
@@ -170,7 +170,7 @@ const Register = () => {
             selectedTrack={attendingOption}
             setSelectedTrack={setAttendingOption}
             flex="col"
-            zIndex="5"
+            zIndex="20"
           />
         </div>
         <p className="mt-4 w-full space-y-4 font-palanquin">
@@ -201,7 +201,7 @@ const Register = () => {
               <textarea
                 value={whyAttend}
                 onChange={(event) => setWhyAttend(event.target.value)}
-                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-transparent border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
@@ -349,6 +349,7 @@ const OptionSelector = ({
   selectedTrack,
   setSelectedTrack,
   flex,
+  zIndex,
 }) => {
   return (
     <div
@@ -376,7 +377,9 @@ const OptionSelector = ({
             </span>
           </Listbox.Button>
 
-          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-${zIndex}`}
+          >
             {trackOptions.map((track, trackIdx) => (
               <Listbox.Option
                 key={trackIdx}
