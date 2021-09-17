@@ -106,22 +106,19 @@ const Register = () => {
       </h1>
       <form onSubmit={submitRegistration} className="flex flex-col">
         <div className="flex flex-col justify-center font-palanquin">
-          <TextInputBox label="First Name:" setter={setFirstName} />
-          <TextInputBox label="Last Name:" setter={setLastName} />
+          <TextInputBox label="First Name" setter={setFirstName} />
+          <TextInputBox label="Last Name" setter={setLastName} />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
-            label="Phone:"
+            label="Phone"
             pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
             setter={setPhoneNumber}
           />
-          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+          <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
         </div>
         <div className="flex flex-col lg:flex-row justify-center font-palanquin">
-          <TextInputBox
-            label="University of Central Florida"
-            setter={setSchoolName}
-          />
+          <TextInputBox label="School" setter={setSchoolName} />
           <OptionSelector
             trackOptions={graduationOptions}
             selectedTrack={graduationOption}
