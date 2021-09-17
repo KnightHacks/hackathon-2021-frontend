@@ -32,10 +32,11 @@ const Landing = () => {
             className={`
               font-palanquin
               px-4 sm:px-6 md:px-12 py-2
-              border-white border-4 md:border-4
+              border-indigo-50 border-4 md:border-4
               rounded-full text-xl sm:text-3xl md:text-4xl
               mt-4 md:mt-8 focus:outline-none
-              hover:bg-indigo-50 hover:shadow-lg
+              hover:border-white hover:shadow-xl
+              hover:text-white
               shadow-md
             `}
             to="/register"
