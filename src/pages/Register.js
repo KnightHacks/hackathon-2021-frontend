@@ -55,7 +55,7 @@ const Register = () => {
       case "success":
         setFeedbackMessage("Registration already successful!");
         window.open("/success");
-
+        console.log("work");
         break;
       default: {
         setRegistrationState("pending");
@@ -82,12 +82,6 @@ const Register = () => {
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
-        history.push({
-          pathname: "/success",
-          state: {
-            response: "success",
-          },
-        });
       }
     }
   };
