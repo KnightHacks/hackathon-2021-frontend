@@ -1,4 +1,4 @@
-import { Listbox } from "@headlessui/react";
+import { Dialog, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
 import Page from "../components/Page";
@@ -44,6 +44,11 @@ const Register = () => {
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
+  // registration dialog
+  const [isOpen, setIsOpen] = useState(true);
+
+  const [response, setResponse] = useState(null);
+
   const submitRegistration = async (event) => {
     event.preventDefault();
     switch (registrationState) {
@@ -77,12 +82,61 @@ const Register = () => {
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
+        setResponse(response);
+        if (!response.ok) setIsOpen(true);
       }
     }
   };
 
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="fixed inset-0 z-10 overflow-y-auto h-100 w-100"
+      >
+        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+
+        <div className="grid place-items-center h-full">
+          <div className="flex flex-col justify-center max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+            <Dialog.Title
+              as="h3"
+              className="text-xl font-medium leading-6 text-gray-900"
+            >
+              Registration Failed :(
+            </Dialog.Title>
+            <Dialog.Description className="text-lg">
+              Something went wrong; please try again!
+            </Dialog.Description>
+
+            <p className="text-md text-gray-500">
+              {`The server says "${
+                response
+                  ? `${response.status}: ${response.statusText}`
+                  : "<crickets>"
+              }".`}
+            </p>
+
+            <div className="mt-4">
+              <button
+                className={`
+                bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
+                hover:bg-blue-700
+                active:bg-blue-800 max-w-xs
+                truncate
+              `}
+                onClick={(event) => {
+                  setIsOpen(false);
+                  submitRegistration(event);
+                }}
+              >
+                Try again!
+              </button>
+              <button onClick={() => setIsOpen(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </Dialog>
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
