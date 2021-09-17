@@ -4,7 +4,15 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        "full-with-margins": "calc(100% - 30px)",
+        "19/20": "95%",
+      },
+      maxWidth: {
+        xs: "15rem",
+      },
+      height: {
+        "19/20": "95%",
+        "3/20": "15%",
+        "17/20": "85%",
       },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
@@ -14,11 +22,16 @@ module.exports = {
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
       }),
+      fontFamily: {
+        sansita: "Sansita",
+        palanquin: ["Palanquin"],
+      },
     },
   },
   variants: {
     extend: {
       fontSize: ["hover", "focus"],
+      backgroundColor: ["active"],
     },
   },
   plugins: [],
