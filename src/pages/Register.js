@@ -15,17 +15,6 @@ import * as yup from "yup";
  * @author Rob
  */
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [major, setMajor] = useState("");
-  const [github, setGithub] = useState("");
-  const [linkedIn, setLinkedIn] = useState("");
-  const [whyAttend, setWhyAttend] = useState("");
-  const [whatLearn, setWhatLearn] = useState("");
-  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
   const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
@@ -81,7 +70,7 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
-  const submitRegistration = async (event) => {
+  const submitRegistration = async (values, setSubmitting) => {
     event.preventDefault();
 
     switch (registrationState) {
@@ -99,29 +88,30 @@ const Register = () => {
         setFeedbackMessage("Processing registration...");
 
         const response = await createHacker({
-          email,
-          firstName,
-          lastName,
-          phoneNumber,
+          email: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
           pronouns: pronounOption,
-          college: schoolName,
-          major,
+          college: values.schoolName,
+          major: values.major,
           graduation: graduationOption,
-          github,
-          linkedIn,
-          whyAttend,
-          whatLearn,
+          github: values.github,
+          linkedIn: values.linkedIn,
+          whyAttend: values.whyAttend,
+          whatLearn: values.whatLearn,
           inPerson: attendingOption === "In Person",
-          dietaryRestrictions,
+          dietaryRestrictions: values.dietaryRestrictions,
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
         setResponse(response);
         if (response.ok) history.push("/success");
         else setIsOpen(true);
+        setSubmitting(false);
       }
     }
   };
@@ -129,15 +119,17 @@ const Register = () => {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let registrationSchema = yup.object().shape({
-    firstName: yup.string().required("Required"),
-    lastName: yup.string().required("Required"),
-    schoolName: yup.string().required("Required"),
-    email: yup.string().email("Email is not valid").required("Required"),
+    firstName: yup.string().required("A first name is required"),
+    lastName: yup.string().required("A last name is required"),
+    schoolName: yup.string().required("The name of your school is required"),
+    email: yup
+      .string()
+      .email("Email is not valid")
+      .required("An email is required"),
     phoneNumber: yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required("Required"),
-    graduation: yup.string().required("Required"),
+      .matches(phoneRegExp, "The phone number is not valid")
+      .required("A phone number is required"),
   });
 
   if (window.innerWidth <= 470) {
@@ -225,6 +217,7 @@ const Register = () => {
           linkedIn: "",
           major: "",
           whyAttend: "",
+          whatLearn: "",
         }}
         validate={() => {
           const errors = {};
@@ -249,16 +242,7 @@ const Register = () => {
         }}
         validationSchema={registrationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(
-              JSON.stringify(
-                { ...values, resume, selectedTrack, attendingOption },
-                null,
-                2
-              )
-            );
-            setSubmitting(false);
-          }, 400);
+          submitRegistration(values, setSubmitting);
         }}
       >
         {({ isSubmitting, errors }) => (
@@ -378,18 +362,21 @@ const Register = () => {
             <p className="mt-4 w-full space-y-4 font-palanquin">
               Do you have any dietary restrictions that we should be aware of?
             </p>
-            <TextInputBox
-              label="Dietary Restrictions"
-              setter={setDietaryRestrictions}
-            />
-            <OptionSelector
-              title="What track would you like to follow for the hackathon?"
-              trackOptions={trackOptions}
-              selectedTrack={selectedTrack}
-              setSelectedTrack={setSelectedTrack}
-              flex="col"
-              zIndex="20"
-            />
+            <Field type="text" name="dietaryRestrictions">
+              {({ field }) => (
+                <TextInputBox label="Dietary Restrictions" field={field} />
+              )}
+            </Field>
+            <div className="font-palanquin">
+              <OptionSelector
+                title="What track would you like to follow for the hackathon?"
+                trackOptions={trackOptions}
+                selectedTrack={selectedTrack}
+                setSelectedTrack={setSelectedTrack}
+                flex="col"
+                zIndex="20"
+              />
+            </div>
             <div className="flex flex-col justify-center font-palanquin">
               <Field type="text" name="github">
                 {({ field }) => <TextInputBox label="GitHub" field={field} />}
@@ -447,10 +434,18 @@ const Register = () => {
                   handleFile={(fileUploaded) => setResume(fileUploaded)}
                   title=" Upload Resume"
                 />
-                <p className="visible lg:hidden">
-                  {(resume && "Filename: " + resume.name) ||
-                    "(PDF file required)"}
-                </p>
+                <div className="lg:hidden flex flex-col">
+                  {resume ? (
+                    <>
+                      <p>{"Filename: " + resume.name}</p>
+                      <p className="font-palanquin text-red-600">
+                        {errors.resume && errors.resume}
+                      </p>
+                    </>
+                  ) : (
+                    <p>(PDF files only)</p>
+                  )}
+                </div>
                 <OptionSelector
                   title="What track would you like to follow for the hackathon?"
                   trackOptions={trackOptions}
@@ -460,10 +455,18 @@ const Register = () => {
                   zIndex="0"
                 />
               </div>
-              <p className="hidden lg:block">
-                {(resume && "Filename: " + resume.name) ||
-                  "(PDF file required)"}
-              </p>
+              <div className="hidden lg:flex lg:flex-col">
+                {resume ? (
+                  <>
+                    <p>{"Filename: " + resume.name}</p>
+                    <p className="font-palanquin text-red-600">
+                      {errors.resume && errors.resume}
+                    </p>
+                  </>
+                ) : (
+                  <p>(PDF files only)</p>
+                )}
+              </div>
             </div>
             <div className="flex justify-center font-palanquin">
               <button
