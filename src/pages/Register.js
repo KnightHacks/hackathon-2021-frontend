@@ -27,7 +27,7 @@ const Register = () => {
   const [whatLearn, setWhatLearn] = useState("");
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
-  let history = useHistory();
+  const history = useHistory();
   const trackOptions = ["Beginner", "Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
@@ -82,6 +82,7 @@ const Register = () => {
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
+        if (response.ok) history.push("/success");
       }
     }
   };
