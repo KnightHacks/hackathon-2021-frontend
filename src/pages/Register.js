@@ -1,6 +1,7 @@
 import { Dialog, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
+import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 
 /**
@@ -28,10 +29,13 @@ const Register = () => {
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
 
-  const trackOptions = ["Beginner", "Advanced"];
+  const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
 
-  const infoOptions = ["Yes", "No"];
+  const infoOptions = [
+    "Yes, I'm comfortable with my information being shared.",
+    "No, I'm uncomfortable with my information being shared.",
+  ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
   const attendingOptions = [
@@ -39,6 +43,35 @@ const Register = () => {
     "I will be attending Knight Hacks virtually.",
   ];
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
+
+  const graduationOptions = [
+    "Fall 2021",
+    "Spring 2022",
+    "Summer 2022",
+    "Fall 2022",
+    "Spring 2023",
+    "Summer 2023",
+    "Fall 2023",
+    "Spring 2024",
+    "Summer 2024",
+    "Fall 2024",
+  ];
+
+  const [graduationOption, setGraduationOption] = useState("Graduation Year");
+
+  const pronounOptions = ["she/her", "he/him", "they/them", "ze/zir", "Other"];
+  const [pronounOption, setPronounOption] = useState("Pronouns");
+
+  const ethnicityOptions = [
+    "American Indian or Alaska Native",
+    "Asian",
+    "Black or African American",
+    "Hispanic or Latino",
+    "Native Hawaiian or Other Pacific Islander",
+    "White",
+    "Two or more",
+  ];
+  const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
@@ -140,64 +173,90 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col m-4">
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="First Name:" setter={setFirstName} />
-          <TextInputBox label="Last Name:" setter={setLastName} />
+      <form onSubmit={submitRegistration} className="flex flex-col">
+        <div className="flex flex-col justify-center font-palanquin">
+          <TextInputBox label="First Name" setter={setFirstName} />
+          <TextInputBox label="Last Name" setter={setLastName} />
+        </div>
+        <p className="mt-4 w-full space-y-4 font-palanquin z-">
+          How do you identify?
+        </p>
+        <div className="font-palanquin">
+          <OptionSelector
+            trackOptions={pronounOptions}
+            selectedTrack={pronounOption}
+            setSelectedTrack={setPronounOption}
+            flex="col"
+            zIndex="50"
+          />
+        </div>
+        <div className="font-palanquin">
+          <OptionSelector
+            trackOptions={ethnicityOptions}
+            selectedTrack={ethnicityOption}
+            setSelectedTrack={setEthnicityOption}
+            flex="col"
+            zIndex="40"
+          />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
           <TextInputBox
-            label="Phone:"
+            label="Phone"
             pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
             setter={setPhoneNumber}
           />
-          <TextInputBox label="Email:" pattern=".+@.+" setter={setEmail} />
+          <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="School Name:" setter={setSchoolName} />
-          <TextInputBox
-            label="Graduation Year:"
-            pattern="^\d{4}$"
-            setter={setGraduation}
+        <div className="font-palanquin">
+          <TextInputBox label="School" setter={setSchoolName} />
+          <OptionSelector
+            title="When are you graduating?"
+            trackOptions={graduationOptions}
+            selectedTrack={graduationOption}
+            setSelectedTrack={setGraduationOption}
+            flex="col"
+            zIndex="30"
           />
         </div>
-        <OptionSelector
-          title="Are you attending our hackathon in person or virtually?"
-          trackOptions={attendingOptions}
-          selectedTrack={attendingOption}
-          setSelectedTrack={setAttendingOption}
-          flex="col"
-        />
+        <div className="font-palanquin">
+          <OptionSelector
+            title="Are you attending our hackathon in person or virtually?"
+            trackOptions={attendingOptions}
+            selectedTrack={attendingOption}
+            setSelectedTrack={setAttendingOption}
+            flex="col"
+            zIndex="20"
+          />
+        </div>
+        <p className="mt-4 w-full space-y-4 font-palanquin">
+          Do you have any dietary restrictions that we should be aware of?
+        </p>
         <TextInputBox
-          label="Dietary Restrictions"
+          className="font-palanquin rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
           setter={setDietaryRestrictions}
         />
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="GitHub:" setter={setGithub} />
-          <TextInputBox label="LinkedIn:" setter={setLinkedIn} />
+        <div className="flex flex-col justify-center font-palanquin">
+          <TextInputBox label="GitHub" setter={setGithub} />
+          <TextInputBox label="LinkedIn" setter={setLinkedIn} />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox label="Pronouns:" setter={setPronouns} />
-          <TextInputBox label="Ethnicity:" setter={setEthnicity} />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+        <div className="flex flex-col justify-center font-palanquin">
           <OptionSelector
-            title="Can share info:"
+            title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
             trackOptions={infoOptions}
             selectedTrack={canShareInfo}
             setSelectedTrack={setCanShareInfo}
-            flex="row"
+            flex="col"
           />
-          <TextInputBox label="Major:" setter={setMajor} />
+          <TextInputBox label="Major" setter={setMajor} />
         </div>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="my-4 flex-1">
+          <div className="mt-4 w-full space-y-4 flex-1">
             <label>
               <span>Why are you attending Knight Hacks?</span>
               <textarea
                 value={whyAttend}
                 onChange={(event) => setWhyAttend(event.target.value)}
-                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
@@ -209,26 +268,27 @@ const Register = () => {
               <textarea
                 value={whatLearn}
                 onChange={(event) => setWhatLearn(event.target.value)}
-                className="text-gray-800 p-2 w-full h-24 px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
               />
             </label>
           </div>
         </div>
-        <div className="flex flex-col justify-center">
-          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center font-palanquin">
+        <div className="flex flex-col justify-center font-palanquin">
+          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
             <FileUploadBox
               handleFile={(fileUploaded) => setResume(fileUploaded)}
-              title="Upload Resume"
+              title=" Upload Resume"
             />
-            <p className="visible lg:hidden font-palanquin">
+            <p className="visible lg:hidden">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
             </p>
             <OptionSelector
-              title="Track:"
+              title="What track would you like to follow for the hackathon?"
               trackOptions={trackOptions}
               selectedTrack={selectedTrack}
               setSelectedTrack={setSelectedTrack}
-              flex="row"
+              flex="col"
+              zIndex="1"
             />
           </div>
           <p className="hidden lg:block">
@@ -239,9 +299,12 @@ const Register = () => {
           <input
             type="submit"
             className={`
-              bg-blue-600 rounded-lg m-6 py-2 px-4
-              hover:bg-blue-700
-              active:bg-blue-800
+              border-2
+              border-green-800
+              cursor-pointer
+              bg-green-700 rounded-lg m-6 py-2 px-4
+              hover:bg-green-800
+              hover:border-green-900
               w-72
             `}
             value="Submit"
@@ -268,9 +331,9 @@ const TextInputBox = ({ label, setter, ...props }) => {
   return (
     <div className="my-4 flex-1">
       <label>
-        <span>{label}</span>
         <input
-          className="text-gray-800 p-2 w-full px-4 py-2 border-b border-gray-900 bg-transparent focus:outline-none hover:border-blue-400 focus:border-blue-500 font-light"
+          placeholder={label}
+          className="bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
@@ -307,16 +370,18 @@ const FileUploadBox = ({ handleFile, title }) => {
 
   return (
     <div className="h-full justify-center items-center flex-1">
-      <span>Resume:</span>
+      <span>Resume</span>
       <button
         onClick={handleClick}
         className={`
-              bg-blue-600 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
-              hover:bg-blue-700
-              active:bg-blue-800 max-w-xs
-              truncate
+              bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
+              max-w-xs truncate
+              hover:bg-green-600
+              hover:border-green-700
+              flex justify-center
               `}
       >
+        <HiOutlineUpload className="mt-1 mr-2 " />
         <p className="truncate">{title}</p>
       </button>
       <input
@@ -344,12 +409,15 @@ const OptionSelector = ({
   selectedTrack,
   setSelectedTrack,
   flex,
+  zIndex,
 }) => {
   return (
     <div
       className={
-        `h-full mt-4 md:mt-0 flex flex-${flex} items-center ` +
-        (flex === "col" ? `w-full space-y-4` : `w-72 space-x-4`)
+        `h-full py-2 flex flex-${flex} items-center ` +
+        (flex === "col"
+          ? `w-full space-y-4`
+          : `w-full space-y-4 md:w-72 md:space-x-4`)
       }
     >
       <span className={flex === "col" ? "flex self-start" : undefined}>
@@ -357,8 +425,8 @@ const OptionSelector = ({
       </span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-            <span className="block truncate text-gray-900 font-medium">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+            <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -369,7 +437,9 @@ const OptionSelector = ({
             </span>
           </Listbox.Button>
 
-          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-${zIndex}`}
+          >
             {trackOptions.map((track, trackIdx) => (
               <Listbox.Option
                 key={trackIdx}
