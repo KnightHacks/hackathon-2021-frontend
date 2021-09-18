@@ -70,9 +70,7 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
-  const submitRegistration = async (values, setSubmitting) => {
-    event.preventDefault();
-
+  const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
@@ -111,7 +109,6 @@ const Register = () => {
         setResponse(response);
         if (response.ok) history.push("/success");
         else setIsOpen(true);
-        setSubmitting(false);
       }
     }
   };
@@ -130,6 +127,7 @@ const Register = () => {
       .string()
       .matches(phoneRegExp, "The phone number is not valid")
       .required("A phone number is required"),
+    major: yup.string().required("A major is required"),
   });
 
   if (window.innerWidth <= 470) {
@@ -242,7 +240,8 @@ const Register = () => {
         }}
         validationSchema={registrationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          submitRegistration(values, setSubmitting);
+          submitRegistration(values);
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, errors }) => (
@@ -394,9 +393,16 @@ const Register = () => {
                 flex="col"
                 zIndex="10"
               />
-              <Field type="text" name="major">
-                {({ field }) => <TextInputBox label="Major" field={field} />}
-              </Field>
+              <div className="flex flex-col">
+                <Field type="text" name="major">
+                  {({ field }) => <TextInputBox label="Major" field={field} />}
+                </Field>
+                <ErrorMessage name="major">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
             </div>
             <Field type="text" name="whyAttend">
               {({ field }) => (
@@ -469,9 +475,10 @@ const Register = () => {
               </div>
             </div>
             <div className="flex justify-center font-palanquin">
-              <button
+              <input
                 type="submit"
                 disabled={isSubmitting}
+                value="Submit"
                 className={`
               border-2
               border-green-800
@@ -481,9 +488,7 @@ const Register = () => {
               hover:border-green-900
               w-72
             `}
-              >
-                Submit
-              </button>
+              />
             </div>
           </Form>
         )}
@@ -493,12 +498,7 @@ const Register = () => {
 };
 
 /**
- * @desc An input box component with useful defaults. Use similarly to a
- * controlled component, except you only have to provide a setter function using
- * the `setter` prop if you want the typical `event =>
- * setter(event.target.value)` pattern. You can override `onChange` if you wish,
- * but then `setter` will have no effect and you must set `value` to the correct
- * value yourself.
+ * @desc TODO
  * @prop label
  * @author Rob
  */
