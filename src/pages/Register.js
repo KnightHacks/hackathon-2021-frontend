@@ -322,6 +322,8 @@ const FileUploadBox = ({ handleFile, title }) => {
         className={`
               bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
               max-w-xs truncate
+              hover:bg-green-600
+              hover:border-green-700
               flex justify-center
               `}
       >
