@@ -530,10 +530,6 @@ const createHacker = async ({
   dietaryRestrictions: dietary_restrictions,
   resume,
 }) => {
-  const transaction = Sentry.startTransaction({ name: "submitHacker" });
-
-  Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
-
   const hackerFormData = new FormData();
   hackerFormData.append(
     "hacker",
@@ -563,20 +559,24 @@ const createHacker = async ({
   );
   hackerFormData.append("resume", resume);
 
-  const span = transaction.startChild({
-    data: hackerFormData,
-    op: "http",
+  const transaction = Sentry.startTransaction({
+    data: {
+      hackerFormData,
+    },
+    op: "transaction",
+    name: "submitHacker",
     description: "POST https://api.knighthacks.org/api/hackers/",
   });
+
+  Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
   const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     body: hackerFormData,
   });
 
-  span.setTag("http.status_code", res.status);
+  transaction.setHttpStatus(res.status);
 
-  span.finish();
   transaction.finish();
 
   return res;
