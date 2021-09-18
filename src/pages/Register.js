@@ -16,12 +16,8 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [ethnicity, setEthnicity] = useState("");
-  // TODO what options/prompting are we providing?
-  const [pronouns, setPronouns] = useState("");
   const [schoolName, setSchoolName] = useState("");
   const [major, setMajor] = useState("");
-  const [graduation, setGraduation] = useState("");
   const [github, setGithub] = useState("");
   const [linkedIn, setLinkedIn] = useState("");
   const [whyAttend, setWhyAttend] = useState("");
@@ -106,11 +102,11 @@ const Register = () => {
           phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
-          ethnicity,
-          pronouns,
+          ethnicity: ethnicityOption,
+          pronouns: pronounOption,
           college: schoolName,
           major,
-          graduation,
+          graduation: graduationOption,
           github,
           linkedIn,
           whyAttend,
