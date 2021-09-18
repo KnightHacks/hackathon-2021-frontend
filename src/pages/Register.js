@@ -4,6 +4,9 @@ import { useRef, useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -123,6 +126,20 @@ const Register = () => {
     }
   };
 
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  let registrationSchema = yup.object().shape({
+    firstName: yup.string().required("Required"),
+    lastName: yup.string().required("Required"),
+    schoolName: yup.string().required("Required"),
+    email: yup.string().email("Email is not valid").required("Required"),
+    phoneNumber: yup
+      .string()
+      .matches(phoneRegExp, "Phone number is not valid")
+      .required("Required"),
+    graduation: yup.string().required("Required"),
+  });
+
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
       <Dialog
@@ -175,115 +192,137 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col">
-        <div className="flex flex-col justify-center font-palanquin">
-          <TextInputBox label="First Name" setter={setFirstName} />
-          <TextInputBox label="Last Name" setter={setLastName} />
-        </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin">
-          How do you identify?
-        </p>
-        <div className="font-palanquin">
-          <OptionSelector
-            trackOptions={pronounOptions}
-            selectedTrack={pronounOption}
-            setSelectedTrack={setPronounOption}
-            flex="col"
-            zIndex="50"
-          />
-        </div>
-        <div className="font-palanquin">
-          <OptionSelector
-            trackOptions={ethnicityOptions}
-            selectedTrack={ethnicityOption}
-            setSelectedTrack={setEthnicityOption}
-            flex="col"
-            zIndex="40"
-          />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox
-            label="Phone"
-            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-            setter={setPhoneNumber}
-          />
-          <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
-        </div>
-        <div className="font-palanquin">
-          <TextInputBox label="School" setter={setSchoolName} />
-          <OptionSelector
-            title="When are you graduating?"
-            trackOptions={graduationOptions}
-            selectedTrack={graduationOption}
-            setSelectedTrack={setGraduationOption}
-            flex="col"
-            zIndex="30"
-          />
-        </div>
-        <div className="font-palanquin">
-          <OptionSelector
-            title="Are you attending our hackathon in person or virtually?"
-            trackOptions={attendingOptions}
-            selectedTrack={attendingOption}
-            setSelectedTrack={setAttendingOption}
-            flex="col"
-            zIndex="20"
-          />
-        </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin">
-          Do you have any dietary restrictions that we should be aware of?
-        </p>
-        <TextInputBox
-          className="font-palanquin rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
-          setter={setDietaryRestrictions}
-        />
-        <div className="flex flex-col justify-center font-palanquin">
-          <TextInputBox label="GitHub" setter={setGithub} />
-          <TextInputBox label="LinkedIn" setter={setLinkedIn} />
-        </div>
-        <div className="flex flex-col justify-center font-palanquin">
-          <OptionSelector
-            title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
-            trackOptions={infoOptions}
-            selectedTrack={canShareInfo}
-            setSelectedTrack={setCanShareInfo}
-            flex="col"
-            zIndex="10"
-          />
-          <TextInputBox label="Major" setter={setMajor} />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="mt-4 w-full space-y-4 flex-1">
-            <label>
-              <span>Why are you attending Knight Hacks?</span>
-              <textarea
-                value={whyAttend}
-                onChange={(event) => setWhyAttend(event.target.value)}
-                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          schoolName: "",
+          email: "",
+          phoneNumber: "",
+          graduation: "",
+          dietaryRestrictions: "",
+          github: "",
+          linkedIn: "",
+          major: "",
+          whyAttend: "",
+        }}
+        // validationSchema={registrationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(
+              JSON.stringify(
+                { ...values, resume, selectedTrack, attendingOption },
+                null,
+                2
+              )
+            );
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form className="flex flex-col">
+            <div className="flex flex-col justify-center font-palanquin">
+              <div className="flex flex-col">
+                <Field type="text" name="firstName">
+                  {({ field }) => (
+                    <TextInputBox label="First Name" field={field} />
+                  )}
+                </Field>
+                <ErrorMessage name="firstName">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
+              <div className="flex flex-col">
+                <Field type="text" name="lastName">
+                  {({ field }) => (
+                    <TextInputBox label="Last Name" field={field} />
+                  )}
+                </Field>
+                <ErrorMessage name="lastName">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
+            </div>
+            <p className="mt-4 w-full space-y-4 font-palanquin">
+              How do you identify?
+            </p>
+            <div className="font-palanquin">
+              <OptionSelector
+                trackOptions={pronounOptions}
+                selectedTrack={pronounOption}
+                setSelectedTrack={setPronounOption}
+                flex="col"
+                zIndex="60"
               />
-            </label>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="my-4 flex-1">
-            <label>
-              <span>What do you hope to learn at Knight Hacks?</span>
-              <textarea
-                value={whatLearn}
-                onChange={(event) => setWhatLearn(event.target.value)}
-                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+            </div>
+            <div className="font-palanquin">
+              <OptionSelector
+                trackOptions={ethnicityOptions}
+                selectedTrack={ethnicityOption}
+                setSelectedTrack={setEthnicityOption}
+                flex="col"
+                zIndex="50"
               />
-            </label>
-          </div>
-        </div>
-        <div className="flex flex-col justify-center font-palanquin">
-          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-            <FileUploadBox
-              handleFile={(fileUploaded) => setResume(fileUploaded)}
-              title=" Upload Resume"
-            />
-            <p className="visible lg:hidden">
-              {(resume && "Filename: " + resume.name) || "(PDF file required)"}
+            </div>
+            <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+              <div className="flex flex-col">
+                <Field type="text" name="phoneNumber">
+                  {({ field }) => <TextInputBox label="Phone" field={field} />}
+                </Field>
+                <ErrorMessage name="phoneNumber">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
+              <div className="flex flex-col">
+                <Field type="text" name="email">
+                  {({ field }) => <TextInputBox label="Email" field={field} />}
+                </Field>
+                <ErrorMessage name="email">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
+            </div>
+            <div className="font-palanquin">
+              <div className="flex flex-col">
+                <Field type="text" name="schoolName">
+                  {({ field }) => <TextInputBox label="School" field={field} />}
+                </Field>
+                <ErrorMessage name="schoolName">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700">{msg}</p>
+                  )}
+                </ErrorMessage>
+              </div>
+              <OptionSelector
+                title="When are you graduating?"
+                trackOptions={graduationOptions}
+                selectedTrack={graduationOption}
+                setSelectedTrack={setGraduationOption}
+                flex="col"
+                zIndex="40"
+              />
+            </div>
+            <div className="font-palanquin">
+              <OptionSelector
+                title="Are you attending our hackathon in person or virtually?"
+                trackOptions={attendingOptions}
+                selectedTrack={attendingOption}
+                setSelectedTrack={setAttendingOption}
+                flex="col"
+                zIndex="30"
+              />
+            </div>
+            <p className="mt-4 w-full space-y-4 font-palanquin">
+              Do you have any dietary restrictions that we should be aware of?
             </p>
             <OptionSelector
               title="What track would you like to follow for the hackathon?"
@@ -291,17 +330,88 @@ const Register = () => {
               selectedTrack={selectedTrack}
               setSelectedTrack={setSelectedTrack}
               flex="col"
-              zIndex="0"
+              zIndex="20"
             />
-          </div>
-          <p className="hidden lg:block">
-            {(resume && "Filename: " + resume.name) || "(PDF file required)"}
-          </p>
-        </div>
-        <div className="flex justify-center font-palanquin">
-          <input
-            type="submit"
-            className={`
+            <div className="flex flex-col justify-center font-palanquin">
+              <Field type="text" name="github">
+                {({ field }) => <TextInputBox label="GitHub" field={field} />}
+              </Field>
+              <Field type="text" name="linkedIn">
+                {({ field }) => <TextInputBox label="LinkedIn" field={field} />}
+              </Field>
+            </div>
+            <div className="flex flex-col justify-center font-palanquin">
+              <OptionSelector
+                title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
+                trackOptions={infoOptions}
+                selectedTrack={canShareInfo}
+                setSelectedTrack={setCanShareInfo}
+                flex="col"
+                zIndex="10"
+              />
+              <Field type="text" name="major">
+                {({ field }) => <TextInputBox label="Major" field={field} />}
+              </Field>
+            </div>
+            <Field type="text" name="whyAttend">
+              {({ field }) => (
+                <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+                  <div className="mt-4 w-full space-y-4 flex-1">
+                    <label>
+                      <span>Why are you attending Knight Hacks?</span>
+                      <textarea
+                        {...field}
+                        className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+            </Field>
+            <Field type="text" name="whatLearn">
+              {({ field }) => (
+                <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+                  <div className="my-4 flex-1">
+                    <label>
+                      <span>What do you hope to learn at Knight Hacks?</span>
+                      <textarea
+                        {...field}
+                        className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+            </Field>
+            <div className="flex flex-col justify-center font-palanquin">
+              <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
+                <FileUploadBox
+                  handleFile={(fileUploaded) => setResume(fileUploaded)}
+                  title=" Upload Resume"
+                />
+                <p className="visible lg:hidden">
+                  {(resume && "Filename: " + resume.name) ||
+                    "(PDF file required)"}
+                </p>
+                <OptionSelector
+                  title="What track would you like to follow for the hackathon?"
+                  trackOptions={trackOptions}
+                  selectedTrack={selectedTrack}
+                  setSelectedTrack={setSelectedTrack}
+                  flex="col"
+                  zIndex="0"
+                />
+              </div>
+              <p className="hidden lg:block">
+                {(resume && "Filename: " + resume.name) ||
+                  "(PDF file required)"}
+              </p>
+            </div>
+            <div className="flex justify-center font-palanquin">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`
               border-2
               border-green-800
               cursor-pointer
@@ -310,10 +420,13 @@ const Register = () => {
               hover:border-green-900
               w-72
             `}
-            value="Submit"
-          />
-        </div>
-      </form>
+              >
+                Submit
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </Page>
   );
 };
@@ -326,11 +439,9 @@ const Register = () => {
  * but then `setter` will have no effect and you must set `value` to the correct
  * value yourself.
  * @prop label
- * @prop setter
  * @author Rob
  */
-const TextInputBox = ({ label, setter, ...props }) => {
-  const [value, setValue] = useState("");
+const TextInputBox = ({ label, field }) => {
   return (
     <div className="my-4 flex-1">
       <label>
@@ -338,12 +449,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
           placeholder={label}
           className="bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
-          onChange={(event) => {
-            setValue(event.target.value);
-            setter(event.target.value);
-          }}
-          value={value}
-          {...props}
+          {...field}
         />
       </label>
     </div>
