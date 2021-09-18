@@ -22,6 +22,7 @@ module.exports = {
       backgroundColor: (theme) => ({
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
+        "opaque-blue": "rgba(159, 211, 233, 0.47)",
       }),
       fontFamily: {
         sansita: "Sansita",
