@@ -1,6 +1,7 @@
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
+import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 
 /**
@@ -222,7 +223,7 @@ const Register = () => {
           <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
             <FileUploadBox
               handleFile={(fileUploaded) => setResume(fileUploaded)}
-              title="Upload Resume"
+              title=" Upload Resume"
             />
             <p className="visible lg:hidden">
               {(resume && "Filename: " + resume.name) || "(PDF file required)"}
@@ -244,10 +245,12 @@ const Register = () => {
           <input
             type="submit"
             className={`
+              border-2
+              border-green-800
               cursor-pointer
-              bg-blue-600 rounded-lg m-6 py-2 px-4
-              hover:bg-blue-700
-              active:bg-blue-800
+              bg-green-700 rounded-lg m-6 py-2 px-4
+              hover:bg-green-800
+              hover:border-green-900
               w-72
             `}
             value="Submit"
@@ -317,12 +320,12 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-blue-600 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
-              hover:bg-blue-700
-              active:bg-blue-800 max-w-xs
-              truncate
+              bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
+              max-w-xs truncate
+              flex justify-center
               `}
       >
+        <HiOutlineUpload className="mt-1 mr-2 " />
         <p className="truncate">{title}</p>
       </button>
       <input
