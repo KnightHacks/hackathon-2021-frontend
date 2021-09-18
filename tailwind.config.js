@@ -5,11 +5,15 @@ module.exports = {
   important: true,
   theme: {
     extend: {
+      screens: {
+        xxs: "300px",
+        xs: "500px",
+      },
       width: {
         "19/20": "95%",
       },
       maxWidth: {
-        xs: "15rem",
+        xswidth: "15rem",
       },
       height: {
         "19/20": "95%",
