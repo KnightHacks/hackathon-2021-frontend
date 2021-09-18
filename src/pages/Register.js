@@ -123,6 +123,26 @@ const Register = () => {
     }
   };
 
+  if (window.innerWidth <= 470) {
+    return (
+      <>
+        <Page onLanding={false}>
+          <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
+            Register
+          </h1>
+          <div className="grid justify-items-center my-20">
+            <div className="font-sansita text-2xl sm:text-4xl xl:text-4xl my-4">
+              Get off your phone!
+            </div>
+            <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
+              Head over to our web view to register early.
+            </div>
+          </div>
+        </Page>
+      </>
+    );
+  }
+
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
       <Dialog
@@ -157,7 +177,7 @@ const Register = () => {
                 className={`
                 bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
                 hover:bg-blue-700
-                active:bg-blue-800 max-w-xs
+                active:bg-blue-800 max-w-xswidth
                 truncate
               `}
                 onClick={(event) => {
@@ -176,7 +196,7 @@ const Register = () => {
         Register
       </h1>
       <form onSubmit={submitRegistration} className="flex flex-col">
-        <div className="flex flex-col justify-center font-palanquin">
+        <div className=" flex flex-col justify-center font-palanquin">
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
@@ -332,11 +352,13 @@ const Register = () => {
 const TextInputBox = ({ label, setter, ...props }) => {
   const [value, setValue] = useState("");
   return (
-    <div className="my-4 flex-1">
+    <div className="my-4 flex-1 ">
       <label>
         <input
           placeholder={label}
-          className="bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
+          className={`
+            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words
+            `}
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
@@ -378,7 +400,7 @@ const FileUploadBox = ({ handleFile, title }) => {
         onClick={handleClick}
         className={`
               bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
-              max-w-xs truncate
+              max-w-xswidth truncate
               hover:bg-green-600
               hover:border-green-700
               flex justify-center

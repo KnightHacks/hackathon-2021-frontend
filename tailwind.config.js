@@ -31,6 +31,7 @@ module.exports = {
       }),
       fontFamily: {
         sansita: ["Sansita Black Italic", "sans-serif"],
+        sansitaregular: ["Sansita Regular", "sans-serif"],
         palanquin: ["Palanquin Light", "sans-serif"],
         palanquinregular: ["Palanquin Regular"],
       },
