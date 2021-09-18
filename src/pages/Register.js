@@ -336,7 +336,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
       <label>
         <input
           placeholder={label}
-          className="bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50 bg-transparent focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
+          className="bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 w-full px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words"
           type="text"
           onChange={(event) => {
             setValue(event.target.value);
