@@ -3,7 +3,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
-
+import { useHistory } from "react-router-dom";
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -28,9 +28,9 @@ const Register = () => {
   const [whatLearn, setWhatLearn] = useState("");
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
-
   const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
+  const history = useHistory();
 
   const infoOptions = [
     "Yes, I'm comfortable with my information being shared.",
@@ -84,16 +84,21 @@ const Register = () => {
 
   const submitRegistration = async (event) => {
     event.preventDefault();
+
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
+        console.log("in proccess");
         break;
       case "success":
         setFeedbackMessage("Registration already successful!");
+        window.open("/success");
+        console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
         setFeedbackMessage("Processing registration...");
+
         const response = await createHacker({
           email,
           firstName,
@@ -116,7 +121,8 @@ const Register = () => {
         });
         setRegistrationState(response.ok ? "success" : "failure");
         setResponse(response);
-        if (!response.ok) setIsOpen(true);
+        if (response.ok) history.push("/success");
+        else setIsOpen(true);
       }
     }
   };
