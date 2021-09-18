@@ -116,18 +116,18 @@ const Register = () => {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let registrationSchema = yup.object().shape({
-    firstName: yup.string().required("A first name is required"),
-    lastName: yup.string().required("A last name is required"),
-    schoolName: yup.string().required("The name of your school is required"),
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string().required("Last name is required"),
+    schoolName: yup.string().required("School name is required"),
     email: yup
       .string()
       .email("Email is not valid")
-      .required("An email is required"),
+      .required("Email is required"),
     phoneNumber: yup
       .string()
-      .matches(phoneRegExp, "The phone number is not valid")
-      .required("A phone number is required"),
-    major: yup.string().required("A major is required"),
+      .matches(phoneRegExp, "Phone number is not valid")
+      .required("Phone number is required"),
+    major: yup.string().required("Major is required"),
   });
 
   if (window.innerWidth <= 470) {
@@ -220,15 +220,15 @@ const Register = () => {
           const errors = {};
 
           if (pronounOption === "Pronouns") {
-            errors.pronoun = "A pronoun option is required";
+            errors.pronoun = "Pronoun option is required";
           }
 
           if (ethnicityOption === "Ethnicity") {
-            errors.ethnicity = "An ethnicity option is required";
+            errors.ethnicity = "Ethnicity option is required";
           }
 
           if (graduationOption === "Graduation Year") {
-            errors.graduation = "A graduation option is required";
+            errors.graduation = "Graduation option is required";
           }
 
           if (resume != null && resume.type !== "application/pdf") {
@@ -367,16 +367,6 @@ const Register = () => {
                 <TextInputBox label="Dietary Restrictions" field={field} />
               )}
             </Field>
-            <div className="font-palanquin">
-              <OptionSelector
-                title="What track would you like to follow for the hackathon?"
-                trackOptions={trackOptions}
-                selectedTrack={selectedTrack}
-                setSelectedTrack={setSelectedTrack}
-                flex="col"
-                zIndex="20"
-              />
-            </div>
             <div className="flex flex-col justify-center font-palanquin">
               <Field type="text" name="github">
                 {({ field }) => <TextInputBox label="GitHub" field={field} />}
