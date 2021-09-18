@@ -30,7 +30,7 @@ const Landing = () => {
               font-palanquin
               px-4 sm:px-6 md:px-12 py-2
               border-indigo-50 border-4 md:border-4
-              rounded-full text-xl sm:text-3xl md:text-4xl
+              rounded-xl text-xl sm:text-3xl md:text-4xl
               mt-4 md:mt-8 focus:outline-none
               hover:border-white hover:shadow-lg
               transition duration-1000 ease-in-out
@@ -52,7 +52,7 @@ const Landing = () => {
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
                 border-indigo-50 border-4
-                rounded-full text-xl
+                rounded-xl text-lg
                 font-palanquin
                 hover:border-white
                 focus:outline-none
@@ -64,7 +64,7 @@ const Landing = () => {
             >
               <span
                 className={`
-                absolute rounded-full
+                absolute rounded-xl
                 right-0 w-8 h-32 -mt-12
                 transition-all duration-1000 transform translate-x-12
                 bg-white opacity-10 rotate-12
@@ -80,7 +80,7 @@ const Landing = () => {
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
                 border-indigo-50 border-4
-                rounded-full text-xl
+                rounded-xl text-lg
                 font-palanquin
                 hover:border-white
                 focus:outline-none
@@ -92,7 +92,7 @@ const Landing = () => {
             >
               <span
                 className={`
-                absolute rounded-full
+                absolute rounded-xl
                 right-0 w-8 h-32 -mt-12
                 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
                 group-hover:-translate-x-40 ease

@@ -1,15 +1,18 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
-  mode: "jit",
   important: true,
   theme: {
     extend: {
+      screens: {
+        xxs: "300px",
+        xs: "500px",
+      },
       width: {
         "19/20": "95%",
       },
       maxWidth: {
-        xs: "15rem",
+        xswidth: "15rem",
       },
       height: {
         "19/20": "95%",
@@ -26,8 +29,10 @@ module.exports = {
         "opaque-blue": "rgba(159, 211, 233, 0.47)",
       }),
       fontFamily: {
-        sansita: ["Sansita", "sans-serif"],
-        palanquin: ["Palanquin", "sans-serif"],
+        sansita: ["Sansita Black Italic", "sans-serif"],
+        sansitaregular: ["Sansita Regular", "sans-serif"],
+        palanquin: ["Palanquin Light", "sans-serif"],
+        palanquinregular: ["Palanquin Regular"],
       },
     },
   },
