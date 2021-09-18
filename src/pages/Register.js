@@ -209,7 +209,6 @@ const Register = () => {
           schoolName: "",
           email: "",
           phoneNumber: "",
-          graduation: "",
           dietaryRestrictions: "",
           github: "",
           linkedIn: "",
@@ -239,6 +238,8 @@ const Register = () => {
           return errors;
         }}
         validationSchema={registrationSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
         onSubmit={(values, { setSubmitting }) => {
           submitRegistration(values);
           setSubmitting(false);
