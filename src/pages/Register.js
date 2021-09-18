@@ -180,7 +180,7 @@ const Register = () => {
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin z-">
+        <p className="mt-4 w-full space-y-4 font-palanquin">
           How do you identify?
         </p>
         <div className="font-palanquin">
@@ -248,6 +248,7 @@ const Register = () => {
             selectedTrack={canShareInfo}
             setSelectedTrack={setCanShareInfo}
             flex="col"
+            zIndex="10"
           />
           <TextInputBox label="Major" setter={setMajor} />
         </div>
@@ -270,7 +271,7 @@ const Register = () => {
               <textarea
                 value={whatLearn}
                 onChange={(event) => setWhatLearn(event.target.value)}
-                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
               />
             </label>
           </div>
@@ -290,7 +291,7 @@ const Register = () => {
               selectedTrack={selectedTrack}
               setSelectedTrack={setSelectedTrack}
               flex="col"
-              zIndex="1"
+              zIndex="0"
             />
           </div>
           <p className="hidden lg:block">
