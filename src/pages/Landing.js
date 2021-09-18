@@ -32,7 +32,9 @@ const Landing = () => {
               border-indigo-50 border-4 md:border-4
               rounded-full text-xl sm:text-3xl md:text-4xl
               mt-4 md:mt-8 focus:outline-none
-              hover:border-white hover:shadow-xl
+              hover:border-white hover:shadow-lg
+              transition duration-1000 ease-in-out
+              hover:scale-110
               hover:text-white
               shadow-md
             `}
