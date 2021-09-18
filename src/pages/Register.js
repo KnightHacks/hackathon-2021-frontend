@@ -226,7 +226,28 @@ const Register = () => {
           major: "",
           whyAttend: "",
         }}
-        // validationSchema={registrationSchema}
+        validate={() => {
+          const errors = {};
+
+          if (pronounOption === "Pronouns") {
+            errors.pronoun = "A pronoun option is required";
+          }
+
+          if (ethnicityOption === "Ethnicity") {
+            errors.ethnicity = "An ethnicity option is required";
+          }
+
+          if (graduationOption === "Graduation Year") {
+            errors.graduation = "A graduation option is required";
+          }
+
+          if (resume != null && resume.type !== "application/pdf") {
+            errors.resume = "File must be a pdf";
+          }
+
+          return errors;
+        }}
+        validationSchema={registrationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(
@@ -240,7 +261,7 @@ const Register = () => {
           }, 400);
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors }) => (
           <Form className="flex flex-col">
             <div className="flex flex-col justify-center font-palanquin">
               <div className="flex flex-col">
@@ -271,7 +292,7 @@ const Register = () => {
             <p className="mt-4 w-full space-y-4 font-palanquin">
               How do you identify?
             </p>
-            <div className="font-palanquin">
+            <div className="font-palanquin flex flex-col">
               <OptionSelector
                 trackOptions={pronounOptions}
                 selectedTrack={pronounOption}
@@ -279,8 +300,11 @@ const Register = () => {
                 flex="col"
                 zIndex="60"
               />
+              {errors.pronoun && (
+                <p className="font-palanquin text-red-700">{errors.pronoun}</p>
+              )}
             </div>
-            <div className="font-palanquin">
+            <div className="font-palanquin flex flex-col">
               <OptionSelector
                 trackOptions={ethnicityOptions}
                 selectedTrack={ethnicityOption}
@@ -288,6 +312,11 @@ const Register = () => {
                 flex="col"
                 zIndex="50"
               />
+              {errors.ethnicity && (
+                <p className="font-palanquin text-red-700">
+                  {errors.ethnicity}
+                </p>
+              )}
             </div>
             <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
               <div className="flex flex-col">
@@ -311,7 +340,7 @@ const Register = () => {
                 </ErrorMessage>
               </div>
             </div>
-            <div className="font-palanquin">
+            <div className="font-palanquin flex flex-col">
               <div className="flex flex-col">
                 <Field type="text" name="schoolName">
                   {({ field }) => <TextInputBox label="School" field={field} />}
@@ -330,6 +359,11 @@ const Register = () => {
                 flex="col"
                 zIndex="40"
               />
+              {errors.graduation && (
+                <p className="font-palanquin text-red-700">
+                  {errors.graduation}
+                </p>
+              )}
             </div>
             <div className="font-palanquin">
               <OptionSelector
@@ -344,6 +378,10 @@ const Register = () => {
             <p className="mt-4 w-full space-y-4 font-palanquin">
               Do you have any dietary restrictions that we should be aware of?
             </p>
+            <TextInputBox
+              label="Dietary Restrictions"
+              setter={setDietaryRestrictions}
+            />
             <OptionSelector
               title="What track would you like to follow for the hackathon?"
               trackOptions={trackOptions}
