@@ -26,8 +26,9 @@ module.exports = {
         "opaque-blue": "rgba(159, 211, 233, 0.47)",
       }),
       fontFamily: {
-        sansita: ["Sansita", "sans-serif"],
-        palanquin: ["Palanquin", "sans-serif"],
+        sansita: ["Sansita Black Italic", "sans-serif"],
+        palanquin: ["Palanquin Light", "sans-serif"],
+        palanquinregular: ["Palanquin Regular"],
       },
     },
   },

@@ -180,7 +180,7 @@ const Register = () => {
           <TextInputBox label="First Name" setter={setFirstName} />
           <TextInputBox label="Last Name" setter={setLastName} />
         </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin">
+        <p className="mt-4 w-full space-y-4 font-palanquinregular">
           How do you identify?
         </p>
         <div className="font-palanquin">

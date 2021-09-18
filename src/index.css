@@ -1,56 +1,112 @@
-@import url("https://fonts.googleapis.com/css2?family=Sansita:ital,wght@1,900&display=swap");
 @tailwind base;
 @tailwind components;
-@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@300&display=swap");
-/* Avenir font faces */
+/* Sansita font faces */
 
 @font-face {
-  font-family: "Avenir Next Italic";
-  src: local("AvenirNext-Italic"),
-    url("../src/assets/fonts/AvenirNext-Italic.ttf") format("truetype");
+  font-family: "Sansita Black";
+  src: local("Sansita-Black"),
+    url("../src/assets/fonts/Sansita-Black.ttf") format("truetype");
+  font-weight: black;
+}
+
+@font-face {
+  font-family: "Sansita Black Italic";
+  src: local("Sansita-BlackItalic"),
+    url("../src/assets/fonts/Sansita-BlackItalic.ttf") format("truetype");
+  font-weight: black;
+}
+
+@font-face {
+  font-family: "Sansita Bold";
+  src: local("Sansita-Bold"),
+    url("../src/assets/fonts/Sansita-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Sansita Bold Italic";
+  src: local("Sansita-BoldItalic"),
+    url("../src/assets/fonts/Sansita-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Sansita Extra Bold";
+  src: local("Sansita-ExtraBold"),
+    url("../src/assets/fonts/Sansita-ExtraBold.ttf") format("truetype");
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: "Sansita Extra Bold Italic";
+  src: local("Sansita-ExtraBoldItalic"),
+    url("../src/assets/fonts/Sansita-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: "Sansita Italic";
+  src: local("Sansita-Italic"),
+    url("../src/assets/fonts/Sansita-Italic.ttf") format("truetype");
+  font-weight: italic;
+}
+
+@font-face {
+  font-family: "Sansita Regular";
+  src: local("Sansita-Regular"),
+    url("../src/assets/fonts/Sansita-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+/* Palanquin font faces */
+
+@font-face {
+  font-family: "Palanquin Bold";
+  src: local("Palanquin-Bold"),
+    url("../src/assets/fonts/Palanquin-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Palanquin Extra Light";
+  src: local("Palanquin-ExtraLight"),
+    url("../src/assets/fonts/Palanquin-ExtraLight.ttf") format("truetype");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Palanquin Light";
+  src: local("Palanquin-Light"),
+    url("../src/assets/fonts/Palanquin-Light.ttf") format("truetype");
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: "Palanquin Medium";
+  src: local("Palanquin-Medium"),
+    url("../src/assets/fonts/Palanquin-Medium.ttf") format("truetype");
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: "Palanquin Regular";
+  src: local("Palanquin-Regular"),
+    url("../src/assets/fonts/Palanquin-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "Avenir Next Regular";
-  src: local("AvenirNext-Regular"),
-    url("../src/assets/fonts/AvenirNext-Regular.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "Palanquin SemiBold";
+  src: local("Palanquin-SemiBold"),
+    url("../src/assets/fonts/Palanquin-SemiBold.ttf") format("truetype");
+  font-weight: bold;
 }
 
 @font-face {
-  font-family: "Avenir Next Ultra Light";
-  src: local("AvenirNext-UltraLight"),
-    url("../src/assets/fonts/AvenirNext-UltraLight.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Avenir Next Heavy";
-  src: local("AvenirNext-Heavy"),
-    url("../src/assets/fonts/AvenirNext-Heavy.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Avenir Next Medium";
-  src: local("AvenirNext-Medium"),
-    url("../src/assets/fonts/AvenirNext-Medium.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Avenir Next Medium Italic";
-  src: local("AvenirNext-MediumItalic"),
-    url("../src/assets/fonts/AvenirNext-MediumItalic.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Avenir Next Ultra Light Italic";
-  src: local("AvenirNext-UltraLightItalic"),
-    url("../src/assets/fonts/AvenirNext-UltraLight.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "Palanquin Thin";
+  src: local("Palanquin-Thin"),
+    url("../src/assets/fonts/Palanquin-Thin.ttf") format("truetype");
+  font-weight: thin;
 }
 
 @tailwind utilities;
