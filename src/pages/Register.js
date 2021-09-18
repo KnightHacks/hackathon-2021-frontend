@@ -441,7 +441,8 @@ const OptionSelector = ({
           </Listbox.Button>
 
           <Listbox.Options
-            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-${zIndex}`}
+            style={{ zIndex: zIndex }}
+            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
           >
             {trackOptions.map((track, trackIdx) => (
               <Listbox.Option
