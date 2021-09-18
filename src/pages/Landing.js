@@ -17,7 +17,7 @@ const Landing = () => {
           <div
             className={`
             bg-knight-hacks-logo
-            w-full h-20 md:h-36 bg-no-repeat
+            w-full h-24 md:h-36 lg:h-44 bg-no-repeat
             my-2 md:my-4 bg-center
             font-palanquin"
             `}
@@ -66,7 +66,8 @@ const Landing = () => {
                 className={`
                 absolute rounded-full
                 right-0 w-8 h-32 -mt-12
-                transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
+                transition-all duration-1000 transform translate-x-12
+                bg-white opacity-10 rotate-12
                 group-hover:-translate-x-40 ease
                 `}
               />
