@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
+import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 
@@ -353,7 +354,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+              <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
                   <Field type="text" name="phoneNumber">
                     {({ field }) => (
@@ -618,7 +619,8 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
+              bg-green-500 border-2 border-green-700 rounded-lg mx-4 md:my-6 py-1.5 px-4
+              shadow-md
               max-w-xswidth truncate
               hover:bg-green-600
               hover:border-green-700
@@ -776,10 +778,28 @@ const createHacker = async ({
     })
   );
   hackerFormData.append("resume", resume);
-  return await fetch("https://api.knighthacks.org/api/hackers/", {
+
+  const transaction = Sentry.startTransaction({
+    data: {
+      hacker: hackerFormData.get("hacker"),
+    },
+    op: "transaction",
+    name: "submitHacker",
+    description: "POST https://api.knighthacks.org/api/hackers/",
+  });
+
+  Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
+
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     body: hackerFormData,
   });
+
+  transaction.setHttpStatus(res.status);
+
+  transaction.finish();
+
+  return res;
 };
 
 export default Register;
