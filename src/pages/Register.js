@@ -156,15 +156,15 @@ const Register = () => {
           <div className="flex flex-col justify-center max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
             <Dialog.Title
               as="h3"
-              className="text-xl font-medium leading-6 text-gray-900"
+              className="font-palanquinbold text-lg font-medium leading-6 text-gray-900"
             >
               Registration Failed :(
             </Dialog.Title>
-            <Dialog.Description className="text-lg">
+            <Dialog.Description className="font-palanquin text-md">
               Something went wrong; please try again!
             </Dialog.Description>
 
-            <p className="text-md text-gray-500">
+            <p className="text-md text-gray-500 font-palanquin">
               {`The server says "${
                 response
                   ? `${response.status}: ${response.statusText}`
@@ -175,9 +175,10 @@ const Register = () => {
             <div className="mt-4">
               <button
                 className={`
-                bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
-                hover:bg-blue-700
+                bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
+                hover:shadow-md
                 active:bg-blue-800 max-w-xswidth
+                font-palanquin
                 truncate
               `}
                 onClick={(event) => {
@@ -185,7 +186,7 @@ const Register = () => {
                   submitRegistration(event);
                 }}
               >
-                Try again!
+                Try again
               </button>
               <button onClick={() => setIsOpen(false)}>Cancel</button>
             </div>
