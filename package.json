@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "REACT_APP_CF_PAGES_COMMIT_SHA=$CF_PAGES_COMMIT_SHA REACT_APP_CF_PAGES_BRANCH=$CF_PAGES_BRANCH craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint src",

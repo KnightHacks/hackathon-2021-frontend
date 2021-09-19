@@ -12,8 +12,7 @@ export const setupSentry = (history) => {
     ],
     environment: process.env.REACT_APP_CF_PAGES_BRANCH ?? process.env.NODE_ENV,
     release: process.env.REACT_APP_CF_PAGES_COMMIT_SHA,
-    tracesSampleRate: 1.0,
+    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.75 : 1.0,
     enabled: true,
-    debug: true,
   });
 };
