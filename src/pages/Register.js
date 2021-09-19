@@ -392,6 +392,18 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="major">
+                    {({ field }) => (
+                      <TextInputBox label="Major" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="major">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
                 <OptionSelector
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
@@ -443,18 +455,6 @@ const Register = () => {
                   flex="col"
                   zIndex="10"
                 />
-                <div className="flex flex-col">
-                  <Field type="text" name="major">
-                    {({ field }) => (
-                      <TextInputBox label="Major" field={field} />
-                    )}
-                  </Field>
-                  <ErrorMessage name="major">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
-                    )}
-                  </ErrorMessage>
-                </div>
               </div>
               <Field type="text" name="whyAttend">
                 {({ field }) => (
