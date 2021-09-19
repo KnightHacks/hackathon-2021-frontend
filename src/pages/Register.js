@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
+import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 
@@ -776,10 +777,28 @@ const createHacker = async ({
     })
   );
   hackerFormData.append("resume", resume);
-  return await fetch("https://api.knighthacks.org/api/hackers/", {
+
+  const transaction = Sentry.startTransaction({
+    data: {
+      hacker: hackerFormData.get("hacker"),
+    },
+    op: "transaction",
+    name: "submitHacker",
+    description: "POST https://api.knighthacks.org/api/hackers/",
+  });
+
+  Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
+
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     body: hackerFormData,
   });
+
+  transaction.setHttpStatus(res.status);
+
+  transaction.finish();
+
+  return res;
 };
 
 export default Register;
