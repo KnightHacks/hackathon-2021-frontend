@@ -119,20 +119,20 @@ const Register = () => {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let registrationSchema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
-    schoolName: yup.string().required("School name is required"),
+    firstName: yup.string().required("First name is required."),
+    lastName: yup.string().required("Last name is required."),
+    schoolName: yup.string().required("School name is required."),
     email: yup
       .string()
-      .email("Email is not valid")
-      .required("Email is required"),
+      .email("Email is not valid.")
+      .required("Email is required."),
     phoneNumber: yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required("Phone number is required"),
-    major: yup.string().required("Major is required"),
-    whyAttend: yup.string().required("Required"),
-    whatLearn: yup.string().required("Required"),
+      .matches(phoneRegExp, "Phone number is not valid.")
+      .required("Phone number is required."),
+    major: yup.string().required("Major is required."),
+    whyAttend: yup.string().required("Required."),
+    whatLearn: yup.string().required("Required."),
   });
 
   if (window.innerWidth <= 470) {
@@ -225,15 +225,15 @@ const Register = () => {
           const errors = {};
 
           if (pronounOption === "Pronouns") {
-            errors.pronoun = "Pronoun option is required";
+            errors.pronoun = "Pronoun option is required.";
           }
 
           if (ethnicityOption === "Ethnicity") {
-            errors.ethnicity = "Ethnicity option is required";
+            errors.ethnicity = "Ethnicity option is required.";
           }
 
           if (graduationOption === "Graduation Year") {
-            errors.graduation = "Graduation option is required";
+            errors.graduation = "Graduation option is required.";
           }
 
           if (resume != null && resume.type !== "application/pdf") {
@@ -304,7 +304,7 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="firstName">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 ">{msg}</p>
                     )}
                   </ErrorMessage>
                 </div>
