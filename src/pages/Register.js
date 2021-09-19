@@ -354,7 +354,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+              <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
                   <Field type="text" name="phoneNumber">
                     {({ field }) => (
