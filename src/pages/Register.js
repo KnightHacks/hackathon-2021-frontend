@@ -65,8 +65,11 @@ const Register = () => {
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  // registration dialog
+  // registration fail dialog
   const [isOpen, setIsOpen] = useState(false);
+
+  // user validation dialog
+  const [shouldOpen, setShouldOpen] = useState(false);
 
   const [response, setResponse] = useState(null);
 
@@ -247,203 +250,274 @@ const Register = () => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors }) => (
-          <Form className="flex flex-col">
-            <div className="flex flex-col justify-center font-palanquin">
-              <div className="flex flex-col">
-                <Field type="text" name="firstName">
-                  {({ field }) => (
-                    <TextInputBox label="First Name" field={field} />
-                  )}
-                </Field>
-                <ErrorMessage name="firstName">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-              <div className="flex flex-col">
-                <Field type="text" name="lastName">
-                  {({ field }) => (
-                    <TextInputBox label="Last Name" field={field} />
-                  )}
-                </Field>
-                <ErrorMessage name="lastName">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-            </div>
-            <p className="mt-4 w-full space-y-4 font-palanquin">
-              How do you identify?
-            </p>
-            <div className="font-palanquin flex flex-col">
-              <OptionSelector
-                trackOptions={pronounOptions}
-                selectedTrack={pronounOption}
-                setSelectedTrack={setPronounOption}
-                flex="col"
-                zIndex="60"
-              />
-              {errors.pronoun && (
-                <p className="font-palanquin text-red-700">{errors.pronoun}</p>
-              )}
-            </div>
-            <div className="font-palanquin flex flex-col">
-              <OptionSelector
-                trackOptions={ethnicityOptions}
-                selectedTrack={ethnicityOption}
-                setSelectedTrack={setEthnicityOption}
-                flex="col"
-                zIndex="50"
-              />
-              {errors.ethnicity && (
-                <p className="font-palanquin text-red-700">
-                  {errors.ethnicity}
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-              <div className="flex flex-col">
-                <Field type="text" name="phoneNumber">
-                  {({ field }) => <TextInputBox label="Phone" field={field} />}
-                </Field>
-                <ErrorMessage name="phoneNumber">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-              <div className="flex flex-col">
-                <Field type="text" name="email">
-                  {({ field }) => <TextInputBox label="Email" field={field} />}
-                </Field>
-                <ErrorMessage name="email">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-            </div>
-            <div className="font-palanquin flex flex-col">
-              <div className="flex flex-col">
-                <Field type="text" name="schoolName">
-                  {({ field }) => <TextInputBox label="School" field={field} />}
-                </Field>
-                <ErrorMessage name="schoolName">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-              <OptionSelector
-                title="When are you graduating?"
-                trackOptions={graduationOptions}
-                selectedTrack={graduationOption}
-                setSelectedTrack={setGraduationOption}
-                flex="col"
-                zIndex="40"
-              />
-              {errors.graduation && (
-                <p className="font-palanquin text-red-700">
-                  {errors.graduation}
-                </p>
-              )}
-            </div>
-            <div className="font-palanquin">
-              <OptionSelector
-                title="Are you attending our hackathon in person or virtually?"
-                trackOptions={attendingOptions}
-                selectedTrack={attendingOption}
-                setSelectedTrack={setAttendingOption}
-                flex="col"
-                zIndex="30"
-              />
-            </div>
-            <p className="mt-4 w-full space-y-4 font-palanquin">
-              Do you have any dietary restrictions that we should be aware of?
-            </p>
-            <Field type="text" name="dietaryRestrictions">
-              {({ field }) => (
-                <TextInputBox label="Dietary Restrictions" field={field} />
-              )}
-            </Field>
-            <div className="flex flex-col justify-center font-palanquin">
-              <Field type="text" name="github">
-                {({ field }) => <TextInputBox label="GitHub" field={field} />}
-              </Field>
-              <Field type="text" name="linkedIn">
-                {({ field }) => <TextInputBox label="LinkedIn" field={field} />}
-              </Field>
-            </div>
-            <div className="flex flex-col justify-center font-palanquin">
-              <OptionSelector
-                title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
-                trackOptions={infoOptions}
-                selectedTrack={canShareInfo}
-                setSelectedTrack={setCanShareInfo}
-                flex="col"
-                zIndex="10"
-              />
-              <div className="flex flex-col">
-                <Field type="text" name="major">
-                  {({ field }) => <TextInputBox label="Major" field={field} />}
-                </Field>
-                <ErrorMessage name="major">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700">{msg}</p>
-                  )}
-                </ErrorMessage>
-              </div>
-            </div>
-            <Field type="text" name="whyAttend">
-              {({ field }) => (
-                <div className="flex flex-col justify-center font-palanquin mt-4">
-                  <div className="w-full space-y-4 flex-1">
-                    <label>
-                      <span>Why are you attending Knight Hacks?</span>
-                      <textarea
-                        {...field}
-                        className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
-                      />
-                    </label>
-                  </div>
-                  {errors.whyAttend && (
-                    <p className="font-palanquin text-red-700">
-                      {errors.whyAttend}
-                    </p>
-                  )}
+        {({ isSubmitting, errors, validateForm, submitForm }) => (
+          <>
+            <Dialog
+              open={shouldOpen}
+              onClose={() => {
+                setShouldOpen(false);
+              }}
+              className="absolute bottom-4 left-2 z-10"
+            >
+              <div className="flex flex-col justify-center max-w-md p-6 overflow-hidden text-center align-middle transition-all transform bg-gray-200 shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h4"
+                  className="font-palanquin font-semibold text-red-700"
+                >
+                  One or more fields have not been filled in correctly!
+                </Dialog.Title>
+                <Dialog.Description className="font-palanquin">
+                  Please try again
+                </Dialog.Description>
+
+                <div className="mt-4">
+                  <button
+                    className={`
+        bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
+        hover:bg-blue-700
+        active:bg-blue-800 max-w-xswidth
+        truncate
+      `}
+                    onClick={() => {
+                      console.log("TEST");
+                      setShouldOpen(false);
+                    }}
+                  >
+                    Go away
+                  </button>
                 </div>
-              )}
-            </Field>
-            <Field type="text" name="whatLearn">
-              {({ field }) => (
-                <div className="flex flex-col justify-center font-palanquin my-4">
-                  <div className="flex-1">
-                    <label>
-                      <span>What do you hope to learn at Knight Hacks?</span>
-                      <textarea
-                        {...field}
-                        className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
-                      />
-                    </label>
-                  </div>
-                  {errors.whatLearn && (
-                    <p className="font-palanquin text-red-700">
-                      {errors.whatLearn}
-                    </p>
-                  )}
+              </div>
+            </Dialog>
+
+            <Form className="flex flex-col">
+              <div className="flex flex-col justify-center font-palanquin">
+                <div className="flex flex-col">
+                  <Field type="text" name="firstName">
+                    {({ field }) => (
+                      <TextInputBox label="First Name" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="firstName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
                 </div>
-              )}
-            </Field>
-            <div className="flex flex-col justify-center font-palanquin">
-              <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-                <FileUploadBox
-                  handleFile={(fileUploaded) => setResume(fileUploaded)}
-                  title=" Upload Resume"
+                <div className="flex flex-col">
+                  <Field type="text" name="lastName">
+                    {({ field }) => (
+                      <TextInputBox label="Last Name" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="lastName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
+              <p className="mt-4 w-full space-y-4 font-palanquin">
+                How do you identify?
+              </p>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={pronounOptions}
+                  selectedTrack={pronounOption}
+                  setSelectedTrack={setPronounOption}
+                  flex="col"
+                  zIndex="60"
                 />
-                <div className="lg:hidden flex flex-col">
+                {errors.pronoun && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.pronoun}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={ethnicityOptions}
+                  selectedTrack={ethnicityOption}
+                  setSelectedTrack={setEthnicityOption}
+                  flex="col"
+                  zIndex="50"
+                />
+                {errors.ethnicity && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.ethnicity}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+                <div className="flex flex-col">
+                  <Field type="text" name="phoneNumber">
+                    {({ field }) => (
+                      <TextInputBox label="Phone" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="phoneNumber">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="email">
+                    {({ field }) => (
+                      <TextInputBox label="Email" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="email">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <div className="flex flex-col">
+                  <Field type="text" name="schoolName">
+                    {({ field }) => (
+                      <TextInputBox label="School" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="schoolName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <OptionSelector
+                  title="When are you graduating?"
+                  trackOptions={graduationOptions}
+                  selectedTrack={graduationOption}
+                  setSelectedTrack={setGraduationOption}
+                  flex="col"
+                  zIndex="40"
+                />
+                {errors.graduation && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.graduation}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin">
+                <OptionSelector
+                  title="Are you attending our hackathon in person or virtually?"
+                  trackOptions={attendingOptions}
+                  selectedTrack={attendingOption}
+                  setSelectedTrack={setAttendingOption}
+                  flex="col"
+                  zIndex="30"
+                />
+              </div>
+              <p className="mt-4 w-full space-y-4 font-palanquin">
+                Do you have any dietary restrictions that we should be aware of?
+              </p>
+              <div className="flex flex-col justify-center font-palanquin">
+                <Field type="text" name="dietaryRestrictions">
+                  {({ field }) => (
+                    <TextInputBox label="Dietary Restrictions" field={field} />
+                  )}
+                </Field>
+                <Field type="text" name="github">
+                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
+                </Field>
+                <Field type="text" name="linkedIn">
+                  {({ field }) => (
+                    <TextInputBox label="LinkedIn" field={field} />
+                  )}
+                </Field>
+              </div>
+              <div className="flex flex-col justify-center font-palanquin">
+                <OptionSelector
+                  title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
+                  trackOptions={infoOptions}
+                  selectedTrack={canShareInfo}
+                  setSelectedTrack={setCanShareInfo}
+                  flex="col"
+                  zIndex="10"
+                />
+                <div className="flex flex-col">
+                  <Field type="text" name="major">
+                    {({ field }) => (
+                      <TextInputBox label="Major" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="major">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
+              <Field type="text" name="whyAttend">
+                {({ field }) => (
+                  <div className="flex flex-col justify-center font-palanquin mt-4">
+                    <div className="w-full space-y-4 flex-1">
+                      <label>
+                        <span>Why are you attending Knight Hacks?</span>
+                        <textarea
+                          {...field}
+                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                        />
+                      </label>
+                    </div>
+                    {errors.whyAttend && (
+                      <p className="font-palanquin text-red-700">
+                        {errors.whyAttend}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <Field type="text" name="whatLearn">
+                {({ field }) => (
+                  <div className="flex flex-col justify-center font-palanquin my-4">
+                    <div className="flex-1">
+                      <label>
+                        <span>What do you hope to learn at Knight Hacks?</span>
+                        <textarea
+                          {...field}
+                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                        />
+                      </label>
+                    </div>
+                    {errors.whatLearn && (
+                      <p className="font-palanquin text-red-700">
+                        {errors.whatLearn}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <div className="flex flex-col justify-center font-palanquin">
+                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
+                  <FileUploadBox
+                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    title=" Upload Resume"
+                  />
+                  <div className="lg:hidden flex flex-col">
+                    {resume ? (
+                      <>
+                        <p>{"Filename: " + resume.name}</p>
+                        <p className="font-palanquin text-red-600">
+                          {errors.resume && errors.resume}
+                        </p>
+                      </>
+                    ) : (
+                      <p>(PDF files only)</p>
+                    )}
+                  </div>
+                  <OptionSelector
+                    title="What track would you like to follow for the hackathon?"
+                    trackOptions={trackOptions}
+                    selectedTrack={selectedTrack}
+                    setSelectedTrack={setSelectedTrack}
+                    flex="col"
+                    zIndex="0"
+                  />
+                </div>
+                <div className="hidden lg:flex lg:flex-col">
                   {resume ? (
                     <>
                       <p>{"Filename: " + resume.name}</p>
@@ -455,34 +529,20 @@ const Register = () => {
                     <p>(PDF files only)</p>
                   )}
                 </div>
-                <OptionSelector
-                  title="What track would you like to follow for the hackathon?"
-                  trackOptions={trackOptions}
-                  selectedTrack={selectedTrack}
-                  setSelectedTrack={setSelectedTrack}
-                  flex="col"
-                  zIndex="0"
-                />
               </div>
-              <div className="hidden lg:flex lg:flex-col">
-                {resume ? (
-                  <>
-                    <p>{"Filename: " + resume.name}</p>
-                    <p className="font-palanquin text-red-600">
-                      {errors.resume && errors.resume}
-                    </p>
-                  </>
-                ) : (
-                  <p>(PDF files only)</p>
-                )}
-              </div>
-            </div>
-            <div className="flex justify-center font-palanquin">
-              <input
-                type="submit"
-                disabled={isSubmitting}
-                value="Submit"
-                className={`
+              <div className="flex justify-center font-palanquin">
+                <button
+                  disabled={isSubmitting}
+                  onClick={() => {
+                    validateForm().then((err) => {
+                      setShouldOpen(Object.keys(err).length !== 0);
+
+                      if (err == null) {
+                        submitForm();
+                      }
+                    });
+                  }}
+                  className={`
               border-2
               border-green-800
               cursor-pointer
@@ -491,9 +551,12 @@ const Register = () => {
               hover:border-green-900
               w-72
             `}
-              />
-            </div>
-          </Form>
+                >
+                  Submit
+                </button>
+              </div>
+            </Form>
+          </>
         )}
       </Formik>
     </Page>
