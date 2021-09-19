@@ -512,7 +512,7 @@ const Register = () => {
                         </p>
                       </>
                     ) : (
-                      <p>(PDF files only)</p>
+                      <p className="justify-self-center">(PDF files only)</p>
                     )}
                   </div>
                   <OptionSelector
@@ -550,14 +550,14 @@ const Register = () => {
                     });
                   }}
                   className={`
-              border-2
-              border-green-800
-              cursor-pointer
-              bg-green-700 rounded-lg m-6 py-2 px-4
-              hover:bg-green-800
-              hover:border-green-900
-              w-72
-            `}
+                  border-2
+                  border-green-800
+                  cursor-pointer
+                  bg-green-700 rounded-lg m-6 py-2 px-4
+                  hover:bg-green-800
+                  hover:border-green-900
+                  w-72
+                `}
                 >
                   Submit
                 </button>

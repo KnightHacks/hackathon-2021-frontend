@@ -35,13 +35,22 @@ const Page = ({ children, onLanding, title }) => {
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
               <a href="https://twitter.com/KnightHacks?lang=en/">
-                <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
+                <RiTwitterLine
+                  aria-label="Twitter logo"
+                  className="p-2 rounded-xl hover:shadow-md"
+                />
               </a>
               <a href="https://www.instagram.com/knighthacks/">
-                <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
+                <FaInstagram
+                  aria-label="Instagram logo"
+                  className="p-2 rounded-xl hover:shadow-md"
+                />
               </a>
               <a href="https://www.facebook.com/KnightHacks/">
-                <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
+                <TiSocialFacebook
+                  aria-label="Facebook logo"
+                  className="p-2 rounded-xl hover:shadow-md"
+                />
               </a>
             </div>
           </div>
