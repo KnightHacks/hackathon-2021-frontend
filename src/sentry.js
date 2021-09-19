@@ -12,7 +12,7 @@ export const setupSentry = (history) => {
     ],
     environment: process.env.CF_PAGES_BRANCH ?? process.env.NODE_ENV,
     release: process.env.CF_PAGES_COMMIT_SHA,
-    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.75 : 1,
+    tracesSampleRate: 1.0,
     enabled: true,
   });
 };
