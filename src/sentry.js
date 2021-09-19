@@ -14,5 +14,6 @@ export const setupSentry = (history) => {
     release: process.env.CF_PAGES_COMMIT_SHA,
     tracesSampleRate: 1.0,
     enabled: true,
+    debug: true,
   });
 };
