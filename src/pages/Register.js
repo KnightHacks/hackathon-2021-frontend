@@ -619,7 +619,8 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-green-500 border-2 border-green-700 rounded-lg mx-4 mt-6 md:my-6 py-2 px-4
+              bg-green-500 border-2 border-green-700 rounded-lg mx-4 md:my-6 py-1.5 px-4
+              shadow-md
               max-w-xswidth truncate
               hover:bg-green-600
               hover:border-green-700
