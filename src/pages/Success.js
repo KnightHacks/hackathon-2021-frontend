@@ -22,9 +22,9 @@ function Success() {
             Thank you for applying!
           </h1>
 
-          <div className="my-2  flex flex-col  sm:text-base md:text-xl xl:text-2xl items-center w-2/3 ">
-            <div className="text-center space-x-4  mb-2 mt-16 font-palanquin">
-              You will be receiving a follow up email soon
+          <div className="my-2 flex flex-col  sm:text-base md:text-xl xl:text-2xl items-center w-2/3 ">
+            <div className="text-center space-x-4  mb-2 font-palanquin">
+              You will be receiving a follow up email soon.
             </div>
           </div>
         </div>
