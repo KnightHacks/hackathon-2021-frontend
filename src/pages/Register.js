@@ -251,7 +251,8 @@ const Register = () => {
           />
         </div>
         <p className="mt-4 w-full space-y-4 font-palanquin">
-          Do you have any dietary restrictions that we should be aware of?
+          Do you have any dietary restrictions or food allergies that we should
+          be aware of?
         </p>
         <TextInputBox
           className="font-palanquin rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
