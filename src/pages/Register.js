@@ -257,27 +257,32 @@ const Register = () => {
               onClose={() => {
                 setShouldOpen(false);
               }}
-              className="absolute bottom-4 left-2 z-10"
+              className="absolute bottom-4 left-4 z-10"
             >
-              <div className="flex flex-col justify-center max-w-md p-6 overflow-hidden text-center align-middle transition-all transform bg-gray-200 shadow-xl rounded-2xl">
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+              <div className="flex flex-col justify-center max-w-md p-6 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
-                  as="h4"
-                  className="font-palanquin font-semibold text-red-700"
+                  as="h3"
+                  className="font-palanquinbold text-lg font-medium leading-6 text-gray-900"
                 >
-                  One or more fields have not been filled in correctly!
+                  Registration Failed :(
                 </Dialog.Title>
-                <Dialog.Description className="font-palanquin">
-                  Please try again
+                <Dialog.Description as="h4" className="font-palanquin text-md">
+                  One or more fields have not been filled in correctly.
+                </Dialog.Description>
+                <Dialog.Description className="font-palanquin text-gray-500">
+                  Please try again!
                 </Dialog.Description>
 
                 <div className="mt-4">
                   <button
                     className={`
-        bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
-        hover:bg-blue-700
-        active:bg-blue-800 max-w-xswidth
-        truncate
-      `}
+                      font-palanquin
+                      bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
+                      hover:shadow-sm
+                      active:bg-opaque-blue max-w-xswidth
+                      truncate
+                    `}
                     onClick={() => {
                       console.log("TEST");
                       setShouldOpen(false);
