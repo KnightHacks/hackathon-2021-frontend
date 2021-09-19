@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
-import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { TiSocialFacebook } from "react-icons/ti";
+import { RiTwitterLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
 
 /**
@@ -33,13 +35,13 @@ const Page = ({ children, onLanding, title }) => {
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
               <a href="https://twitter.com/KnightHacks?lang=en/">
-                <FaTwitter className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
+                <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a href="https://www.instagram.com/knighthacks/">
-                <FaInstagram className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
+                <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a href="https://www.facebook.com/KnightHacks/">
-                <FaFacebookF className="border-4 border-white rounded-xl p-2 hover:bg-blue-400" />
+                <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>
             </div>
           </div>
