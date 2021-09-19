@@ -128,6 +128,8 @@ const Register = () => {
       .matches(phoneRegExp, "Phone number is not valid")
       .required("Phone number is required"),
     major: yup.string().required("Major is required"),
+    whyAttend: yup.string().required("Required"),
+    whatLearn: yup.string().required("Required"),
   });
 
   if (window.innerWidth <= 470) {
@@ -397,8 +399,8 @@ const Register = () => {
             </div>
             <Field type="text" name="whyAttend">
               {({ field }) => (
-                <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-                  <div className="mt-4 w-full space-y-4 flex-1">
+                <div className="flex flex-col justify-center font-palanquin mt-4">
+                  <div className="w-full space-y-4 flex-1">
                     <label>
                       <span>Why are you attending Knight Hacks?</span>
                       <textarea
@@ -407,13 +409,18 @@ const Register = () => {
                       />
                     </label>
                   </div>
+                  {errors.whyAttend && (
+                    <p className="font-palanquin text-red-700">
+                      {errors.whyAttend}
+                    </p>
+                  )}
                 </div>
               )}
             </Field>
             <Field type="text" name="whatLearn">
               {({ field }) => (
-                <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-                  <div className="my-4 flex-1">
+                <div className="flex flex-col justify-center font-palanquin my-4">
+                  <div className="flex-1">
                     <label>
                       <span>What do you hope to learn at Knight Hacks?</span>
                       <textarea
@@ -422,6 +429,11 @@ const Register = () => {
                       />
                     </label>
                   </div>
+                  {errors.whatLearn && (
+                    <p className="font-palanquin text-red-700">
+                      {errors.whatLearn}
+                    </p>
+                  )}
                 </div>
               )}
             </Field>
