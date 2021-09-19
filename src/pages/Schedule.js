@@ -1,7 +1,6 @@
 import Page from "../components/Page";
 import content from "../assets/content/schedule.json";
 import ColorHash from "color-hash";
-import stillLoadingFish from "../assets/loadingFish.png";
 import { Helmet } from "react-helmet";
 
 /**

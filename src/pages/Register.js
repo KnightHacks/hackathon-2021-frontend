@@ -5,6 +5,9 @@ import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -13,17 +16,6 @@ import * as Sentry from "@sentry/react";
  * @author Rob
  */
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [major, setMajor] = useState("");
-  const [github, setGithub] = useState("");
-  const [linkedIn, setLinkedIn] = useState("");
-  const [whyAttend, setWhyAttend] = useState("");
-  const [whatLearn, setWhatLearn] = useState("");
-  const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   const [resume, setResume] = useState(null);
   const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
@@ -74,14 +66,15 @@ const Register = () => {
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  // registration dialog
+  // registration fail dialog
   const [isOpen, setIsOpen] = useState(false);
+
+  // user validation dialog
+  const [shouldOpen, setShouldOpen] = useState(false);
 
   const [response, setResponse] = useState(null);
 
-  const submitRegistration = async (event) => {
-    event.preventDefault();
-
+  const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
         setFeedbackMessage("Registration is being processed!");
@@ -97,23 +90,23 @@ const Register = () => {
         setFeedbackMessage("Processing registration...");
 
         const response = await createHacker({
-          email,
-          firstName,
-          lastName,
-          phoneNumber,
+          email: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
           pronouns: pronounOption,
-          college: schoolName,
-          major,
+          college: values.schoolName,
+          major: values.major,
           graduation: graduationOption,
-          github,
-          linkedIn,
-          whyAttend,
-          whatLearn,
+          github: values.github,
+          linkedIn: values.linkedIn,
+          whyAttend: values.whyAttend,
+          whatLearn: values.whatLearn,
           inPerson: attendingOption === "In Person",
-          dietaryRestrictions,
+          dietaryRestrictions: values.dietaryRestrictions,
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
@@ -123,6 +116,25 @@ const Register = () => {
       }
     }
   };
+
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  let registrationSchema = yup.object().shape({
+    firstName: yup.string().required("First name is required."),
+    lastName: yup.string().required("Last name is required."),
+    schoolName: yup.string().required("School name is required."),
+    email: yup
+      .string()
+      .email("Email is not valid.")
+      .required("Email is required."),
+    phoneNumber: yup
+      .string()
+      .matches(phoneRegExp, "Phone number is not valid.")
+      .required("Phone number is required."),
+    major: yup.string().required("Major is required."),
+    whyAttend: yup.string().required("Required."),
+    whatLearn: yup.string().required("Required."),
+  });
 
   if (window.innerWidth <= 470) {
     return (
@@ -157,15 +169,15 @@ const Register = () => {
           <div className="flex flex-col justify-center max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
             <Dialog.Title
               as="h3"
-              className="text-xl font-medium leading-6 text-gray-900"
+              className="font-palanquinbold text-lg font-medium leading-6 text-gray-900"
             >
               Registration Failed :(
             </Dialog.Title>
-            <Dialog.Description className="text-lg">
+            <Dialog.Description className="font-palanquin text-md">
               Something went wrong; please try again!
             </Dialog.Description>
 
-            <p className="text-md text-gray-500">
+            <p className="text-md text-gray-500 font-palanquin">
               {`The server says "${
                 response
                   ? `${response.status}: ${response.statusText}`
@@ -176,9 +188,10 @@ const Register = () => {
             <div className="mt-4">
               <button
                 className={`
-                bg-blue-600 rounded-lg mx-4 py-2 px-4 text-white
-                hover:bg-blue-700
+                bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
+                hover:shadow-md
                 active:bg-blue-800 max-w-xswidth
+                font-palanquin
                 truncate
               `}
                 onClick={(event) => {
@@ -186,7 +199,7 @@ const Register = () => {
                   submitRegistration(event);
                 }}
               >
-                Try again!
+                Try again
               </button>
               <button onClick={() => setIsOpen(false)}>Cancel</button>
             </div>
@@ -196,133 +209,347 @@ const Register = () => {
       <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
         Register
       </h1>
-      <form onSubmit={submitRegistration} className="flex flex-col">
-        <div className=" flex flex-col justify-center font-palanquin">
-          <TextInputBox label="First Name" setter={setFirstName} />
-          <TextInputBox label="Last Name" setter={setLastName} />
-        </div>
-        <p className="mt-4 w-full space-y-4 font-palanquinregular">
-          How do you identify?
-        </p>
-        <div className="font-palanquin">
-          <OptionSelector
-            trackOptions={pronounOptions}
-            selectedTrack={pronounOption}
-            setSelectedTrack={setPronounOption}
-            flex="col"
-            zIndex="50"
-          />
-        </div>
-        <div className="font-palanquin">
-          <OptionSelector
-            trackOptions={ethnicityOptions}
-            selectedTrack={ethnicityOption}
-            setSelectedTrack={setEthnicityOption}
-            flex="col"
-            zIndex="40"
-          />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <TextInputBox
-            label="Phone"
-            pattern="^\(?\d{3}\)?-?\d{3}-?\d{4}$"
-            setter={setPhoneNumber}
-          />
-          <TextInputBox label="Email" pattern=".+@.+" setter={setEmail} />
-        </div>
-        <div className="font-palanquin">
-          <TextInputBox label="School" setter={setSchoolName} />
-          <OptionSelector
-            title="When are you graduating?"
-            trackOptions={graduationOptions}
-            selectedTrack={graduationOption}
-            setSelectedTrack={setGraduationOption}
-            flex="col"
-            zIndex="30"
-          />
-        </div>
-        <div className="font-palanquin">
-          <OptionSelector
-            title="Are you attending our hackathon in person or virtually?"
-            trackOptions={attendingOptions}
-            selectedTrack={attendingOption}
-            setSelectedTrack={setAttendingOption}
-            flex="col"
-            zIndex="20"
-          />
-        </div>
-        <p className="mt-4 w-full space-y-4 font-palanquin">
-          Do you have any dietary restrictions that we should be aware of?
-        </p>
-        <TextInputBox
-          className="font-palanquin rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
-          setter={setDietaryRestrictions}
-        />
-        <div className="flex flex-col justify-center font-palanquin">
-          <TextInputBox label="GitHub" setter={setGithub} />
-          <TextInputBox label="LinkedIn" setter={setLinkedIn} />
-        </div>
-        <div className="flex flex-col justify-center font-palanquin">
-          <OptionSelector
-            title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
-            trackOptions={infoOptions}
-            selectedTrack={canShareInfo}
-            setSelectedTrack={setCanShareInfo}
-            flex="col"
-            zIndex="10"
-          />
-          <TextInputBox label="Major" setter={setMajor} />
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="mt-4 w-full space-y-4 flex-1">
-            <label>
-              <span>Why are you attending Knight Hacks?</span>
-              <textarea
-                value={whyAttend}
-                onChange={(event) => setWhyAttend(event.target.value)}
-                className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
-              />
-            </label>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
-          <div className="my-4 flex-1">
-            <label>
-              <span>What do you hope to learn at Knight Hacks?</span>
-              <textarea
-                value={whatLearn}
-                onChange={(event) => setWhatLearn(event.target.value)}
-                className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
-              />
-            </label>
-          </div>
-        </div>
-        <div className="flex flex-col justify-center font-palanquin">
-          <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-            <FileUploadBox
-              handleFile={(fileUploaded) => setResume(fileUploaded)}
-              title=" Upload Resume"
-            />
-            <p className="visible lg:hidden">
-              {(resume && "Filename: " + resume.name) || "(PDF file required)"}
-            </p>
-            <OptionSelector
-              title="What track would you like to follow for the hackathon?"
-              trackOptions={trackOptions}
-              selectedTrack={selectedTrack}
-              setSelectedTrack={setSelectedTrack}
-              flex="col"
-              zIndex="0"
-            />
-          </div>
-          <p className="hidden lg:block">
-            {(resume && "Filename: " + resume.name) || "(PDF file required)"}
-          </p>
-        </div>
-        <div className="flex justify-center font-palanquin">
-          <input
-            type="submit"
-            className={`
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          schoolName: "",
+          email: "",
+          phoneNumber: "",
+          dietaryRestrictions: "",
+          github: "",
+          linkedIn: "",
+          major: "",
+          whyAttend: "",
+          whatLearn: "",
+        }}
+        validate={() => {
+          const errors = {};
+
+          if (pronounOption === "Pronouns") {
+            errors.pronoun = "Pronoun option is required.";
+          }
+
+          if (ethnicityOption === "Ethnicity") {
+            errors.ethnicity = "Ethnicity option is required.";
+          }
+
+          if (graduationOption === "Graduation Year") {
+            errors.graduation = "Graduation option is required.";
+          }
+
+          if (resume != null && resume.type !== "application/pdf") {
+            errors.resume = "File must be a pdf";
+          }
+
+          return errors;
+        }}
+        validationSchema={registrationSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
+        onSubmit={(values, { setSubmitting }) => {
+          submitRegistration(values);
+          setSubmitting(false);
+        }}
+      >
+        {({ isSubmitting, errors, validateForm, submitForm }) => (
+          <>
+            <Dialog
+              open={shouldOpen}
+              onClose={() => {
+                setShouldOpen(false);
+              }}
+              className="absolute bottom-4 left-4 z-10"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+              <div className="flex flex-col justify-center max-w-md p-6 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="font-palanquinbold text-lg font-medium leading-6 text-gray-900"
+                >
+                  Registration Failed :(
+                </Dialog.Title>
+                <Dialog.Description as="h4" className="font-palanquin text-md">
+                  One or more fields have not been filled in correctly.
+                </Dialog.Description>
+                <Dialog.Description className="font-palanquin text-gray-500">
+                  Please try again!
+                </Dialog.Description>
+
+                <div className="mt-4">
+                  <button
+                    className={`
+                      font-palanquin
+                      bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
+                      hover:shadow-sm
+                      active:bg-opaque-blue max-w-xswidth
+                      truncate
+                    `}
+                    onClick={() => {
+                      console.log("TEST");
+                      setShouldOpen(false);
+                    }}
+                  >
+                    Go away
+                  </button>
+                </div>
+              </div>
+            </Dialog>
+
+            <Form className="flex flex-col">
+              <div className="flex flex-col justify-center font-palanquin">
+                <div className="flex flex-col">
+                  <Field type="text" name="firstName">
+                    {({ field }) => (
+                      <TextInputBox label="First Name" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="firstName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 ">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="lastName">
+                    {({ field }) => (
+                      <TextInputBox label="Last Name" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="lastName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
+              <p className="mt-4 w-full space-y-4 font-palanquin">
+                How do you identify?
+              </p>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={pronounOptions}
+                  selectedTrack={pronounOption}
+                  setSelectedTrack={setPronounOption}
+                  flex="col"
+                  zIndex="60"
+                />
+                {errors.pronoun && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.pronoun}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={ethnicityOptions}
+                  selectedTrack={ethnicityOption}
+                  setSelectedTrack={setEthnicityOption}
+                  flex="col"
+                  zIndex="50"
+                />
+                {errors.ethnicity && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.ethnicity}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4 justify-center font-palanquin">
+                <div className="flex flex-col">
+                  <Field type="text" name="phoneNumber">
+                    {({ field }) => (
+                      <TextInputBox label="Phone" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="phoneNumber">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="email">
+                    {({ field }) => (
+                      <TextInputBox label="Email" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="email">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <div className="flex flex-col">
+                  <Field type="text" name="schoolName">
+                    {({ field }) => (
+                      <TextInputBox label="School" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="schoolName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="major">
+                    {({ field }) => (
+                      <TextInputBox label="Major" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="major">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <OptionSelector
+                  title="When are you graduating?"
+                  trackOptions={graduationOptions}
+                  selectedTrack={graduationOption}
+                  setSelectedTrack={setGraduationOption}
+                  flex="col"
+                  zIndex="40"
+                />
+                {errors.graduation && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.graduation}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin">
+                <OptionSelector
+                  title="Are you attending our hackathon in person or virtually?"
+                  trackOptions={attendingOptions}
+                  selectedTrack={attendingOption}
+                  setSelectedTrack={setAttendingOption}
+                  flex="col"
+                  zIndex="30"
+                />
+              </div>
+              <p className="mt-4 w-full space-y-4 font-palanquin">
+                Do you have any dietary restrictions that we should be aware of?
+              </p>
+              <div className="flex flex-col justify-center font-palanquin">
+                <Field type="text" name="dietaryRestrictions">
+                  {({ field }) => (
+                    <TextInputBox label="Dietary Restrictions" field={field} />
+                  )}
+                </Field>
+                <Field type="text" name="github">
+                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
+                </Field>
+                <Field type="text" name="linkedIn">
+                  {({ field }) => (
+                    <TextInputBox label="LinkedIn" field={field} />
+                  )}
+                </Field>
+              </div>
+              <div className="flex flex-col justify-center font-palanquin">
+                <OptionSelector
+                  title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
+                  trackOptions={infoOptions}
+                  selectedTrack={canShareInfo}
+                  setSelectedTrack={setCanShareInfo}
+                  flex="col"
+                  zIndex="10"
+                />
+              </div>
+              <Field type="text" name="whyAttend">
+                {({ field }) => (
+                  <div className="flex flex-col justify-center font-palanquin mt-4">
+                    <div className="w-full space-y-4 flex-1">
+                      <label>
+                        <span>Why are you attending Knight Hacks?</span>
+                        <textarea
+                          {...field}
+                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                        />
+                      </label>
+                    </div>
+                    {errors.whyAttend && (
+                      <p className="font-palanquin text-red-700">
+                        {errors.whyAttend}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <Field type="text" name="whatLearn">
+                {({ field }) => (
+                  <div className="flex flex-col justify-center font-palanquin my-4">
+                    <div className="flex-1">
+                      <label>
+                        <span>What do you hope to learn at Knight Hacks?</span>
+                        <textarea
+                          {...field}
+                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                        />
+                      </label>
+                    </div>
+                    {errors.whatLearn && (
+                      <p className="font-palanquin text-red-700">
+                        {errors.whatLearn}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <div className="flex flex-col justify-center font-palanquin">
+                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
+                  <FileUploadBox
+                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    title=" Upload Resume"
+                  />
+                  <div className="lg:hidden flex flex-col">
+                    {resume ? (
+                      <>
+                        <p>{"Filename: " + resume.name}</p>
+                        <p className="font-palanquin text-red-600">
+                          {errors.resume && errors.resume}
+                        </p>
+                      </>
+                    ) : (
+                      <p>(PDF files only)</p>
+                    )}
+                  </div>
+                  <OptionSelector
+                    title="What track would you like to follow for the hackathon?"
+                    trackOptions={trackOptions}
+                    selectedTrack={selectedTrack}
+                    setSelectedTrack={setSelectedTrack}
+                    flex="col"
+                    zIndex="0"
+                  />
+                </div>
+                <div className="hidden lg:flex lg:flex-col">
+                  {resume ? (
+                    <>
+                      <p>{"Filename: " + resume.name}</p>
+                      <p className="font-palanquin text-red-600">
+                        {errors.resume && errors.resume}
+                      </p>
+                    </>
+                  ) : (
+                    <p>(PDF files only)</p>
+                  )}
+                </div>
+              </div>
+              <div className="flex justify-center font-palanquin">
+                <button
+                  disabled={isSubmitting}
+                  onClick={() => {
+                    validateForm().then((err) => {
+                      setShouldOpen(Object.keys(err).length !== 0);
+
+                      if (err == null) {
+                        submitForm();
+                      }
+                    });
+                  }}
+                  className={`
               border-2
               border-green-800
               cursor-pointer
@@ -331,27 +558,24 @@ const Register = () => {
               hover:border-green-900
               w-72
             `}
-            value="Submit"
-          />
-        </div>
-      </form>
+                >
+                  Submit
+                </button>
+              </div>
+            </Form>
+          </>
+        )}
+      </Formik>
     </Page>
   );
 };
 
 /**
- * @desc An input box component with useful defaults. Use similarly to a
- * controlled component, except you only have to provide a setter function using
- * the `setter` prop if you want the typical `event =>
- * setter(event.target.value)` pattern. You can override `onChange` if you wish,
- * but then `setter` will have no effect and you must set `value` to the correct
- * value yourself.
+ * @desc TODO
  * @prop label
- * @prop setter
  * @author Rob
  */
-const TextInputBox = ({ label, setter, ...props }) => {
-  const [value, setValue] = useState("");
+const TextInputBox = ({ label, field }) => {
   return (
     <div className="my-4 flex-1 ">
       <label>
@@ -361,12 +585,7 @@ const TextInputBox = ({ label, setter, ...props }) => {
             w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words
             `}
           type="text"
-          onChange={(event) => {
-            setValue(event.target.value);
-            setter(event.target.value);
-          }}
-          value={value}
-          {...props}
+          {...field}
         />
       </label>
     </div>
@@ -561,7 +780,7 @@ const createHacker = async ({
 
   const transaction = Sentry.startTransaction({
     data: {
-      hackerFormData,
+      hacker: hackerFormData.get("hacker"),
     },
     op: "transaction",
     name: "submitHacker",

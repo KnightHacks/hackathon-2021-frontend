@@ -1,7 +1,6 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
-  important: true,
   theme: {
     extend: {
       screens: {
@@ -32,7 +31,8 @@ module.exports = {
         sansita: ["Sansita Black Italic", "sans-serif"],
         sansitaregular: ["Sansita Regular", "sans-serif"],
         palanquin: ["Palanquin Light", "sans-serif"],
-        palanquinregular: ["Palanquin Regular"],
+        palanquinregular: ["Palanquin Regular", "sans-serif"],
+        palanquinbold: ["Palanquin Bold", "sans-serif"],
       },
     },
   },
