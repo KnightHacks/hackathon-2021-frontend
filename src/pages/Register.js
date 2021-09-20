@@ -22,8 +22,8 @@ const Register = () => {
   const history = useHistory();
 
   const infoOptions = [
-    "Yes, I'm comfortable with my information being shared.",
-    "No, I'm uncomfortable with my information being shared.",
+    "Yes; I'm comfortable with my information being shared.",
+    "No; don't share my my information.",
   ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
