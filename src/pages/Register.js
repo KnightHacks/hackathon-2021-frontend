@@ -74,6 +74,17 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
+  const [resumeID, setResumeID] = useState(null);
+  const uploadResume = async (resume) => {
+    setResume(resume);
+    const { id } = await fetch("https://api.knighthacks.org/api/resume", {
+      method: "POST",
+      headers: { "content-type": "application/pdf" },
+      body: resume,
+    }).then((b) => b.json());
+    setResumeID(id);
+  };
+
   const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
@@ -107,7 +118,7 @@ const Register = () => {
           whatLearn: values.whatLearn,
           inPerson: attendingOption === "In Person",
           dietaryRestrictions: values.dietaryRestrictions,
-          resume,
+          resume_id: resumeID,
         });
         setRegistrationState(response.ok ? "success" : "failure");
         setResponse(response);
@@ -333,7 +344,7 @@ const Register = () => {
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
                   <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    handleFile={(fileUploaded) => uploadResume(fileUploaded)}
                     title=" Upload Resume"
                   />
                   <div className="lg:hidden flex flex-col">
@@ -755,40 +766,35 @@ const createHacker = async ({
   whatLearn: what_learn,
   inPerson: in_person,
   dietaryRestrictions: dietary_restrictions,
-  resume,
+  resume_id,
 }) => {
-  const hackerFormData = new FormData();
-  hackerFormData.append(
-    "hacker",
-    JSON.stringify({
-      beginner,
-      can_share_info: can_share_info === "Yes",
-      edu_info: {
-        college,
-        graduation_date,
-        major,
-      },
-      email,
-      ethnicity,
-      first_name,
-      last_name,
-      phone_number,
-      pronouns,
-      socials: {
-        github,
-        linkedin,
-      },
-      why_attend,
-      what_learn: [what_learn],
-      dietary_restrictions,
-      in_person,
-    })
-  );
-  hackerFormData.append("resume", resume);
-
+  const payload = {
+    beginner,
+    can_share_info: can_share_info === "Yes",
+    edu_info: {
+      college,
+      graduation_date,
+      major,
+    },
+    email,
+    ethnicity,
+    first_name,
+    last_name,
+    phone_number,
+    pronouns,
+    socials: {
+      github,
+      linkedin,
+    },
+    why_attend,
+    what_learn: [what_learn],
+    dietary_restrictions,
+    in_person,
+    resume_id,
+  };
   const transaction = Sentry.startTransaction({
     data: {
-      hacker: hackerFormData.get("hacker"),
+      hacker: JSON.stringify(payload),
     },
     op: "transaction",
     name: "submitHacker",
@@ -799,7 +805,10 @@ const createHacker = async ({
 
   const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
-    body: hackerFormData,
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(payload),
   });
 
   transaction.setHttpStatus(res.status);
