@@ -22,37 +22,36 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      <div className="flex flex-col flex-wrap content-center">
-        <img
-          className="w-2/3 xl:w-96 ml-36 my-10"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="w-2/3 xl:w-96 mr-36 my-10 transform rotate-180"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="w-2/3 xl:w-96 ml-36 my-10"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="w-2/3 xl:w-96 ml-36 my-10"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="w-2/3 xl:w-96 mr-36 my-10 transform rotate-180"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="w-2/3 xl:w-96 ml-36 my-10"
-          src={TestLogo}
-          alt="test logo"
-        />
+      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
+        Level 1
+      </div>
+      <div>
+        _____________________________________________________________________
+      </div>
+      <div className="flex justify-center">
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+      </div>
+
+      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
+        Level 2
+      </div>
+      <div>
+        _____________________________________________________________________
+      </div>
+      <div className="flex justify-center">
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+      </div>
+      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
+        Level 3
+      </div>
+      <div>
+        _____________________________________________________________________
+      </div>
+      <div className="flex justify-center">
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
       </div>
     </Page>
   );
