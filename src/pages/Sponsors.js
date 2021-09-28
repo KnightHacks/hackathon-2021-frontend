@@ -23,12 +23,10 @@ const Sponsors = () => {
         Our Sponsors
       </h1>
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL 1
+        LEVEL ONE
       </div>
-      <div>
-        _____________________________________________________________________
-      </div>
-      <div className="flex justify-center">
+      <div>_________________________________________</div>
+      <div className="flex justify-center ">
         <img
           className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
           src={TestLogo}
@@ -42,11 +40,9 @@ const Sponsors = () => {
       </div>
 
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL 2
+        LEVEL TWO
       </div>
-      <div>
-        _____________________________________________________________________
-      </div>
+      <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
           className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
@@ -60,9 +56,9 @@ const Sponsors = () => {
         />
       </div>
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL 3
+        LEVEL THREE
       </div>
-      <div>_______________________________________________________________</div>
+      <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
           className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
