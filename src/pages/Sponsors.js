@@ -12,7 +12,7 @@ const Sponsors = () => {
     <Page title="Knight Hacks | Sponsors" onLanding={false}>
       <h1
         className={`
-          text-4xl w-full text-center mt-16
+          text-4xl w-full text-center mt-10
           sm:text-4xl md:text-6xl
           lg:mt-32
           xl:text-6xl xl:mt-36
@@ -22,36 +22,58 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
-        Level 1
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+        LEVEL 1
       </div>
       <div>
         _____________________________________________________________________
       </div>
       <div className="flex justify-center">
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          src={TestLogo}
+          alt="test logo"
+        />
+        <img
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 "
+          src={TestLogo}
+          alt="test logo"
+        />
       </div>
 
-      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
-        Level 2
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+        LEVEL 2
       </div>
       <div>
         _____________________________________________________________________
       </div>
       <div className="flex justify-center">
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          src={TestLogo}
+          alt="test logo"
+        />
+        <img
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 "
+          src={TestLogo}
+          alt="test logo"
+        />
       </div>
-      <div className="text-center space-x-4 mt-14 mb-2 font-palanquin">
-        Level 3
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+        LEVEL 3
       </div>
-      <div>
-        _____________________________________________________________________
-      </div>
+      <div>_______________________________________________________________</div>
       <div className="flex justify-center">
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
-        <img className="w-2/3 xl:w-96 " src={TestLogo} alt="test logo" />
+        <img
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          src={TestLogo}
+          alt="test logo"
+        />
+        <img
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8  "
+          src={TestLogo}
+          alt="test logo"
+        />
       </div>
     </Page>
   );
