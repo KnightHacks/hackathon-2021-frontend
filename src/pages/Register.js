@@ -226,18 +226,6 @@ const Register = () => {
         validate={() => {
           const errors = {};
 
-          if (pronounOption === "Pronouns") {
-            errors.pronoun = "Pronoun option is required.";
-          }
-
-          if (ethnicityOption === "Ethnicity") {
-            errors.ethnicity = "Ethnicity option is required.";
-          }
-
-          if (graduationOption === "Graduation Year") {
-            errors.graduation = "Graduation option is required.";
-          }
-
           if (resume != null && resume.type !== "application/pdf") {
             errors.resume = "File must be a pdf";
           }
@@ -245,14 +233,12 @@ const Register = () => {
           return errors;
         }}
         validationSchema={registrationSchema}
-        validateOnChange={false}
-        validateOnBlur={false}
         onSubmit={(values, { setSubmitting }) => {
           submitRegistration(values);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, validateForm, submitForm }) => (
+        {({ isSubmitting, errors, status, setStatus, submitForm }) => (
           <>
             <Dialog
               open={shouldOpen}
@@ -293,7 +279,6 @@ const Register = () => {
                       truncate
                     `}
                       onClick={() => {
-                        console.log("TEST");
                         setShouldOpen(false);
                       }}
                     >
@@ -354,7 +339,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="0"
+                    zIndex="60"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -377,13 +362,31 @@ const Register = () => {
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
-                  setSelectedTrack={setPronounOption}
+                  setSelectedTrack={(option) => {
+                    setPronounOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "pronoun") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (pronounOption === "Pronouns") {
+                      setStatus({
+                        ...status,
+                        pronoun: "Pronoun option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
-                  zIndex="60"
+                  zIndex="50"
                 />
-                {errors.pronoun && (
+                {status && status.pronoun && (
                   <p className="font-palanquin text-red-700">
-                    {errors.pronoun}
+                    {status.pronoun}
                   </p>
                 )}
               </div>
@@ -391,13 +394,31 @@ const Register = () => {
                 <OptionSelector
                   trackOptions={ethnicityOptions}
                   selectedTrack={ethnicityOption}
-                  setSelectedTrack={setEthnicityOption}
+                  setSelectedTrack={(option) => {
+                    setEthnicityOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "ethnicity") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (ethnicityOption === "Ethnicity") {
+                      setStatus({
+                        ...status,
+                        ethnicity: "Ethnicity option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="40"
                 />
-                {errors.ethnicity && (
+                {status && status.ethnicity && (
                   <p className="font-palanquin text-red-700">
-                    {errors.ethnicity}
+                    {status.ethnicity}
                   </p>
                 )}
               </div>
@@ -456,13 +477,31 @@ const Register = () => {
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
                   selectedTrack={graduationOption}
-                  setSelectedTrack={setGraduationOption}
+                  handleSelectedTrack={(option) => {
+                    setGraduationOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "graduation") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (graduationOption === "Graduation Year") {
+                      setStatus({
+                        ...status,
+                        graduation: "Graduation option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="30"
                 />
-                {errors.graduation && (
+                {status && status.graduation && (
                   <p className="font-palanquin text-red-700">
-                    {errors.graduation}
+                    {status.graduation}
                   </p>
                 )}
               </div>
@@ -473,7 +512,7 @@ const Register = () => {
                   selectedTrack={attendingOption}
                   setSelectedTrack={setAttendingOption}
                   flex="col"
-                  zIndex="30"
+                  zIndex="20"
                 />
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
@@ -547,15 +586,7 @@ const Register = () => {
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
-                  onClick={() => {
-                    validateForm().then((err) => {
-                      setShouldOpen(Object.keys(err).length !== 0);
-
-                      if (err == null) {
-                        submitForm();
-                      }
-                    });
-                  }}
+                  onClick={submitForm}
                   className={`
               border-2
               border-green-800
@@ -660,7 +691,8 @@ const OptionSelector = ({
   title,
   trackOptions,
   selectedTrack,
-  setSelectedTrack,
+  handleSelectedTrack,
+  handleTouched,
   flex,
   zIndex,
 }) => {
@@ -676,7 +708,11 @@ const OptionSelector = ({
       <span className={flex === "col" ? "flex self-start" : undefined}>
         {title}
       </span>
-      <Listbox value={selectedTrack} onChange={setSelectedTrack}>
+      <Listbox
+        value={selectedTrack}
+        onChange={(option) => handleSelectedTrack(option)}
+        onClick={handleTouched}
+      >
         <div className="relative mt-1 flex-1 w-full">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
