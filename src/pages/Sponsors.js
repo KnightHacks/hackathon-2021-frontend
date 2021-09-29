@@ -61,12 +61,12 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
           src={TestLogo}
           alt="test logo"
         />
         <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8  "
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
           src={TestLogo}
           alt="test logo"
         />
