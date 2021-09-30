@@ -37,13 +37,13 @@ const Landing = () => {
               hover:scale-110
               hover:text-white
               shadow-md
+              focus:outline-none
+              focus:ring-4
+              focus:ring-white
             `}
             to="/register"
           >
-            <p
-              className="focus:outline-none focus-visible:ring focus-visible:ring-4 tracking-widest select-none"
-              unselectable="on"
-            >
+            <p className=" tracking-widest select-none" unselectable="on">
               REGISTER
             </p>
           </Link>
@@ -61,6 +61,9 @@ const Landing = () => {
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
+                focus:outline-none
+                focus:ring-4
+                focus:ring-white
                 shadow-sm
               `}
             >
@@ -88,6 +91,9 @@ const Landing = () => {
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
+                focus:outline-none
+                focus:ring-4
+                focus:ring-white
                 shadow-sm
               `}
             >
