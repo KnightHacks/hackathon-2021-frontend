@@ -361,7 +361,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="0"
+                    zIndex="70"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -479,7 +479,7 @@ const Register = () => {
                   selectedTrack={graduationOption}
                   setSelectedTrack={setGraduationOption}
                   flex="col"
-                  zIndex="40"
+                  zIndex="30"
                 />
                 {errors.graduation && (
                   <p className="font-palanquin text-red-700">
@@ -494,7 +494,7 @@ const Register = () => {
                   selectedTrack={attendingOption}
                   setSelectedTrack={setAttendingOption}
                   flex="col"
-                  zIndex="30"
+                  zIndex="20"
                 />
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
