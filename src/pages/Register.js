@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import content from "../assets/content/schools.json";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -20,6 +21,7 @@ const Register = () => {
   const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
   const history = useHistory();
+  const schools = content.schools;
 
   const infoOptions = [
     "Yes; I'm comfortable with my information being shared.",
@@ -45,6 +47,8 @@ const Register = () => {
     "Summer 2024",
     "Fall 2024",
   ];
+
+  const [schoolName, setSchoolName] = useState("School Name");
 
   const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
@@ -98,7 +102,7 @@ const Register = () => {
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
           pronouns: pronounOption,
-          college: values.schoolName,
+          college: schoolName,
           major: values.major,
           graduation: graduationOption,
           github: values.github,
@@ -213,7 +217,6 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          schoolName: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -236,6 +239,10 @@ const Register = () => {
 
           if (graduationOption === "Graduation Year") {
             errors.graduation = "Graduation option is required.";
+          }
+
+          if (schoolName === "School Name") {
+            errors.schoolName = "School name option is required.";
           }
 
           if (resume != null && resume.type !== "application/pdf") {
@@ -275,14 +282,6 @@ const Register = () => {
                     One or more fields have not been filled in correctly.
                   </Dialog.Description>
 
-                  <p className="text-md text-gray-500 font-palanquin">
-                    {`The server says "${
-                      response
-                        ? `${response.status}: ${response.statusText}`
-                        : "<crickets>"
-                    }".`}
-                  </p>
-
                   <div className="mt-4">
                     <button
                       className={`
@@ -293,7 +292,6 @@ const Register = () => {
                       truncate
                     `}
                       onClick={() => {
-                        console.log("TEST");
                         setShouldOpen(false);
                       }}
                     >
@@ -370,11 +368,9 @@ const Register = () => {
                   )}
                 </div>
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquin">
-                How do you identify?
-              </p>
-              <div className="font-palanquin flex flex-col">
+              <div className="font-palanquin flex flex-col mt-2">
                 <OptionSelector
+                  title="How do you identify"
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={setPronounOption}
@@ -429,7 +425,7 @@ const Register = () => {
               </div>
               <div className="font-palanquin flex flex-col">
                 <div className="flex flex-col">
-                  <Field type="text" name="schoolName">
+                  {/* <Field type="text" name="schoolName">
                     {({ field }) => (
                       <TextInputBox label="School" field={field} />
                     )}
@@ -438,7 +434,19 @@ const Register = () => {
                     {(msg) => (
                       <p className="font-palanquin text-red-700">{msg}</p>
                     )}
-                  </ErrorMessage>
+                  </ErrorMessage> */}
+                  <OptionSelector
+                    trackOptions={schools}
+                    selectedTrack={schoolName}
+                    setSelectedTrack={setSchoolName}
+                    flex="col"
+                    zIndex="50"
+                  />
+                  {errors.schoolName && (
+                    <p className="font-palanquin text-red-700">
+                      {errors.schoolName}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <Field type="text" name="major">
