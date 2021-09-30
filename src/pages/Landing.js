@@ -31,7 +31,7 @@ const Landing = () => {
               px-4 sm:px-6 md:px-12 py-2
               border-indigo-50 border-4 md:border-4
               rounded-xl text-xl sm:text-3xl md:text-4xl
-              mt-4 md:mt-8 focus:outline-none
+              mt-4 md:mt-8
               hover:border-white hover:shadow-lg
               transition duration-1000 ease-in-out
               hover:scale-110
@@ -40,7 +40,10 @@ const Landing = () => {
             `}
             to="/register"
           >
-            <p className="tracking-widest select-none" unselectable="on">
+            <p
+              className="focus:outline-none focus-visible:ring focus-visible:ring-4 tracking-widest select-none"
+              unselectable="on"
+            >
               REGISTER
             </p>
           </Link>
@@ -55,7 +58,6 @@ const Landing = () => {
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
-                focus:outline-none
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
@@ -83,7 +85,6 @@ const Landing = () => {
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
-                focus:outline-none
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
