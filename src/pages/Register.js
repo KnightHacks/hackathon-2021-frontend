@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-
+import countries from "../assets/content/countries.json";
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -62,6 +62,8 @@ const Register = () => {
   ];
   const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
 
+  const [countryOption, setCountryOption] = useState("Country");
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -97,6 +99,7 @@ const Register = () => {
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
+          country: countryOption,
           pronouns: pronounOption,
           college: values.schoolName,
           major: values.major,
@@ -236,6 +239,10 @@ const Register = () => {
 
           if (graduationOption === "Graduation Year") {
             errors.graduation = "Graduation option is required.";
+          }
+
+          if (countryOption === "Country") {
+            errors.country = "Country option is required.";
           }
 
           if (resume != null && resume.type !== "application/pdf") {
@@ -398,6 +405,20 @@ const Register = () => {
                 {errors.ethnicity && (
                   <p className="font-palanquin text-red-700">
                     {errors.ethnicity}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={countries}
+                  selectedTrack={countryOption}
+                  setSelectedTrack={setCountryOption}
+                  flex="col"
+                  zIndex="40"
+                />
+                {errors.country && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.country}
                   </p>
                 )}
               </div>
