@@ -585,6 +585,7 @@ const Register = () => {
               hover:bg-green-800
               hover:border-green-900
               w-72
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-900
             `}
                 >
                   Submit
