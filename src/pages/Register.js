@@ -653,6 +653,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               hover:bg-green-600
               hover:border-green-700
               flex justify-center
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-600
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
