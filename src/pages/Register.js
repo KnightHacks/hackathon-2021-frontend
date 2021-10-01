@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import ReactSelect, { createFilter, components } from "react-select";
+import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
 
@@ -49,6 +51,17 @@ const Register = () => {
   ];
 
   const [schoolName, setSchoolName] = useState("School Name");
+
+  const CustomOption = ({ children, ...props }) => {
+    // eslint-disable-next-line no-unused-vars
+    const { onMouseMove, onMouseOver, ...rest } = props.innerProps;
+    const newProps = { ...props, innerProps: rest };
+    return (
+      <components.Option {...newProps} className="custom-option">
+        {children}
+      </components.Option>
+    );
+  };
 
   const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
@@ -446,12 +459,27 @@ const Register = () => {
               </div>
               <div className="font-palanquin flex flex-col">
                 <div className="flex flex-col">
-                  <OptionSelector
+                  {/* <OptionSelector
                     trackOptions={schools}
                     selectedTrack={schoolName}
                     setSelectedTrack={setSchoolName}
                     flex="col"
                     zIndex="50"
+                  /> */}
+                  <ReactSelect
+                    options={schools}
+                    value={schoolName}
+                    onChange={setSchoolName}
+                    placeholder="School Name"
+                    isSearchable
+                    filterOption={createFilter({ ignoreAccents: false })}
+                    captureMenuScroll={false}
+                    classNamePrefix="custom-select"
+                    components={{
+                      Option: CustomOption,
+                      MenuList: CustomMenuList,
+                    }}
+                    className="text-gray-900"
                   />
                   {errors.schoolName && (
                     <p className="font-palanquin text-red-700">
