@@ -63,6 +63,14 @@ const Register = () => {
     );
   };
 
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
+      </components.DropdownIndicator>
+    );
+  };
+
   const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
   const pronounOptions = ["she/her", "he/him", "they/them", "ze/zir", "Other"];
@@ -459,13 +467,6 @@ const Register = () => {
               </div>
               <div className="font-palanquin flex flex-col">
                 <div className="flex flex-col">
-                  {/* <OptionSelector
-                    trackOptions={schools}
-                    selectedTrack={schoolName}
-                    setSelectedTrack={setSchoolName}
-                    flex="col"
-                    zIndex="50"
-                  /> */}
                   <ReactSelect
                     options={schools}
                     value={schoolName}
@@ -478,8 +479,46 @@ const Register = () => {
                     components={{
                       Option: CustomOption,
                       MenuList: CustomMenuList,
+                      DropdownIndicator: DropdownIndicator,
                     }}
                     className="text-gray-900"
+                    styles={{
+                      placeholder: (provided) => ({
+                        ...provided,
+                        color: "rgb(219, 234, 254)",
+                        fontFamily: "Palanquin Light, sans-serif",
+                      }),
+                      control: (provided) => ({
+                        ...provided,
+                        backgroundColor: "rgba(159, 211, 233, 0.47)",
+                        borderWidth: "2px",
+                        borderRadius: "0.5rem",
+                        borderColor: "rgb(249, 250, 251)",
+                        "&:hover": {
+                          borderColor: "rgb(191, 219, 254)",
+                        },
+                        paddingTop: "0.1rem",
+                        paddingBottom: "0.1rem",
+                      }),
+                      singleValue: (provided) => ({
+                        ...provided,
+                        color: "white",
+                        fontSize: "0.875rem",
+                        lineHeight: "1.25rem",
+                      }),
+                      option: (provided, state) => {
+                        const backgroundColor = state.isSelected
+                          ? "rgb(219, 234, 254)"
+                          : "";
+                        return {
+                          ...provided,
+                          backgroundColor: backgroundColor,
+                          color: "rgb(17, 24, 39)",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        };
+                      },
+                    }}
                   />
                   {errors.schoolName && (
                     <p className="font-palanquin text-red-700">
