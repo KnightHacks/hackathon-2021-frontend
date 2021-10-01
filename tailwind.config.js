@@ -18,6 +18,10 @@ module.exports = {
         "3/20": "15%",
         "17/20": "85%",
       },
+      zIndex: {
+        60: "60",
+        70: "70",
+      },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
         "knight-hacks-logo": "url('/src/assets/knightHacksLogo_WHITE.svg')",
