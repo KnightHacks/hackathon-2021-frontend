@@ -7,7 +7,8 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import content from "../assets/content/schools.json";
+import schools from "../assets/content/schools.json";
+import countries from "../assets/content/countries.json";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -21,7 +22,6 @@ const Register = () => {
   const trackOptions = ["Beginner", "Intermediate / Advanced"];
   const [selectedTrack, setSelectedTrack] = useState(trackOptions[0]);
   const history = useHistory();
-  const schools = content.schools;
 
   const infoOptions = [
     "Yes; I'm comfortable with my information being shared.",
@@ -66,6 +66,8 @@ const Register = () => {
   ];
   const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
 
+  const [countryOption, setCountryOption] = useState("Country");
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -101,6 +103,7 @@ const Register = () => {
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
+          country: countryOption,
           pronouns: pronounOption,
           college: schoolName,
           major: values.major,
@@ -245,6 +248,10 @@ const Register = () => {
             errors.schoolName = "School name option is required.";
           }
 
+          if (countryOption === "Country") {
+            errors.country = "Country option is required.";
+          }
+
           if (resume != null && resume.type !== "application/pdf") {
             errors.resume = "File must be a pdf";
           }
@@ -352,7 +359,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="0"
+                    zIndex="70"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -397,6 +404,20 @@ const Register = () => {
                   </p>
                 )}
               </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={countries}
+                  selectedTrack={countryOption}
+                  setSelectedTrack={setCountryOption}
+                  flex="col"
+                  zIndex="40"
+                />
+                {errors.country && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.country}
+                  </p>
+                )}
+              </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
                   <Field type="text" name="phoneNumber">
@@ -425,16 +446,6 @@ const Register = () => {
               </div>
               <div className="font-palanquin flex flex-col">
                 <div className="flex flex-col">
-                  {/* <Field type="text" name="schoolName">
-                    {({ field }) => (
-                      <TextInputBox label="School" field={field} />
-                    )}
-                  </Field>
-                  <ErrorMessage name="schoolName">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
-                    )}
-                  </ErrorMessage> */}
                   <OptionSelector
                     trackOptions={schools}
                     selectedTrack={schoolName}
@@ -466,7 +477,7 @@ const Register = () => {
                   selectedTrack={graduationOption}
                   setSelectedTrack={setGraduationOption}
                   flex="col"
-                  zIndex="40"
+                  zIndex="30"
                 />
                 {errors.graduation && (
                   <p className="font-palanquin text-red-700">
@@ -481,7 +492,7 @@ const Register = () => {
                   selectedTrack={attendingOption}
                   setSelectedTrack={setAttendingOption}
                   flex="col"
-                  zIndex="30"
+                  zIndex="20"
                 />
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
