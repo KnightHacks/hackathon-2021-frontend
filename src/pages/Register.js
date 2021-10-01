@@ -699,7 +699,7 @@ const OptionSelector = ({
       </span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
