@@ -518,6 +518,12 @@ const Register = () => {
                           lineHeight: "1.25rem",
                         };
                       },
+                      input: (provided) => ({
+                        ...provided,
+                        color: "white",
+                        fontSize: "0.875rem",
+                        lineHeight: "1.25rem",
+                      }),
                     }}
                   />
                   {errors.schoolName && (
