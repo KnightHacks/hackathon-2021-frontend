@@ -533,7 +533,7 @@ const Register = () => {
                         <span>Why are you attending Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -553,7 +553,7 @@ const Register = () => {
                         <span>What do you hope to learn at Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
                         />
                       </label>
                     </div>
