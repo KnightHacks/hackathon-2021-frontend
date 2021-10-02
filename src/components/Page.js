@@ -47,7 +47,7 @@ const Page = ({ children, onLanding, title }) => {
           </div>
         </div>
 
-        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center">
+        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-items-center">
           {!onLanding ? (
             <Link to="/" className="w-11/12 h-16">
               <div className="bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full mt-12" />
