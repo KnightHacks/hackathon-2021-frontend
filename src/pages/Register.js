@@ -101,6 +101,9 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
+  const serverErrorFocusRef = useRef(null);
+  const validationErrorFocusRef = useRef(null);
+
   const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
@@ -183,12 +186,12 @@ const Register = () => {
     );
   }
 
-  console.log(schoolOption);
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
+        initialFocus={serverErrorFocusRef}
         className="fixed inset-0 z-10 overflow-y-auto h-100 w-100"
       >
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -226,6 +229,7 @@ const Register = () => {
                   setIsOpen(false);
                   submitRegistration(event);
                 }}
+                ref={serverErrorFocusRef}
               >
                 Try again
               </button>
@@ -295,6 +299,7 @@ const Register = () => {
                 setShouldOpen(false);
               }}
               className="fixed inset-0 z-10 overflow-y-auto h-100 w-100"
+              initialFocus={validationErrorFocusRef}
             >
               <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
@@ -322,6 +327,7 @@ const Register = () => {
                       onClick={() => {
                         setShouldOpen(false);
                       }}
+                      ref={validationErrorFocusRef}
                     >
                       Go away
                     </button>
