@@ -50,7 +50,7 @@ const Register = () => {
     "Fall 2024",
   ];
 
-  const [schoolName, setSchoolName] = useState("School Name");
+  const [schoolOption, setSchoolOption] = useState("School Name");
 
   const CustomOption = ({ children, ...props }) => {
     // eslint-disable-next-line no-unused-vars
@@ -126,7 +126,7 @@ const Register = () => {
           ethnicity: ethnicityOption,
           country: countryOption,
           pronouns: pronounOption,
-          college: schoolName,
+          college: schoolOption.value,
           major: values.major,
           graduation: graduationOption,
           github: values.github,
@@ -150,7 +150,6 @@ const Register = () => {
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    schoolName: yup.string().required("School name is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -184,6 +183,7 @@ const Register = () => {
     );
   }
 
+  console.log(schoolOption);
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
       <Dialog
@@ -265,7 +265,7 @@ const Register = () => {
             errors.graduation = "Graduation option is required.";
           }
 
-          if (schoolName === "School Name") {
+          if (schoolOption.value === "School Name") {
             errors.schoolName = "School name option is required.";
           }
 
@@ -469,8 +469,8 @@ const Register = () => {
                 <div className="flex flex-col">
                   <ReactSelect
                     options={schools}
-                    value={schoolName}
-                    onChange={setSchoolName}
+                    value={schoolOption}
+                    onChange={setSchoolOption}
                     placeholder="School Name"
                     isSearchable
                     filterOption={createFilter({ ignoreAccents: false })}
