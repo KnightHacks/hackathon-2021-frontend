@@ -555,11 +555,11 @@ const Register = () => {
                         />
                       </label>
                     </div>
-                    {errors.whyAttend && (
-                      <p className="font-palanquin text-red-700">
-                        {errors.whyAttend}
-                      </p>
-                    )}
+                    <ErrorMessage name="whyAttend">
+                      {(msg) => (
+                        <p className="font-palanquin text-red-700">{msg}</p>
+                      )}
+                    </ErrorMessage>
                   </div>
                 )}
               </Field>
@@ -575,11 +575,11 @@ const Register = () => {
                         />
                       </label>
                     </div>
-                    {errors.whatLearn && (
-                      <p className="font-palanquin text-red-700">
-                        {errors.whatLearn}
-                      </p>
-                    )}
+                    <ErrorMessage name="whatLearn">
+                      {(msg) => (
+                        <p className="font-palanquin text-red-700">{msg}</p>
+                      )}
+                    </ErrorMessage>
                   </div>
                 )}
               </Field>
