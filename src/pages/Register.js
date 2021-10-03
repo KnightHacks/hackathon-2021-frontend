@@ -7,6 +7,10 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import ReactSelect, { createFilter, components } from "react-select";
+import CustomMenuList from "../components/CustomMenuList";
+import schools from "../assets/content/schools.json";
+import countries from "../assets/content/countries.json";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -46,6 +50,27 @@ const Register = () => {
     "Fall 2024",
   ];
 
+  const [schoolOption, setSchoolOption] = useState("School Name");
+
+  const CustomOption = ({ children, ...props }) => {
+    // eslint-disable-next-line no-unused-vars
+    const { onMouseMove, onMouseOver, ...rest } = props.innerProps;
+    const newProps = { ...props, innerProps: rest };
+    return (
+      <components.Option {...newProps} className="custom-option">
+        {children}
+      </components.Option>
+    );
+  };
+
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
+      </components.DropdownIndicator>
+    );
+  };
+
   const [graduationOption, setGraduationOption] = useState("Graduation Year");
 
   const pronounOptions = ["she/her", "he/him", "they/them", "ze/zir", "Other"];
@@ -62,6 +87,8 @@ const Register = () => {
   ];
   const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
 
+  const [countryOption, setCountryOption] = useState("Country");
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -73,6 +100,9 @@ const Register = () => {
   const [shouldOpen, setShouldOpen] = useState(false);
 
   const [response, setResponse] = useState(null);
+
+  const serverErrorFocusRef = useRef(null);
+  const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
     switch (registrationState) {
@@ -97,8 +127,9 @@ const Register = () => {
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
+          country: countryOption,
           pronouns: pronounOption,
-          college: values.schoolName,
+          college: schoolOption.value,
           major: values.major,
           graduation: graduationOption,
           github: values.github,
@@ -122,7 +153,6 @@ const Register = () => {
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    schoolName: yup.string().required("School name is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -161,6 +191,7 @@ const Register = () => {
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
+        initialFocus={serverErrorFocusRef}
         className="fixed inset-0 z-10 overflow-y-auto h-100 w-100"
       >
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -198,6 +229,7 @@ const Register = () => {
                   setIsOpen(false);
                   submitRegistration(event);
                 }}
+                ref={serverErrorFocusRef}
               >
                 Try again
               </button>
@@ -213,7 +245,6 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          schoolName: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -246,6 +277,7 @@ const Register = () => {
                 setShouldOpen(false);
               }}
               className="fixed inset-0 z-10 overflow-y-auto h-100 w-100"
+              initialFocus={validationErrorFocusRef}
             >
               <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
@@ -261,14 +293,6 @@ const Register = () => {
                     One or more fields have not been filled in correctly.
                   </Dialog.Description>
 
-                  <p className="text-md text-gray-500 font-palanquin">
-                    {`The server says "${
-                      response
-                        ? `${response.status}: ${response.statusText}`
-                        : "<crickets>"
-                    }".`}
-                  </p>
-
                   <div className="mt-4">
                     <button
                       className={`
@@ -281,6 +305,7 @@ const Register = () => {
                       onClick={() => {
                         setShouldOpen(false);
                       }}
+                      ref={validationErrorFocusRef}
                     >
                       Go away
                     </button>
@@ -298,7 +323,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="firstName">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700 ">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -310,7 +337,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="lastName">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -339,7 +368,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="60"
+                    zIndex="70"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -355,11 +384,9 @@ const Register = () => {
                   )}
                 </div>
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquin">
-                How do you identify?
-              </p>
-              <div className="font-palanquin flex flex-col">
+              <div className="font-palanquin flex flex-col mt-2">
                 <OptionSelector
+                  title="How do you identify"
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={(option) => {
@@ -374,7 +401,7 @@ const Register = () => {
                     );
                   }}
                   handleTouched={() => {
-                    if (pronounOption === "Pronouns") {
+                    if (!status?.pronoun && pronounOption === "Pronouns") {
                       setStatus({
                         ...status,
                         pronoun: "Pronoun option is required.",
@@ -385,7 +412,7 @@ const Register = () => {
                   zIndex="50"
                 />
                 {status && status.pronoun && (
-                  <p className="font-palanquin text-red-700">
+                  <p className="font-palanquin text-red-700 font-bold">
                     {status.pronoun}
                   </p>
                 )}
@@ -406,7 +433,7 @@ const Register = () => {
                     );
                   }}
                   handleTouched={() => {
-                    if (ethnicityOption === "Ethnicity") {
+                    if (!status?.ethnicity && ethnicityOption === "Ethnicity") {
                       setStatus({
                         ...status,
                         ethnicity: "Ethnicity option is required.",
@@ -417,8 +444,40 @@ const Register = () => {
                   zIndex="40"
                 />
                 {status && status.ethnicity && (
-                  <p className="font-palanquin text-red-700">
+                  <p className="font-palanquin text-red-700 font-bold">
                     {status.ethnicity}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={countries}
+                  selectedTrack={countryOption}
+                  setSelectedTrack={(option) => {
+                    setCountryOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "country") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (!status?.country && countryOption === "Country") {
+                      setStatus({
+                        ...status,
+                        country: "Country option is required.",
+                      });
+                    }
+                  }}
+                  flex="col"
+                  zIndex="40"
+                />
+                {status && status.country && (
+                  <p className="font-palanquin text-red-700 font-bold">
+                    {status.country}
                   </p>
                 )}
               </div>
@@ -431,7 +490,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="phoneNumber">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -443,23 +504,100 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="email">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
                 <div className="flex flex-col">
-                  <Field type="text" name="schoolName">
-                    {({ field }) => (
-                      <TextInputBox label="School" field={field} />
-                    )}
-                  </Field>
-                  <ErrorMessage name="schoolName">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
-                    )}
-                  </ErrorMessage>
+                  <ReactSelect
+                    options={schools}
+                    value={schoolOption}
+                    onChange={(option) => {
+                      setSchoolOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "schoolName") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
+                    placeholder="School Name"
+                    isSearchable
+                    filterOption={createFilter({ ignoreAccents: false })}
+                    captureMenuScroll={false}
+                    classNamePrefix="custom-select"
+                    components={{
+                      Option: CustomOption,
+                      MenuList: CustomMenuList,
+                      DropdownIndicator: DropdownIndicator,
+                    }}
+                    className="text-gray-900"
+                    styles={{
+                      placeholder: (provided) => ({
+                        ...provided,
+                        color: "rgb(219, 234, 254)",
+                        fontFamily: "Palanquin Light, sans-serif",
+                      }),
+                      control: (provided) => ({
+                        ...provided,
+                        backgroundColor: "rgba(159, 211, 233, 0.47)",
+                        borderWidth: "2px",
+                        borderRadius: "0.5rem",
+                        borderColor: "rgb(249, 250, 251)",
+                        "&:hover": {
+                          borderColor: "rgb(191, 219, 254)",
+                        },
+                        paddingTop: "0.1rem",
+                        paddingBottom: "0.1rem",
+                      }),
+                      singleValue: (provided) => ({
+                        ...provided,
+                        color: "white",
+                        fontSize: "0.875rem",
+                        lineHeight: "1.25rem",
+                      }),
+                      option: (provided, state) => {
+                        const backgroundColor = state.isSelected
+                          ? "rgb(219, 234, 254)"
+                          : "";
+                        return {
+                          ...provided,
+                          backgroundColor: backgroundColor,
+                          color: "rgb(17, 24, 39)",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        };
+                      },
+                      input: (provided) => ({
+                        ...provided,
+                        color: "white",
+                        fontSize: "0.875rem",
+                        lineHeight: "1.25rem",
+                      }),
+                    }}
+                    onMenuOpen={() => {
+                      if (
+                        !status?.schoolName &&
+                        schoolOption === "School Name"
+                      ) {
+                        setStatus({
+                          ...status,
+                          schoolName: "School name is required.",
+                        });
+                      }
+                    }}
+                  />
+                  {status && status.schoolName && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.schoolName}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <Field type="text" name="major">
@@ -469,7 +607,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="major">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -477,7 +617,7 @@ const Register = () => {
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
                   selectedTrack={graduationOption}
-                  handleSelectedTrack={(option) => {
+                  setSelectedTrack={(option) => {
                     setGraduationOption(option);
                     setStatus(
                       Object.keys(status).reduce((object, key) => {
@@ -489,7 +629,10 @@ const Register = () => {
                     );
                   }}
                   handleTouched={() => {
-                    if (graduationOption === "Graduation Year") {
+                    if (
+                      !status?.graduation &&
+                      graduationOption === "Graduation Year"
+                    ) {
                       setStatus({
                         ...status,
                         graduation: "Graduation option is required.",
@@ -500,7 +643,7 @@ const Register = () => {
                   zIndex="30"
                 />
                 {status && status.graduation && (
-                  <p className="font-palanquin text-red-700">
+                  <p className="font-palanquin text-red-700 font-bold">
                     {status.graduation}
                   </p>
                 )}
@@ -557,7 +700,9 @@ const Register = () => {
                     </div>
                     <ErrorMessage name="whyAttend">
                       {(msg) => (
-                        <p className="font-palanquin text-red-700">{msg}</p>
+                        <p className="font-palanquin text-red-700 font-bold">
+                          {msg}
+                        </p>
                       )}
                     </ErrorMessage>
                   </div>
@@ -577,7 +722,9 @@ const Register = () => {
                     </div>
                     <ErrorMessage name="whatLearn">
                       {(msg) => (
-                        <p className="font-palanquin text-red-700">{msg}</p>
+                        <p className="font-palanquin text-red-700 font-bold">
+                          {msg}
+                        </p>
                       )}
                     </ErrorMessage>
                   </div>
@@ -691,7 +838,7 @@ const OptionSelector = ({
   title,
   trackOptions,
   selectedTrack,
-  handleSelectedTrack,
+  setSelectedTrack,
   handleTouched,
   flex,
   zIndex,
@@ -710,7 +857,7 @@ const OptionSelector = ({
       </span>
       <Listbox
         value={selectedTrack}
-        onChange={(option) => handleSelectedTrack(option)}
+        onChange={setSelectedTrack}
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
