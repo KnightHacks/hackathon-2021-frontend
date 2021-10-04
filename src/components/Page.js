@@ -47,12 +47,19 @@ const Page = ({ children, onLanding, title }) => {
           </div>
         </div>
 
-        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center sm:items-end mb-20">
-          {!onLanding ? (
-            <Link to="/" className="w-11/12 h-16">
-              <div className="justify-self-center bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full " />
-            </Link>
-          ) : null}
+        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center">
+          <a
+            id="mlh-trust-badge"
+            className="block sm:w-20 md:w-28"
+            href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=white"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-white.svg"
+              alt="Major League Hacking 2022 Hackathon Season"
+            />
+          </a>
         </div>
       </div>
     </>
