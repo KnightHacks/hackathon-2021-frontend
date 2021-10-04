@@ -257,26 +257,6 @@ const Register = () => {
         validate={() => {
           const errors = {};
 
-          if (pronounOption === "Pronouns") {
-            errors.pronoun = "Pronoun option is required.";
-          }
-
-          if (ethnicityOption === "Ethnicity") {
-            errors.ethnicity = "Ethnicity option is required.";
-          }
-
-          if (graduationOption === "Graduation Year") {
-            errors.graduation = "Graduation option is required.";
-          }
-
-          if (schoolOption.value === "School Name") {
-            errors.schoolName = "School name option is required.";
-          }
-
-          if (countryOption === "Country") {
-            errors.country = "Country option is required.";
-          }
-
           if (resume != null && resume.type !== "application/pdf") {
             errors.resume = "File must be a pdf";
           }
@@ -284,14 +264,12 @@ const Register = () => {
           return errors;
         }}
         validationSchema={registrationSchema}
-        validateOnChange={false}
-        validateOnBlur={false}
         onSubmit={(values, { setSubmitting }) => {
           submitRegistration(values);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, validateForm, submitForm }) => (
+        {({ isSubmitting, errors, status, setStatus, submitForm }) => (
           <>
             <Dialog
               open={shouldOpen}
@@ -345,7 +323,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="firstName">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700 ">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -357,7 +337,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="lastName">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -407,13 +389,31 @@ const Register = () => {
                   title="How do you identify"
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
-                  setSelectedTrack={setPronounOption}
+                  setSelectedTrack={(option) => {
+                    setPronounOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "pronoun") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (!status?.pronoun && pronounOption === "Pronouns") {
+                      setStatus({
+                        ...status,
+                        pronoun: "Pronoun option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
-                  zIndex="60"
+                  zIndex="50"
                 />
-                {errors.pronoun && (
-                  <p className="font-palanquin text-red-700">
-                    {errors.pronoun}
+                {status && status.pronoun && (
+                  <p className="font-palanquin text-red-700 font-bold">
+                    {status.pronoun}
                   </p>
                 )}
               </div>
@@ -421,13 +421,31 @@ const Register = () => {
                 <OptionSelector
                   trackOptions={ethnicityOptions}
                   selectedTrack={ethnicityOption}
-                  setSelectedTrack={setEthnicityOption}
+                  setSelectedTrack={(option) => {
+                    setEthnicityOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "ethnicity") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (!status?.ethnicity && ethnicityOption === "Ethnicity") {
+                      setStatus({
+                        ...status,
+                        ethnicity: "Ethnicity option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="40"
                 />
-                {errors.ethnicity && (
-                  <p className="font-palanquin text-red-700">
-                    {errors.ethnicity}
+                {status && status.ethnicity && (
+                  <p className="font-palanquin text-red-700 font-bold">
+                    {status.ethnicity}
                   </p>
                 )}
               </div>
@@ -435,13 +453,31 @@ const Register = () => {
                 <OptionSelector
                   trackOptions={countries}
                   selectedTrack={countryOption}
-                  setSelectedTrack={setCountryOption}
+                  setSelectedTrack={(option) => {
+                    setCountryOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "country") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (!status?.country && countryOption === "Country") {
+                      setStatus({
+                        ...status,
+                        country: "Country option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
                   zIndex="40"
                 />
-                {errors.country && (
-                  <p className="font-palanquin text-red-700">
-                    {errors.country}
+                {status && status.country && (
+                  <p className="font-palanquin text-red-700 font-bold">
+                    {status.country}
                   </p>
                 )}
               </div>
@@ -454,7 +490,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="phoneNumber">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -466,7 +504,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="email">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -476,7 +516,17 @@ const Register = () => {
                   <ReactSelect
                     options={schools}
                     value={schoolOption}
-                    onChange={setSchoolOption}
+                    onChange={(option) => {
+                      setSchoolOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "schoolName") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
                     placeholder="School Name"
                     isSearchable
                     filterOption={createFilter({ ignoreAccents: false })}
@@ -531,10 +581,21 @@ const Register = () => {
                         lineHeight: "1.25rem",
                       }),
                     }}
+                    onMenuOpen={() => {
+                      if (
+                        !status?.schoolName &&
+                        schoolOption === "School Name"
+                      ) {
+                        setStatus({
+                          ...status,
+                          schoolName: "School name is required.",
+                        });
+                      }
+                    }}
                   />
-                  {errors.schoolName && (
-                    <p className="font-palanquin text-red-700">
-                      {errors.schoolName}
+                  {status && status.schoolName && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.schoolName}
                     </p>
                   )}
                 </div>
@@ -546,7 +607,9 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="major">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </div>
@@ -554,13 +617,34 @@ const Register = () => {
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
                   selectedTrack={graduationOption}
-                  setSelectedTrack={setGraduationOption}
+                  setSelectedTrack={(option) => {
+                    setGraduationOption(option);
+                    setStatus(
+                      Object.keys(status).reduce((object, key) => {
+                        if (key !== "graduation") {
+                          object[key] = status[key];
+                        }
+                        return object;
+                      }, {})
+                    );
+                  }}
+                  handleTouched={() => {
+                    if (
+                      !status?.graduation &&
+                      graduationOption === "Graduation Year"
+                    ) {
+                      setStatus({
+                        ...status,
+                        graduation: "Graduation option is required.",
+                      });
+                    }
+                  }}
                   flex="col"
                   zIndex="30"
                 />
-                {errors.graduation && (
-                  <p className="font-palanquin text-red-700">
-                    {errors.graduation}
+                {status && status.graduation && (
+                  <p className="font-palanquin text-red-700 font-bold">
+                    {status.graduation}
                   </p>
                 )}
               </div>
@@ -614,11 +698,13 @@ const Register = () => {
                         />
                       </label>
                     </div>
-                    {errors.whyAttend && (
-                      <p className="font-palanquin text-red-700">
-                        {errors.whyAttend}
-                      </p>
-                    )}
+                    <ErrorMessage name="whyAttend">
+                      {(msg) => (
+                        <p className="font-palanquin text-red-700 font-bold">
+                          {msg}
+                        </p>
+                      )}
+                    </ErrorMessage>
                   </div>
                 )}
               </Field>
@@ -634,11 +720,13 @@ const Register = () => {
                         />
                       </label>
                     </div>
-                    {errors.whatLearn && (
-                      <p className="font-palanquin text-red-700">
-                        {errors.whatLearn}
-                      </p>
-                    )}
+                    <ErrorMessage name="whatLearn">
+                      {(msg) => (
+                        <p className="font-palanquin text-red-700 font-bold">
+                          {msg}
+                        </p>
+                      )}
+                    </ErrorMessage>
                   </div>
                 )}
               </Field>
@@ -685,15 +773,7 @@ const Register = () => {
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
-                  onClick={() => {
-                    validateForm().then((err) => {
-                      setShouldOpen(Object.keys(err).length !== 0);
-
-                      if (err == null) {
-                        submitForm();
-                      }
-                    });
-                  }}
+                  onClick={submitForm}
                   className={`
                   border-2
                   border-green-800
@@ -799,6 +879,7 @@ const OptionSelector = ({
   trackOptions,
   selectedTrack,
   setSelectedTrack,
+  handleTouched,
   flex,
   zIndex,
 }) => {
@@ -814,7 +895,11 @@ const OptionSelector = ({
       <span className={flex === "col" ? "flex self-start" : undefined}>
         {title}
       </span>
-      <Listbox value={selectedTrack} onChange={setSelectedTrack}>
+      <Listbox
+        value={selectedTrack}
+        onChange={setSelectedTrack}
+        onClick={handleTouched}
+      >
         <div className="relative mt-1 flex-1 w-full">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
