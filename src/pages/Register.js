@@ -642,6 +642,46 @@ const Register = () => {
                   </div>
                 )}
               </Field>
+              <div className="flex flex-col justify-center font-palanquin">
+                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
+                  <FileUploadBox
+                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    title=" Upload Resume"
+                  />
+                  <div className="lg:hidden flex flex-col">
+                    {resume ? (
+                      <>
+                        <p>{"Filename: " + resume.name}</p>
+                        <p className="font-palanquin text-red-600">
+                          {errors.resume && errors.resume}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="justify-self-center">(PDF files only)</p>
+                    )}
+                  </div>
+                  <OptionSelector
+                    title="What track would you like to follow for the hackathon?"
+                    trackOptions={trackOptions}
+                    selectedTrack={selectedTrack}
+                    setSelectedTrack={setSelectedTrack}
+                    flex="col"
+                    zIndex="0"
+                  />
+                </div>
+                <div className="hidden lg:flex lg:flex-col">
+                  {resume ? (
+                    <>
+                      <p>{"Filename: " + resume.name}</p>
+                      <p className="font-palanquin text-red-600">
+                        {errors.resume && errors.resume}
+                      </p>
+                    </>
+                  ) : (
+                    <p>(PDF files only)</p>
+                  )}
+                </div>
+              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
@@ -655,14 +695,14 @@ const Register = () => {
                     });
                   }}
                   className={`
-              border-2
-              border-green-800
-              cursor-pointer
-              bg-green-700 rounded-lg m-6 py-2 px-4
-              hover:bg-green-800
-              hover:border-green-900
-              w-72
-            `}
+                  border-2
+                  border-green-800
+                  cursor-pointer
+                  bg-green-700 rounded-lg m-6 py-2 px-4
+                  hover:bg-green-800
+                  hover:border-green-900
+                  w-72
+                `}
                 >
                   Submit
                 </button>
@@ -724,11 +764,11 @@ const FileUploadBox = ({ handleFile, title }) => {
       <button
         onClick={handleClick}
         className={`
-              bg-green-500 border-2 border-green-700 rounded-lg mx-4 md:my-6 py-1.5 px-4
+              bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-6 py-1.5 px-4
               shadow-md
               max-w-xswidth truncate
-              hover:bg-green-600
-              hover:border-green-700
+              hover:bg-green-800
+              hover:border-green-900
               flex justify-center
               `}
       >

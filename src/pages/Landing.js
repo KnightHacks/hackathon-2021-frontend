@@ -15,6 +15,7 @@ const Landing = () => {
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto">
           <div
+            aria-label="Knight Hacks logo"
             className={`
             bg-knight-hacks-logo
             w-full h-24 md:h-36 lg:h-44 bg-no-repeat
