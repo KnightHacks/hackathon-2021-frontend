@@ -37,6 +37,19 @@ const Register = () => {
   ];
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
 
+  const levelOfStudyOptions = [
+    "Middle School",
+    "High School",
+    "Undergraduation / Bachelors",
+    "Graduation / Masters",
+    "PhD / Doctorate",
+    "Post Doctorate",
+  ];
+
+  const [levelOfStudyOption, setLevelOfStudyOption] = useState(
+    "Level of Study"
+  );
+
   const graduationOptions = [
     "Fall 2021",
     "Spring 2022",
@@ -131,6 +144,7 @@ const Register = () => {
           pronouns: pronounOption,
           college: schoolOption.value,
           major: values.major,
+          levelOfStudy: levelOfStudyOption,
           graduation: graduationOption,
           github: values.github,
           linkedIn: values.linkedIn,
@@ -612,6 +626,41 @@ const Register = () => {
                       </p>
                     )}
                   </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <OptionSelector
+                    trackOptions={levelOfStudyOptions}
+                    selectedTrack={levelOfStudyOption}
+                    setSelectedTrack={(option) => {
+                      setLevelOfStudyOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "levelOfStudy") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
+                    handleTouched={() => {
+                      if (
+                        !status?.levelOfStudy &&
+                        levelOfStudyOption === "Level of Study"
+                      ) {
+                        setStatus({
+                          ...status,
+                          levelOfStudy: "Level of Study option is required.",
+                        });
+                      }
+                    }}
+                    flex="col"
+                    zIndex="40"
+                  />
+                  {status && status.levelOfStudy && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.levelOfStudy}
+                    </p>
+                  )}
                 </div>
                 <OptionSelector
                   title="When are you graduating?"
