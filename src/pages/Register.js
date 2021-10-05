@@ -382,7 +382,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="70"
+                    zIndex="80"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -423,7 +423,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="70"
                 />
                 {status && status.pronoun && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -455,7 +455,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="60"
                 />
                 {status && status.ethnicity && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -487,7 +487,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="50"
                 />
                 {status && status.country && (
                   <p className="font-palanquin text-red-700 font-bold">
