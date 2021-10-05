@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-
+import countries from "../assets/content/countries.json";
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
  * submitting, the backend is updated and they will recieve a success message
@@ -62,6 +62,8 @@ const Register = () => {
   ];
   const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
 
+  const [countryOption, setCountryOption] = useState("Country");
+
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -97,6 +99,7 @@ const Register = () => {
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
           ethnicity: ethnicityOption,
+          country: countryOption,
           pronouns: pronounOption,
           college: values.schoolName,
           major: values.major,
@@ -238,6 +241,10 @@ const Register = () => {
             errors.graduation = "Graduation option is required.";
           }
 
+          if (countryOption === "Country") {
+            errors.country = "Country option is required.";
+          }
+
           if (resume != null && resume.type !== "application/pdf") {
             errors.resume = "File must be a pdf";
           }
@@ -354,7 +361,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="0"
+                    zIndex="70"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -398,6 +405,20 @@ const Register = () => {
                 {errors.ethnicity && (
                   <p className="font-palanquin text-red-700">
                     {errors.ethnicity}
+                  </p>
+                )}
+              </div>
+              <div className="font-palanquin flex flex-col">
+                <OptionSelector
+                  trackOptions={countries}
+                  selectedTrack={countryOption}
+                  setSelectedTrack={setCountryOption}
+                  flex="col"
+                  zIndex="40"
+                />
+                {errors.country && (
+                  <p className="font-palanquin text-red-700">
+                    {errors.country}
                   </p>
                 )}
               </div>
@@ -458,7 +479,7 @@ const Register = () => {
                   selectedTrack={graduationOption}
                   setSelectedTrack={setGraduationOption}
                   flex="col"
-                  zIndex="40"
+                  zIndex="30"
                 />
                 {errors.graduation && (
                   <p className="font-palanquin text-red-700">
@@ -473,7 +494,7 @@ const Register = () => {
                   selectedTrack={attendingOption}
                   setSelectedTrack={setAttendingOption}
                   flex="col"
-                  zIndex="30"
+                  zIndex="20"
                 />
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
@@ -512,7 +533,7 @@ const Register = () => {
                         <span>Why are you attending Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -532,7 +553,7 @@ const Register = () => {
                         <span>What do you hope to learn at Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -564,6 +585,7 @@ const Register = () => {
               hover:bg-green-800
               hover:border-green-900
               w-72
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-900
             `}
                 >
                   Submit
@@ -589,7 +611,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words
+            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
             `}
           type="text"
           {...field}
@@ -632,6 +654,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               hover:bg-green-600
               hover:border-green-700
               flex justify-center
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-600
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
@@ -678,7 +701,7 @@ const OptionSelector = ({
       </span>
       <Listbox value={selectedTrack} onChange={setSelectedTrack}>
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
