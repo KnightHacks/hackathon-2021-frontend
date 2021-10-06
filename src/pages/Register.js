@@ -694,7 +694,7 @@ const Register = () => {
                         <span>Why are you attending Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 w-full px-4 py-2"
+                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -716,7 +716,7 @@ const Register = () => {
                         <span>What do you hope to learn at Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 focus:outline-none hover:border-blue-200 focus:border-blue-200 p-2 px-4 py-2"
+                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -775,14 +775,15 @@ const Register = () => {
                   disabled={isSubmitting}
                   onClick={submitForm}
                   className={`
-                  border-2
-                  border-green-800
-                  cursor-pointer
-                  bg-green-700 rounded-lg m-6 py-2 px-4
-                  hover:bg-green-800
-                  hover:border-green-900
-                  w-72
-                `}
+              border-2
+              border-green-800
+              cursor-pointer
+              bg-green-700 rounded-lg m-6 py-2 px-4
+              hover:bg-green-800
+              hover:border-green-900
+              w-72
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-900
+            `}
                 >
                   Submit
                 </button>
@@ -807,7 +808,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50  focus:outline-none hover:border-blue-200 focus:border-blue-200 break-words
+            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
             `}
           type="text"
           {...field}
@@ -850,6 +851,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               hover:bg-green-800
               hover:border-green-900
               flex justify-center
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-600
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
@@ -901,7 +903,7 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
             <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
