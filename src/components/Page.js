@@ -47,7 +47,7 @@ const Page = ({ children, onLanding, title }) => {
           </div>
         </div>
 
-        <div className="col-span-1 absolute w-20 sm:relative sm:flex sm:w-full sm:h-full sm:justify-center">
+        <div className="col-span-1 absolute w-16 sm:relative sm:flex sm:w-full sm:h-full sm:justify-center">
           <a
             id="mlh-trust-badge"
             className="block sm:w-20 md:w-28"
