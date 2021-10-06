@@ -23,7 +23,7 @@ const Sponsors = () => {
         Our Sponsors
       </h1>
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL ONE
+        DIAMOND
       </div>
       <div>_________________________________________</div>
       <div className="flex justify-center ">
@@ -40,7 +40,7 @@ const Sponsors = () => {
       </div>
 
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL TWO
+        PLATINUM
       </div>
       <div>_____________________________________</div>
       <div className="flex justify-center">
@@ -56,7 +56,39 @@ const Sponsors = () => {
         />
       </div>
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        LEVEL THREE
+        GOLD
+      </div>
+      <div>_____________________________________</div>
+      <div className="flex justify-center">
+        <img
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+          src={TestLogo}
+          alt="test logo"
+        />
+        <img
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+          src={TestLogo}
+          alt="test logo"
+        />
+      </div>
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+        SILVER
+      </div>
+      <div>_____________________________________</div>
+      <div className="flex justify-center">
+        <img
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+          src={TestLogo}
+          alt="test logo"
+        />
+        <img
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+          src={TestLogo}
+          alt="test logo"
+        />
+      </div>
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+        BRONZE
       </div>
       <div>_____________________________________</div>
       <div className="flex justify-center">
