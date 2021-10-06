@@ -45,6 +45,7 @@ module.exports = {
       animation: ["group-hover"],
       fontSize: ["hover", "focus"],
       backgroundColor: ["active"],
+      textDecoration: ["focus-visible"],
     },
   },
   plugins: [],
