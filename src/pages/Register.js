@@ -537,7 +537,7 @@ const Register = () => {
                       MenuList: CustomMenuList,
                       DropdownIndicator: DropdownIndicator,
                     }}
-                    className="text-gray-900"
+                    className="text-gray-700"
                     styles={{
                       placeholder: (provided) => ({
                         ...provided,
@@ -694,7 +694,7 @@ const Register = () => {
                         <span>Why are you attending Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
+                          className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -716,7 +716,7 @@ const Register = () => {
                         <span>What do you hope to learn at Knight Hacks?</span>
                         <textarea
                           {...field}
-                          className="h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
+                          className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -808,7 +808,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-white placeholder-opacity-75 text-white font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
+            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
             `}
           type="text"
           {...field}
@@ -904,7 +904,7 @@ const OptionSelector = ({
       >
         <div className="relative mt-1 flex-1 w-full">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
-            <span className="block truncate text-gray-50 font-medium">
+            <span className="block truncate text-gray-700 font-medium">
               {selectedTrack}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
