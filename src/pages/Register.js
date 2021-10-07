@@ -134,6 +134,9 @@ const Register = () => {
     major: yup.string().required("Major is required."),
     whyAttend: yup.string().required("Required."),
     whatLearn: yup.string().required("Required."),
+    mlh1: yup.bool().oneOf([true], "Field must be checked."),
+    mlh2: yup.bool().oneOf([true], "Field must be checked."),
+    mlh3: yup.bool().oneOf([true], "Field must be checked."),
   });
 
   if (window.innerWidth <= 470) {
@@ -222,6 +225,9 @@ const Register = () => {
           major: "",
           whyAttend: "",
           whatLearn: "",
+          mlh1: false,
+          mlh2: false,
+          mlh3: false,
         }}
         validate={() => {
           const errors = {};
@@ -545,25 +551,48 @@ const Register = () => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <div>
-                  <Field type="checkbox" name="mlh1" />
-                  <label htmlFor="mlh1">
-                    I authorize you to share my application/registration
-                    information with Major League Hacking for event
-                    administration, ranking, and MLH administration in-line with
-                    the MLH Privacy Policy.
-                  </label>
-                </div>
-                <div>
-                  <Field type="checkbox" name="mlh2" />
-                  <label className="self-end" htmlFor="mlh2">
-                    I further agree to the terms of both the MLH Contest Terms
-                    and Conditions and the MLH Privacy Policy.
-                  </label>
-                </div>
-                <Field type="checkbox" name="mlh3" />
-                <label className="self-end" htmlFor="mlh3">
-                  finally
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center">
+                    <Field type="checkbox" name="mlh1" />
+                    <p>
+                      I authorize you to share my application/registration
+                      information with Major League Hacking for event
+                      administration, ranking, and MLH administration in-line
+                      with the MLH Privacy Policy.
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh1">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>{" "}
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center">
+                    <Field type="checkbox" name="mlh2" />
+                    <p>
+                      I further agree to the terms of both the MLH Contest Terms
+                      and Conditions and the MLH Privacy Policy.
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh2">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center">
+                    <Field type="checkbox" name="mlh3" />
+                    <p>finally</p>
+                  </div>
+                  <ErrorMessage name="mlh3">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700">{msg}</p>
+                    )}
+                  </ErrorMessage>
                 </label>
               </div>
               <div className="flex justify-center font-palanquin">
