@@ -123,6 +123,7 @@ const Register = () => {
           email: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
+          dateOfBirth: values.dateOfBirth,
           phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
@@ -150,9 +151,15 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+  const dateOfBirthExp = /^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
+
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
+    dateOfBirth: yup
+      .string()
+      .matches(dateOfBirthExp, "Date of birth is not valid.")
+      .required("Date of birth is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -245,6 +252,7 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
+          dateOfBirth: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -336,6 +344,20 @@ const Register = () => {
                     )}
                   </Field>
                   <ErrorMessage name="lastName">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <Field type="text" name="dateOfBirth">
+                    {({ field }) => (
+                      <TextInputBox label="YYYY-MM-DD" field={field} />
+                    )}
+                  </Field>
+                  <ErrorMessage name="dateOfBirth">
                     {(msg) => (
                       <p className="font-palanquin text-red-700 font-bold">
                         {msg}
@@ -966,6 +988,7 @@ const createHacker = async ({
   email,
   firstName: first_name,
   lastName: last_name,
+  dateOfBirth: date_of_birth,
   phoneNumber: phone_number,
   canShareInfo: can_share_info,
   isBeginner: beginner,
