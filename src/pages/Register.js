@@ -77,11 +77,16 @@ const Register = () => {
   const [resumeID, setResumeID] = useState(null);
   const uploadResume = async (resume) => {
     setResume(resume);
-    const { id } = await fetch("https://api.knighthacks.org/api/resume", {
-      method: "POST",
-      headers: { "content-type": "application/pdf" },
-      body: resume,
-    }).then((b) => b.json());
+    const formData = new FormData();
+    formData.set("resume", resume);
+    formData.set("type", "application/json");
+    const { id } = await fetch(
+      "https://api.knighthacks.org/api/hackers/resume/",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((b) => b.json());
     setResumeID(id);
   };
 
@@ -344,7 +349,7 @@ const Register = () => {
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
                   <FileUploadBox
-                    handleFile={(fileUploaded) => uploadResume(fileUploaded)}
+                    handleFile={uploadResume}
                     title=" Upload Resume"
                   />
                   <div className="lg:hidden flex flex-col">
