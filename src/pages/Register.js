@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import CircularProgress from "@mui/material/CircularProgress";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -74,7 +75,11 @@ const Register = () => {
   const [response, setResponse] = useState(null);
 
   const [resumeID, setResumeID] = useState(null);
+
+  const [isUploading, setIsUploading] = useState(false);
+
   const uploadResume = async (resume) => {
+    setIsUploading(true);
     setResume(resume);
     const formData = new FormData();
     formData.set("resume", resume);
@@ -87,6 +92,7 @@ const Register = () => {
       }
     ).then((b) => b.json());
     setResumeID(id);
+    setIsUploading(false);
   };
 
   const submitRegistration = async (values) => {
@@ -199,6 +205,7 @@ const Register = () => {
 
             <div className="mt-4">
               <button
+                type="button"
                 className={`
                 bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
                 hover:shadow-md
@@ -213,7 +220,9 @@ const Register = () => {
               >
                 Try again
               </button>
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
+              <button type="button" onClick={() => setIsOpen(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -297,6 +306,7 @@ const Register = () => {
 
                   <div className="mt-4">
                     <button
+                      type="button"
                       className={`
                       font-palanquin
                       bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
@@ -346,6 +356,7 @@ const Register = () => {
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
                   <FileUploadBox
                     handleFile={uploadResume}
+                    disabled={isUploading}
                     title=" Upload Resume"
                   />
                   <div className="lg:hidden flex flex-col">
@@ -558,6 +569,7 @@ const Register = () => {
               </Field>
               <div className="flex justify-center font-palanquin">
                 <button
+                  type="submit"
                   disabled={isSubmitting}
                   onClick={() => {
                     validateForm().then((err) => {
@@ -578,7 +590,11 @@ const Register = () => {
               w-72
             `}
                 >
-                  Submit
+                  {registrationState === "pending" ? (
+                    <CircularProgress />
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
             </Form>
@@ -618,7 +634,7 @@ const TextInputBox = ({ label, field }) => {
  * @prop defaultValue: The default text shown when no file has been selected.
  * @author Abraham Hernandez
  */
-const FileUploadBox = ({ handleFile, title }) => {
+const FileUploadBox = ({ handleFile, title, disabled }) => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event) => {
@@ -637,6 +653,8 @@ const FileUploadBox = ({ handleFile, title }) => {
       <span>Resume</span>
       <button
         onClick={handleClick}
+        type="button"
+        disabled={disabled}
         className={`
               bg-green-500 border-2 border-green-700 rounded-lg mx-4 md:my-6 py-1.5 px-4
               shadow-md
@@ -647,7 +665,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
-        <p className="truncate">{title}</p>
+        {disabled ? <CircularProgress /> : <p className="truncate">{title}</p>}
       </button>
       <input
         type="file"
