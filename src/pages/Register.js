@@ -64,7 +64,6 @@ const Register = () => {
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
-  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   // registration fail dialog
   const [isOpen, setIsOpen] = useState(false);
@@ -93,17 +92,14 @@ const Register = () => {
   const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
-        setFeedbackMessage("Registration is being processed!");
         console.log("in proccess");
         break;
       case "success":
-        setFeedbackMessage("Registration already successful!");
         window.open("/success");
         console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
-        setFeedbackMessage("Processing registration...");
 
         const response = await createHacker({
           email: values.email,
