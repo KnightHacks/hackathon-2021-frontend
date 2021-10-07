@@ -544,6 +544,28 @@ const Register = () => {
                   )}
                 </div>
               </div>
+              <div className="flex flex-col">
+                <div>
+                  <Field type="checkbox" name="mlh1" />
+                  <label htmlFor="mlh1">
+                    I authorize you to share my application/registration
+                    information with Major League Hacking for event
+                    administration, ranking, and MLH administration in-line with
+                    the MLH Privacy Policy.
+                  </label>
+                </div>
+                <div>
+                  <Field type="checkbox" name="mlh2" />
+                  <label className="self-end" htmlFor="mlh2">
+                    I further agree to the terms of both the MLH Contest Terms
+                    and Conditions and the MLH Privacy Policy.
+                  </label>
+                </div>
+                <Field type="checkbox" name="mlh3" />
+                <label className="self-end" htmlFor="mlh3">
+                  finally
+                </label>
+              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
