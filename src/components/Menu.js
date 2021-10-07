@@ -78,56 +78,56 @@ const Menu = ({ open, setOpen }) => {
               >
                 <div className="mt-2 inline-block">
                   <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col font-sansita">
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         Home
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/about"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         About
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/sponsors"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         Sponsors
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/schedule"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         Schedule
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/faq"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         FAQ
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
                       <Link
                         to="/register"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2 focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1 rounded-xl"
+                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
                       >
                         Register
                       </Link>
