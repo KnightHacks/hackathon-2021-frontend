@@ -27,7 +27,7 @@ const Menu = ({ open, setOpen }) => {
           <VolumeButton />
         </div>
       </div>
-      <div className="col-span-1 absolute w-14 justify-center sm:flex sm:w-full sm:h-full sm:justify-end sm:mr-20">
+      <div className="col-span-1 absolute w-14 justify-center sm:flex sm:w-11/12 sm:h-full sm:justify-end lg:w-full lg:mr-20 md:w-11/12 md:mr-6 ">
         <a
           id="mlh-trust-badge"
           className="block sm:w-20 md:w-28"
