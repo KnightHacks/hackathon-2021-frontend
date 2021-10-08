@@ -38,8 +38,6 @@ const Register = () => {
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
 
   const levelOfStudyOptions = [
-    "Middle School",
-    "High School",
     "Undergraduation / Bachelors",
     "Graduation / Masters",
     "PhD / Doctorate",
