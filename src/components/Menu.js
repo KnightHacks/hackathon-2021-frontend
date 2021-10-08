@@ -78,56 +78,56 @@ const Menu = ({ open, setOpen }) => {
               >
                 <div className="mt-2 inline-block">
                   <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col font-sansita">
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         Home
                       </Link>
                     </li>
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/about"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         About
                       </Link>
                     </li>
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/sponsors"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         Sponsors
                       </Link>
                     </li>
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/schedule"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         Schedule
                       </Link>
                     </li>
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/faq"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         FAQ
                       </Link>
                     </li>
-                    <li className="m-2 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-200">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/register"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring-4 focus:ring-white ease-out duration-300 rounded-xl p-1"
+                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
                       >
                         Register
                       </Link>
