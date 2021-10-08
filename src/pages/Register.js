@@ -138,6 +138,9 @@ const Register = () => {
           whatLearn: values.whatLearn,
           inPerson: attendingOption === "In Person",
           dietaryRestrictions: values.dietaryRestrictions,
+          mlh1: values.mlh1,
+          mlh2: values.mlh2,
+          mlh3: values.mlh3,
           resume,
         });
         setRegistrationState(response.ok ? "success" : "failure");
@@ -166,7 +169,7 @@ const Register = () => {
     whatLearn: yup.string().required("Required."),
     mlh1: yup.bool().oneOf([true], "Field must be checked."),
     mlh2: yup.bool().oneOf([true], "Field must be checked."),
-    mlh3: yup.bool().oneOf([true], "Field must be checked."),
+    mlh3: yup.bool().oneOf([true]),
   });
 
   if (window.innerWidth <= 470) {
@@ -746,7 +749,7 @@ const Register = () => {
                     {resume ? (
                       <>
                         <p>{"Filename: " + resume.name}</p>
-                        <p className="font-palanquin text-red-600">
+                        <p className="font-palanquin text-red-700 font-bold">
                           {errors.resume && errors.resume}
                         </p>
                       </>
@@ -767,7 +770,7 @@ const Register = () => {
                   {resume ? (
                     <>
                       <p>{"Filename: " + resume.name}</p>
-                      <p className="font-palanquin text-red-600">
+                      <p className="font-palanquin text-red-700 font-bold">
                         {errors.resume && errors.resume}
                       </p>
                     </>
@@ -776,47 +779,88 @@ const Register = () => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col space-y-4 mt-4">
                 <label className="flex flex-col">
-                  <div className="flex flex-row items-center">
-                    <Field type="checkbox" name="mlh1" />
-                    <p>
-                      I authorize you to share my application/registration
-                      information with Major League Hacking for event
-                      administration, ranking, and MLH administration in-line
-                      with the MLH Privacy Policy.
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field type="checkbox" name="mlh1" className="w-6 h-6" />
+                    <p className="text-lg w-5/6">
+                      Have you read and understood the MLH Code of Conduct? This
+                      question is required.*
+                      <br />
+                      <a
+                        href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                      >
+                        https://static.mlh.io/docs/mlh-code-of-conduct.pdf
+                      </a>
                     </p>
                   </div>
                   <ErrorMessage name="mlh1">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
-                    )}
-                  </ErrorMessage>{" "}
-                </label>
-
-                <label className="flex flex-col">
-                  <div className="flex flex-row items-center">
-                    <Field type="checkbox" name="mlh2" />
-                    <p>
-                      I further agree to the terms of both the MLH Contest Terms
-                      and Conditions and the MLH Privacy Policy.
-                    </p>
-                  </div>
-                  <ErrorMessage name="mlh2">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </label>
 
                 <label className="flex flex-col">
-                  <div className="flex flex-row items-center">
-                    <Field type="checkbox" name="mlh3" />
-                    <p>finally</p>
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field type="checkbox" name="mlh2" className="w-6 h-6" />
+                    <p className="text-lg w-5/6">
+                      I authorize you to share my application/registration
+                      information with Major League Hacking for event
+                      administration, ranking, and MLH administration in-line
+                      with the MLH Privacy Policy. I further agree to the terms
+                      of both the MLH Contest Terms and Conditions and the MLH
+                      Privacy Policy.This question is required. *
+                      <br />
+                      MLH Privacy Policy:{" "}
+                      <a
+                        href="https://mlh.io/privacy"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                      >
+                        https://mlh.io/privacy
+                      </a>
+                      <br />
+                      MLH Contest Terms and Conditions:{" "}
+                      <a
+                        href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                      >
+                        https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions
+                      </a>
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh2">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field type="checkbox" name="mlh3" className="w-6 h-6" />
+                    <p className="text-lg w-5/6">
+                      I authorize Major League Hacking to send me occasional
+                      messages about hackathons including pre- and post-event
+                      informational emails.This question is required. *
+                    </p>
                   </div>
                   <ErrorMessage name="mlh3">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700">{msg}</p>
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
                     )}
                   </ErrorMessage>
                 </label>
