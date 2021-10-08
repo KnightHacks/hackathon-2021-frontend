@@ -327,6 +327,9 @@ const Register = () => {
             <Form className="flex flex-col">
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
+                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                    Welcome Hacker!
+                  </p>
                   <Field type="text" name="firstName">
                     {({ field }) => (
                       <TextInputBox label="First Name" field={field} />
@@ -354,20 +357,6 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
-                <div className="flex flex-col">
-                  <Field type="text" name="dateOfBirth">
-                    {({ field }) => (
-                      <TextInputBox label="YYYY-MM-DD" field={field} />
-                    )}
-                  </Field>
-                  <ErrorMessage name="dateOfBirth">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700 font-bold">
-                        {msg}
-                      </p>
-                    )}
-                  </ErrorMessage>
-                </div>
               </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
@@ -375,7 +364,7 @@ const Register = () => {
                     handleFile={(fileUploaded) => setResume(fileUploaded)}
                     title=" Upload Resume"
                   />
-                  <div className="lg:hidden flex flex-col">
+                  <div className="lg:hidden flex flex-col text-gray-700">
                     {resume ? (
                       <>
                         <p>{"Filename: " + resume.name}</p>
@@ -410,8 +399,11 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col mt-2">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-lg">
+                  About You
+                </p>
                 <OptionSelector
-                  title="How do you identify"
+                  title="Let's learn more about you. How do you identify?"
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={(option) => {
@@ -508,6 +500,21 @@ const Register = () => {
               </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
+                  <Field type="text" name="dateOfBirth">
+                    {({ field }) => (
+                      <TextInputBox
+                        label="Birthday: YYYY-MM-DD"
+                        field={field}
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="dateOfBirth">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
                   <Field type="text" name="phoneNumber">
                     {({ field }) => (
                       <TextInputBox label="Phone" field={field} />
@@ -537,7 +544,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
-                <div className="flex flex-col">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                  School Information
+                </p>
+                <div className="flex flex-col mt-4 text-gray-700">
                   <ReactSelect
                     options={schools}
                     value={schoolOption}
@@ -566,7 +576,7 @@ const Register = () => {
                     styles={{
                       placeholder: (provided) => ({
                         ...provided,
-                        color: "rgb(219, 234, 254)",
+                        color: "rgb(74, 75, 77)",
                         fontFamily: "Palanquin Light, sans-serif",
                       }),
                       control: (provided) => ({
@@ -583,7 +593,7 @@ const Register = () => {
                       }),
                       singleValue: (provided) => ({
                         ...provided,
-                        color: "white",
+                        color: "rgb(74, 75, 77)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -601,7 +611,7 @@ const Register = () => {
                       },
                       input: (provided) => ({
                         ...provided,
-                        color: "white",
+                        color: "rgb(74, 75, 77)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -640,6 +650,7 @@ const Register = () => {
                 </div>
                 <div className="flex flex-col">
                   <OptionSelector
+                    title="What is your level of study?"
                     trackOptions={levelOfStudyOptions}
                     selectedTrack={levelOfStudyOption}
                     setSelectedTrack={(option) => {
@@ -708,24 +719,9 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquin">
-                Do you have any dietary restrictions that we should be aware of?
+              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                Hackathon Information
               </p>
-              <div className="flex flex-col justify-center font-palanquin">
-                <Field type="text" name="dietaryRestrictions">
-                  {({ field }) => (
-                    <TextInputBox label="Dietary Restrictions" field={field} />
-                  )}
-                </Field>
-                <Field type="text" name="github">
-                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
-                </Field>
-                <Field type="text" name="linkedIn">
-                  {({ field }) => (
-                    <TextInputBox label="LinkedIn" field={field} />
-                  )}
-                </Field>
-              </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <OptionSelector
                   title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
@@ -741,7 +737,9 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin mt-4">
                     <div className="w-full space-y-4 flex-1">
                       <label>
-                        <span>Why are you attending Knight Hacks?</span>
+                        <span className="text-gray-700">
+                          Why are you attending Knight Hacks?
+                        </span>
                         <textarea
                           {...field}
                           className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
@@ -763,7 +761,9 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin my-4">
                     <div className="flex-1">
                       <label>
-                        <span>What do you hope to learn at Knight Hacks?</span>
+                        <span className="text-gray-700">
+                          What do you hope to learn at Knight Hacks?
+                        </span>
                         <textarea
                           {...field}
                           className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
@@ -780,6 +780,24 @@ const Register = () => {
                   </div>
                 )}
               </Field>
+              <div className="flex flex-col justify-center font-palanquin">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                  External Links
+                </p>
+                <p className="mt-4 w-full space-y-4 font-palanquin text-gray-700">
+                  Note: these are optional, but most technical applications ask
+                  for them! Make a Github / LinkedIn account today if you
+                  don&rsquo;t have one.
+                </p>
+                <Field type="text" name="github">
+                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
+                </Field>
+                <Field type="text" name="linkedIn">
+                  {({ field }) => (
+                    <TextInputBox label="LinkedIn" field={field} />
+                  )}
+                </Field>
+              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
@@ -818,7 +836,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
+            w-full bg-opaque-blue rounded-xl placeholder-gray-600 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -850,12 +868,12 @@ const FileUploadBox = ({ handleFile, title }) => {
   };
 
   return (
-    <div className="h-full justify-center items-center flex-1">
-      <span>Resume</span>
+    <div className="h-full justify-center items-center flex-1 ">
+      <p className="mt-3 font-palanquin text-gray-700">Resume</p>
       <button
         onClick={handleClick}
         className={`
-              bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-6 py-1.5 px-4
+              bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-3 py-1.5 px-4
               shadow-md
               max-w-xswidth truncate
               hover:bg-green-800
@@ -865,7 +883,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
-        <p className="truncate">{title}</p>
+        <p className="truncate ">{title}</p>
       </button>
       <input
         type="file"
@@ -904,7 +922,11 @@ const OptionSelector = ({
           : `w-full space-y-4 md:w-72 md:space-x-4`)
       }
     >
-      <span className={flex === "col" ? "flex self-start" : undefined}>
+      <span
+        className={
+          flex === "col" ? "flex self-start text-gray-700 text-md" : undefined
+        }
+      >
         {title}
       </span>
       <Listbox
@@ -913,7 +935,7 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-md text-gray-700">
             <span className="block truncate text-gray-700 font-medium">
               {selectedTrack}
             </span>
@@ -933,7 +955,7 @@ const OptionSelector = ({
               <Listbox.Option
                 key={trackIdx}
                 className={({ active }) =>
-                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-900"}
+                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-700"}
                           cursor-default select-none relative py-2 pl-10 pr-4`
                 }
                 value={track}
