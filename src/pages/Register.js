@@ -169,7 +169,7 @@ const Register = () => {
     whatLearn: yup.string().required("Required."),
     mlh1: yup.bool().oneOf([true], "Field must be checked."),
     mlh2: yup.bool().oneOf([true], "Field must be checked."),
-    mlh3: yup.bool().oneOf([true]),
+    mlh3: yup.bool().oneOf([true], "Field must be checked."),
   });
 
   if (window.innerWidth <= 470) {
@@ -1075,6 +1075,9 @@ const createHacker = async ({
   whatLearn: what_learn,
   inPerson: in_person,
   dietaryRestrictions: dietary_restrictions,
+  mlh1,
+  mlh2,
+  mlh3,
   resume,
 }) => {
   const hackerFormData = new FormData();
@@ -1102,6 +1105,11 @@ const createHacker = async ({
       what_learn: [what_learn],
       dietary_restrictions,
       in_person,
+      mlh: {
+        mlh1,
+        mlh2,
+        mlh3,
+      },
     })
   );
   hackerFormData.append("resume", resume);
