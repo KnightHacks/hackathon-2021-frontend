@@ -31,12 +31,6 @@ const Register = () => {
   ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
-  const attendingOptions = [
-    "I will be attending Knight Hacks in person.",
-    "I will be attending Knight Hacks virtually.",
-  ];
-  const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
-
   const graduationOptions = [
     "Fall 2021",
     "Spring 2022",
@@ -136,7 +130,6 @@ const Register = () => {
           linkedIn: values.linkedIn,
           whyAttend: values.whyAttend,
           whatLearn: values.whatLearn,
-          inPerson: attendingOption === "In Person",
           dietaryRestrictions: values.dietaryRestrictions,
           mlh1: values.mlh1,
           mlh2: values.mlh2,
@@ -657,16 +650,6 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <div className="font-palanquin">
-                <OptionSelector
-                  title="Are you attending our hackathon in person or virtually?"
-                  trackOptions={attendingOptions}
-                  selectedTrack={attendingOption}
-                  setSelectedTrack={setAttendingOption}
-                  flex="col"
-                  zIndex="20"
-                />
-              </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
                 Do you have any dietary restrictions that we should be aware of?
               </p>
@@ -1073,7 +1056,6 @@ const createHacker = async ({
   linkedIn: linkedin,
   whyAttend: why_attend,
   whatLearn: what_learn,
-  inPerson: in_person,
   dietaryRestrictions: dietary_restrictions,
   mlh1,
   mlh2,
@@ -1104,7 +1086,6 @@ const createHacker = async ({
       why_attend,
       what_learn: [what_learn],
       dietary_restrictions,
-      in_person,
       mlh: {
         mlh1,
         mlh2,
