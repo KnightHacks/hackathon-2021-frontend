@@ -871,7 +871,7 @@ const FileUploadBox = ({ handleFile, title }) => {
   };
 
   return (
-    <div className="h-full justify-center items-center flex-1 ">
+    <div className="h-full justify-center items-center flex-1 flex flex-col">
       <p className="mt-3 font-palanquin text-gray-700">Resume</p>
       <button
         onClick={handleClick}
