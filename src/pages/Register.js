@@ -162,7 +162,7 @@ const Register = () => {
     whatLearn: yup.string().required("Required."),
     mlh1: yup.bool().oneOf([true], "Field must be checked."),
     mlh2: yup.bool().oneOf([true], "Field must be checked."),
-    mlh3: yup.bool().oneOf([true], "Field must be checked."),
+    mlh3: yup.bool().oneOf([true, false]),
   });
 
   if (window.innerWidth <= 470) {
