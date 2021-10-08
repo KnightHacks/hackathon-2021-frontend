@@ -767,8 +767,7 @@ const Register = () => {
                   <div className="flex flex-row items-center space-x-4">
                     <Field type="checkbox" name="mlh1" className="w-6 h-6" />
                     <p className="text-lg w-5/6">
-                      Have you read and understood the MLH Code of Conduct? This
-                      question is required.*
+                      Have you read and understood the MLH Code of Conduct?
                       <br />
                       <a
                         href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
@@ -798,7 +797,7 @@ const Register = () => {
                       administration, ranking, and MLH administration in-line
                       with the MLH Privacy Policy. I further agree to the terms
                       of both the MLH Contest Terms and Conditions and the MLH
-                      Privacy Policy.This question is required. *
+                      Privacy Policy.
                       <br />
                       MLH Privacy Policy:{" "}
                       <a
@@ -836,7 +835,7 @@ const Register = () => {
                     <p className="text-lg w-5/6">
                       I authorize Major League Hacking to send me occasional
                       messages about hackathons including pre- and post-event
-                      informational emails.This question is required. *
+                      informational emails.
                     </p>
                   </div>
                   <ErrorMessage name="mlh3">
