@@ -385,7 +385,7 @@ const Register = () => {
                     zIndex="80"
                   />
                 </div>
-                <div className="hidden lg:flex lg:flex-col">
+                <div className="hidden text-gray-700 lg:flex lg:flex-col">
                   {resume ? (
                     <>
                       <p>{"Filename: " + resume.name}</p>
@@ -399,11 +399,11 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col mt-2">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-lg">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                   About You
                 </p>
                 <OptionSelector
-                  title="Let's learn more about you. How do you identify?"
+                  title="Let's learn more about you."
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={(option) => {
@@ -499,6 +499,9 @@ const Register = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center font-palanquin">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                  Contact Information
+                </p>
                 <div className="flex flex-col">
                   <Field type="text" name="dateOfBirth">
                     {({ field }) => (
