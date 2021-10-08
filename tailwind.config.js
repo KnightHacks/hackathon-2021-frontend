@@ -21,6 +21,7 @@ module.exports = {
       zIndex: {
         60: "60",
         70: "70",
+        80: "80",
       },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
