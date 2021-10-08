@@ -28,7 +28,7 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+      {/*<div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-0 space-x-4 mt-14 mb-2 font-palanquin font-bold">
         DIAMOND
       </div>
       <div>_____________________________________</div>
@@ -44,7 +44,7 @@ const Sponsors = () => {
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-0 sm:mb-.5 space-x-4 mb-2 font-palanquin font-bold">
         PLATINUM
       </div>
       <div>_____________________________________</div>
@@ -60,24 +60,26 @@ const Sponsors = () => {
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+  */}
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-0 space-x-4 mt-8 mb-8 font-palanquin font-bold">
         GOLD
       </div>
-      <div>_____________________________________</div>
+
+      <div>_______________________________________________</div>
       <div className="flex justify-center">
         <img
-          className="xl:w-96 lg:w-80 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+          className="xl:w-96 lg:w-80 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-"
           src={Facebook}
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl space-x-4 font-palanquin font-bold">
         SILVER
       </div>
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="xl:w-96 lg:w-80 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+          className="xl:w-96 lg:w-80 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-10"
           src={TI}
           alt="test logo"
         />
@@ -86,24 +88,24 @@ const Sponsors = () => {
         BRONZE
       </div>
       <div>_____________________________________</div>
-      <div className="flex justify-center">
+      <div className="flex justify-center content-between ">
         <img
           className=" xl:w-24 lg:w-24 md:w-24 sm:w-24 sm:mr-7 sm:mt-8 mr-8 mb-24"
           src={EA}
           alt="test logo"
         />
         <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+          className="xl:w-44 lg:w-60 md:w-60 sm:mt-8 sm:w-28 mr-8 mb-24 "
           src={Google}
           alt="test logo"
         />
         <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+          className="xl:w-44 lg:w-60 md:w-60 sm:mt-8 sm:w-28 mr-8 mb-24 "
           src={Learner}
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4  mb-2 font-palanquin font-bold">
         PARTNER ORGANIZATIONS
       </div>
       <div>_____________________________________</div>
