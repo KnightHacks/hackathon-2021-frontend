@@ -785,9 +785,10 @@ const Register = () => {
                   External Links
                 </p>
                 <p className="mt-4 w-full space-y-4 font-palanquin text-gray-700">
-                  Note: these are optional, but most technical applications ask
-                  for them! Make a Github / LinkedIn account today if you
-                  don&rsquo;t have one.
+                  Note: these are{" "}
+                  <span className="font-palanquinbold">optional</span>, but most
+                  technical applications ask for them! Make a Github / LinkedIn
+                  account today if you don&rsquo;t have one.
                 </p>
                 <Field type="text" name="github">
                   {({ field }) => <TextInputBox label="GitHub" field={field} />}
