@@ -15,6 +15,7 @@ const Landing = () => {
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto">
           <div
+            aria-label="Knight Hacks logo"
             className={`
             bg-knight-hacks-logo
             w-full h-24 md:h-36 lg:h-44 bg-no-repeat
@@ -31,16 +32,19 @@ const Landing = () => {
               px-4 sm:px-6 md:px-12 py-2
               border-indigo-50 border-4 md:border-4
               rounded-xl text-xl sm:text-3xl md:text-4xl
-              mt-4 md:mt-8 focus:outline-none
+              mt-4 md:mt-8
               hover:border-white hover:shadow-lg
               transition duration-1000 ease-in-out
               hover:scale-110
               hover:text-white
               shadow-md
+              focus:outline-none
+              focus:ring-4
+              focus:ring-white
             `}
             to="/register"
           >
-            <p className="tracking-widest select-none" unselectable="on">
+            <p className=" tracking-widest select-none" unselectable="on">
               REGISTER
             </p>
           </Link>
@@ -55,10 +59,12 @@ const Landing = () => {
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
-                focus:outline-none
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
+                focus:outline-none
+                focus:ring-4
+                focus:ring-white
                 shadow-sm
               `}
             >
@@ -83,10 +89,12 @@ const Landing = () => {
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
-                focus:outline-none
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
+                focus:outline-none
+                focus:ring-4
+                focus:ring-white
                 shadow-sm
               `}
             >
