@@ -32,8 +32,6 @@ const Register = () => {
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
   const levelOfStudyOptions = [
-    "Middle School",
-    "High School",
     "Undergraduation / Bachelors",
     "Graduation / Masters",
     "PhD / Doctorate",
@@ -803,7 +801,35 @@ const Register = () => {
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
-                  onClick={submitForm}
+                  onClick={() => {
+                    const newStatus = {};
+                    if (pronounOption === "Pronouns") {
+                      newStatus.pronoun = "Pronoun option is required.";
+                    }
+                    if (ethnicityOption === "Ethnicity") {
+                      newStatus.ethnicity = "Ethnicity option is required.";
+                    }
+                    if (countryOption === "Country") {
+                      newStatus.country = "Country option is required.";
+                    }
+                    if (schoolOption === "School Name") {
+                      newStatus.schoolName = "School name is required.";
+                    }
+                    if (graduationOption === "Graduation Year") {
+                      newStatus.graduation = "Graduation option is required.";
+                    }
+
+                    setStatus(newStatus);
+
+                    if (
+                      Object.keys(newStatus).length === 0 ||
+                      Object.keys(errors).length === 0
+                    ) {
+                      submitForm();
+                    } else {
+                      setShouldOpen(true);
+                    }
+                  }}
                   className={`
               border-2
               border-green-800
@@ -1008,6 +1034,7 @@ const createHacker = async ({
   pronouns,
   college,
   major,
+  levelOfStudy,
   graduation: graduation_date,
   github,
   linkedIn: linkedin,
@@ -1026,6 +1053,7 @@ const createHacker = async ({
         college,
         graduation_date,
         major,
+        levelOfStudy,
       },
       email,
       ethnicity,
