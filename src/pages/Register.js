@@ -736,46 +736,6 @@ const Register = () => {
                   </div>
                 )}
               </Field>
-              <div className="flex flex-col justify-center font-palanquin">
-                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-                  <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
-                    title=" Upload Resume"
-                  />
-                  <div className="lg:hidden flex flex-col">
-                    {resume ? (
-                      <>
-                        <p>{"Filename: " + resume.name}</p>
-                        <p className="font-palanquin text-red-600">
-                          {errors.resume && errors.resume}
-                        </p>
-                      </>
-                    ) : (
-                      <p className="justify-self-center">(PDF files only)</p>
-                    )}
-                  </div>
-                  <OptionSelector
-                    title="What track would you like to follow for the hackathon?"
-                    trackOptions={trackOptions}
-                    selectedTrack={selectedTrack}
-                    setSelectedTrack={setSelectedTrack}
-                    flex="col"
-                    zIndex="0"
-                  />
-                </div>
-                <div className="hidden lg:flex lg:flex-col">
-                  {resume ? (
-                    <>
-                      <p>{"Filename: " + resume.name}</p>
-                      <p className="font-palanquin text-red-600">
-                        {errors.resume && errors.resume}
-                      </p>
-                    </>
-                  ) : (
-                    <p>(PDF files only)</p>
-                  )}
-                </div>
-              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   type="submit"
