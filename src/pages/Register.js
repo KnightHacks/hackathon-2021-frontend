@@ -373,7 +373,7 @@ const Register = () => {
                         </p>
                       </>
                     ) : (
-                      <p>(PDF files only)</p>
+                      ""
                     )}
                   </div>
                   <OptionSelector
@@ -394,7 +394,7 @@ const Register = () => {
                       </p>
                     </>
                   ) : (
-                    <p>(PDF files only)</p>
+                    ""
                   )}
                 </div>
               </div>
@@ -402,8 +402,22 @@ const Register = () => {
                 <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                   About You
                 </p>
+                <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
+                  Let&apos;s learn more about you.
+                </p>
+                <Field type="text" name="dateOfBirth">
+                  {({ field }) => (
+                    <TextInputBox label="Birthday: YYYY-MM-DD" field={field} />
+                  )}
+                </Field>
+                <ErrorMessage name="dateOfBirth">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
                 <OptionSelector
-                  title="Let's learn more about you."
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={(option) => {
@@ -499,25 +513,10 @@ const Register = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                   Contact Information
                 </p>
                 <div className="flex flex-col">
-                  <Field type="text" name="dateOfBirth">
-                    {({ field }) => (
-                      <TextInputBox
-                        label="Birthday: YYYY-MM-DD"
-                        field={field}
-                      />
-                    )}
-                  </Field>
-                  <ErrorMessage name="dateOfBirth">
-                    {(msg) => (
-                      <p className="font-palanquin text-red-700 font-bold">
-                        {msg}
-                      </p>
-                    )}
-                  </ErrorMessage>
                   <Field type="text" name="phoneNumber">
                     {({ field }) => (
                       <TextInputBox label="Phone" field={field} />
@@ -547,7 +546,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                   School Information
                 </p>
                 <div className="flex flex-col mt-4 text-gray-700">
@@ -722,7 +721,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                 Hackathon Information
               </p>
               <div className="flex flex-col justify-center font-palanquin">
@@ -784,7 +783,7 @@ const Register = () => {
                 )}
               </Field>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
                   External Links
                 </p>
                 <p className="mt-4 w-full space-y-4 font-palanquin text-gray-700">
@@ -839,7 +838,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue rounded-xl placeholder-gray-600 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
+            w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -872,7 +871,7 @@ const FileUploadBox = ({ handleFile, title }) => {
 
   return (
     <div className="h-full justify-center items-center flex-1 flex flex-col">
-      <p className="mt-3 font-palanquin text-gray-700">Resume</p>
+      <p className="mt-3 font-palanquin text-gray-700">Resume (PDF)</p>
       <button
         onClick={handleClick}
         className={`
