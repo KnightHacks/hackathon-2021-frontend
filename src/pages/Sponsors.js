@@ -14,9 +14,9 @@ const Sponsors = () => {
         className={`
           text-4xl w-full text-center mt-10
           sm:text-4xl md:text-6xl
-          lg:mt-32
-          xl:text-6xl xl:mt-36
-          2xl:text-7xl 2xl:mt-36
+          lg:mt-20
+          xl:text-6xl xl:mt-20
+          2xl:text-7xl 2xl:mt-20
           font-sansita
         `}
       >
@@ -25,32 +25,31 @@ const Sponsors = () => {
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
         DIAMOND
       </div>
-      <div>_________________________________________</div>
-      <div className="flex justify-center ">
+      <div>_____________________________________</div>
+      <div className="flex justify-center">
         <img
-          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
           src={TestLogo}
           alt="test logo"
         />
         <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 "
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
           src={TestLogo}
           alt="test logo"
         />
       </div>
-
       <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-.5 space-x-4 mt-14 mb-2 font-palanquin font-bold">
         PLATINUM
       </div>
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8"
+          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
           src={TestLogo}
           alt="test logo"
         />
         <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 "
+          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
           src={TestLogo}
           alt="test logo"
         />
