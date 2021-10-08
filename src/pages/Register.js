@@ -37,6 +37,17 @@ const Register = () => {
   ];
   const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
 
+  const levelOfStudyOptions = [
+    "Undergraduation / Bachelors",
+    "Graduation / Masters",
+    "PhD / Doctorate",
+    "Post Doctorate",
+  ];
+
+  const [levelOfStudyOption, setLevelOfStudyOption] = useState(
+    "Level of Study"
+  );
+
   const graduationOptions = [
     "Fall 2021",
     "Spring 2022",
@@ -91,7 +102,6 @@ const Register = () => {
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
-  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   // registration fail dialog
   const [isOpen, setIsOpen] = useState(false);
@@ -107,17 +117,14 @@ const Register = () => {
   const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
-        setFeedbackMessage("Registration is being processed!");
         console.log("in proccess");
         break;
       case "success":
-        setFeedbackMessage("Registration already successful!");
         window.open("/success");
         console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
-        setFeedbackMessage("Processing registration...");
 
         const response = await createHacker({
           email: values.email,
@@ -132,12 +139,12 @@ const Register = () => {
           pronouns: pronounOption,
           college: schoolOption.value,
           major: values.major,
+          levelOfStudy: levelOfStudyOption,
           graduation: graduationOption,
           github: values.github,
           linkedIn: values.linkedIn,
           whyAttend: values.whyAttend,
           whatLearn: values.whatLearn,
-          inPerson: attendingOption === "In Person",
           dietaryRestrictions: values.dietaryRestrictions,
           resume,
         });
@@ -390,7 +397,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="70"
+                    zIndex="80"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -431,7 +438,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="70"
                 />
                 {status && status.pronoun && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -463,7 +470,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="60"
                 />
                 {status && status.ethnicity && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -495,7 +502,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="50"
                 />
                 {status && status.country && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -635,6 +642,41 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                <div className="flex flex-col">
+                  <OptionSelector
+                    trackOptions={levelOfStudyOptions}
+                    selectedTrack={levelOfStudyOption}
+                    setSelectedTrack={(option) => {
+                      setLevelOfStudyOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "levelOfStudy") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
+                    handleTouched={() => {
+                      if (
+                        !status?.levelOfStudy &&
+                        levelOfStudyOption === "Level of Study"
+                      ) {
+                        setStatus({
+                          ...status,
+                          levelOfStudy: "Level of Study option is required.",
+                        });
+                      }
+                    }}
+                    flex="col"
+                    zIndex="40"
+                  />
+                  {status && status.levelOfStudy && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.levelOfStudy}
+                    </p>
+                  )}
+                </div>
                 <OptionSelector
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
@@ -669,16 +711,6 @@ const Register = () => {
                     {status.graduation}
                   </p>
                 )}
-              </div>
-              <div className="font-palanquin">
-                <OptionSelector
-                  title="Are you attending our hackathon in person or virtually?"
-                  trackOptions={attendingOptions}
-                  selectedTrack={attendingOption}
-                  setSelectedTrack={setAttendingOption}
-                  flex="col"
-                  zIndex="20"
-                />
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquin">
                 Do you have any dietary restrictions that we should be aware of?
@@ -752,50 +784,38 @@ const Register = () => {
                   </div>
                 )}
               </Field>
-              <div className="flex flex-col justify-center font-palanquin">
-                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-                  <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
-                    title=" Upload Resume"
-                  />
-                  <div className="lg:hidden flex flex-col">
-                    {resume ? (
-                      <>
-                        <p>{"Filename: " + resume.name}</p>
-                        <p className="font-palanquin text-red-600">
-                          {errors.resume && errors.resume}
-                        </p>
-                      </>
-                    ) : (
-                      <p className="justify-self-center">(PDF files only)</p>
-                    )}
-                  </div>
-                  <OptionSelector
-                    title="What track would you like to follow for the hackathon?"
-                    trackOptions={trackOptions}
-                    selectedTrack={selectedTrack}
-                    setSelectedTrack={setSelectedTrack}
-                    flex="col"
-                    zIndex="0"
-                  />
-                </div>
-                <div className="hidden lg:flex lg:flex-col">
-                  {resume ? (
-                    <>
-                      <p>{"Filename: " + resume.name}</p>
-                      <p className="font-palanquin text-red-600">
-                        {errors.resume && errors.resume}
-                      </p>
-                    </>
-                  ) : (
-                    <p>(PDF files only)</p>
-                  )}
-                </div>
-              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   disabled={isSubmitting}
-                  onClick={submitForm}
+                  onClick={() => {
+                    const newStatus = {};
+                    if (pronounOption === "Pronouns") {
+                      newStatus.pronoun = "Pronoun option is required.";
+                    }
+                    if (ethnicityOption === "Ethnicity") {
+                      newStatus.ethnicity = "Ethnicity option is required.";
+                    }
+                    if (countryOption === "Country") {
+                      newStatus.country = "Country option is required.";
+                    }
+                    if (schoolOption === "School Name") {
+                      newStatus.schoolName = "School name is required.";
+                    }
+                    if (graduationOption === "Graduation Year") {
+                      newStatus.graduation = "Graduation option is required.";
+                    }
+
+                    setStatus(newStatus);
+
+                    if (
+                      Object.keys(newStatus).length === 0 ||
+                      Object.keys(errors).length === 0
+                    ) {
+                      submitForm();
+                    } else {
+                      setShouldOpen(true);
+                    }
+                  }}
                   className={`
               border-2
               border-green-800
@@ -996,12 +1016,12 @@ const createHacker = async ({
   pronouns,
   college,
   major,
+  levelOfStudy,
   graduation: graduation_date,
   github,
   linkedIn: linkedin,
   whyAttend: why_attend,
   whatLearn: what_learn,
-  inPerson: in_person,
   dietaryRestrictions: dietary_restrictions,
   resume,
 }) => {
@@ -1015,6 +1035,7 @@ const createHacker = async ({
         college,
         graduation_date,
         major,
+        levelOfStudy,
       },
       email,
       ethnicity,
@@ -1029,7 +1050,6 @@ const createHacker = async ({
       why_attend,
       what_learn: [what_learn],
       dietary_restrictions,
-      in_person,
     })
   );
   hackerFormData.append("resume", resume);
