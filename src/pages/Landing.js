@@ -114,7 +114,7 @@ const Landing = () => {
             className={`
               relative group
               overflow-hidden
-              px-4 py-2 md:mx-3 mt-4
+              px-4 break-words md:px-10 py-2 md:mx-3 mt-4
               border-indigo-50 border-4
               rounded-xl text-lg
               font-palanquin
