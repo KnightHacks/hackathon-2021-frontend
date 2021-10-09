@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
@@ -30,6 +31,17 @@ const Register = () => {
     "No; don't share my my information.",
   ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
+
+  const levelOfStudyOptions = [
+    "Undergraduation / Bachelors",
+    "Graduation / Masters",
+    "PhD / Doctorate",
+    "Post Doctorate",
+  ];
+
+  const [levelOfStudyOption, setLevelOfStudyOption] = useState(
+    "Level of Study"
+  );
 
   const graduationOptions = [
     "Fall 2021",
@@ -85,7 +97,6 @@ const Register = () => {
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
-  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   // registration fail dialog
   const [isOpen, setIsOpen] = useState(false);
@@ -95,28 +106,47 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
+  const [resumeID, setResumeID] = useState(null);
+
+  const [isUploading, setIsUploading] = useState(false);
+
+  const uploadResume = async (resume) => {
+    setIsUploading(true);
+    setResume(resume);
+    const formData = new FormData();
+    formData.set("resume", resume);
+    formData.set("type", "application/json");
+    const { id } = await fetch(
+      "https://api.knighthacks.org/api/hackers/resume/",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((b) => b.json());
+    setResumeID(id);
+    setIsUploading(false);
+  };
+
   const serverErrorFocusRef = useRef(null);
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
     switch (registrationState) {
       case "pending":
-        setFeedbackMessage("Registration is being processed!");
         console.log("in proccess");
         break;
       case "success":
-        setFeedbackMessage("Registration already successful!");
         window.open("/success");
         console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
-        setFeedbackMessage("Processing registration...");
 
         const response = await createHacker({
           email: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
+          dateOfBirth: values.dateOfBirth,
           phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
@@ -125,6 +155,7 @@ const Register = () => {
           pronouns: pronounOption,
           college: schoolOption.value,
           major: values.major,
+          levelOfStudy: levelOfStudyOption,
           graduation: graduationOption,
           github: values.github,
           linkedIn: values.linkedIn,
@@ -134,7 +165,7 @@ const Register = () => {
           mlh1: values.mlh1,
           mlh2: values.mlh2,
           mlh3: values.mlh3,
-          resume,
+          resume_id: resumeID,
         });
         setRegistrationState(response.ok ? "success" : "failure");
         setResponse(response);
@@ -146,9 +177,15 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+  const dateOfBirthExp = /^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
+
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
+    dateOfBirth: yup
+      .string()
+      .matches(dateOfBirthExp, "Date of birth is not valid.")
+      .required("Date of birth is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -217,6 +254,7 @@ const Register = () => {
 
             <div className="mt-4">
               <button
+                type="button"
                 className={`
                 bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
                 hover:shadow-md
@@ -232,7 +270,9 @@ const Register = () => {
               >
                 Try again
               </button>
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
+              <button type="button" onClick={() => setIsOpen(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -244,6 +284,7 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
+          dateOfBirth: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -297,6 +338,7 @@ const Register = () => {
 
                   <div className="mt-4">
                     <button
+                      type="button"
                       className={`
                       font-palanquin
                       bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
@@ -318,6 +360,9 @@ const Register = () => {
             <Form className="flex flex-col">
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
+                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                    Welcome Hacker!
+                  </p>
                   <Field type="text" name="firstName">
                     {({ field }) => (
                       <TextInputBox label="First Name" field={field} />
@@ -349,10 +394,11 @@ const Register = () => {
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
                   <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    handleFile={uploadResume}
+                    disabled={isUploading}
                     title=" Upload Resume"
                   />
-                  <div className="lg:hidden flex flex-col">
+                  <div className="lg:hidden flex flex-col text-gray-700">
                     {resume ? (
                       <>
                         <p>{"Filename: " + resume.name}</p>
@@ -361,7 +407,7 @@ const Register = () => {
                         </p>
                       </>
                     ) : (
-                      <p>(PDF files only)</p>
+                      ""
                     )}
                   </div>
                   <OptionSelector
@@ -370,10 +416,10 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="70"
+                    zIndex="80"
                   />
                 </div>
-                <div className="hidden lg:flex lg:flex-col">
+                <div className="hidden text-gray-700 lg:flex lg:flex-col">
                   {resume ? (
                     <>
                       <p>{"Filename: " + resume.name}</p>
@@ -382,13 +428,30 @@ const Register = () => {
                       </p>
                     </>
                   ) : (
-                    <p>(PDF files only)</p>
+                    ""
                   )}
                 </div>
               </div>
               <div className="font-palanquin flex flex-col mt-2">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  About You
+                </p>
+                <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
+                  Let&apos;s learn more about you.
+                </p>
+                <Field type="text" name="dateOfBirth">
+                  {({ field }) => (
+                    <TextInputBox label="Birthday: YYYY-MM-DD" field={field} />
+                  )}
+                </Field>
+                <ErrorMessage name="dateOfBirth">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
                 <OptionSelector
-                  title="How do you identify"
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
                   setSelectedTrack={(option) => {
@@ -411,7 +474,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="70"
                 />
                 {status && status.pronoun && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -443,7 +506,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="60"
                 />
                 {status && status.ethnicity && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -475,7 +538,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="50"
                 />
                 {status && status.country && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -484,6 +547,9 @@ const Register = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center font-palanquin">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  Contact Information
+                </p>
                 <div className="flex flex-col">
                   <Field type="text" name="phoneNumber">
                     {({ field }) => (
@@ -514,7 +580,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
-                <div className="flex flex-col">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  School Information
+                </p>
+                <div className="flex flex-col mt-4 text-gray-700">
                   <ReactSelect
                     options={schools}
                     value={schoolOption}
@@ -543,7 +612,7 @@ const Register = () => {
                     styles={{
                       placeholder: (provided) => ({
                         ...provided,
-                        color: "rgb(219, 234, 254)",
+                        color: "rgb(74, 75, 77)",
                         fontFamily: "Palanquin Light, sans-serif",
                       }),
                       control: (provided) => ({
@@ -560,7 +629,7 @@ const Register = () => {
                       }),
                       singleValue: (provided) => ({
                         ...provided,
-                        color: "white",
+                        color: "rgb(74, 75, 77)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -578,7 +647,7 @@ const Register = () => {
                       },
                       input: (provided) => ({
                         ...provided,
-                        color: "white",
+                        color: "rgb(74, 75, 77)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -615,6 +684,42 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                <div className="flex flex-col">
+                  <OptionSelector
+                    title="What is your level of study?"
+                    trackOptions={levelOfStudyOptions}
+                    selectedTrack={levelOfStudyOption}
+                    setSelectedTrack={(option) => {
+                      setLevelOfStudyOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "levelOfStudy") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
+                    handleTouched={() => {
+                      if (
+                        !status?.levelOfStudy &&
+                        levelOfStudyOption === "Level of Study"
+                      ) {
+                        setStatus({
+                          ...status,
+                          levelOfStudy: "Level of Study option is required.",
+                        });
+                      }
+                    }}
+                    flex="col"
+                    zIndex="40"
+                  />
+                  {status && status.levelOfStudy && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.levelOfStudy}
+                    </p>
+                  )}
+                </div>
                 <OptionSelector
                   title="When are you graduating?"
                   trackOptions={graduationOptions}
@@ -650,24 +755,9 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquin">
-                Do you have any dietary restrictions that we should be aware of?
+              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                Hackathon Information
               </p>
-              <div className="flex flex-col justify-center font-palanquin">
-                <Field type="text" name="dietaryRestrictions">
-                  {({ field }) => (
-                    <TextInputBox label="Dietary Restrictions" field={field} />
-                  )}
-                </Field>
-                <Field type="text" name="github">
-                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
-                </Field>
-                <Field type="text" name="linkedIn">
-                  {({ field }) => (
-                    <TextInputBox label="LinkedIn" field={field} />
-                  )}
-                </Field>
-              </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <OptionSelector
                   title="Is it okay if we share your information (name, resume, graduation year, etc.) with sponsors?"
@@ -683,7 +773,9 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin mt-4">
                     <div className="w-full space-y-4 flex-1">
                       <label>
-                        <span>Why are you attending Knight Hacks?</span>
+                        <span className="text-gray-700">
+                          Why are you attending Knight Hacks?
+                        </span>
                         <textarea
                           {...field}
                           className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
@@ -705,7 +797,9 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin my-4">
                     <div className="flex-1">
                       <label>
-                        <span>What do you hope to learn at Knight Hacks?</span>
+                        <span className="text-gray-700">
+                          What do you hope to learn at Knight Hacks?
+                        </span>
                         <textarea
                           {...field}
                           className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
@@ -723,44 +817,23 @@ const Register = () => {
                 )}
               </Field>
               <div className="flex flex-col justify-center font-palanquin">
-                <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
-                  <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
-                    title=" Upload Resume"
-                  />
-                  <div className="lg:hidden flex flex-col">
-                    {resume ? (
-                      <>
-                        <p>{"Filename: " + resume.name}</p>
-                        <p className="font-palanquin text-red-700 font-bold">
-                          {errors.resume && errors.resume}
-                        </p>
-                      </>
-                    ) : (
-                      <p className="justify-self-center">(PDF files only)</p>
-                    )}
-                  </div>
-                  <OptionSelector
-                    title="What track would you like to follow for the hackathon?"
-                    trackOptions={trackOptions}
-                    selectedTrack={selectedTrack}
-                    setSelectedTrack={setSelectedTrack}
-                    flex="col"
-                    zIndex="0"
-                  />
-                </div>
-                <div className="hidden lg:flex lg:flex-col">
-                  {resume ? (
-                    <>
-                      <p>{"Filename: " + resume.name}</p>
-                      <p className="font-palanquin text-red-700 font-bold">
-                        {errors.resume && errors.resume}
-                      </p>
-                    </>
-                  ) : (
-                    <p>(PDF files only)</p>
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  External Links
+                </p>
+                <p className="mt-4 w-full space-y-4 font-palanquin text-gray-700">
+                  Note: these are{" "}
+                  <span className="font-palanquinbold">optional</span>, but most
+                  technical applications ask for them! Make a Github / LinkedIn
+                  account today if you don&rsquo;t have one.
+                </p>
+                <Field type="text" name="github">
+                  {({ field }) => <TextInputBox label="GitHub" field={field} />}
+                </Field>
+                <Field type="text" name="linkedIn">
+                  {({ field }) => (
+                    <TextInputBox label="LinkedIn" field={field} />
                   )}
-                </div>
+                </Field>
               </div>
               <div className="flex flex-col space-y-4 mt-4">
                 <label className="flex flex-col">
@@ -861,6 +934,7 @@ const Register = () => {
               </div>
               <div className="flex justify-center font-palanquin">
                 <button
+                  type="submit"
                   disabled={isSubmitting}
                   onClick={() => {
                     const newStatus = {};
@@ -902,7 +976,11 @@ const Register = () => {
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-900
             `}
                 >
-                  Submit
+                  {registrationState === "pending" ? (
+                    <CircularProgress />
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
             </Form>
@@ -925,7 +1003,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue focus:shadow-md rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words
+            w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -942,7 +1020,7 @@ const TextInputBox = ({ label, field }) => {
  * @prop defaultValue: The default text shown when no file has been selected.
  * @author Abraham Hernandez
  */
-const FileUploadBox = ({ handleFile, title }) => {
+const FileUploadBox = ({ handleFile, title, disabled }) => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event) => {
@@ -957,12 +1035,14 @@ const FileUploadBox = ({ handleFile, title }) => {
   };
 
   return (
-    <div className="h-full justify-center items-center flex-1">
-      <span>Resume</span>
+    <div className="h-full justify-center items-center flex-1 flex flex-col">
+      <p className="mt-3 font-palanquin text-gray-700">Resume (PDF)</p>
       <button
         onClick={handleClick}
+        type="button"
+        disabled={disabled}
         className={`
-              bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-6 py-1.5 px-4
+              bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-3 py-1.5 px-4
               shadow-md
               max-w-xswidth truncate
               hover:bg-green-800
@@ -972,7 +1052,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
-        <p className="truncate">{title}</p>
+        <p className="truncate ">{title}</p>
       </button>
       <input
         type="file"
@@ -1011,7 +1091,11 @@ const OptionSelector = ({
           : `w-full space-y-4 md:w-72 md:space-x-4`)
       }
     >
-      <span className={flex === "col" ? "flex self-start" : undefined}>
+      <span
+        className={
+          flex === "col" ? "flex self-start text-gray-700 text-md" : undefined
+        }
+      >
         {title}
       </span>
       <Listbox
@@ -1020,7 +1104,7 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-sm">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-md text-gray-700">
             <span className="block truncate text-gray-700 font-medium">
               {selectedTrack}
             </span>
@@ -1040,7 +1124,7 @@ const OptionSelector = ({
               <Listbox.Option
                 key={trackIdx}
                 className={({ active }) =>
-                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-900"}
+                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-700"}
                           cursor-default select-none relative py-2 pl-10 pr-4`
                 }
                 value={track}
@@ -1083,6 +1167,7 @@ const createHacker = async ({
   email,
   firstName: first_name,
   lastName: last_name,
+  dateOfBirth: date_of_birth,
   phoneNumber: phone_number,
   canShareInfo: can_share_info,
   isBeginner: beginner,
@@ -1090,53 +1175,51 @@ const createHacker = async ({
   pronouns,
   college,
   major,
+  levelOfStudy,
   graduation: graduation_date,
   github,
   linkedIn: linkedin,
   whyAttend: why_attend,
   whatLearn: what_learn,
   dietaryRestrictions: dietary_restrictions,
+  resume_id,
   mlh1,
   mlh2,
   mlh3,
-  resume,
 }) => {
-  const hackerFormData = new FormData();
-  hackerFormData.append(
-    "hacker",
-    JSON.stringify({
-      beginner,
-      can_share_info: can_share_info === "Yes",
-      edu_info: {
-        college,
-        graduation_date,
-        major,
-      },
-      email,
-      ethnicity,
-      first_name,
-      last_name,
-      phone_number,
-      pronouns,
-      socials: {
-        github,
-        linkedin,
-      },
-      why_attend,
-      what_learn: [what_learn],
-      dietary_restrictions,
-      mlh: {
-        mlh1,
-        mlh2,
-        mlh3,
-      },
-    })
-  );
-  hackerFormData.append("resume", resume);
+  const payload = {
+    beginner,
+    can_share_info: can_share_info === "Yes",
+    edu_info: {
+      college,
+      graduation_date,
+      major,
+      levelOfStudy,
+    },
+    email,
+    ethnicity,
+    first_name,
+    last_name,
+    phone_number,
+    pronouns,
+    socials: {
+      github,
+      linkedin,
+    },
+    why_attend,
+    what_learn: [what_learn],
+    dietary_restrictions,
+    resume_id,
+    mlh: {
+      mlh1,
+      mlh2,
+      mlh3,
+    },
+  };
 
   const transaction = Sentry.startTransaction({
     data: {
-      hacker: hackerFormData.get("hacker"),
+      hacker: JSON.stringify(payload),
     },
     op: "transaction",
     name: "submitHacker",
@@ -1147,7 +1230,10 @@ const createHacker = async ({
 
   const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
-    body: hackerFormData,
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(payload),
   });
 
   transaction.setHttpStatus(res.status);
