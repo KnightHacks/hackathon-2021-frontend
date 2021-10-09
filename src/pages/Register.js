@@ -765,8 +765,12 @@ const Register = () => {
               <div className="flex flex-col space-y-4 mt-4">
                 <label className="flex flex-col">
                   <div className="flex flex-row items-center space-x-4">
-                    <Field type="checkbox" name="mlh1" className="w-6 h-6" />
-                    <p className="text-lg w-5/6">
+                    <Field
+                      type="checkbox"
+                      name="mlh1"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                    />
+                    <p className="w-5/6 font-palanquin">
                       Have you read and understood the MLH Code of Conduct?
                       <br />
                       <a
@@ -790,8 +794,12 @@ const Register = () => {
 
                 <label className="flex flex-col">
                   <div className="flex flex-row items-center space-x-4">
-                    <Field type="checkbox" name="mlh2" className="w-6 h-6" />
-                    <p className="text-lg w-5/6">
+                    <Field
+                      type="checkbox"
+                      name="mlh2"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                    />
+                    <p className="w-5/6 font-palanquin">
                       I authorize you to share my application/registration
                       information with Major League Hacking for event
                       administration, ranking, and MLH administration in-line
@@ -831,8 +839,12 @@ const Register = () => {
 
                 <label className="flex flex-col">
                   <div className="flex flex-row items-center space-x-4">
-                    <Field type="checkbox" name="mlh3" className="w-6 h-6" />
-                    <p className="text-lg w-5/6">
+                    <Field
+                      type="checkbox"
+                      name="mlh3"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                    />
+                    <p className="w-5/6 font-palanquin">
                       I authorize Major League Hacking to send me occasional
                       messages about hackathons including pre- and post-event
                       informational emails.
