@@ -14,6 +14,7 @@ import synopsys from "../assets/synopsys.jpg";
  * @author Rob
  */
 const Sponsors = () => {
+  const sponsorsIncomplete = true;
   return (
     <Page title="Knight Hacks | Sponsors" onLanding={false}>
       <h1
@@ -29,39 +30,41 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      {/*<div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-0 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-        DIAMOND
+      <div className="hidden ">
+        <div className="text-center hidden sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-0 space-x-4 mt-14 mb-2 font-palanquin font-bold">
+          DIAMOND
+        </div>
+        <div>_____________________________________</div>
+        <div className="flex justify-center">
+          <img
+            className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+            src={TestLogo}
+            alt="test logo"
+          />
+          <img
+            className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+            src={TestLogo}
+            alt="test logo"
+          />
+        </div>
+        <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-0 sm:mb-.5 space-x-4 mb-2 font-palanquin font-bold">
+          PLATINUM
+        </div>
+        <div>_____________________________________</div>
+        <div className="flex justify-center">
+          <img
+            className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
+            src={TestLogo}
+            alt="test logo"
+          />
+          <img
+            className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
+            src={TestLogo}
+            alt="test logo"
+          />
+        </div>
       </div>
-      <div>_____________________________________</div>
-      <div className="flex justify-center">
-        <img
-          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
-          src={TestLogo}
-          alt="test logo"
-        />
-      </div>
-      <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-0 sm:mb-.5 space-x-4 mb-2 font-palanquin font-bold">
-        PLATINUM
-      </div>
-      <div>_____________________________________</div>
-      <div className="flex justify-center">
-        <img
-          className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
-          src={TestLogo}
-          alt="test logo"
-        />
-        <img
-          className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
-          src={TestLogo}
-          alt="test logo"
-        />
-      </div>
-  */}
+
       <div className="text-center sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl mb-4 space-x-4 mt-8  font-palanquin font-bold">
         GOLD
       </div>
