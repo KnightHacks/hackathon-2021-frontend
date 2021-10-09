@@ -31,7 +31,7 @@ const Page = ({ children, onLanding, title }) => {
         </div>
 
         <div className="sm:col-span-3 text-white w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
-          <div className="flex items-center w-full h-19/20 sm:h-full bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
+          <div className="flex items-center w-full h-19/20 sm:h-full backdrop-filter backdrop-blur-sm bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
               <a
@@ -54,14 +54,6 @@ const Page = ({ children, onLanding, title }) => {
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center">
-          {!onLanding ? (
-            <Link to="/" className="w-11/12 h-16">
-              <div className="bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full mt-12" />
-            </Link>
-          ) : null}
         </div>
       </div>
     </>
