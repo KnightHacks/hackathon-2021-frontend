@@ -96,7 +96,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         Home
                       </Link>
@@ -105,7 +105,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/about"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         About
                       </Link>
@@ -114,7 +114,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/sponsors"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         Sponsors
                       </Link>
@@ -123,7 +123,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/schedule"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         Schedule
                       </Link>
@@ -132,7 +132,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/faq"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         FAQ
                       </Link>
@@ -141,7 +141,7 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/register"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none hover:text-gray-300 focus:text-gray-300"
+                        className="focus:outline-none hover:text-gray-300 focus:underline"
                       >
                         Register
                       </Link>
