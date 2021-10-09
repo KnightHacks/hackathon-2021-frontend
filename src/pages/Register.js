@@ -8,6 +8,7 @@ import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import ReactSelect, { createFilter, components } from "react-select";
+import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
@@ -102,6 +103,11 @@ const Register = () => {
 
   // user validation dialog
   const [shouldOpen, setShouldOpen] = useState(false);
+
+  // birthday
+  const [yearBirth, setYearBirth] = useState(null);
+  const [monthBirth, setMonthBirth] = useState(null);
+  const [dayBirth, setDayBirth] = useState(null);
 
   const [response, setResponse] = useState(null);
 
@@ -403,18 +409,80 @@ const Register = () => {
                 <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
                   Let&apos;s learn more about you.
                 </p>
-                <Field type="text" name="dateOfBirth">
-                  {({ field }) => (
-                    <TextInputBox label="Birthday: YYYY-MM-DD" field={field} />
-                  )}
-                </Field>
-                <ErrorMessage name="dateOfBirth">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
-                      {msg}
-                    </p>
-                  )}
-                </ErrorMessage>
+                <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
+                  <Field type="text" name="dayBirth">
+                    {({ field }) => (
+                      <DayPicker
+                        defaultValue={"Day"}
+                        year={yearBirth} // mandatory
+                        month={monthBirth} // mandatory
+                        endYearGiven // mandatory if end={} is given in YearPicker
+                        required={true} // default is false
+                        value={dayBirth} // mandatory
+                        onChange={setDayBirth}
+                        id={"Day"}
+                        name={"Day"}
+                        classes={
+                          "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        }
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="dayBirth">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                  <Field type="text" name="monthBirth">
+                    {({ field }) => (
+                      <MonthPicker
+                        defaultValue={"Month"}
+                        endYearGiven // mandatory if end={} is given in YearPicker
+                        year={yearBirth} // mandatory
+                        required={true} // default is false
+                        value={monthBirth} // mandatory
+                        onChange={setMonthBirth}
+                        classes={
+                          "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        }
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="monthBirth">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                  <Field type="text" name="yearBirth">
+                    {({ field }) => (
+                      <YearPicker
+                        defaultValue={"Year"}
+                        start={1950} // default is 1900
+                        end={2020} // default is current year
+                        reverse
+                        required={true}
+                        id={"Year"}
+                        name={"Year"}
+                        value={yearBirth} // mandatory
+                        onChange={setYearBirth}
+                        classes={
+                          "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        }
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="yearBirth">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </div>
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
@@ -860,7 +928,7 @@ const Register = () => {
  */
 const TextInputBox = ({ label, field }) => {
   return (
-    <div className="my-4 flex-1 ">
+    <div className="my-4 flex-1">
       <label>
         <input
           placeholder={label}
