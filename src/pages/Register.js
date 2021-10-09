@@ -835,13 +835,13 @@ const Register = () => {
                   )}
                 </Field>
               </div>
-              <div className="flex flex-col space-y-4 mt-4">
+              <div className="flex flex-col space-y-8 mt-4 ml-4">
                 <label className="flex flex-col">
                   <div className="flex flex-row items-center space-x-4">
                     <Field
                       type="checkbox"
                       name="mlh1"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
                     <p className="w-5/6 font-palanquin">
                       Have you read and understood the MLH Code of Conduct?
@@ -850,7 +850,7 @@ const Register = () => {
                         href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
                       >
                         https://static.mlh.io/docs/mlh-code-of-conduct.pdf
                       </a>
@@ -870,7 +870,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh2"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
                     <p className="w-5/6 font-palanquin">
                       I authorize you to share my application/registration
@@ -885,7 +885,7 @@ const Register = () => {
                         href="https://mlh.io/privacy"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
                       >
                         https://mlh.io/privacy
                       </a>
@@ -895,7 +895,7 @@ const Register = () => {
                         href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
                       >
                         https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions
                       </a>
@@ -915,7 +915,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh3"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
                     <p className="w-5/6 font-palanquin">
                       I authorize Major League Hacking to send me occasional
