@@ -73,7 +73,7 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="xl:w-96 lg:w-80 md:w-60 scale-100 sm:mt-8 mr-10 "
+          className="transform scale-50 lg:scale-75"
           src={Facebook}
           alt="test logo"
         />
@@ -84,7 +84,7 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="xl:w-96 lg:w-80 md:w-60  scale-100 sm:mr-7 sm:mt-8 mr-8"
+          className="transform scale-50 lg:scale-75 mt-8"
           src={TI}
           alt="test logo"
         />
@@ -93,32 +93,32 @@ const Sponsors = () => {
         BRONZE
       </div>
       <div>_____________________________________</div>
-      <div className="flex justify-center content-between ">
+      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-80  ">
         <img
-          className="xl:w-60 lg:mr-8 lg:w-44 md:w-28 scale-0  mb-14 "
+          className="transform scale-50 md:scale-65  "
           src={Google}
           alt="test logo"
         />
         <img
-          className="xl:w-60 lg:w-44 md:w-36 sm:mt-8 scale-50 sm:w-28 sm:mr-8 mb-14 "
+          className=" transform scale-50 md:scale-75"
           src={Learner}
           alt="test logo"
         />
       </div>
       <div className="flex justify-center content-between ">
         <img
-          className=" xl:w-24 lg:w-20 lg:h-20  md:w-14 md:h-14 sm:mt-8 mb-14"
+          className=" transform scale-y-100 scale-x-100 md:scale-y-150 md:scale-x-150 xl:scale-x-200 xl:scale-y-200 "
           src={EA}
           alt="EA Logo"
         />
       </div>
-      <div className="text-center sm:text-xl mt-4 md:text-3xl lg:text-4xl xl:text-5xl space-x-4 font-palanquin font-bold mt-8">
+      <div className="text-center sm:text-xl mt-4 md:text-3xl lg:text-4xl xl:text-5xl space-x-4 font-palanquin font-bold mt-14">
         PARTNER ORGANIZATIONS
       </div>
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className=" xl:w-96 lg:w-80 md:w-60 sm:w-44 sm:mr-7 sm:mt-8 mr-8 mb-24"
+          className="transform scale-75 xl:mt-10 xl:scale-100 md:scale-100 md:mb-10"
           src={UCF}
           alt="test logo"
         />
