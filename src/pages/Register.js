@@ -119,6 +119,10 @@ const Register = () => {
       dayBirth + monthBirth + yearBirth
     ).toISOString();
 
+    {
+      console.log("Date of birth " + dateOfBirth);
+    }
+
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -165,6 +169,9 @@ const Register = () => {
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
+    day: yup.string().required("Day is required."),
+    month: yup.string().required("Month is required."),
+    year: yup.string().required("Year is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -265,7 +272,9 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          dateOfBirth: "",
+          day: "",
+          month: "",
+          year: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -416,7 +425,7 @@ const Register = () => {
                   Let&apos;s learn more about you.
                 </p>
                 <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
-                  <Field type="text" name="dayBirth">
+                  <Field type="text" name="day">
                     {({ field }) => (
                       <DayPicker
                         defaultValue={"Day"}
@@ -434,14 +443,14 @@ const Register = () => {
                       />
                     )}
                   </Field>
-                  <ErrorMessage name="dayBirth">
+                  <ErrorMessage name="day">
                     {(msg) => (
                       <p className="font-palanquin text-red-700 font-bold">
                         {msg}
                       </p>
                     )}
                   </ErrorMessage>
-                  <Field type="text" name="monthBirth">
+                  <Field type="text" name="month">
                     {({ field }) => (
                       <MonthPicker
                         defaultValue={"Month"}
@@ -456,14 +465,14 @@ const Register = () => {
                       />
                     )}
                   </Field>
-                  <ErrorMessage name="monthBirth">
+                  <ErrorMessage name="month">
                     {(msg) => (
                       <p className="font-palanquin text-red-700 font-bold">
                         {msg}
                       </p>
                     )}
                   </ErrorMessage>
-                  <Field type="text" name="yearBirth">
+                  <Field type="text" name="year">
                     {({ field }) => (
                       <YearPicker
                         defaultValue={"Year"}
@@ -481,7 +490,7 @@ const Register = () => {
                       />
                     )}
                   </Field>
-                  <ErrorMessage name="yearBirth">
+                  <ErrorMessage name="year">
                     {(msg) => (
                       <p className="font-palanquin text-red-700 font-bold">
                         {msg}
