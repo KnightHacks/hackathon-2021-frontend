@@ -26,7 +26,10 @@ const FAQ = () => {
                   <Disclosure.Button
                     className={`${
                       open ? "rounded-t-lg" : "rounded-lg"
-                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75`}
+                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 ease-out duration-300
+                    focus:outline-none
+                    focus:ring-4
+                    focus:ring-blue-500`}
                   >
                     <span>{item.question}</span>
                     <HiChevronDown
