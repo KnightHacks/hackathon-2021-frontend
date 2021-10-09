@@ -1183,9 +1183,9 @@ const createHacker = async ({
   whatLearn: what_learn,
   dietaryRestrictions: dietary_restrictions,
   resume_id,
-  mlh1,
-  mlh2,
-  mlh3,
+  mlh1: mlh_code_of_conduct,
+  mlh2: mlh_privacy_and_contest_terms,
+  mlh3: mlh_send_messages,
 }) => {
   const payload = {
     beginner,
@@ -1211,9 +1211,9 @@ const createHacker = async ({
     dietary_restrictions,
     resume_id,
     mlh: {
-      mlh1,
-      mlh2,
-      mlh3,
+      mlh_code_of_conduct,
+      mlh_privacy_and_contest_terms,
+      mlh_send_messages,
     },
   };
 
