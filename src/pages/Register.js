@@ -32,6 +32,23 @@ const Register = () => {
   ];
   const [canShareInfo, setCanShareInfo] = useState(infoOptions[0]);
 
+  const attendingOptions = [
+    "I will be attending Knight Hacks in person.",
+    "I will be attending Knight Hacks virtually.",
+  ];
+  const [attendingOption, setAttendingOption] = useState(attendingOptions[0]);
+
+  const levelOfStudyOptions = [
+    "Undergraduation / Bachelors",
+    "Graduation / Masters",
+    "PhD / Doctorate",
+    "Post Doctorate",
+  ];
+
+  const [levelOfStudyOption, setLevelOfStudyOption] = useState(
+    "Level of Study"
+  );
+
   const graduationOptions = [
     "Fall 2021",
     "Spring 2022",
@@ -143,6 +160,7 @@ const Register = () => {
           pronouns: pronounOption,
           college: schoolOption.value,
           major: values.major,
+          levelOfStudy: levelOfStudyOption,
           graduation: graduationOption,
           github: values.github,
           linkedIn: values.linkedIn,
@@ -384,7 +402,7 @@ const Register = () => {
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                     flex="col"
-                    zIndex="70"
+                    zIndex="80"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-col">
@@ -425,7 +443,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="50"
+                  zIndex="70"
                 />
                 {status && status.pronoun && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -457,7 +475,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="60"
                 />
                 {status && status.ethnicity && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -489,7 +507,7 @@ const Register = () => {
                     }
                   }}
                   flex="col"
-                  zIndex="40"
+                  zIndex="50"
                 />
                 {status && status.country && (
                   <p className="font-palanquin text-red-700 font-bold">
@@ -628,6 +646,41 @@ const Register = () => {
                       </p>
                     )}
                   </ErrorMessage>
+                </div>
+                <div className="flex flex-col">
+                  <OptionSelector
+                    trackOptions={levelOfStudyOptions}
+                    selectedTrack={levelOfStudyOption}
+                    setSelectedTrack={(option) => {
+                      setLevelOfStudyOption(option);
+                      setStatus(
+                        Object.keys(status).reduce((object, key) => {
+                          if (key !== "levelOfStudy") {
+                            object[key] = status[key];
+                          }
+                          return object;
+                        }, {})
+                      );
+                    }}
+                    handleTouched={() => {
+                      if (
+                        !status?.levelOfStudy &&
+                        levelOfStudyOption === "Level of Study"
+                      ) {
+                        setStatus({
+                          ...status,
+                          levelOfStudy: "Level of Study option is required.",
+                        });
+                      }
+                    }}
+                    flex="col"
+                    zIndex="40"
+                  />
+                  {status && status.levelOfStudy && (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {status.levelOfStudy}
+                    </p>
+                  )}
                 </div>
                 <OptionSelector
                   title="When are you graduating?"
@@ -974,6 +1027,7 @@ const createHacker = async ({
   pronouns,
   college,
   major,
+  levelOfStudy,
   graduation: graduation_date,
   github,
   linkedIn: linkedin,
@@ -989,6 +1043,7 @@ const createHacker = async ({
       college,
       graduation_date,
       major,
+      levelOfStudy,
     },
     email,
     ethnicity,
