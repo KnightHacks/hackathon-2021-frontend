@@ -50,7 +50,7 @@ const Landing = () => {
           </Link>
           <div className="flex flex-col md:flex-row">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSeEFBCaQCqMZdN2cYgYhVCC1kAERxvWqWF_dJZqrxSDMsMuPA/viewform"
+              href="mailto:sponsorship@knighthacks.org"
               className={`
                 relative group
                 overflow-hidden
@@ -110,7 +110,7 @@ const Landing = () => {
             </a>
           </div>
           <a
-            href="https://discord.gg/CcZPUTFAuW"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeEFBCaQCqMZdN2cYgYhVCC1kAERxvWqWF_dJZqrxSDMsMuPA/viewform"
             className={`
               relative group
               overflow-hidden
