@@ -115,7 +115,9 @@ const Register = () => {
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
-    const dateOfBirth = new Date(dayBirth + monthBirth + yearBirth).toISOString;
+    const dateOfBirth = new Date(
+      dayBirth + monthBirth + yearBirth
+    ).toISOString();
 
     switch (registrationState) {
       case "pending":
@@ -196,7 +198,13 @@ const Register = () => {
     );
   }
 
-  const dayOfBirth = new Date(dayBirth + monthBirth + yearBirth).toISOString();
+  console.log("Day type " + typeof dayBirth);
+  console.log("Month type " + typeof monthBirth);
+  console.log("Year type " + typeof yearBirth);
+
+  // const dayOfBirth = new Date(
+  //   String(dayBirth) + String(monthBirth) + String(yearBirth)
+  // ).toISOString();
 
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
@@ -481,7 +489,10 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
-                {console.log("Day of birth " + dayOfBirth)}
+                {
+                  // {console.log("Day of birth " + dayOfBirth)}
+                  // {console.log("Day Type " + typeof dayBirth)}}
+                }
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
