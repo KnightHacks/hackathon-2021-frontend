@@ -93,7 +93,7 @@ const Sponsors = () => {
         BRONZE
       </div>
       <div>_____________________________________</div>
-      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-80  ">
+      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-80 2xl:-space-x-96  ">
         <img
           className="transform scale-50 md:scale-65  "
           src={Google}
