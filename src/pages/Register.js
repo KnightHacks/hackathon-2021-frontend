@@ -115,6 +115,8 @@ const Register = () => {
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
+    const dateOfBirth = new Date(dayBirth + monthBirth + yearBirth).toISOString;
+
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -158,15 +160,9 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const dateOfBirthExp = /^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
-
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    dateOfBirth: yup
-      .string()
-      .matches(dateOfBirthExp, "Date of birth is not valid.")
-      .required("Date of birth is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -199,6 +195,8 @@ const Register = () => {
       </>
     );
   }
+
+  const dayOfBirth = new Date(dayBirth + monthBirth + yearBirth).toISOString();
 
   return (
     <Page title="Knight Hacks | Register" onLanding={false}>
@@ -483,6 +481,7 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                {console.log("Day of birth " + dayOfBirth)}
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
@@ -1128,6 +1127,7 @@ const createHacker = async ({
       ethnicity,
       first_name,
       last_name,
+      date_of_birth,
       phone_number,
       pronouns,
       socials: {
