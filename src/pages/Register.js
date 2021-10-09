@@ -416,7 +416,7 @@ const Register = () => {
                   <Field type="text" name="day">
                     {({ field }) => (
                       <DayPicker
-                        defaultValue={"Day"}
+                        defaultValue={"Birth Date"}
                         year={yearBirth} // mandatory
                         month={monthBirth} // mandatory
                         endYearGiven // mandatory if end={} is given in YearPicker
@@ -441,7 +441,7 @@ const Register = () => {
                   <Field type="text" name="month">
                     {({ field }) => (
                       <MonthPicker
-                        defaultValue={"Month"}
+                        defaultValue={"Birth Month"}
                         endYearGiven // mandatory if end={} is given in YearPicker
                         year={yearBirth} // mandatory
                         required={true} // default is false
@@ -463,7 +463,7 @@ const Register = () => {
                   <Field type="text" name="year">
                     {({ field }) => (
                       <YearPicker
-                        defaultValue={"Year"}
+                        defaultValue={"Birth Year"}
                         start={1950} // default is 1900
                         end={2020} // default is current year
                         reverse
