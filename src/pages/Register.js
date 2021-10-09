@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
@@ -111,6 +112,27 @@ const Register = () => {
 
   const [response, setResponse] = useState(null);
 
+  const [resumeID, setResumeID] = useState(null);
+
+  const [isUploading, setIsUploading] = useState(false);
+
+  const uploadResume = async (resume) => {
+    setIsUploading(true);
+    setResume(resume);
+    const formData = new FormData();
+    formData.set("resume", resume);
+    formData.set("type", "application/json");
+    const { id } = await fetch(
+      "https://api.knighthacks.org/api/hackers/resume/",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((b) => b.json());
+    setResumeID(id);
+    setIsUploading(false);
+  };
+
   const serverErrorFocusRef = useRef(null);
   const validationErrorFocusRef = useRef(null);
 
@@ -145,7 +167,7 @@ const Register = () => {
           whyAttend: values.whyAttend,
           whatLearn: values.whatLearn,
           dietaryRestrictions: values.dietaryRestrictions,
-          resume,
+          resume_id: resumeID,
         });
         setRegistrationState(response.ok ? "success" : "failure");
         setResponse(response);
@@ -225,6 +247,7 @@ const Register = () => {
 
             <div className="mt-4">
               <button
+                type="button"
                 className={`
                 bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
                 hover:shadow-md
@@ -240,7 +263,9 @@ const Register = () => {
               >
                 Try again
               </button>
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
+              <button type="button" onClick={() => setIsOpen(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -302,6 +327,7 @@ const Register = () => {
 
                   <div className="mt-4">
                     <button
+                      type="button"
                       className={`
                       font-palanquin
                       bg-opaque-blue rounded-lg mx-4 py-2 px-4 text-black
@@ -354,7 +380,8 @@ const Register = () => {
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col lg:flex-row md:space-y-0 space-y-4 lg:space-x-4 items-center">
                   <FileUploadBox
-                    handleFile={(fileUploaded) => setResume(fileUploaded)}
+                    handleFile={uploadResume}
+                    disabled={isUploading}
                     title=" Upload Resume"
                   />
                   <div className="lg:hidden flex flex-col">
@@ -764,6 +791,7 @@ const Register = () => {
               </Field>
               <div className="flex justify-center font-palanquin">
                 <button
+                  type="submit"
                   disabled={isSubmitting}
                   onClick={() => {
                     const newStatus = {};
@@ -805,7 +833,11 @@ const Register = () => {
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-900
             `}
                 >
-                  Submit
+                  {registrationState === "pending" ? (
+                    <CircularProgress />
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
             </Form>
@@ -845,7 +877,7 @@ const TextInputBox = ({ label, field }) => {
  * @prop defaultValue: The default text shown when no file has been selected.
  * @author Abraham Hernandez
  */
-const FileUploadBox = ({ handleFile, title }) => {
+const FileUploadBox = ({ handleFile, title, disabled }) => {
   const hiddenFileInput = useRef(null);
 
   const handleClick = (event) => {
@@ -864,6 +896,8 @@ const FileUploadBox = ({ handleFile, title }) => {
       <span>Resume</span>
       <button
         onClick={handleClick}
+        type="button"
+        disabled={disabled}
         className={`
               bg-green-700 border-2 border-green-800 rounded-lg mx-4 md:my-6 py-1.5 px-4
               shadow-md
@@ -875,7 +909,7 @@ const FileUploadBox = ({ handleFile, title }) => {
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 " />
-        <p className="truncate">{title}</p>
+        {disabled ? <CircularProgress /> : <p className="truncate">{title}</p>}
       </button>
       <input
         type="file"
@@ -1000,40 +1034,36 @@ const createHacker = async ({
   whyAttend: why_attend,
   whatLearn: what_learn,
   dietaryRestrictions: dietary_restrictions,
-  resume,
+  resume_id,
 }) => {
-  const hackerFormData = new FormData();
-  hackerFormData.append(
-    "hacker",
-    JSON.stringify({
-      beginner,
-      can_share_info: can_share_info === "Yes",
-      edu_info: {
-        college,
-        graduation_date,
-        major,
-        levelOfStudy,
-      },
-      email,
-      ethnicity,
-      first_name,
-      last_name,
-      phone_number,
-      pronouns,
-      socials: {
-        github,
-        linkedin,
-      },
-      why_attend,
-      what_learn: [what_learn],
-      dietary_restrictions,
-    })
-  );
-  hackerFormData.append("resume", resume);
+  const payload = {
+    beginner,
+    can_share_info: can_share_info === "Yes",
+    edu_info: {
+      college,
+      graduation_date,
+      major,
+      levelOfStudy,
+    },
+    email,
+    ethnicity,
+    first_name,
+    last_name,
+    phone_number,
+    pronouns,
+    socials: {
+      github,
+      linkedin,
+    },
+    why_attend,
+    what_learn: [what_learn],
+    dietary_restrictions,
+    resume_id,
+  };
 
   const transaction = Sentry.startTransaction({
     data: {
-      hacker: hackerFormData.get("hacker"),
+      hacker: JSON.stringify(payload),
     },
     op: "transaction",
     name: "submitHacker",
@@ -1044,7 +1074,10 @@ const createHacker = async ({
 
   const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
-    body: hackerFormData,
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(payload),
   });
 
   transaction.setHttpStatus(res.status);
