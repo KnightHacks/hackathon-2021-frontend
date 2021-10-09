@@ -73,7 +73,7 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="transform scale-50 lg:scale-75"
+          className="transform scale-50 lg:scale-50"
           src={Facebook}
           alt="test logo"
         />
@@ -84,7 +84,7 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="transform scale-50 lg:scale-75 mt-8"
+          className="transform scale-50 lg:scale-50 mt-8"
           src={TI}
           alt="test logo"
         />
@@ -93,21 +93,17 @@ const Sponsors = () => {
         BRONZE
       </div>
       <div>_____________________________________</div>
-      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-80 2xl:-space-x-96  ">
+      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-96 2xl:-space-x-96  ">
+        <img className="transform scale-50  " src={Google} alt="test logo" />
         <img
-          className="transform scale-50 md:scale-65  "
-          src={Google}
-          alt="test logo"
-        />
-        <img
-          className=" transform scale-50 md:scale-75"
+          className=" transform scale-50  2xl:scale-60 2xl:mr-24"
           src={Learner}
           alt="test logo"
         />
       </div>
       <div className="flex justify-center content-between ">
         <img
-          className=" transform scale-y-100 scale-x-100 md:scale-y-150 md:scale-x-150 xl:scale-x-200 xl:scale-y-200 "
+          className=" transform scale-y-100 scale-x-100 md:scale-y-150 md:scale-x-150 xl:scale-x-200 xl:scale-y-200 2xl:scale-x-250 2xl:scale-y-250 "
           src={EA}
           alt="EA Logo"
         />
@@ -118,7 +114,7 @@ const Sponsors = () => {
       <div>_____________________________________</div>
       <div className="flex justify-center">
         <img
-          className="transform scale-75 xl:mt-10 xl:scale-100 md:scale-100 md:mb-10"
+          className="transform scale-75 xl:mt-10 xl:scale-100 2xl:scale-150 md:scale-100 md:mb-10"
           src={UCF}
           alt="test logo"
         />
