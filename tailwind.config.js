@@ -18,6 +18,11 @@ module.exports = {
         "3/20": "15%",
         "17/20": "85%",
       },
+      zIndex: {
+        60: "60",
+        70: "70",
+        80: "80",
+      },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
         "knight-hacks-logo": "url('/src/assets/knightHacksLogo_WHITE.svg')",
@@ -40,8 +45,14 @@ module.exports = {
     extend: {
       animation: ["group-hover"],
       fontSize: ["hover", "focus"],
-      backgroundColor: ["active"],
+      backgroundColor: ["active", "checked"],
+      textDecoration: ["focus-visible"],
+      borderColor: ["checked"],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 };

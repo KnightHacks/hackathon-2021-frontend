@@ -31,37 +31,32 @@ const Page = ({ children, onLanding, title }) => {
         </div>
 
         <div className="sm:col-span-3 text-white w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
-          <div className="flex items-center w-full h-19/20 sm:h-full bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
+          <div className="flex items-center w-full h-19/20 sm:h-full backdrop-filter backdrop-blur-sm bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
-              <a href="https://twitter.com/KnightHacks?lang=en/">
-                <RiTwitterLine
-                  aria-label="Twitter logo"
-                  className="p-2 rounded-xl hover:shadow-md"
-                />
+              <a
+                aria-label="Twitter Icon"
+                href="https://twitter.com/KnightHacks?lang=en/"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-white focus:border-4"
+              >
+                <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
               </a>
-              <a href="https://www.instagram.com/knighthacks/">
-                <FaInstagram
-                  aria-label="Instagram logo"
-                  className="p-2 rounded-xl hover:shadow-md"
-                />
+              <a
+                aria-label="Instagram Icon"
+                href="https://www.instagram.com/knighthacks/"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-white focus:border-4"
+              >
+                <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
               </a>
-              <a href="https://www.facebook.com/KnightHacks/">
-                <TiSocialFacebook
-                  aria-label="Facebook logo"
-                  className="p-2 rounded-xl hover:shadow-md"
-                />
+              <a
+                aria-label="Facebook Icon"
+                href="https://www.facebook.com/KnightHacks/"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-white focus:border-4"
+              >
+                <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="col-span-1 w-full h-full hidden sm:flex sm:h-full sm:justify-center">
-          {!onLanding ? (
-            <Link to="/" className="w-11/12 h-16">
-              <div className="bg-knight-hacks-logo bg-no-repeat bg-center w-full h-full mt-12" />
-            </Link>
-          ) : null}
         </div>
       </div>
     </>
