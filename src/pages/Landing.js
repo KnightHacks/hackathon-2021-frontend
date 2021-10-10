@@ -13,7 +13,7 @@ const Landing = () => {
         <title>Knight Hacks</title>
       </Helmet>
       <Page onLanding={true}>
-        <div className="flex justify-center items-center flex-col w-full mt-auto">
+        <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-28">
           <div
             aria-label="Knight Hacks logo"
             className={`
