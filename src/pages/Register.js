@@ -9,6 +9,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
+import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
@@ -104,6 +105,11 @@ const Register = () => {
   // user validation dialog
   const [shouldOpen, setShouldOpen] = useState(false);
 
+  // birthday
+  const [yearBirth, setYearBirth] = useState(null);
+  const [monthBirth, setMonthBirth] = useState(null);
+  const [dayBirth, setDayBirth] = useState(null);
+
   const [response, setResponse] = useState(null);
 
   const [resumeID, setResumeID] = useState(null);
@@ -131,6 +137,10 @@ const Register = () => {
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
+    // Combining date of birth fields and converting to iso8601
+    const dateOfBirth = new Date(
+      dayBirth + monthBirth + yearBirth
+    ).toISOString();
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -177,15 +187,12 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const dateOfBirthExp = /^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
-
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    dateOfBirth: yup
-      .string()
-      .matches(dateOfBirthExp, "Date of birth is not valid.")
-      .required("Date of birth is required."),
+    day: yup.string().required("Day is required."),
+    month: yup.string().required("Month is required."),
+    year: yup.string().required("Year is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -284,7 +291,9 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          dateOfBirth: "",
+          day: "",
+          month: "",
+          year: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -439,18 +448,6 @@ const Register = () => {
                 <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
                   Let&apos;s learn more about you.
                 </p>
-                <Field type="text" name="dateOfBirth">
-                  {({ field }) => (
-                    <TextInputBox label="Birthday: YYYY-MM-DD" field={field} />
-                  )}
-                </Field>
-                <ErrorMessage name="dateOfBirth">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
-                      {msg}
-                    </p>
-                  )}
-                </ErrorMessage>
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
@@ -545,6 +542,80 @@ const Register = () => {
                     {status.country}
                   </p>
                 )}
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
+                <Field type="text" name="day">
+                  {({ field }) => (
+                    <DayPicker
+                      defaultValue={"Birth Date"}
+                      year={yearBirth} // mandatory
+                      month={monthBirth} // mandatory
+                      endYearGiven // mandatory if end={} is given in YearPicker
+                      required={true} // default is false
+                      value={dayBirth} // mandatory
+                      onChange={setDayBirth}
+                      id={"Day"}
+                      name={"Day"}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="day">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
+                <Field type="text" name="month">
+                  {({ field }) => (
+                    <MonthPicker
+                      defaultValue={"Birth Month"}
+                      endYearGiven // mandatory if end={} is given in YearPicker
+                      year={yearBirth} // mandatory
+                      required={true} // default is false
+                      value={monthBirth} // mandatory
+                      onChange={setMonthBirth}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="month">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
+                <Field type="text" name="year">
+                  {({ field }) => (
+                    <YearPicker
+                      defaultValue={"Birth Year"}
+                      start={1950} // default is 1900
+                      end={2020} // default is current year
+                      reverse
+                      required={true}
+                      id={"Year"}
+                      name={"Year"}
+                      value={yearBirth} // mandatory
+                      onChange={setYearBirth}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="year">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
               </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
@@ -998,7 +1069,7 @@ const Register = () => {
  */
 const TextInputBox = ({ label, field }) => {
   return (
-    <div className="my-4 flex-1 ">
+    <div className="my-4 flex-1">
       <label>
         <input
           placeholder={label}
