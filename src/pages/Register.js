@@ -172,6 +172,9 @@ const Register = () => {
           whyAttend: values.whyAttend,
           whatLearn: values.whatLearn,
           dietaryRestrictions: values.dietaryRestrictions,
+          mlh1: values.mlh1,
+          mlh2: values.mlh2,
+          mlh3: values.mlh3,
           resume_id: resumeID,
         });
         setRegistrationState(response.ok ? "success" : "failure");
@@ -201,6 +204,9 @@ const Register = () => {
     major: yup.string().required("Major is required."),
     whyAttend: yup.string().required("Required."),
     whatLearn: yup.string().required("Required."),
+    mlh1: yup.bool().oneOf([true], "Field must be checked."),
+    mlh2: yup.bool().oneOf([true], "Field must be checked."),
+    mlh3: yup.bool().oneOf([true, false]),
   });
 
   if (window.innerWidth <= 470) {
@@ -296,6 +302,9 @@ const Register = () => {
           major: "",
           whyAttend: "",
           whatLearn: "",
+          mlh1: false,
+          mlh2: false,
+          mlh3: false,
         }}
         validate={() => {
           const errors = {};
@@ -897,6 +906,103 @@ const Register = () => {
                   )}
                 </Field>
               </div>
+              <div className="flex flex-col space-y-8 mt-4 ml-4">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  Last Step!
+                </p>
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh1"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      Have you read and understood the{" "}
+                      <a
+                        href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Code of Conduct
+                      </a>
+                      ?
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh1">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh2"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      I authorize you to share my application/registration
+                      information with Major League Hacking for event
+                      administration, ranking, and MLH administration in-line
+                      with the MLH Privacy Policy. I further agree to the terms
+                      of both the{" "}
+                      <a
+                        href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Contest Terms and Conditions
+                      </a>{" "}
+                      and the{" "}
+                      <a
+                        href="https://mlh.io/privacy"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Privacy Policy
+                      </a>
+                      .
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh2">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh3"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      I authorize Major League Hacking to send me occasional
+                      messages about hackathons including pre- and post-event
+                      informational emails.
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh3">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   type="submit"
@@ -1148,36 +1254,39 @@ const createHacker = async ({
   whatLearn: what_learn,
   dietaryRestrictions: dietary_restrictions,
   resume_id,
+  mlh1: mlh_code_of_conduct,
+  mlh2: mlh_privacy_and_contest_terms,
+  mlh3: mlh_send_messages,
 }) => {
-  const hackerFormData = new FormData();
-  hackerFormData.append(
-    "hacker",
-    JSON.stringify({
-      beginner,
-      can_share_info: can_share_info === "Yes",
-      edu_info: {
-        college,
-        graduation_date,
-        major,
-        levelOfStudy,
-      },
-      email,
-      ethnicity,
-      first_name,
-      last_name,
-      date_of_birth,
-      phone_number,
-      pronouns,
-      socials: {
-        github,
-        linkedin,
-      },
-      why_attend,
-      what_learn: [what_learn],
-      dietary_restrictions,
-    })
-  );
-  hackerFormData.append("resume", resume);
+  const payload = {
+    beginner,
+    can_share_info: can_share_info === "Yes",
+    edu_info: {
+      college,
+      graduation_date,
+      major,
+      levelOfStudy,
+    },
+    email,
+    ethnicity,
+    first_name,
+    last_name,
+    phone_number,
+    pronouns,
+    socials: {
+      github,
+      linkedin,
+    },
+    why_attend,
+    what_learn: [what_learn],
+    dietary_restrictions,
+    resume_id,
+    mlh: {
+      mlh_code_of_conduct,
+      mlh_privacy_and_contest_terms,
+      mlh_send_messages,
+    },
+  };
 
   const transaction = Sentry.startTransaction({
     data: {

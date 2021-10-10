@@ -45,9 +45,14 @@ module.exports = {
     extend: {
       animation: ["group-hover"],
       fontSize: ["hover", "focus"],
-      backgroundColor: ["active"],
+      backgroundColor: ["active", "checked"],
       textDecoration: ["focus-visible"],
+      borderColor: ["checked"],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 };
