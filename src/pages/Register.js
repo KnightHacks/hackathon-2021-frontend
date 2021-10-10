@@ -836,6 +836,9 @@ const Register = () => {
                 </Field>
               </div>
               <div className="flex flex-col space-y-8 mt-4 ml-4">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  Last Step!
+                </p>
                 <label className="flex flex-col">
                   <div className="flex flex-row items-center space-x-4">
                     <Field
@@ -843,17 +846,17 @@ const Register = () => {
                       name="mlh1"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquin text-gray-700">
-                      Have you read and understood the MLH Code of Conduct?
-                      <br />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      Have you read and understood the{" "}
                       <a
                         href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
                         target="_blank"
                         rel="noreferrer"
                         className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
                       >
-                        https://static.mlh.io/docs/mlh-code-of-conduct.pdf
+                        MLH Code of Conduct
                       </a>
+                      ?
                     </p>
                   </div>
                   <ErrorMessage name="mlh1">
@@ -872,33 +875,30 @@ const Register = () => {
                       name="mlh2"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquin text-gray-700">
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
                       I authorize you to share my application/registration
                       information with Major League Hacking for event
                       administration, ranking, and MLH administration in-line
                       with the MLH Privacy Policy. I further agree to the terms
-                      of both the MLH Contest Terms and Conditions and the MLH
-                      Privacy Policy.
-                      <br />
-                      MLH Privacy Policy:{" "}
-                      <a
-                        href="https://mlh.io/privacy"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
-                      >
-                        https://mlh.io/privacy
-                      </a>
-                      <br />
-                      MLH Contest Terms and Conditions:{" "}
+                      of both the{" "}
                       <a
                         href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
                         target="_blank"
                         rel="noreferrer"
                         className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
                       >
-                        https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions
+                        MLH Contest Terms and Conditions
+                      </a>{" "}
+                      and the{" "}
+                      <a
+                        href="https://mlh.io/privacy"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Privacy Policy
                       </a>
+                      .
                     </p>
                   </div>
                   <ErrorMessage name="mlh2">
@@ -917,7 +917,7 @@ const Register = () => {
                       name="mlh3"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquin text-gray-700">
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
                       I authorize Major League Hacking to send me occasional
                       messages about hackathons including pre- and post-event
                       informational emails.
