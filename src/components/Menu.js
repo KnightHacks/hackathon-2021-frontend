@@ -27,10 +27,10 @@ const Menu = ({ open, setOpen }) => {
           <VolumeButton />
         </div>
       </div>
-      <div className="col-span-1 w-14 justify-center sm:flex sm:w-11/12 sm:h-full sm:justify-end lg:w-full lg:mr-20 md:w-11/12 md:mr-6 ">
+      <div className="col-span-1 justify-center sm:flex sm:w-11/12 sm:h-full sm:justify-end lg:w-full">
         <a
           id="mlh-trust-badge"
-          className="block w-12 sm:w-20 md:w-28 mr-2"
+          className="block w-12 sm:w-20 sm:mr-6 md:w-24 md:mr-8 lg:mr-20 mr-2"
           href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=white"
           target="_blank"
           rel="noreferrer"

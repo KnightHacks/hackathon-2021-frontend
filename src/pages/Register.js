@@ -9,6 +9,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
+import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
@@ -104,6 +105,11 @@ const Register = () => {
   // user validation dialog
   const [shouldOpen, setShouldOpen] = useState(false);
 
+  // birthday
+  const [yearBirth, setYearBirth] = useState(null);
+  const [monthBirth, setMonthBirth] = useState(null);
+  const [dayBirth, setDayBirth] = useState(null);
+
   const [response, setResponse] = useState(null);
 
   const [resumeID, setResumeID] = useState(null);
@@ -131,6 +137,10 @@ const Register = () => {
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
+    // Combining date of birth fields and converting to iso8601
+    const dateOfBirth = new Date(
+      dayBirth + monthBirth + yearBirth
+    ).toISOString();
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -162,6 +172,9 @@ const Register = () => {
           whyAttend: values.whyAttend,
           whatLearn: values.whatLearn,
           dietaryRestrictions: values.dietaryRestrictions,
+          mlh1: values.mlh1,
+          mlh2: values.mlh2,
+          mlh3: values.mlh3,
           resume_id: resumeID,
         });
         setRegistrationState(response.ok ? "success" : "failure");
@@ -174,15 +187,12 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const dateOfBirthExp = /^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
-
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    dateOfBirth: yup
-      .string()
-      .matches(dateOfBirthExp, "Date of birth is not valid.")
-      .required("Date of birth is required."),
+    day: yup.string().required("Day is required."),
+    month: yup.string().required("Month is required."),
+    year: yup.string().required("Year is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -194,6 +204,9 @@ const Register = () => {
     major: yup.string().required("Major is required."),
     whyAttend: yup.string().required("Required."),
     whatLearn: yup.string().required("Required."),
+    mlh1: yup.bool().oneOf([true], "Field must be checked."),
+    mlh2: yup.bool().oneOf([true], "Field must be checked."),
+    mlh3: yup.bool().oneOf([true, false]),
   });
 
   if (window.innerWidth <= 470) {
@@ -278,7 +291,9 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          dateOfBirth: "",
+          day: "",
+          month: "",
+          year: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -287,6 +302,9 @@ const Register = () => {
           major: "",
           whyAttend: "",
           whatLearn: "",
+          mlh1: false,
+          mlh2: false,
+          mlh3: false,
         }}
         validate={() => {
           const errors = {};
@@ -430,18 +448,6 @@ const Register = () => {
                 <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
                   Let&apos;s learn more about you.
                 </p>
-                <Field type="text" name="dateOfBirth">
-                  {({ field }) => (
-                    <TextInputBox label="Birthday: YYYY-MM-DD" field={field} />
-                  )}
-                </Field>
-                <ErrorMessage name="dateOfBirth">
-                  {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
-                      {msg}
-                    </p>
-                  )}
-                </ErrorMessage>
                 <OptionSelector
                   trackOptions={pronounOptions}
                   selectedTrack={pronounOption}
@@ -536,6 +542,80 @@ const Register = () => {
                     {status.country}
                   </p>
                 )}
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
+                <Field type="text" name="day">
+                  {({ field }) => (
+                    <DayPicker
+                      defaultValue={"Birth Date"}
+                      year={yearBirth} // mandatory
+                      month={monthBirth} // mandatory
+                      endYearGiven // mandatory if end={} is given in YearPicker
+                      required={true} // default is false
+                      value={dayBirth} // mandatory
+                      onChange={setDayBirth}
+                      id={"Day"}
+                      name={"Day"}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="day">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
+                <Field type="text" name="month">
+                  {({ field }) => (
+                    <MonthPicker
+                      defaultValue={"Birth Month"}
+                      endYearGiven // mandatory if end={} is given in YearPicker
+                      year={yearBirth} // mandatory
+                      required={true} // default is false
+                      value={monthBirth} // mandatory
+                      onChange={setMonthBirth}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="month">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
+                <Field type="text" name="year">
+                  {({ field }) => (
+                    <YearPicker
+                      defaultValue={"Birth Year"}
+                      start={1950} // default is 1900
+                      end={2020} // default is current year
+                      reverse
+                      required={true}
+                      id={"Year"}
+                      name={"Year"}
+                      value={yearBirth} // mandatory
+                      onChange={setYearBirth}
+                      classes={
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                      }
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="year">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
               </div>
               <div className="flex flex-col justify-center font-palanquin">
                 <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
@@ -826,6 +906,103 @@ const Register = () => {
                   )}
                 </Field>
               </div>
+              <div className="flex flex-col space-y-8 mt-4 ml-4">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  Last Step!
+                </p>
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh1"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      Have you read and understood the{" "}
+                      <a
+                        href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Code of Conduct
+                      </a>
+                      ?
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh1">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh2"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      I authorize you to share my application/registration
+                      information with Major League Hacking for event
+                      administration, ranking, and MLH administration in-line
+                      with the MLH Privacy Policy. I further agree to the terms
+                      of both the{" "}
+                      <a
+                        href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Contest Terms and Conditions
+                      </a>{" "}
+                      and the{" "}
+                      <a
+                        href="https://mlh.io/privacy"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-green-900 hover:text-green-800 hover:underline cursor-pointer font-palanquinbold"
+                      >
+                        MLH Privacy Policy
+                      </a>
+                      .
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh2">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+
+                <label className="flex flex-col">
+                  <div className="flex flex-row items-center space-x-4">
+                    <Field
+                      type="checkbox"
+                      name="mlh3"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                    />
+                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                      I authorize Major League Hacking to send me occasional
+                      messages about hackathons including pre- and post-event
+                      informational emails.
+                    </p>
+                  </div>
+                  <ErrorMessage name="mlh3">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </label>
+              </div>
               <div className="flex justify-center font-palanquin">
                 <button
                   type="submit"
@@ -892,7 +1069,7 @@ const Register = () => {
  */
 const TextInputBox = ({ label, field }) => {
   return (
-    <div className="my-4 flex-1 ">
+    <div className="my-4 flex-1">
       <label>
         <input
           placeholder={label}
@@ -1077,6 +1254,9 @@ const createHacker = async ({
   whatLearn: what_learn,
   dietaryRestrictions: dietary_restrictions,
   resume_id,
+  mlh1: mlh_code_of_conduct,
+  mlh2: mlh_privacy_and_contest_terms,
+  mlh3: mlh_send_messages,
 }) => {
   const payload = {
     beginner,
@@ -1101,6 +1281,11 @@ const createHacker = async ({
     what_learn: [what_learn],
     dietary_restrictions,
     resume_id,
+    mlh: {
+      mlh_code_of_conduct,
+      mlh_privacy_and_contest_terms,
+      mlh_send_messages,
+    },
   };
 
   const transaction = Sentry.startTransaction({

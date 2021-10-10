@@ -26,13 +26,16 @@ const FAQ = () => {
                   <Disclosure.Button
                     className={`${
                       open ? "rounded-t-lg" : "rounded-lg"
-                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-900 bg-blue-100 bg-opacity-70 hover:bg-blue-200 hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75`}
+                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-gray-700 bg-opaque-blue hover:bg-blue-200 hover:bg-opacity-70 ease-out duration-300
+                    focus:outline-none
+                    focus:ring-4
+                    focus:ring-white`}
                   >
                     <span>{item.question}</span>
                     <HiChevronDown
                       className={`${
                         open ? "transform rotate-180" : ""
-                      } w-5 h-5 text-blue-500`}
+                      } w-5 h-5 text-gray-50`}
                     />
                   </Disclosure.Button>
                   <Transition
@@ -46,7 +49,7 @@ const FAQ = () => {
                   >
                     <Disclosure.Panel
                       static
-                      className="text-left text-base sm:text-lg text-gray-700 px-8 py-2 bg-blue-100 bg-opacity-70 rounded-b-lg"
+                      className="text-left text-base sm:text-lg text-gray-700 px-8 py-2 bg-opaque-blue rounded-b-lg"
                       dangerouslySetInnerHTML={{ __html: item.answer }}
                     />
                   </Transition>
