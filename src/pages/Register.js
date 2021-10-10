@@ -369,7 +369,7 @@ const Register = () => {
             <Form className="flex flex-col">
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
-                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                     Welcome Hacker!
                   </p>
                   <Field type="text" name="firstName">
@@ -407,7 +407,7 @@ const Register = () => {
                     disabled={isUploading}
                     title=" Upload Resume"
                   />
-                  <div className="lg:hidden flex flex-col text-gray-700">
+                  <div className="lg:hidden flex flex-col text-gray-50">
                     {resume ? (
                       <>
                         <p>{"Filename: " + resume.name}</p>
@@ -428,7 +428,7 @@ const Register = () => {
                     zIndex="80"
                   />
                 </div>
-                <div className="hidden text-gray-700 lg:flex lg:flex-col">
+                <div className="hidden text-gray-50 lg:flex lg:flex-col">
                   {resume ? (
                     <>
                       <p>{"Filename: " + resume.name}</p>
@@ -442,10 +442,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col mt-2">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                   About You
                 </p>
-                <p className="mt-2 w-full space-y-4 font-palanquin text-gray-700">
+                <p className="mt-2 w-full space-y-4 font-palanquin text-gray-50">
                   Let&apos;s learn more about you.
                 </p>
                 <OptionSelector
@@ -557,7 +557,7 @@ const Register = () => {
                       id={"Day"}
                       name={"Day"}
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-50 placeholder-opacity-75 text-gray-50 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
                     />
                   )}
@@ -579,7 +579,7 @@ const Register = () => {
                       value={monthBirth} // mandatory
                       onChange={setMonthBirth}
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-50 placeholder-opacity-75 text-gray-50 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
                     />
                   )}
@@ -604,7 +604,7 @@ const Register = () => {
                       value={yearBirth} // mandatory
                       onChange={setYearBirth}
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-50 placeholder-opacity-75 text-gray-50 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
                     />
                   )}
@@ -618,7 +618,7 @@ const Register = () => {
                 </ErrorMessage>
               </div>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                   Contact Information
                 </p>
                 <div className="flex flex-col">
@@ -651,10 +651,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                   School Information
                 </p>
-                <div className="flex flex-col mt-4 text-gray-700">
+                <div className="flex flex-col mt-4 text-gray-50">
                   <ReactSelect
                     options={schools}
                     value={schoolOption}
@@ -679,12 +679,12 @@ const Register = () => {
                       MenuList: CustomMenuList,
                       DropdownIndicator: DropdownIndicator,
                     }}
-                    className="text-gray-700"
+                    className="text-gray-50"
                     styles={{
                       placeholder: (provided) => ({
                         ...provided,
-                        color: "rgb(74, 75, 77)",
-                        fontFamily: "Palanquin Light, sans-serif",
+                        color: "rgb(255, 255, 255)",
+                        fontFamily: "Palanquin Regular, sans-serif",
                       }),
                       control: (provided) => ({
                         ...provided,
@@ -700,7 +700,7 @@ const Register = () => {
                       }),
                       singleValue: (provided) => ({
                         ...provided,
-                        color: "rgb(74, 75, 77)",
+                        color: "rgb(255, 255, 255)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -718,7 +718,7 @@ const Register = () => {
                       },
                       input: (provided) => ({
                         ...provided,
-                        color: "rgb(74, 75, 77)",
+                        color: "rgb(255, 255, 255)",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -826,7 +826,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+              <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                 Hackathon Information
               </p>
               <div className="flex flex-col justify-center font-palanquin">
@@ -844,12 +844,12 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin mt-4">
                     <div className="w-full space-y-4 flex-1">
                       <label>
-                        <span className="text-gray-700">
+                        <span className="text-gray-50">
                           Why are you attending Knight Hacks?
                         </span>
                         <textarea
                           {...field}
-                          className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
+                          className="text-gray-50 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -868,12 +868,12 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin my-4">
                     <div className="flex-1">
                       <label>
-                        <span className="text-gray-700">
+                        <span className="text-gray-50">
                           What do you hope to learn at Knight Hacks?
                         </span>
                         <textarea
                           {...field}
-                          className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
+                          className="text-gray-50 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -888,10 +888,10 @@ const Register = () => {
                 )}
               </Field>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                   External Links
                 </p>
-                <p className="mt-4 w-full space-y-4 font-palanquin text-gray-700">
+                <p className="mt-4 w-full space-y-4 font-palanquin text-gray-50">
                   Note: these are{" "}
                   <span className="font-palanquinbold">optional</span>, but most
                   technical applications ask for them! Make a Github / LinkedIn
@@ -907,7 +907,7 @@ const Register = () => {
                 </Field>
               </div>
               <div className="flex flex-col space-y-8 mt-4 ml-4">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-700 text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-gray-50 text-xl">
                   Last Step!
                 </p>
                 <label className="flex flex-col">
@@ -917,7 +917,7 @@ const Register = () => {
                       name="mlh1"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                    <p className="w-5/6 font-palanquinregular text-gray-50">
                       Have you read and understood the{" "}
                       <a
                         href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
@@ -946,7 +946,7 @@ const Register = () => {
                       name="mlh2"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                    <p className="w-5/6 font-palanquinregular text-gray-50">
                       I authorize you to share my application/registration
                       information with Major League Hacking for event
                       administration, ranking, and MLH administration in-line
@@ -988,7 +988,7 @@ const Register = () => {
                       name="mlh3"
                       className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-gray-700">
+                    <p className="w-5/6 font-palanquinregular text-gray-50">
                       I authorize Major League Hacking to send me occasional
                       messages about hackathons including pre- and post-event
                       informational emails.
@@ -1074,7 +1074,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
+            w-full bg-opaque-blue rounded-xl placeholder-gray-50 text-gray-50 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -1107,7 +1107,7 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
 
   return (
     <div className="h-full justify-center items-center flex-1 flex flex-col">
-      <p className="mt-3 font-palanquin text-gray-700">Resume (PDF)</p>
+      <p className="mt-3 font-palanquin text-gray-50">Resume (PDF)</p>
       <button
         onClick={handleClick}
         type="button"
@@ -1164,7 +1164,7 @@ const OptionSelector = ({
     >
       <span
         className={
-          flex === "col" ? "flex self-start text-gray-700 text-md" : undefined
+          flex === "col" ? "flex self-start text-gray-50 text-md" : undefined
         }
       >
         {title}
@@ -1175,8 +1175,8 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-md text-gray-700">
-            <span className="block truncate text-gray-700 font-medium">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-md text-gray-50">
+            <span className="block truncate text-gray-50 font-medium">
               {selectedTrack}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -1195,7 +1195,7 @@ const OptionSelector = ({
               <Listbox.Option
                 key={trackIdx}
                 className={({ active }) =>
-                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-700"}
+                  `${active ? "text-blue-900 bg-blue-100" : "text-gray-50"}
                           cursor-default select-none relative py-2 pl-10 pr-4`
                 }
                 value={track}
