@@ -15,7 +15,7 @@ import NewEa from "../assets/newEA.png";
  * @author Rob
  */
 const Sponsors = () => {
-  const sponsorsIncomplete = true;
+  const sponsorsIncomplete = false;
   if (sponsorsIncomplete) {
     return (
       <>
@@ -89,7 +89,7 @@ const Sponsors = () => {
         </div>
       </div>
 
-      <div className="text-center sm:text-xl  md:text-3xl lg:text-4xl xl:text-5xl mb-4 space-x-4 mt-8  font-palanquin font-bold">
+      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
         GOLD
       </div>
 
@@ -101,7 +101,7 @@ const Sponsors = () => {
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl space-x-4 font-palanquin font-bold mt-8">
+      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
         SILVER
       </div>
       <div>_____________________________________</div>
@@ -112,11 +112,11 @@ const Sponsors = () => {
           alt="test logo"
         />
       </div>
-      <div className="text-center sm:text-xl mt-10 md:text-3xl lg:text-4xl xl:text-5xl sm:mt-8 sm:mb-.5 space-x-4  mb-2 font-palanquin font-bold">
+      <div className="text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
         BRONZE
       </div>
       <div>_____________________________________</div>
-      <div className="flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-96 2xl:-space-x-96  ">
+      <div className="mt-2 flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-96 2xl:-space-x-96  ">
         <img className="transform scale-50  " src={Google} alt="test logo" />
         <img
           className=" transform scale-50  2xl:scale-60 2xl:mr-24"
@@ -131,7 +131,7 @@ const Sponsors = () => {
           alt="EA Logo"
         />
       </div>
-      <div className="text-center sm:text-xl mt-4 md:text-3xl lg:text-4xl xl:text-5xl space-x-4 font-palanquin font-bold mt-14">
+      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4 mt-14">
         PARTNER ORGANIZATIONS
       </div>
       <div>_____________________________________</div>
