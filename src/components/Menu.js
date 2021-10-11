@@ -20,7 +20,7 @@ const Menu = ({ open, setOpen }) => {
         }
       >
         <CgMenu
-          className="text-4xl md:text-5xl cursor-pointer text-gray-700"
+          className="text-4xl md:text-5xl cursor-pointer text-darkblue"
           onClick={() => setOpen(!open)}
         />
         <div className="flex-1 sm:flex-none flex justify-end">
@@ -31,12 +31,12 @@ const Menu = ({ open, setOpen }) => {
         <a
           id="mlh-trust-badge"
           className="block w-12 sm:w-20 sm:mr-6 md:w-24 md:mr-8 lg:mr-20 mr-2"
-          href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=black"
+          href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=gray"
           target="_blank"
           rel="noreferrer"
         >
           <img
-            src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-black.svg"
+            src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-gray.svg"
             alt="Major League Hacking 2022 Hackathon Season"
           />
         </a>
@@ -66,7 +66,7 @@ const Menu = ({ open, setOpen }) => {
             <div className="sm:inline-block px-6 pt-6 mt-8 text-left align-middle transition-all transform">
               <Dialog.Title
                 as="div"
-                className="leading-6 text-gray-700 flex flex-row sm:space-x-8 w-full"
+                className="leading-6 text-darkblue flex flex-row sm:space-x-8 w-full"
               >
                 <CgMenu
                   className="text-4xl md:text-5xl cursor-pointer"
@@ -91,7 +91,7 @@ const Menu = ({ open, setOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
-                  <ul className="text-4xl sm:text-5xl text-gray-700 inline-flex flex-col font-sansita">
+                  <ul className="text-4xl sm:text-5xl text-darkblue inline-flex flex-col font-sansita">
                     <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
                       <Link
                         to="/"

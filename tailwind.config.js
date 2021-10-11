@@ -5,6 +5,15 @@ module.exports = {
     textColor: {
       darkblue: "#0B2D4F",
     },
+    borderColor: (theme) => ({
+      ...theme("textColor"),
+    }),
+    ringColor: (theme) => ({
+      ...theme("textColor"),
+    }),
+    placeholderColor: (theme) => ({
+      ...theme("textColor"),
+    }),
     extend: {
       screens: {
         xxs: "300px",
@@ -34,6 +43,7 @@ module.exports = {
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
         "opaque-blue": "rgba(159, 211, 233, 0.47)",
+        ...theme("textColor"),
       }),
       fontFamily: {
         sansita: ["Sansita Black Italic", "sans-serif"],

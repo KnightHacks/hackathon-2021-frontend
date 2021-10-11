@@ -9,7 +9,7 @@ const VolumeButton = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "#374151",
+        color: "#0B2D4F",
         className: "text-4xl md:text-5xl cursor-pointer",
       }}
     >
