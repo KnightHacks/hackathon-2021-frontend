@@ -105,11 +105,6 @@ const Register = () => {
   // user validation dialog
   const [shouldOpen, setShouldOpen] = useState(false);
 
-  // birthday
-  const [yearBirth, setYearBirth] = useState(null);
-  const [monthBirth, setMonthBirth] = useState(null);
-  const [dayBirth, setDayBirth] = useState(null);
-
   const [response, setResponse] = useState(null);
 
   const [resumeID, setResumeID] = useState(null);
@@ -138,9 +133,7 @@ const Register = () => {
 
   const submitRegistration = async (values) => {
     // Combining date of birth fields and converting to iso8601
-    const dateOfBirth = new Date(
-      dayBirth + monthBirth + yearBirth
-    ).toISOString();
+    const dateOfBirth = `${values.year}-${values.month}-${values.day}`;
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -156,7 +149,7 @@ const Register = () => {
           email: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
-          dateOfBirth: values.dateOfBirth,
+          dateOfBirth: dateOfBirth,
           phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
@@ -321,7 +314,15 @@ const Register = () => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, status, setStatus, submitForm }) => (
+        {({
+          values,
+          isSubmitting,
+          errors,
+          status,
+          setStatus,
+          submitForm,
+          setFieldValue,
+        }) => (
           <>
             <Dialog
               open={shouldOpen}
@@ -548,17 +549,15 @@ const Register = () => {
                   {({ field }) => (
                     <DayPicker
                       defaultValue={"Birth Date"}
-                      year={yearBirth} // mandatory
-                      month={monthBirth} // mandatory
+                      year={values.year} // mandatory
+                      month={values.month} // mandatory
                       endYearGiven // mandatory if end={} is given in YearPicker
-                      required={true} // default is false
-                      value={dayBirth} // mandatory
-                      onChange={setDayBirth}
                       id={"Day"}
-                      name={"Day"}
                       classes={
                         "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
+                      {...field}
+                      onChange={(v) => setFieldValue(field.name, v)}
                     />
                   )}
                 </Field>
@@ -574,13 +573,12 @@ const Register = () => {
                     <MonthPicker
                       defaultValue={"Birth Month"}
                       endYearGiven // mandatory if end={} is given in YearPicker
-                      year={yearBirth} // mandatory
-                      required={true} // default is false
-                      value={monthBirth} // mandatory
-                      onChange={setMonthBirth}
+                      year={values.year} // mandatory
                       classes={
                         "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
+                      {...field}
+                      onChange={(v) => setFieldValue(field.name, v)}
                     />
                   )}
                 </Field>
@@ -598,14 +596,12 @@ const Register = () => {
                       start={1950} // default is 1900
                       end={2020} // default is current year
                       reverse
-                      required={true}
                       id={"Year"}
-                      name={"Year"}
-                      value={yearBirth} // mandatory
-                      onChange={setYearBirth}
                       classes={
                         "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
                       }
+                      {...field}
+                      onChange={(v) => setFieldValue(field.name, v)}
                     />
                   )}
                 </Field>
@@ -1238,7 +1234,7 @@ const createHacker = async ({
   email,
   firstName: first_name,
   lastName: last_name,
-  dateOfBirth: date_of_birth,
+  dateOfBirth: birthday,
   phoneNumber: phone_number,
   canShareInfo: can_share_info,
   isBeginner: beginner,
@@ -1246,7 +1242,7 @@ const createHacker = async ({
   pronouns,
   college,
   major,
-  levelOfStudy,
+  levelOfStudy: level_of_study,
   graduation: graduation_date,
   github,
   linkedIn: linkedin,
@@ -1265,7 +1261,7 @@ const createHacker = async ({
       college,
       graduation_date,
       major,
-      levelOfStudy,
+      level_of_study,
     },
     email,
     ethnicity,
@@ -1273,6 +1269,7 @@ const createHacker = async ({
     last_name,
     phone_number,
     pronouns,
+    birthday,
     socials: {
       github,
       linkedin,
