@@ -30,7 +30,7 @@ const Page = ({ children, onLanding, title }) => {
           <Menu open={open} setOpen={setOpen} />
         </div>
 
-        <div className="sm:col-span-3 text-white w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
+        <div className="sm:col-span-3 text-gray-700 w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
           <div className="flex items-center w-full h-19/20 sm:h-full backdrop-filter backdrop-blur-sm bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
