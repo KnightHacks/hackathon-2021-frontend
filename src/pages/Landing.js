@@ -35,8 +35,8 @@ const Landing = () => {
               mt-4 md:mt-8
               hover:border-darkblue hover:shadow-lg
               transition duration-1000 ease-in-out
-              hover:scale-110
-              hover:text-darkblue
+              hover:text-purewhite
+              hover:bg-darkblue
               shadow-md
               focus:outline-none
               focus:ring-4
@@ -58,7 +58,9 @@ const Landing = () => {
                 border-darkblue border-4
                 rounded-xl text-lg
                 font-palanquin
-                hover:border-darkblue
+                hover:text-purewhite
+                hover:bg-darkblue
+                hover:bg-opacity-70
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
@@ -88,7 +90,9 @@ const Landing = () => {
                 border-darkblue border-4
                 rounded-xl text-lg
                 font-palanquin
-                hover:border-darkblue
+                hover:text-purewhite
+                hover:bg-darkblue
+                hover:bg-opacity-70
                 hover:shadow-md
                 hover:bg-gradient-to-r
                 ease-out duration-300
@@ -118,7 +122,9 @@ const Landing = () => {
               border-darkblue border-4
               rounded-xl text-lg
               font-palanquin
-              hover:border-darkblue
+              hover:text-purewhite
+              hover:bg-darkblue
+              hover:bg-opacity-70
               hover:shadow-md
               hover:bg-gradient-to-r
               ease-out duration-300
