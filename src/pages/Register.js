@@ -124,15 +124,12 @@ const Register = () => {
     const dateOfBirth = `${values.year}-${values.month}-${values.day}`;
     switch (registrationState) {
       case "pending":
-        console.log("in proccess");
         break;
       case "success":
         window.open("/success");
-        console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
-
         const response = await createHacker({
           email: values.email,
           firstName: values.firstName,
@@ -205,7 +202,7 @@ const Register = () => {
   if (window.innerWidth <= 470) {
     return (
       <>
-        <Page onLanding={false}>
+        <Page>
           <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
             Register
           </h1>
@@ -223,7 +220,7 @@ const Register = () => {
   }
 
   return (
-    <Page title="Knight Hacks | Register" onLanding={false}>
+    <Page title="Knight Hacks | Register">
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
