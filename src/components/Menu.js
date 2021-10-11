@@ -20,7 +20,7 @@ const Menu = ({ open, setOpen }) => {
         }
       >
         <CgMenu
-          className="text-4xl md:text-5xl cursor-pointer text-white"
+          className="text-4xl md:text-5xl cursor-pointer text-gray-700"
           onClick={() => setOpen(!open)}
         />
         <div className="flex-1 sm:flex-none flex justify-end">
@@ -66,7 +66,7 @@ const Menu = ({ open, setOpen }) => {
             <div className="sm:inline-block px-6 pt-6 mt-8 text-left align-middle transition-all transform">
               <Dialog.Title
                 as="div"
-                className="leading-6 text-white flex flex-row sm:space-x-8 w-full"
+                className="leading-6 text-gray-700 flex flex-row sm:space-x-8 w-full"
               >
                 <CgMenu
                   className="text-4xl md:text-5xl cursor-pointer"
@@ -91,7 +91,7 @@ const Menu = ({ open, setOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
-                  <ul className="text-4xl sm:text-5xl text-white inline-flex flex-col font-sansita">
+                  <ul className="text-4xl sm:text-5xl text-gray-700 inline-flex flex-col font-sansita">
                     <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
                       <Link
                         to="/"
