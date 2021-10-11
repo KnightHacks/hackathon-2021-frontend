@@ -141,7 +141,7 @@ const Register = () => {
           ethnicity: values.ethnicity,
           country: values.country,
           pronouns: values.pronoun,
-          college: values.school.value,
+          college: values.school,
           major: values.major,
           levelOfStudy: values.levelOfStudy,
           graduation: values.graduation,
