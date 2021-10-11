@@ -554,7 +554,7 @@ const Register = () => {
                       endYearGiven // mandatory if end={} is given in YearPicker
                       id={"Day"}
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-700 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 break-words shadow-md font-palanquinregular"
                       }
                       {...field}
                       onChange={(v) => setFieldValue(field.name, v)}
@@ -575,7 +575,7 @@ const Register = () => {
                       endYearGiven // mandatory if end={} is given in YearPicker
                       year={values.year} // mandatory
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-700 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 break-words shadow-md font-palanquinregular"
                       }
                       {...field}
                       onChange={(v) => setFieldValue(field.name, v)}
@@ -598,7 +598,7 @@ const Register = () => {
                       reverse
                       id={"Year"}
                       classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular"
+                        "w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light py-1 px-4 border-2 border-gray-700 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 break-words shadow-md font-palanquinregular"
                       }
                       {...field}
                       onChange={(v) => setFieldValue(field.name, v)}
@@ -679,7 +679,7 @@ const Register = () => {
                     styles={{
                       placeholder: (provided) => ({
                         ...provided,
-                        color: "rgb(74, 75, 77)",
+                        color: "#374151",
                         fontFamily: "Palanquin Light, sans-serif",
                       }),
                       control: (provided) => ({
@@ -687,16 +687,16 @@ const Register = () => {
                         backgroundColor: "rgba(159, 211, 233, 0.47)",
                         borderWidth: "2px",
                         borderRadius: "0.5rem",
-                        borderColor: "rgb(249, 250, 251)",
+                        borderColor: "#374151",
                         "&:hover": {
-                          borderColor: "rgb(191, 219, 254)",
+                          borderColor: "#374151",
                         },
                         paddingTop: "0.1rem",
                         paddingBottom: "0.1rem",
                       }),
                       singleValue: (provided) => ({
                         ...provided,
-                        color: "rgb(74, 75, 77)",
+                        color: "#374151",
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem",
                       }),
@@ -845,7 +845,7 @@ const Register = () => {
                         </span>
                         <textarea
                           {...field}
-                          className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 w-full px-4 py-2"
+                          className="text-gray-700 h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-700 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -869,7 +869,7 @@ const Register = () => {
                         </span>
                         <textarea
                           {...field}
-                          className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-50 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white p-2 px-4 py-2"
+                          className="text-gray-700 h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-gray-700 hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -911,7 +911,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh1"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-gray-700 rounded-md"
                     />
                     <p className="w-5/6 font-palanquinregular text-gray-700">
                       Have you read and understood the{" "}
@@ -940,7 +940,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh2"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-gray-700 rounded-md"
                     />
                     <p className="w-5/6 font-palanquinregular text-gray-700">
                       I authorize you to share my application/registration
@@ -982,7 +982,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh3"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-white rounded-md"
+                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-gray-700 rounded-md"
                     />
                     <p className="w-5/6 font-palanquinregular text-gray-700">
                       I authorize Major League Hacking to send me occasional
@@ -1033,6 +1033,7 @@ const Register = () => {
                     }
                   }}
                   className={`
+              text-gray-50
               border-2
               border-green-800
               cursor-pointer
@@ -1070,7 +1071,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-50 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white break-words shadow-md font-palanquinregular
+            w-full bg-opaque-blue rounded-xl placeholder-gray-700 placeholder-opacity-75 text-gray-700 font-light p-2 px-4 py-2 border-2 border-gray-700 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -1118,8 +1119,8 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-green-600
               `}
       >
-        <HiOutlineUpload className="mt-1 mr-2 " />
-        <p className="truncate ">{title}</p>
+        <HiOutlineUpload className="mt-1 mr-2 text-gray-50" />
+        <p className="truncate text-gray-50">{title}</p>
       </button>
       <input
         type="file"
@@ -1171,7 +1172,7 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-50 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-white sm:text-md text-gray-700">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-gray-700 bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:text-md text-gray-700">
             <span className="block truncate text-gray-700 font-medium">
               {selectedTrack}
             </span>

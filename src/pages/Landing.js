@@ -30,13 +30,13 @@ const Landing = () => {
             className={`
               font-palanquin
               px-4 sm:px-6 md:px-12 py-2
-              border-indigo-50 border-4 md:border-4
+              border-gray-700 border-4 md:border-4
               rounded-xl text-xl sm:text-3xl md:text-4xl
               mt-4 md:mt-8
-              hover:border-white hover:shadow-lg
+              hover:border-green-600 hover:shadow-lg
               transition duration-1000 ease-in-out
               hover:scale-110
-              hover:text-white
+              hover:text-green-600
               shadow-md
               focus:outline-none
               focus:ring-4
@@ -55,7 +55,7 @@ const Landing = () => {
                 relative group
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
-                border-indigo-50 border-4
+                border-gray-700 border-4
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
@@ -85,7 +85,7 @@ const Landing = () => {
                 relative group
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
-                border-indigo-50 border-4
+                border-gray-700 border-4
                 rounded-xl text-lg
                 font-palanquin
                 hover:border-white
@@ -115,7 +115,7 @@ const Landing = () => {
               relative group
               overflow-hidden
               px-4 break-words md:px-10 py-2 md:mx-3 mt-4
-              border-indigo-50 border-4
+              border-gray-700 border-4
               rounded-xl text-lg
               font-palanquin
               hover:border-white

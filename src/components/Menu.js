@@ -31,12 +31,12 @@ const Menu = ({ open, setOpen }) => {
         <a
           id="mlh-trust-badge"
           className="block w-12 sm:w-20 sm:mr-6 md:w-24 md:mr-8 lg:mr-20 mr-2"
-          href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=white"
+          href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=black"
           target="_blank"
           rel="noreferrer"
         >
           <img
-            src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-white.svg"
+            src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-black.svg"
             alt="Major League Hacking 2022 Hackathon Season"
           />
         </a>
