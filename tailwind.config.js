@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     textColor: {
       darkblue: "#0B2D4F",
+      purewhite: "#FFFFFF",
     },
     borderColor: (theme) => ({
       ...theme("textColor"),

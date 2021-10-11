@@ -940,7 +940,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh2"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-darkblue rounded-md"
+                      className="w-6 h-6 form-checkbox text-darkblue focus:ring-1 focus:ring-darkblue rounded-md"
                     />
                     <p className="w-5/6 font-palanquinregular text-darkblue">
                       I authorize you to share my application/registration
@@ -982,7 +982,7 @@ const Register = () => {
                     <Field
                       type="checkbox"
                       name="mlh3"
-                      className="w-6 h-6 form-checkbox text-green-700 focus:ring-1 focus:ring-darkblue rounded-md"
+                      className="w-6 h-6 form-checkbox text-darkblue focus:ring-1 focus:ring-darkblue rounded-md"
                     />
                     <p className="w-5/6 font-palanquinregular text-darkblue">
                       I authorize Major League Hacking to send me occasional
@@ -1039,8 +1039,9 @@ const Register = () => {
               cursor-pointer
               bg-gray-50 rounded-lg m-6 py-2 px-4
               hover:bg-darkblue
-              hover:text-darkblue
+              hover:text-purewhite
               hover:border-darkblue
+              font-palanquinregular
               w-72
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue
             `}
@@ -1111,18 +1112,18 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
         type="button"
         disabled={disabled}
         className={`
-              bg-darkblue border-2 border-darkblue rounded-lg mx-4 md:my-3 py-1.5 px-4
+              bg-gray-50 border-2 border-darkblue rounded-lg mx-4 md:my-3 py-1.5 px-4
               shadow-md
               max-w-xswidth truncate
-              text-white
               hover:bg-darkblue
+              hover:text-purewhite
               hover:border-darkblue
               flex justify-center
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue
               `}
       >
         <HiOutlineUpload className="mt-1 mr-2 text-white" />
-        <p className="truncate text-white">{title}</p>
+        <p className="truncate text-white font-palanquinregular">{title}</p>
       </button>
       <input
         type="file"
