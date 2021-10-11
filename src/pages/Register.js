@@ -1277,7 +1277,7 @@ const createHacker = async ({
     why_attend,
     what_learn: [what_learn],
     dietary_restrictions,
-    resume_id,
+    resume_id: resume_id ?? undefined,
     mlh: {
       mlh_code_of_conduct,
       mlh_privacy_and_contest_terms,
