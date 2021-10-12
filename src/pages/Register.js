@@ -186,7 +186,7 @@ const Register = () => {
     ethnicity: yup
       .string()
       .oneOf(ethnicityOptions, "Ethnicity option is required."),
-    country: yup.string().oneOf(countries, "Country option is required."),
+    country: yup.string().notOneOf(["Country"], "Country option is required."),
     school: yup.string().notOneOf(["School Name"], "School name is required."),
     graduation: yup
       .string()
@@ -522,12 +522,12 @@ const Register = () => {
               <div className="font-palanquin flex flex-col">
                 <Field name="country" type="select">
                   {({ field }) => (
-                    <OptionSelector
-                      trackOptions={countries}
-                      selectedTrack={values.country}
-                      setSelectedTrack={(option) => {
+                    <ReactSelect
+                      options={countries}
+                      value={{ value: values.country, label: values.country }}
+                      onChange={(option) => {
                         const selectPromise = new Promise((resolve) => {
-                          setFieldValue(field.name, option);
+                          setFieldValue(field.name, option.label);
                           resolve();
                         });
 
@@ -535,13 +535,57 @@ const Register = () => {
                           setFieldTouched(field.name);
                         });
                       }}
-                      handleTouched={() => {
-                        if (touched.pronoun == null) {
-                          setFieldTouched(field.name);
-                        }
+                      isSearchable
+                      components={{
+                        DropdownIndicator: DropdownIndicator,
                       }}
-                      flex="col"
-                      zIndex="50"
+                      className="text-darkblue"
+                      styles={{
+                        placeholder: (provided) => ({
+                          ...provided,
+                          color: "#0B2D4F",
+                          fontFamily: "Palanquin Light, sans-serif",
+                        }),
+                        control: (provided) => ({
+                          ...provided,
+                          backgroundColor: "rgba(159, 211, 233, 0.47)",
+                          borderWidth: "2px",
+                          borderRadius: "0.5rem",
+                          borderColor: "#0B2D4F",
+                          "&:hover": {
+                            borderColor: "#0B2D4F",
+                          },
+                          paddingTop: "0.1rem",
+                          paddingBottom: "0.1rem",
+                        }),
+                        singleValue: (provided) => ({
+                          ...provided,
+                          color: "#0B2D4F",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        }),
+                        option: (provided, state) => {
+                          const backgroundColor = state.isSelected
+                            ? "rgb(219, 234, 254)"
+                            : "";
+                          return {
+                            ...provided,
+                            backgroundColor: backgroundColor,
+                            color: "rgb(17, 24, 39)",
+                            fontSize: "0.875rem",
+                            lineHeight: "1.25rem",
+                          };
+                        },
+                        input: (provided) => ({
+                          ...provided,
+                          color: "rgb(74, 75, 77)",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        }),
+                      }}
+                      onMenuOpen={() => {
+                        setFieldTouched(field.name);
+                      }}
                     />
                   )}
                 </Field>
