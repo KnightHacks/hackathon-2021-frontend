@@ -92,7 +92,7 @@ const Menu = ({ open, setOpen }) => {
               >
                 <div className="mt-2 inline-block">
                   <ul className="text-4xl sm:text-5xl text-darkblue inline-flex flex-col font-sansita">
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700 focus:outline-none">
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
