@@ -26,8 +26,7 @@ const Sponsors = () => {
               Coming soon!
             </div>
             <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-              Keep an eye out on this page for updates on this page in the
-              upcoming weeks.
+              Keep an eye out on this page for updates in the upcoming weeks.
             </div>
           </div>
         </Page>
