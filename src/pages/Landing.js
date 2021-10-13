@@ -16,7 +16,7 @@ const Landing = () => {
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-20">
           <img clasName="scale-50" src={darklogo} />
-          <p className="mt-4 text-xl w-full text-center font-palanquin">
+          <p className="mt-4 text-xl w-full text-center font-palanquinbold">
             November 12th - November 14th, 2021
           </p>
           <Link
