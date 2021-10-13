@@ -133,7 +133,11 @@ const Register = () => {
 
   const submitRegistration = async (values) => {
     // Combining date of birth fields and converting to iso8601
-    const dateOfBirth = `${values.year}-${values.month}-${values.day}`;
+    const dateOfBirth = new Date(
+      values.year,
+      values.month,
+      values.day
+    ).toISOString();
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
