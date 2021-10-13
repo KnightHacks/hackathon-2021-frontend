@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
-import darklogo from "../assets/outlinelogo.png";
+import darklogo from "../assets/Navy_Gi_Logo_-_Transparent.png";
 
 /**
  * @desc Renders Landing page of the site
