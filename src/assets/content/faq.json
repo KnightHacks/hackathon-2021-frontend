@@ -20,6 +20,12 @@
     "answer": "<p>Knight Hacks welcomes students of all skill levels. In previous years, about half of the students have attended Knight Hacks as their first hackathon. We’ll have talks, mentors and workshops to help you with your project. Hackathons can be a great place to learn new skills in a short amount of time. Just be eager to learn, and excited to meet lots of awesome people.</p>"
   },
   {
+    "question": "Which track should I follow?",
+    "answer": [
+      "<p>Beginner Track is suggested for those that have attended 0-2 hackathons before, have 0-2 personal projects, little to no experience using GitHub. Advanced Track is suggested for those that have attended 2+ hackathons before, have 2+ personal projects, and previous experience using GitHub.</p>"
+    ]
+  },
+  {
     "question": "What kind of workshops, talks, and activities will there be?",
     "answer": "<p>Previously, we’ve held workshops and talks for a range of skill levels from beginner to advanced like Intro to Web Development and Virtual Reality. We’ve also had introductory workshops to various programming tools such as APIs, databases and platforms. Whether it’s for relaxation or health, novelty or competition, our team has something exciting prepared for you!</p>"
   },
