@@ -139,16 +139,17 @@ const Register = () => {
 
     let updatedMonth = values.month;
     let updatedDay = values.day;
-    if (values.month < 10) {
+    if (parseInt(values.month) < 10) {
       updatedMonth = "0" + values.month;
     }
 
-    if (values.day < 10) {
+    if (parseInt(values.day) < 10) {
       updatedDay = "0" + values.day;
     }
+    const dateOfBirth = new Date(
+      `${values.year}-${updatedMonth}-${updatedDay}`
+    ).toISOString();
 
-    const date = `${values.year}-${updatedMonth}-${updatedDay}`;
-    const dateOfBirth = new Date(date).toISOString();
     console.log("Date of birth: " + dateOfBirth);
 
     switch (registrationState) {
