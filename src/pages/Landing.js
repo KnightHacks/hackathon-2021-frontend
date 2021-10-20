@@ -1,6 +1,7 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
-import darklogo from "../assets/outlinelogo.png";
+import darklogo from "../assets/Navy_Gi_Logo_-_Transparent.png";
 
 /**
  * @desc Renders Landing page of the site
@@ -8,14 +9,18 @@ import darklogo from "../assets/outlinelogo.png";
  */
 const Landing = () => {
   return (
-    <Page title="Knight Hacks">
-      <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-28">
-        <img clasName="scale-50" src={darklogo} />
-        <p className="text-xl w-full text-center font-palanquin">
-          November 12th - November 14th, 2021
-        </p>
-        <Link
-          className={`
+    <>
+      <Helmet>
+        <title>Knight Hacks</title>
+      </Helmet>
+      <Page onLanding={true}>
+        <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-20">
+          <img clasName="scale-50" src={darklogo} />
+          <p className="mt-4 text-xl w-full text-center font-palanquinbold">
+            November 12th - November 14th, 2021
+          </p>
+          <Link
+            className={`
               font-palanquin
               px-4 sm:px-6 md:px-12 py-2
               border-darkblue border-4 md:border-4
@@ -30,16 +35,16 @@ const Landing = () => {
               focus:ring-4
               focus:ring-darkblue
             `}
-          to="/register"
-        >
-          <p className=" tracking-widest select-none" unselectable="on">
-            REGISTER
-          </p>
-        </Link>
-        <div className="flex flex-col md:flex-row">
-          <a
-            href="mailto:sponsorship@knighthacks.org"
-            className={`
+            to="/register"
+          >
+            <p className=" tracking-widest select-none" unselectable="on">
+              REGISTER
+            </p>
+          </Link>
+          <div className="flex flex-col md:flex-row">
+            <a
+              href="mailto:sponsorship@knighthacks.org"
+              className={`
                 relative group
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
@@ -57,21 +62,21 @@ const Landing = () => {
                 focus:ring-darkblue
                 shadow-sm
               `}
-          >
-            <span
-              className={`
+            >
+              <span
+                className={`
                 absolute rounded-xl
                 right-0 w-8 h-32 -mt-12
                 transition-all duration-1000 transform translate-x-12
                 bg-white opacity-10 rotate-12
                 group-hover:-translate-x-40 ease
                 `}
-            />
-            <p className="relative">Sponsor Us</p>
-          </a>
-          <a
-            href="https://discord.gg/CcZPUTFAuW"
-            className={`
+              />
+              <p className="relative">Sponsor Us</p>
+            </a>
+            <a
+              href="https://discord.gg/CcZPUTFAuW"
+              className={`
                 relative group
                 overflow-hidden
                 px-4 py-2 md:mx-3 mt-4
@@ -89,21 +94,21 @@ const Landing = () => {
                 focus:ring-darkblue
                 shadow-sm
               `}
-          >
-            <span
-              className={`
+            >
+              <span
+                className={`
                 absolute rounded-xl
                 right-0 w-8 h-32 -mt-12
                 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
                 group-hover:-translate-x-40 ease
                 `}
-            />
-            <p className="relative">Join Discord</p>
-          </a>
-        </div>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSeEFBCaQCqMZdN2cYgYhVCC1kAERxvWqWF_dJZqrxSDMsMuPA/viewform"
-          className={`
+              />
+              <p className="relative">Join Discord</p>
+            </a>
+          </div>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeEFBCaQCqMZdN2cYgYhVCC1kAERxvWqWF_dJZqrxSDMsMuPA/viewform"
+            className={`
               relative group
               overflow-hidden
               px-4 break-words md:px-10 py-2 md:mx-3 mt-4
@@ -121,19 +126,20 @@ const Landing = () => {
               focus:ring-darkblue
               shadow-sm
             `}
-        >
-          <span
-            className={`
+          >
+            <span
+              className={`
               absolute rounded-xl
               right-0 w-8 h-32 -mt-12
               transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12
               group-hover:-translate-x-40 ease
               `}
-          />
-          <p className="relative">Become a Mentor / Judge</p>
-        </a>
-      </div>
-    </Page>
+            />
+            <p className="relative">Become a Mentor / Judge</p>
+          </a>
+        </div>
+      </Page>
+    </>
   );
 };
 

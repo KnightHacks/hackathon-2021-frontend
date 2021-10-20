@@ -605,7 +605,7 @@ const Register = () => {
                 <Field type="text" name="day">
                   {({ field }) => (
                     <DayPicker
-                      defaultValue={"Birth Date"}
+                      defaultValue={"Birth Day"}
                       year={values.year} // mandatory
                       month={values.month} // mandatory
                       endYearGiven // mandatory if end={} is given in YearPicker
