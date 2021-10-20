@@ -6,7 +6,7 @@ import Page from "../components/Page";
  */
 const About = () => {
   return (
-    <Page title="Knight Hacks | About" onLanding={false}>
+    <Page title="Knight Hacks | About">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
         <h1 className="text-4xl sm:text-4xl mt-20 md:text-6xl text-center font-sansita">
           About Us
