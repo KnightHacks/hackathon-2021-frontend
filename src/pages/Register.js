@@ -150,7 +150,7 @@ const Register = () => {
       `${values.year}-${updatedMonth}-${updatedDay}`
     ).toISOString();
 
-    console.log("Date of birth: " + dateOfBirth);
+    // console.log("Date of birth: " + dateOfBirth);
 
     switch (registrationState) {
       case "pending":
