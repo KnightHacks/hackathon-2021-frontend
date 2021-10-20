@@ -9,7 +9,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
-import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
@@ -56,7 +55,6 @@ const Register = () => {
     "Summer 2024",
     "Fall 2024",
   ];
-
   const [schoolOption, setSchoolOption] = useState("School Name");
 
   const CustomOption = ({ children, ...props }) => {
@@ -133,11 +131,26 @@ const Register = () => {
 
   const submitRegistration = async (values) => {
     // Combining date of birth fields and converting to iso8601
-    const dateOfBirth = new Date(
-      values.year,
-      values.month,
-      values.day
-    ).toISOString();
+    // const dateOfBirth = new Date(
+    //   values.year,
+    //   values.month,
+    //   values.day
+    // ).toISOString();
+
+    let updatedMonth = values.month;
+    let updatedDay = values.day;
+    if (values.month < 10) {
+      updatedMonth = "0" + values.month;
+    }
+
+    if (values.day < 10) {
+      updatedDay = "0" + values.day;
+    }
+
+    const date = `${values.year}-${updatedMonth}-${updatedDay}`;
+    const dateOfBirth = new Date(date).toISOString();
+    console.log("Date of birth: " + dateOfBirth);
+
     switch (registrationState) {
       case "pending":
         console.log("in proccess");
@@ -550,20 +563,7 @@ const Register = () => {
               </div>
               <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
                 <Field type="text" name="day">
-                  {({ field }) => (
-                    <DayPicker
-                      defaultValue={"Birth Date"}
-                      year={values.year} // mandatory
-                      month={values.month} // mandatory
-                      endYearGiven // mandatory if end={} is given in YearPicker
-                      id={"Day"}
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="DD" field={field} />}
                 </Field>
                 <ErrorMessage name="day">
                   {(msg) => (
@@ -573,18 +573,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
                 <Field type="text" name="month">
-                  {({ field }) => (
-                    <MonthPicker
-                      defaultValue={"Birth Month"}
-                      endYearGiven // mandatory if end={} is given in YearPicker
-                      year={values.year} // mandatory
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="MM" field={field} />}
                 </Field>
                 <ErrorMessage name="month">
                   {(msg) => (
@@ -594,20 +583,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
                 <Field type="text" name="year">
-                  {({ field }) => (
-                    <YearPicker
-                      defaultValue={"Birth Year"}
-                      start={1950} // default is 1900
-                      end={2020} // default is current year
-                      reverse
-                      id={"Year"}
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="YYYY" field={field} />}
                 </Field>
                 <ErrorMessage name="year">
                   {(msg) => (
