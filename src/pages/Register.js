@@ -536,7 +536,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <div className="font-palanquin flex flex-col">
+              <div className="font-palanquin flex flex-col mt-4 w-full space-y-4 font-palanquin text-darkblue">
                 <Field name="country" type="select">
                   {({ field }) => (
                     <ReactSelect
