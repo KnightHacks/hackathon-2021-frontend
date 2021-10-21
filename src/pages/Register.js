@@ -136,7 +136,6 @@ const Register = () => {
     if (parseInt(values.day) < 10 && updatedDay.length < 2) {
       updatedDay = "0" + values.day;
     }
-
     const formattedDate =
       `${values.year}-${updatedMonth}-${updatedDay} ` +
       timestamp.toTimeString();
