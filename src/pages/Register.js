@@ -188,12 +188,25 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+  const dayRegExp = /(0[1-9]|[12][0-9]|3[01])/;
+  const monthRegExp = /(0[1-9]|1[0-2])/;
+  const yearRegExp = /\d{4}-/;
+
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    day: yup.string().required("Day is required."),
-    month: yup.string().required("Month is required."),
-    year: yup.string().required("Year is required."),
+    day: yup
+      .string()
+      .matches(dayRegExp, "Day is not valid.")
+      .required("Day is required."),
+    month: yup
+      .string()
+      .matches(monthRegExp, "Month is not valid.")
+      .required("Month is required."),
+    year: yup
+      .string()
+      .matches(yearRegExp, "Year is not valid.")
+      .required("Year is required."),
     email: yup
       .string()
       .email("Email is not valid.")
