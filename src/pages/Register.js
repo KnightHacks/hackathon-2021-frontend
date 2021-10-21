@@ -143,6 +143,7 @@ const Register = () => {
     ).toISOString();
 
     console.log("Date of birth: " + dateOfBirth);
+    console.log("Timestamp: " + Math.floor(new Date().getTime() / 1000));
 
     switch (registrationState) {
       case "pending":
