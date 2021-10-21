@@ -128,6 +128,7 @@ const Register = () => {
 
     let updatedMonth = values.month;
     let updatedDay = values.day;
+    let timestamp = new Date(Math.floor(new Date().getTime() / 1000));
     if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
       updatedMonth = "0" + values.month;
     }
@@ -135,9 +136,11 @@ const Register = () => {
     if (parseInt(values.day) < 10 && updatedDay.length < 2) {
       updatedDay = "0" + values.day;
     }
-    const dateOfBirth = new Date(
-      `${values.year}-${updatedMonth}-${updatedDay}`
-    ).toISOString();
+    const formattedDate =
+      `${values.year}-${updatedMonth}-${updatedDay} ` +
+      timestamp.toTimeString();
+
+    const dateOfBirth = new Date(formattedDate).toISOString();
 
     // console.log("Date of birth: " + dateOfBirth);
 
@@ -183,6 +186,10 @@ const Register = () => {
   };
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  // const dayRegExp = /(0[1-9]|[12][0-9]|3[01])/;
+  // const monthRegExp = /(0[1-9]|1[0-2])/;
+  // const yearRegExp = ^(19|20)\d{2}$;
 
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
@@ -625,7 +632,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="day">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
@@ -635,7 +642,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="month">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
@@ -645,7 +652,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="year">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
