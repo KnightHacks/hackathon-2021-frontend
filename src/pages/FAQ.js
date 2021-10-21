@@ -9,7 +9,7 @@ import list from "../assets/content/faq.json";
  */
 const FAQ = () => {
   return (
-    <Page title="Knight Hacks | FAQ" onLanding={false}>
+    <Page title="Knight Hacks | FAQ">
       <div className="flex justify-start items-center w-full flex-col my-4 md:my-12">
         <h1 className="text-4xl sm:text-4xl md:text-6xl mt-20 mb-4 font-sansita">
           FAQ

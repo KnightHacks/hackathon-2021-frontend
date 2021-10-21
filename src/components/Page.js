@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Menu from "./Menu";
-import { Link } from "react-router-dom";
 import { FaInstagram } from "react-icons/fa";
 import { TiSocialFacebook } from "react-icons/ti";
 import { RiTwitterLine } from "react-icons/ri";
@@ -12,7 +11,7 @@ import { Helmet } from "react-helmet";
  * @author Abraham Hernandez
  */
 
-const Page = ({ children, onLanding, title }) => {
+const Page = ({ children, title }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -37,21 +36,21 @@ const Page = ({ children, onLanding, title }) => {
               <a
                 aria-label="Twitter Icon"
                 href="https://twitter.com/KnightHacks?lang=en/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
               >
                 <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Instagram Icon"
                 href="https://www.instagram.com/knighthacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
               >
                 <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Facebook Icon"
                 href="https://www.facebook.com/KnightHacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring-4 focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
               >
                 <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>

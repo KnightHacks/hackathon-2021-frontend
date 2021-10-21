@@ -9,7 +9,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import ReactSelect, { createFilter, components } from "react-select";
-import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
@@ -40,10 +39,6 @@ const Register = () => {
     "Post Doctorate",
   ];
 
-  const [levelOfStudyOption, setLevelOfStudyOption] = useState(
-    "Level of Study"
-  );
-
   const graduationOptions = [
     "Fall 2021",
     "Spring 2022",
@@ -56,8 +51,6 @@ const Register = () => {
     "Summer 2024",
     "Fall 2024",
   ];
-
-  const [schoolOption, setSchoolOption] = useState("School Name");
 
   const CustomOption = ({ children, ...props }) => {
     // eslint-disable-next-line no-unused-vars
@@ -73,15 +66,12 @@ const Register = () => {
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
-        <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
+        <SelectorIcon className="w-5 h-5 text-darkblue" aria-hidden="true" />
       </components.DropdownIndicator>
     );
   };
 
-  const [graduationOption, setGraduationOption] = useState("Graduation Year");
-
   const pronounOptions = ["she/her", "he/him", "they/them", "ze/zir", "Other"];
-  const [pronounOption, setPronounOption] = useState("Pronouns");
 
   const ethnicityOptions = [
     "American Indian or Alaska Native",
@@ -92,9 +82,6 @@ const Register = () => {
     "White",
     "Two or more",
   ];
-  const [ethnicityOption, setEthnicityOption] = useState("Ethnicity");
-
-  const [countryOption, setCountryOption] = useState("Country");
 
   // "unset" | "success" | "failure" | "pending"
   const [registrationState, setRegistrationState] = useState("unset");
@@ -133,22 +120,33 @@ const Register = () => {
 
   const submitRegistration = async (values) => {
     // Combining date of birth fields and converting to iso8601
-    const dateOfBirth = new Date(
-      values.year,
-      values.month,
-      values.day
-    ).toISOString();
+    // const dateOfBirth = new Date(
+    //   values.year,
+    //   values.month,
+    //   values.day
+    // ).toISOString();
+
+    let updatedMonth = values.month;
+    let updatedDay = values.day;
+    if (parseInt(values.month) < 10) {
+      updatedMonth = "0" + values.month;
+    }
+
+    if (parseInt(values.day) < 10) {
+      updatedDay = "0" + values.day;
+    }
+    const dateOfBirth = `${values.year}-${updatedMonth}-${updatedDay}`;
+
+    // console.log("Date of birth: " + dateOfBirth);
+
     switch (registrationState) {
       case "pending":
-        console.log("in proccess");
         break;
       case "success":
         window.open("/success");
-        console.log("success login");
         break;
       default: {
         setRegistrationState("pending");
-
         const response = await createHacker({
           email: values.email,
           firstName: values.firstName,
@@ -157,13 +155,13 @@ const Register = () => {
           phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
-          ethnicity: ethnicityOption,
-          country: countryOption,
-          pronouns: pronounOption,
-          college: schoolOption.value,
+          ethnicity: values.ethnicity,
+          country: values.country,
+          pronouns: values.pronoun,
+          college: values.school,
           major: values.major,
-          levelOfStudy: levelOfStudyOption,
-          graduation: graduationOption,
+          levelOfStudy: values.levelOfStudy,
+          graduation: values.graduation,
           github: values.github,
           linkedIn: values.linkedIn,
           whyAttend: values.whyAttend,
@@ -201,6 +199,18 @@ const Register = () => {
     major: yup.string().required("Major is required."),
     whyAttend: yup.string().required("Required."),
     whatLearn: yup.string().required("Required."),
+    pronoun: yup.string().oneOf(pronounOptions, "Pronoun option is required."),
+    ethnicity: yup
+      .string()
+      .oneOf(ethnicityOptions, "Ethnicity option is required."),
+    country: yup.string().notOneOf(["Country"], "Country option is required."),
+    school: yup.string().notOneOf(["School Name"], "School name is required."),
+    graduation: yup
+      .string()
+      .oneOf(graduationOptions, "Graduation option is required."),
+    levelOfStudy: yup
+      .string()
+      .oneOf(levelOfStudyOptions, "Level of Study option is required."),
     mlh1: yup.bool().oneOf([true], "Field must be checked."),
     mlh2: yup.bool().oneOf([true], "Field must be checked."),
     mlh3: yup.bool().oneOf([true, false]),
@@ -209,7 +219,7 @@ const Register = () => {
   if (window.innerWidth <= 470) {
     return (
       <>
-        <Page onLanding={false}>
+        <Page>
           <h1 className="text-4xl sm:text-4xl mt-20 mb-4 md:text-6xl text-center font-sansita">
             Register
           </h1>
@@ -227,7 +237,7 @@ const Register = () => {
   }
 
   return (
-    <Page title="Knight Hacks | Register" onLanding={false}>
+    <Page title="Knight Hacks | Register">
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
@@ -299,6 +309,12 @@ const Register = () => {
           major: "",
           whyAttend: "",
           whatLearn: "",
+          pronoun: "Pronouns",
+          ethnicity: "Ethnicity",
+          country: "Country",
+          school: "School Name",
+          graduation: "Graduation year",
+          levelOfStudy: "Level of Study",
           mlh1: false,
           mlh2: false,
           mlh3: false,
@@ -322,10 +338,10 @@ const Register = () => {
           values,
           isSubmitting,
           errors,
-          status,
-          setStatus,
           submitForm,
           setFieldValue,
+          setFieldTouched,
+          touched,
         }) => (
           <>
             <Dialog
@@ -453,117 +469,154 @@ const Register = () => {
                 <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
                   Let&apos;s learn more about you.
                 </p>
-                <OptionSelector
-                  trackOptions={pronounOptions}
-                  selectedTrack={pronounOption}
-                  setSelectedTrack={(option) => {
-                    setPronounOption(option);
-                    setStatus(
-                      Object.keys(status).reduce((object, key) => {
-                        if (key !== "pronoun") {
-                          object[key] = status[key];
+                <Field name="pronoun" type="select">
+                  {({ field }) => (
+                    <OptionSelector
+                      trackOptions={pronounOptions}
+                      selectedTrack={values.pronoun}
+                      setSelectedTrack={(option) => {
+                        const selectPromise = new Promise((resolve) => {
+                          setFieldValue(field.name, option);
+                          resolve();
+                        });
+
+                        selectPromise.then(() => {
+                          setFieldTouched(field.name);
+                        });
+                      }}
+                      handleTouched={() => {
+                        if (touched.pronoun == null) {
+                          setFieldTouched(field.name);
                         }
-                        return object;
-                      }, {})
-                    );
-                  }}
-                  handleTouched={() => {
-                    if (!status?.pronoun && pronounOption === "Pronouns") {
-                      setStatus({
-                        ...status,
-                        pronoun: "Pronoun option is required.",
-                      });
-                    }
-                  }}
-                  flex="col"
-                  zIndex="70"
-                />
-                {status && status.pronoun && (
-                  <p className="font-palanquin text-red-700 font-bold">
-                    {status.pronoun}
-                  </p>
-                )}
+                      }}
+                      flex="col"
+                      zIndex="70"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="pronoun">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
               </div>
               <div className="font-palanquin flex flex-col">
-                <OptionSelector
-                  trackOptions={ethnicityOptions}
-                  selectedTrack={ethnicityOption}
-                  setSelectedTrack={(option) => {
-                    setEthnicityOption(option);
-                    setStatus(
-                      Object.keys(status).reduce((object, key) => {
-                        if (key !== "ethnicity") {
-                          object[key] = status[key];
+                <Field name="ethnicity" type="select">
+                  {({ field }) => (
+                    <OptionSelector
+                      trackOptions={ethnicityOptions}
+                      selectedTrack={values.ethnicity}
+                      setSelectedTrack={(option) => {
+                        const selectPromise = new Promise((resolve) => {
+                          setFieldValue(field.name, option);
+                          resolve();
+                        });
+
+                        selectPromise.then(() => {
+                          setFieldTouched(field.name);
+                        });
+                      }}
+                      handleTouched={() => {
+                        if (touched.pronoun == null) {
+                          setFieldTouched(field.name);
                         }
-                        return object;
-                      }, {})
-                    );
-                  }}
-                  handleTouched={() => {
-                    if (!status?.ethnicity && ethnicityOption === "Ethnicity") {
-                      setStatus({
-                        ...status,
-                        ethnicity: "Ethnicity option is required.",
-                      });
-                    }
-                  }}
-                  flex="col"
-                  zIndex="60"
-                />
-                {status && status.ethnicity && (
-                  <p className="font-palanquin text-red-700 font-bold">
-                    {status.ethnicity}
-                  </p>
-                )}
+                      }}
+                      flex="col"
+                      zIndex="60"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="ethnicity">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
               </div>
-              <div className="font-palanquin flex flex-col">
-                <OptionSelector
-                  trackOptions={countries}
-                  selectedTrack={countryOption}
-                  setSelectedTrack={(option) => {
-                    setCountryOption(option);
-                    setStatus(
-                      Object.keys(status).reduce((object, key) => {
-                        if (key !== "country") {
-                          object[key] = status[key];
-                        }
-                        return object;
-                      }, {})
-                    );
-                  }}
-                  handleTouched={() => {
-                    if (!status?.country && countryOption === "Country") {
-                      setStatus({
-                        ...status,
-                        country: "Country option is required.",
-                      });
-                    }
-                  }}
-                  flex="col"
-                  zIndex="50"
-                />
-                {status && status.country && (
-                  <p className="font-palanquin text-red-700 font-bold">
-                    {status.country}
-                  </p>
-                )}
+              <div className="font-palanquin flex flex-col mt-4 w-full space-y-4 font-palanquin text-darkblue">
+                <Field name="country" type="select">
+                  {({ field }) => (
+                    <ReactSelect
+                      options={countries}
+                      value={{ value: values.country, label: values.country }}
+                      onChange={(option) => {
+                        const selectPromise = new Promise((resolve) => {
+                          setFieldValue(field.name, option.label);
+                          resolve();
+                        });
+
+                        selectPromise.then(() => {
+                          setFieldTouched(field.name);
+                        });
+                      }}
+                      isSearchable
+                      components={{
+                        DropdownIndicator: DropdownIndicator,
+                      }}
+                      className="text-darkblue"
+                      styles={{
+                        placeholder: (provided) => ({
+                          ...provided,
+                          color: "#0B2D4F",
+                          fontFamily: "Palanquin Light, sans-serif",
+                        }),
+                        control: (provided) => ({
+                          ...provided,
+                          backgroundColor: "rgba(159, 211, 233, 0.47)",
+                          borderWidth: "2px",
+                          borderRadius: "0.5rem",
+                          borderColor: "#0B2D4F",
+                          "&:hover": {
+                            borderColor: "#0B2D4F",
+                          },
+                          paddingTop: "0.1rem",
+                          paddingBottom: "0.1rem",
+                        }),
+                        singleValue: (provided) => ({
+                          ...provided,
+                          color: "#0B2D4F",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        }),
+                        option: (provided, state) => {
+                          const backgroundColor = state.isSelected
+                            ? "rgb(219, 234, 254)"
+                            : "";
+                          return {
+                            ...provided,
+                            backgroundColor: backgroundColor,
+                            color: "rgb(17, 24, 39)",
+                            fontSize: "0.875rem",
+                            lineHeight: "1.25rem",
+                          };
+                        },
+                        input: (provided) => ({
+                          ...provided,
+                          color: "rgb(74, 75, 77)",
+                          fontSize: "0.875rem",
+                          lineHeight: "1.25rem",
+                        }),
+                      }}
+                      onMenuOpen={() => {
+                        setFieldTouched(field.name);
+                      }}
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="country">
+                  {(msg) => (
+                    <p className="font-palanquin text-red-700 font-bold">
+                      {msg}
+                    </p>
+                  )}
+                </ErrorMessage>
               </div>
               <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
                 <Field type="text" name="day">
-                  {({ field }) => (
-                    <DayPicker
-                      defaultValue={"Birth Day"}
-                      year={values.year} // mandatory
-                      month={values.month} // mandatory
-                      endYearGiven // mandatory if end={} is given in YearPicker
-                      id={"Day"}
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="DD" field={field} />}
                 </Field>
                 <ErrorMessage name="day">
                   {(msg) => (
@@ -573,18 +626,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
                 <Field type="text" name="month">
-                  {({ field }) => (
-                    <MonthPicker
-                      defaultValue={"Birth Month"}
-                      endYearGiven // mandatory if end={} is given in YearPicker
-                      year={values.year} // mandatory
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="MM" field={field} />}
                 </Field>
                 <ErrorMessage name="month">
                   {(msg) => (
@@ -594,20 +636,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
                 <Field type="text" name="year">
-                  {({ field }) => (
-                    <YearPicker
-                      defaultValue={"Birth Year"}
-                      start={1950} // default is 1900
-                      end={2020} // default is current year
-                      reverse
-                      id={"Year"}
-                      classes={
-                        "w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light py-1 px-4 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular"
-                      }
-                      {...field}
-                      onChange={(v) => setFieldValue(field.name, v)}
-                    />
-                  )}
+                  {({ field }) => <TextInputBox label="YYYY" field={field} />}
                 </Field>
                 <ErrorMessage name="year">
                   {(msg) => (
@@ -655,91 +684,87 @@ const Register = () => {
                   School Information
                 </p>
                 <div className="flex flex-col mt-4 text-darkblue">
-                  <ReactSelect
-                    options={schools}
-                    value={schoolOption}
-                    onChange={(option) => {
-                      setSchoolOption(option);
-                      setStatus(
-                        Object.keys(status).reduce((object, key) => {
-                          if (key !== "schoolName") {
-                            object[key] = status[key];
-                          }
-                          return object;
-                        }, {})
-                      );
-                    }}
-                    placeholder="School Name"
-                    isSearchable
-                    filterOption={createFilter({ ignoreAccents: false })}
-                    captureMenuScroll={false}
-                    classNamePrefix="custom-select"
-                    components={{
-                      Option: CustomOption,
-                      MenuList: CustomMenuList,
-                      DropdownIndicator: DropdownIndicator,
-                    }}
-                    className="text-darkblue"
-                    styles={{
-                      placeholder: (provided) => ({
-                        ...provided,
-                        color: "#0B2D4F",
-                        fontFamily: "Palanquin Light, sans-serif",
-                      }),
-                      control: (provided) => ({
-                        ...provided,
-                        backgroundColor: "rgba(159, 211, 233, 0.47)",
-                        borderWidth: "2px",
-                        borderRadius: "0.5rem",
-                        borderColor: "#0B2D4F",
-                        "&:hover": {
-                          borderColor: "#0B2D4F",
-                        },
-                        paddingTop: "0.1rem",
-                        paddingBottom: "0.1rem",
-                      }),
-                      singleValue: (provided) => ({
-                        ...provided,
-                        color: "#0B2D4F",
-                        fontSize: "0.875rem",
-                        lineHeight: "1.25rem",
-                      }),
-                      option: (provided, state) => {
-                        const backgroundColor = state.isSelected
-                          ? "rgb(219, 234, 254)"
-                          : "";
-                        return {
-                          ...provided,
-                          backgroundColor: backgroundColor,
-                          color: "rgb(17, 24, 39)",
-                          fontSize: "0.875rem",
-                          lineHeight: "1.25rem",
-                        };
-                      },
-                      input: (provided) => ({
-                        ...provided,
-                        color: "rgb(74, 75, 77)",
-                        fontSize: "0.875rem",
-                        lineHeight: "1.25rem",
-                      }),
-                    }}
-                    onMenuOpen={() => {
-                      if (
-                        !status?.schoolName &&
-                        schoolOption === "School Name"
-                      ) {
-                        setStatus({
-                          ...status,
-                          schoolName: "School name is required.",
-                        });
-                      }
-                    }}
-                  />
-                  {status && status.schoolName && (
-                    <p className="font-palanquin text-red-700 font-bold">
-                      {status.schoolName}
-                    </p>
-                  )}
+                  <Field name="school" type="select">
+                    {({ field }) => (
+                      <ReactSelect
+                        options={schools}
+                        value={{ value: values.school, label: values.school }}
+                        onChange={(option) => {
+                          const selectPromise = new Promise((resolve) => {
+                            setFieldValue(field.name, option.label);
+                            resolve();
+                          });
+
+                          selectPromise.then(() => {
+                            setFieldTouched(field.name);
+                          });
+                        }}
+                        isSearchable
+                        filterOption={createFilter({ ignoreAccents: false })}
+                        captureMenuScroll={false}
+                        classNamePrefix="custom-select"
+                        components={{
+                          Option: CustomOption,
+                          MenuList: CustomMenuList,
+                          DropdownIndicator: DropdownIndicator,
+                        }}
+                        className="text-darkblue"
+                        styles={{
+                          placeholder: (provided) => ({
+                            ...provided,
+                            color: "#0B2D4F",
+                            fontFamily: "Palanquin Light, sans-serif",
+                          }),
+                          control: (provided) => ({
+                            ...provided,
+                            backgroundColor: "rgba(159, 211, 233, 0.47)",
+                            borderWidth: "2px",
+                            borderRadius: "0.5rem",
+                            borderColor: "rgb(17, 24, 39)",
+                            "&:hover": {
+                              borderColor: "rgb(17, 24, 39)",
+                            },
+                            paddingTop: "0.1rem",
+                            paddingBottom: "0.1rem",
+                          }),
+                          singleValue: (provided) => ({
+                            ...provided,
+                            color: "rgb(17, 24, 39)",
+                            fontSize: "0.875rem",
+                            lineHeight: "1.25rem",
+                          }),
+                          option: (provided, state) => {
+                            const backgroundColor = state.isSelected
+                              ? "rgb(17, 24, 39)"
+                              : "";
+                            return {
+                              ...provided,
+                              backgroundColor: backgroundColor,
+                              color: "rgb(17, 24, 39)",
+                              fontSize: "0.875rem",
+                              lineHeight: "1.25rem",
+                            };
+                          },
+                          input: (provided) => ({
+                            ...provided,
+                            color: "rgb(74, 75, 77)",
+                            fontSize: "0.875rem",
+                            lineHeight: "1.25rem",
+                          }),
+                        }}
+                        onMenuOpen={() => {
+                          setFieldTouched(field.name);
+                        }}
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="school">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
                 </div>
                 <div className="flex flex-col">
                   <Field type="text" name="major">
@@ -756,75 +781,73 @@ const Register = () => {
                   </ErrorMessage>
                 </div>
                 <div className="flex flex-col">
-                  <OptionSelector
-                    title="What is your level of study?"
-                    trackOptions={levelOfStudyOptions}
-                    selectedTrack={levelOfStudyOption}
-                    setSelectedTrack={(option) => {
-                      setLevelOfStudyOption(option);
-                      setStatus(
-                        Object.keys(status).reduce((object, key) => {
-                          if (key !== "levelOfStudy") {
-                            object[key] = status[key];
+                  <Field name="levelOfStudy" type="select">
+                    {({ field }) => (
+                      <OptionSelector
+                        title="What is your level of study?"
+                        trackOptions={levelOfStudyOptions}
+                        selectedTrack={values.levelOfStudy}
+                        setSelectedTrack={(option) => {
+                          const selectPromise = new Promise((resolve) => {
+                            setFieldValue(field.name, option);
+                            resolve();
+                          });
+
+                          selectPromise.then(() => {
+                            setFieldTouched(field.name);
+                          });
+                        }}
+                        handleTouched={() => {
+                          if (touched.pronoun == null) {
+                            setFieldTouched(field.name);
                           }
-                          return object;
-                        }, {})
-                      );
-                    }}
-                    handleTouched={() => {
-                      if (
-                        !status?.levelOfStudy &&
-                        levelOfStudyOption === "Level of Study"
-                      ) {
-                        setStatus({
-                          ...status,
-                          levelOfStudy: "Level of Study option is required.",
+                        }}
+                        flex="col"
+                        zIndex="40"
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage name="levelOfStudy">
+                    {(msg) => (
+                      <p className="font-palanquin text-red-700 font-bold">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <Field name="graduation" type="select">
+                  {({ field }) => (
+                    <OptionSelector
+                      title="When are you graduating?"
+                      trackOptions={graduationOptions}
+                      selectedTrack={values.graduation}
+                      setSelectedTrack={(option) => {
+                        const selectPromise = new Promise((resolve) => {
+                          setFieldValue(field.name, option);
+                          resolve();
                         });
-                      }
-                    }}
-                    flex="col"
-                    zIndex="40"
-                  />
-                  {status && status.levelOfStudy && (
+
+                        selectPromise.then(() => {
+                          setFieldTouched(field.name);
+                        });
+                      }}
+                      handleTouched={() => {
+                        if (touched.pronoun == null) {
+                          setFieldTouched(field.name);
+                        }
+                      }}
+                      flex="col"
+                      zIndex="30"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="graduation">
+                  {(msg) => (
                     <p className="font-palanquin text-red-700 font-bold">
-                      {status.levelOfStudy}
+                      {msg}
                     </p>
                   )}
-                </div>
-                <OptionSelector
-                  title="When are you graduating?"
-                  trackOptions={graduationOptions}
-                  selectedTrack={graduationOption}
-                  setSelectedTrack={(option) => {
-                    setGraduationOption(option);
-                    setStatus(
-                      Object.keys(status).reduce((object, key) => {
-                        if (key !== "graduation") {
-                          object[key] = status[key];
-                        }
-                        return object;
-                      }, {})
-                    );
-                  }}
-                  handleTouched={() => {
-                    if (
-                      !status?.graduation &&
-                      graduationOption === "Graduation Year"
-                    ) {
-                      setStatus({
-                        ...status,
-                        graduation: "Graduation option is required.",
-                      });
-                    }
-                  }}
-                  flex="col"
-                  zIndex="30"
-                />
-                {status && status.graduation && (
-                  <p className="font-palanquin text-red-700 font-bold">
-                    {status.graduation}
-                  </p>
-                )}
+                </ErrorMessage>
               </div>
               <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
                 Hackathon Information
@@ -1008,29 +1031,7 @@ const Register = () => {
                   type="submit"
                   disabled={isSubmitting}
                   onClick={() => {
-                    const newStatus = {};
-                    if (pronounOption === "Pronouns") {
-                      newStatus.pronoun = "Pronoun option is required.";
-                    }
-                    if (ethnicityOption === "Ethnicity") {
-                      newStatus.ethnicity = "Ethnicity option is required.";
-                    }
-                    if (countryOption === "Country") {
-                      newStatus.country = "Country option is required.";
-                    }
-                    if (schoolOption === "School Name") {
-                      newStatus.schoolName = "School name is required.";
-                    }
-                    if (graduationOption === "Graduation Year") {
-                      newStatus.graduation = "Graduation option is required.";
-                    }
-
-                    setStatus(newStatus);
-
-                    if (
-                      Object.keys(newStatus).length === 0 ||
-                      Object.keys(errors).length === 0
-                    ) {
+                    if (Object.keys(errors).length === 0) {
                       submitForm();
                     } else {
                       setShouldOpen(true);
