@@ -720,22 +720,22 @@ const Register = () => {
                             backgroundColor: "rgba(159, 211, 233, 0.47)",
                             borderWidth: "2px",
                             borderRadius: "0.5rem",
-                            borderColor: "#0B2D4F",
+                            borderColor: "rgb(17, 24, 39)",
                             "&:hover": {
-                              borderColor: "#0B2D4F",
+                              borderColor: "rgb(17, 24, 39)",
                             },
                             paddingTop: "0.1rem",
                             paddingBottom: "0.1rem",
                           }),
                           singleValue: (provided) => ({
                             ...provided,
-                            color: "#0B2D4F",
+                            color: "rgb(17, 24, 39)",
                             fontSize: "0.875rem",
                             lineHeight: "1.25rem",
                           }),
                           option: (provided, state) => {
                             const backgroundColor = state.isSelected
-                              ? "rgb(219, 234, 254)"
+                              ? "rgb(17, 24, 39)"
                               : "";
                             return {
                               ...provided,
@@ -1300,12 +1300,12 @@ const createHacker = async ({
     },
     op: "transaction",
     name: "submitHacker",
-    description: "POST https://stagingapi.knighthacks.org/api/hackers/",
+    description: "POST https://api.knighthacks.org/api/hackers/",
   });
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch("https://stagingapi.knighthacks.org/api/hackers/", {
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
