@@ -128,6 +128,7 @@ const Register = () => {
 
     let updatedMonth = values.month;
     let updatedDay = values.day;
+    let timestamp = Math.floor(new Date().getTime() / 1000);
     if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
       updatedMonth = "0" + values.month;
     }
@@ -137,13 +138,15 @@ const Register = () => {
     }
 
     console.log("Month and day " + updatedMonth + " " + updatedDay);
+    console.log("Timestamp: " + timestamp);
 
-    const dateOfBirth = new Date(
-      `${values.year}-${updatedMonth}-${updatedDay}`
-    ).toISOString();
+    const date = `${values.year}-${updatedMonth}-${updatedDay}` + timestamp;
+
+    console.log("Formatted date: " + date);
+
+    const dateOfBirth = new Date(date).toISOString();
 
     console.log("Date of birth: " + dateOfBirth);
-    console.log("Timestamp: " + Math.floor(new Date().getTime() / 1000));
 
     switch (registrationState) {
       case "pending":
