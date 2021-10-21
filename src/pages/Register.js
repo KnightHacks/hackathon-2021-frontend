@@ -128,7 +128,7 @@ const Register = () => {
 
     let updatedMonth = values.month;
     let updatedDay = values.day;
-    let timestamp = Math.floor(new Date().getTime() / 1000);
+    let timestamp = new Date(Math.floor(new Date().getTime() / 1000));
     if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
       updatedMonth = "0" + values.month;
     }
@@ -140,7 +140,10 @@ const Register = () => {
     console.log("Month and day " + updatedMonth + " " + updatedDay);
     console.log("Timestamp: " + timestamp);
 
-    const date = `${values.year}-${updatedMonth}-${updatedDay}` + timestamp;
+    const formatTimestamp = date.getHours() + ":" + date.getMinutes();
+
+    const date =
+      `${values.year}-${updatedMonth}-${updatedDay}` + formatTimestamp;
 
     console.log("Formatted date: " + date);
 
