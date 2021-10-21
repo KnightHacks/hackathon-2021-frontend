@@ -137,21 +137,11 @@ const Register = () => {
       updatedDay = "0" + values.day;
     }
 
-    console.log("Month and day " + updatedMonth + " " + updatedDay);
-    console.log("Timestamp: " + timestamp);
+    const formattedDate =
+      `${values.year}-${updatedMonth}-${updatedDay} ` +
+      timestamp.toTimeString();
 
-    const formatTimestamp = timestamp.getHours() + ":" + timestamp.getMinutes();
-
-    const date =
-      `${values.year}-${updatedMonth}-${updatedDay}` + formatTimestamp;
-
-    console.log("Formatted date: " + date);
-
-    const dateOfBirth = new Date(date).toISOString();
-
-    // const dateOfBirth = new Date(
-    //   `${values.year}-${updatedMonth}-${updatedDay}`
-    // );
+    const dateOfBirth = new Date(formattedDate).toISOString();
 
     console.log("Date of birth: " + dateOfBirth);
 
