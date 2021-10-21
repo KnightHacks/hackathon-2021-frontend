@@ -66,7 +66,7 @@ const Register = () => {
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
-        <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
+        <SelectorIcon className="w-5 h-5 text-darkblue" aria-hidden="true" />
       </components.DropdownIndicator>
     );
   };
