@@ -105,7 +105,7 @@ const Register = () => {
     formData.set("resume", resume);
     formData.set("type", "application/json");
     const { id } = await fetch(
-      "https://api.knighthacks.org/api/hackers/resume/",
+      "https://stagingapi.knighthacks.org/api/hackers/resume/",
       {
         method: "POST",
         body: formData,
@@ -135,9 +135,11 @@ const Register = () => {
     if (parseInt(values.day) < 10 && updatedDay.length < 2) {
       updatedDay = "0" + values.day;
     }
-    const dateOfBirth = `${values.year}-${updatedMonth}-${updatedDay}`;
+    const dateOfBirth = new Date(
+      `${values.year}-${updatedMonth}-${updatedDay}`
+    );
 
-    // console.log("Date of birth: " + dateOfBirth);
+    console.log("Date of birth: " + dateOfBirth);
 
     switch (registrationState) {
       case "pending":
@@ -1303,12 +1305,12 @@ const createHacker = async ({
     },
     op: "transaction",
     name: "submitHacker",
-    description: "POST https://api.knighthacks.org/api/hackers/",
+    description: "POST https://stagingapi.knighthacks.org/api/hackers/",
   });
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
+  const res = await fetch("https://stagingapi.knighthacks.org/api/hackers/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
