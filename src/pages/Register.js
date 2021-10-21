@@ -135,7 +135,9 @@ const Register = () => {
     if (parseInt(values.day) < 10 && updatedDay.length < 2) {
       updatedDay = "0" + values.day;
     }
-    const dateOfBirth = `${values.year}-${updatedMonth}-${updatedDay}`;
+    const dateOfBirth = new Date(
+      `${values.year}-${updatedMonth}-${updatedDay}`
+    ).toISOString();
 
     // console.log("Date of birth: " + dateOfBirth);
 
