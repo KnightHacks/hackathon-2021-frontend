@@ -105,7 +105,7 @@ const Register = () => {
     formData.set("resume", resume);
     formData.set("type", "application/json");
     const { id } = await fetch(
-      "https://stagingapi.knighthacks.org/api/hackers/resume/",
+      "https://api.knighthacks.org/api/hackers/resume/",
       {
         method: "POST",
         body: formData,
@@ -641,7 +641,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="day">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
@@ -651,7 +651,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="month">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
@@ -661,7 +661,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="year">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
@@ -1321,12 +1321,12 @@ const createHacker = async ({
     },
     op: "transaction",
     name: "submitHacker",
-    description: "POST https://stagingapi.knighthacks.org/api/hackers/",
+    description: "POST https://api.knighthacks.org/api/hackers/",
   });
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch("https://stagingapi.knighthacks.org/api/hackers/", {
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
