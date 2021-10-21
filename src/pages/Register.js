@@ -614,7 +614,10 @@ const Register = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <div className="flex flex-col md:flex-row md:space-x-4 mt-4">
+              <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
+                Input your birthday below.
+              </p>
+              <div className="flex flex-col md:flex-row md:space-x-4">
                 <Field type="text" name="day">
                   {({ field }) => <TextInputBox label="DD" field={field} />}
                 </Field>
