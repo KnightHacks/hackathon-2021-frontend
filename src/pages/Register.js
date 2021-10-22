@@ -1295,16 +1295,13 @@ const createHacker = async ({
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch(
-    "https://stagingstagingapi.knighthacks.org/api/hackers/",
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
+  const res = await fetch("https://stagingapi.knighthacks.org/api/hackers/", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
   transaction.setHttpStatus(res.status);
 
