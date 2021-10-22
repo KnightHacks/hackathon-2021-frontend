@@ -140,6 +140,8 @@ const Register = () => {
       `${values.year}-${updatedMonth}-${updatedDay} ` +
       timestamp.toTimeString();
 
+    Sentry.captureMessage(formattedDate);
+
     const dateOfBirth = new Date(formattedDate).toISOString();
 
     // console.log("Date of birth: " + dateOfBirth);
