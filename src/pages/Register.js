@@ -107,7 +107,7 @@ const Register = () => {
     formData.set("resume", resume);
     formData.set("type", "application/json");
     const { id } = await fetch(
-      "https://stagingapi.knighthacks.org/api/hackers/resume/",
+      "https://api.knighthacks.org/api/hackers/resume/",
       {
         method: "POST",
         body: formData,
@@ -1294,12 +1294,12 @@ const createHacker = async ({
     },
     op: "transaction",
     name: "submitHacker",
-    description: "POST https://stagingapi.knighthacks.org/api/hackers/",
+    description: "POST https://api.knighthacks.org/api/hackers/",
   });
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch("https://stagingapi.knighthacks.org/api/hackers/", {
+  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
