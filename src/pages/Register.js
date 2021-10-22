@@ -626,11 +626,15 @@ const Register = () => {
               <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
                 Input your birthday below.
               </p>
-              <div className="flex flex-col md:flex-row md:space-x-4">
-                <Field type="date" name="dob" />
+              <div className="flex flex-col">
+                <Field
+                  className="mt-2 rounded-lg border-2 border-darkblue font-palanquinregular p-2 px-4 py-2 w-full border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue bg-opaque-blue"
+                  type="date"
+                  name="dob"
+                />
                 <ErrorMessage name="dob">
                   {(msg) => (
-                    <p className="mt-6 font-palanquin text-red-700 font-bold">
+                    <p className="font-palanquin text-red-700 font-bold">
                       {msg}
                     </p>
                   )}
