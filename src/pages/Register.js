@@ -98,6 +98,8 @@ const Register = () => {
 
   const [isUploading, setIsUploading] = useState(false);
 
+  const [dob, setDob] = useState(null);
+
   const uploadResume = async (resume) => {
     setIsUploading(true);
     setResume(resume);
@@ -105,7 +107,7 @@ const Register = () => {
     formData.set("resume", resume);
     formData.set("type", "application/json");
     const { id } = await fetch(
-      "https://api.knighthacks.org/api/hackers/resume/",
+      "https://stagingapi.knighthacks.org/api/hackers/resume/",
       {
         method: "POST",
         body: formData,
@@ -126,23 +128,25 @@ const Register = () => {
     //   values.day
     // ).toISOString();
 
-    let updatedMonth = values.month;
-    let updatedDay = values.day;
-    let timestamp = new Date(Math.floor(new Date().getTime() / 1000));
-    if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
-      updatedMonth = "0" + values.month;
-    }
-
-    if (parseInt(values.day) < 10 && updatedDay.length < 2) {
-      updatedDay = "0" + values.day;
-    }
-    const formattedDate =
-      `${values.year}-${updatedMonth}-${updatedDay} ` +
-      timestamp.toTimeString();
-
-    const dateOfBirth = new Date(formattedDate).toISOString();
+    // let updatedMonth = values.month;
+    // let updatedDay = values.day;
+    // let timestamp = new Date(Math.floor(new Date().getTime() / 1000));
+    // if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
+    //   updatedMonth = "0" + values.month;
+    // }
+    //
+    // if (parseInt(values.day) < 10 && updatedDay.length < 2) {
+    //   updatedDay = "0" + values.day;
+    // }
+    // const formattedDate =
+    //   `${values.year}-${updatedMonth}-${updatedDay} ` +
+    //   timestamp.toTimeString();
+    //
+    // const dateOfBirth = new Date(formattedDate).toISOString();
 
     // console.log("Date of birth: " + dateOfBirth);
+
+    console.log("Date of birth: " + values.dob);
 
     switch (registrationState) {
       case "pending":
@@ -156,7 +160,7 @@ const Register = () => {
           email: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
-          dateOfBirth: dateOfBirth,
+          dateOfBirth: values.dob,
           phoneNumber: values.phoneNumber,
           canShareInfo,
           isBeginner: selectedTrack === "Beginner",
@@ -194,9 +198,7 @@ const Register = () => {
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
-    day: yup.string().required("Day is required."),
-    month: yup.string().required("Month is required."),
-    year: yup.string().required("Year is required."),
+    dob: yup.string().required("Date of birth is required."),
     email: yup
       .string()
       .email("Email is not valid.")
@@ -307,9 +309,7 @@ const Register = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          day: "",
-          month: "",
-          year: "",
+          dob: "",
           email: "",
           phoneNumber: "",
           dietaryRestrictions: "",
@@ -627,30 +627,8 @@ const Register = () => {
                 Input your birthday below.
               </p>
               <div className="flex flex-col md:flex-row md:space-x-4">
-                <Field type="text" name="day">
-                  {({ field }) => <TextInputBox label="DD" field={field} />}
-                </Field>
-                <ErrorMessage name="day">
-                  {(msg) => (
-                    <p className="mt-6 font-palanquin text-red-700 font-bold">
-                      {msg}
-                    </p>
-                  )}
-                </ErrorMessage>
-                <Field type="text" name="month">
-                  {({ field }) => <TextInputBox label="MM" field={field} />}
-                </Field>
-                <ErrorMessage name="month">
-                  {(msg) => (
-                    <p className="mt-6 font-palanquin text-red-700 font-bold">
-                      {msg}
-                    </p>
-                  )}
-                </ErrorMessage>
-                <Field type="text" name="year">
-                  {({ field }) => <TextInputBox label="YYYY" field={field} />}
-                </Field>
-                <ErrorMessage name="year">
+                <Field type="date" name="dob" />
+                <ErrorMessage name="dob">
                   {(msg) => (
                     <p className="mt-6 font-palanquin text-red-700 font-bold">
                       {msg}
@@ -1312,18 +1290,21 @@ const createHacker = async ({
     },
     op: "transaction",
     name: "submitHacker",
-    description: "POST https://api.knighthacks.org/api/hackers/",
+    description: "POST https://stagingapi.knighthacks.org/api/hackers/",
   });
 
   Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(transaction));
 
-  const res = await fetch("https://api.knighthacks.org/api/hackers/", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  const res = await fetch(
+    "https://stagingstagingapi.knighthacks.org/api/hackers/",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  );
 
   transaction.setHttpStatus(res.status);
 
