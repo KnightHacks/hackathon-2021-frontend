@@ -146,6 +146,15 @@ const Menu = ({ open, setOpen }) => {
                         Register
                       </Link>
                     </li>
+                    <li className=" mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                      <Link
+                        to="/attributions"
+                        onClick={() => setOpen(false)}
+                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                      >
+                        Attributions
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </Transition.Child>

@@ -7,6 +7,7 @@ import Sponsors from "./pages/Sponsors";
 import Schedule from "./pages/Schedule";
 import FAQ from "./pages/FAQ";
 import Register from "./pages/Register";
+import Attributions from "./pages/Attributions";
 import Success from "./pages/Success";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -53,6 +54,7 @@ const AppWithTransitions = () => {
           <Route path="/schedule" component={Schedule} />
           <Route path="/faq" component={FAQ} />
           <Route path="/register" component={Register} />
+          <Route path="/attributions" component={Attributions} />
           <Route path="/success" component={Success} />
         </Switch>
       </CSSTransition>
