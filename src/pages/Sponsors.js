@@ -8,8 +8,9 @@ import Google from "../assets/sponsors/GoogleCloud.png";
 import UCF from "../assets/sponsors/UCF.png";
 import TI from "../assets/sponsors/TI.png";
 import Learner from "../assets/sponsors/Learner.png";
-import synopsys from "../assets/sponsors/synopsys.jpg";
+import synopsys from "../assets/sponsors/synopsys.png";
 import NewEa from "../assets/sponsors/newEA.png";
+import Microsoft from "../assets/sponsors/microsoft.png";
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
