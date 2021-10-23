@@ -2,14 +2,14 @@ import Page from "../components/Page";
 import { Helmet } from "react-helmet";
 // for testing only, not for final production
 import TestLogo from "../assets/KnightHacksLogo.svg";
-import Facebook from "../assets/FBLogo.png";
-import EA from "../assets/EA.png";
-import Google from "../assets/GoogleCloud.png";
-import UCF from "../assets/UCF.png";
-import TI from "../assets/TI.png";
-import Learner from "../assets/Learner.png";
-import synopsys from "../assets/synopsys.jpg";
-import NewEa from "../assets/newEA.png";
+import Facebook from "../assets/sponsors/FBLogo.png";
+import EA from "../assets/sponsors/EA.png";
+import Google from "../assets/sponsors/GoogleCloud.png";
+import UCF from "../assets/sponsors/UCF.png";
+import TI from "../assets/sponsors/TI.png";
+import Learner from "../assets/sponsors/Learner.png";
+import synopsys from "../assets/sponsors/synopsys.jpg";
+import NewEa from "../assets/sponsors/newEA.png";
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
@@ -39,7 +39,7 @@ const Sponsors = () => {
         className={`
           text-4xl w-full text-center mt-10
           sm:text-4xl md:text-6xl
-          lg:mt-20 
+          lg:mt-20
           xl:text-5xl
           xl:text-6xl xl:mt-20
           2xl:text-7xl 2xl:mt-20
