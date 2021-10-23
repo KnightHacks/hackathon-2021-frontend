@@ -2,6 +2,19 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    textColor: {
+      darkblue: "#0B2D4F",
+      purewhite: "#FFFFFF",
+    },
+    borderColor: (theme) => ({
+      ...theme("textColor"),
+    }),
+    ringColor: (theme) => ({
+      ...theme("textColor"),
+    }),
+    placeholderColor: (theme) => ({
+      ...theme("textColor"),
+    }),
     extend: {
       screens: {
         xxs: "300px",
@@ -21,15 +34,17 @@ module.exports = {
       zIndex: {
         60: "60",
         70: "70",
+        80: "80",
       },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
-        "knight-hacks-logo": "url('/src/assets/knightHacksLogo_WHITE.svg')",
+        "knight-hacks-logo": "url('/src/assets/KnightHacksLogo.svg')",
       }),
       backgroundColor: (theme) => ({
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
         "opaque-blue": "rgba(159, 211, 233, 0.47)",
+        ...theme("textColor"),
       }),
       fontFamily: {
         sansita: ["Sansita Black Italic", "sans-serif"],
@@ -44,9 +59,14 @@ module.exports = {
     extend: {
       animation: ["group-hover"],
       fontSize: ["hover", "focus"],
-      backgroundColor: ["active"],
+      backgroundColor: ["active", "checked"],
       textDecoration: ["focus-visible"],
+      borderColor: ["checked"],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 };

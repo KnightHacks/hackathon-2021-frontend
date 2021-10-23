@@ -8,7 +8,7 @@
     "answer": "<p>Undergraduate and graduate students from any college or university anywhere in the world are eligible to apply to Knight Hacks, as well as those who have graduated in the past 12 months. Unfortunately, Knight Hacks 2020 cannot admit high school students or students under 18 years of age.</p>"
   },
   {
-    "question": "Is Knight Hacks Free?",
+    "question": "Is Knight Hacks free?",
     "answer": "<p>Admission to Knight Hacks is completely free. Meals, workshops, mentorship, swag, hardware, and snacks are free for the entire event!</p>"
   },
   {
@@ -18,6 +18,12 @@
   {
     "question": "What if I am a beginner?",
     "answer": "<p>Knight Hacks welcomes students of all skill levels. In previous years, about half of the students have attended Knight Hacks as their first hackathon. We’ll have talks, mentors and workshops to help you with your project. Hackathons can be a great place to learn new skills in a short amount of time. Just be eager to learn, and excited to meet lots of awesome people.</p>"
+  },
+  {
+    "question": "Which track should I follow?",
+    "answer": [
+      "<p>Beginner Track is suggested for those that have attended 0-2 hackathons before, have 0-2 personal projects, little to no experience using GitHub. Advanced Track is suggested for those that have attended 2+ hackathons before, have 2+ personal projects, and previous experience using GitHub.</p>"
+    ]
   },
   {
     "question": "What kind of workshops, talks, and activities will there be?",
