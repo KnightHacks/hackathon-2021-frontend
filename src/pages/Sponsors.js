@@ -11,6 +11,8 @@ import Learner from "../assets/sponsors/Learner.png";
 import synopsys from "../assets/sponsors/synopsys.png";
 import NewEa from "../assets/sponsors/newEA.png";
 import Microsoft from "../assets/sponsors/microsoft.png";
+import Mantech from "../assets/sponsors/Mantech.png";
+import NSIN from "../assets/sponsors/NSIN.png";
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
@@ -49,93 +51,50 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      <div className="hidden ">
-        <div className="text-center hidden sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-8 sm:mb-0 space-x-4 mt-14 mb-2 font-palanquin font-bold">
-          DIAMOND
+      <div className="mt-14 divide-none font-sansitaregular text-center text-2xl">
+        <div>
+          Gold
+          <div className="flex flex-col -space-y-20 items-center">
+            <img
+              className="transform scale-50"
+              src={Microsoft}
+              alt="Microsoft"
+            />
+            <img className="transform scale-50" src={Mantech} alt="Mantech" />
+            <img
+              className="transform scale-50"
+              src={NSIN}
+              alt="National Security Innovation Network"
+            />
+            <img className="transform scale-75" src={Facebook} alt="Facebook" />
+          </div>
         </div>
-        <div>_____________________________________</div>
-        <div className="flex justify-center">
+        <div className="mt-6">
+          Silver
           <img
-            className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
-            src={TestLogo}
-            alt="test logo"
-          />
-          <img
-            className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
-            src={TestLogo}
-            alt="test logo"
-          />
-        </div>
-        <div className="text-center sm:text-base md:text-2xl lg:text-3xl xl:text-4xl sm:mt-0 sm:mb-.5 space-x-4 mb-2 font-palanquin font-bold">
-          PLATINUM
-        </div>
-        <div>_____________________________________</div>
-        <div className="flex justify-center">
-          <img
-            className=" xl:w-80 lg:w-56 md:w-44 sm:w-28 sm:mr-7 sm:mt-8 mr-8 mb-24"
-            src={TestLogo}
-            alt="test logo"
-          />
-          <img
-            className="xl:w-80 lg:w-56 md:w-44 sm:mt-8 sm:w-28 mr-8 mb-24 "
-            src={TestLogo}
-            alt="test logo"
+            className="transform scale-75"
+            src={TI}
+            alt="Texas Instruments"
           />
         </div>
-      </div>
-
-      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-        GOLD
-      </div>
-
-      <div>_____________________________________</div>
-      <div className="flex justify-center">
-        <img
-          className="transform scale-50 lg:scale-50"
-          src={Facebook}
-          alt="test logo"
-        />
-      </div>
-      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-        SILVER
-      </div>
-      <div>_____________________________________</div>
-      <div className="flex justify-center">
-        <img
-          className="transform scale-50 lg:scale-50 mt-8"
-          src={TI}
-          alt="test logo"
-        />
-      </div>
-      <div className="text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-        BRONZE
-      </div>
-      <div>_____________________________________</div>
-      <div className="mt-2 flex justify-center content-between -space-x-48 md:-space-x-52 lg:-space-x-72 xl:-space-x-96 2xl:-space-x-96  ">
-        <img className="transform scale-50  " src={Google} alt="test logo" />
-        <img
-          className=" transform scale-50  2xl:scale-60 2xl:mr-24"
-          src={Learner}
-          alt="test logo"
-        />
-      </div>
-      <div className="flex justify-center content-between ">
-        <img
-          className=" transform scale-y-100 scale-x-100 md:scale-y-150 md:scale-x-150 xl:scale-x-200 xl:scale-y-200 2xl:scale-x-250 2xl:scale-y-250 "
-          src={EA}
-          alt="EA Logo"
-        />
-      </div>
-      <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4 mt-14">
-        PARTNER ORGANIZATIONS
-      </div>
-      <div>_____________________________________</div>
-      <div className="flex justify-center">
-        <img
-          className="transform scale-75 xl:mt-10 xl:scale-100 2xl:scale-150 md:scale-100 md:mb-10"
-          src={UCF}
-          alt="test logo"
-        />
+        <div className="mt-6">
+          Bronze
+          <div className="flex flex-col -space-y-12 items-center">
+            <img
+              className="transform scale-50"
+              src={Google}
+              alt="Google Cloud"
+            />
+            <img className="transform scale-50" src={synopsys} alt="Synopsys" />
+            <img className="mt-20" src={EA} alt="Electronic Arts" />
+          </div>
+        </div>
+        <div className="mt-6 mb-20">
+          Partner Organizations
+          <div className="flex flex-col -space-y-12 items-center">
+            <img className="transform my-6 scale-100" src={UCF} alt="UCF" />
+          </div>
+        </div>
       </div>
     </Page>
   );
