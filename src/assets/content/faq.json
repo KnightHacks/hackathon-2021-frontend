@@ -16,6 +16,10 @@
     "answer": "<p>You can form teams of up to 4 people. There are no restrictions for team members, so you can team up with hackers of any school, country, or experience level. Teams can be formed before or during the event.</p>"
   },
   {
+    "question": "When registering, why are non-EDU emails preferred?",
+    "answer": "<p>Due to restrictions and filters that .edu email providers have on self-hosted websites, it blocks you from recieving a verification email after signing up. Those who include their personal emails always recieve their verification emails while those using .edu unfornately don't. Better to be safe than sorry!</p>"
+  },
+  {
     "question": "What if I am a beginner?",
     "answer": "<p>Knight Hacks welcomes students of all skill levels. In previous years, about half of the students have attended Knight Hacks as their first hackathon. We’ll have talks, mentors and workshops to help you with your project. Hackathons can be a great place to learn new skills in a short amount of time. Just be eager to learn, and excited to meet lots of awesome people.</p>"
   },
