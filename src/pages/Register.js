@@ -658,6 +658,9 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
+                  Non-EDU emails are preferred.
+                </p>
                 <div className="flex flex-col">
                   <Field type="text" name="email">
                     {({ field }) => (
