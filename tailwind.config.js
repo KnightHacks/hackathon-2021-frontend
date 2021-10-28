@@ -40,6 +40,8 @@ module.exports = {
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
         "koi-fish-pond-dark": "url('/src/assets/KoiFishPondDark.png')",
         "knight-hacks-logo": "url('/src/assets/KnightHacksLogo.svg')",
+        "knight-hacks-dark-logo":
+          "url('/src/assets/Navy_Gi_Logo_-_Transparent.png')",
       }),
       backgroundColor: (theme) => ({
         "landing-transparent": "rgba(191, 219, 254, 0.2)",

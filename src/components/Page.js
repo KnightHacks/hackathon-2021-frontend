@@ -74,7 +74,6 @@ const Page = ({ children, title }) => {
                     className="p-2 rounded-xl hover:shadow-md cursor-pointer"
                   />
                 )}
-                {console.log("Toggle switch theme: " + theme)}
               </div>
             </div>
           </div>
