@@ -1,6 +1,6 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     textColor: {
       darkblue: "#0B2D4F",
@@ -38,6 +38,7 @@ module.exports = {
       },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
+        "koi-fish-pond-dark": "url('/src/assets/KoiFishPondDark.png')",
         "knight-hacks-logo": "url('/src/assets/KnightHacksLogo.svg')",
       }),
       backgroundColor: (theme) => ({

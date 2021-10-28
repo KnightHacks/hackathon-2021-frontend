@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext, useEffect, createContext } from "react";
 import Menu from "./Menu";
 import { FaInstagram } from "react-icons/fa";
 import { TiSocialFacebook } from "react-icons/ti";
 import { RiTwitterLine } from "react-icons/ri";
+import { RiMoonClearLine } from "react-icons/ri";
+import { BiSun } from "react-icons/bi";
 import { Helmet } from "react-helmet";
+// import { ThemeSwitch } from "./ThemeSwitch";
 
 /**
  * @desc Renders template layout for all pages
@@ -13,6 +16,56 @@ import { Helmet } from "react-helmet";
 
 const Page = ({ children, title }) => {
   const [open, setOpen] = useState(false);
+  const getInitialTheme = () => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      const storedPrefs = window.localStorage.getItem("color-theme");
+      if (typeof storedPrefs === "string") {
+        return storedPrefs;
+      }
+
+      const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
+      if (userMedia.matches) {
+        return "dark";
+      }
+    }
+
+    return "dark";
+  };
+
+  // const ThemeSwitch = createContext();
+  const ThemeSwitch = createContext();
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  const ThemeProvider = ({ initialTheme, children }) => {
+    console.log("First theme: " + theme);
+
+    const rawSetTheme = (rawTheme) => {
+      const root = window.document.documentElement;
+      const isDark = rawTheme === "dark";
+
+      root.classList.remove(isDark ? "light" : "dark");
+      root.classList.add(rawTheme);
+
+      localStorage.setItem("color-theme", rawTheme);
+    };
+
+    if (initialTheme) {
+      rawSetTheme(initialTheme);
+    }
+
+    useEffect(() => {
+      rawSetTheme(theme);
+    }, [theme]);
+
+    return (
+      <ThemeSwitch.Provider value={{ theme, setTheme }}>
+        {children}
+      </ThemeSwitch.Provider>
+    );
+  };
+
+  // const { theme, setTheme } = useContext(ThemeSwitch);
+  // console.log("Second theme: " + theme);
 
   return (
     <>
@@ -21,7 +74,7 @@ const Page = ({ children, title }) => {
       </Helmet>
       <div
         className={
-          "absolute bg-koi-fish-pond bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
+          "absolute bg-koi-fish-pond dark:bg-koi-fish-pond-dark bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
           (open ? "filter blur-md" : "")
         }
       >
@@ -54,6 +107,23 @@ const Page = ({ children, title }) => {
               >
                 <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>
+              <div className="transition duration-500 ease-in-out">
+                {theme === "dark" ? (
+                  <BiSun
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    className="p-2 rounded-xl hover:shadow-md cursor-pointer"
+                  />
+                ) : (
+                  <RiMoonClearLine
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    className="p-2 rounded-xl hover:shadow-md cursor-pointer"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
