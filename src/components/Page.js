@@ -6,7 +6,7 @@ import { RiTwitterLine } from "react-icons/ri";
 import { RiMoonClearLine } from "react-icons/ri";
 import { BiSun } from "react-icons/bi";
 import { Helmet } from "react-helmet";
-// import { ThemeSwitch } from "./ThemeSwitch";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Renders template layout for all pages
@@ -16,56 +16,7 @@ import { Helmet } from "react-helmet";
 
 const Page = ({ children, title }) => {
   const [open, setOpen] = useState(false);
-  const getInitialTheme = () => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      const storedPrefs = window.localStorage.getItem("color-theme");
-      if (typeof storedPrefs === "string") {
-        return storedPrefs;
-      }
-
-      const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
-      if (userMedia.matches) {
-        return "dark";
-      }
-    }
-
-    return "dark";
-  };
-
-  // const ThemeSwitch = createContext();
-  const ThemeSwitch = createContext();
-  const [theme, setTheme] = useState(getInitialTheme);
-
-  const ThemeProvider = ({ initialTheme, children }) => {
-    console.log("First theme: " + theme);
-
-    const rawSetTheme = (rawTheme) => {
-      const root = window.document.documentElement;
-      const isDark = rawTheme === "dark";
-
-      root.classList.remove(isDark ? "light" : "dark");
-      root.classList.add(rawTheme);
-
-      localStorage.setItem("color-theme", rawTheme);
-    };
-
-    if (initialTheme) {
-      rawSetTheme(initialTheme);
-    }
-
-    useEffect(() => {
-      rawSetTheme(theme);
-    }, [theme]);
-
-    return (
-      <ThemeSwitch.Provider value={{ theme, setTheme }}>
-        {children}
-      </ThemeSwitch.Provider>
-    );
-  };
-
-  // const { theme, setTheme } = useContext(ThemeSwitch);
-  // console.log("Second theme: " + theme);
+  const { theme, setTheme } = useContext(ThemeSwitch);
 
   return (
     <>
@@ -123,6 +74,7 @@ const Page = ({ children, title }) => {
                     className="p-2 rounded-xl hover:shadow-md cursor-pointer"
                   />
                 )}
+                {console.log("Toggle switch theme: " + theme)}
               </div>
             </div>
           </div>
