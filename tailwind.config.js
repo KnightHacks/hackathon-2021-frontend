@@ -63,6 +63,7 @@ module.exports = {
       backgroundColor: ["active", "checked"],
       textDecoration: ["focus-visible"],
       borderColor: ["checked"],
+      backgroundImage: ["dark"],
     },
   },
   plugins: [
