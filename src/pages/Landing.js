@@ -24,7 +24,7 @@ const Landing = () => {
               aria-label="Knight Hacks logo"
               className={`
                 bg-knight-hacks-logo
-                w-full h-20 md:h-24 lg:h-36 bg-no-repeat
+                w-full h-20 md:h-28 lg:h-36 bg-no-repeat
                 my-2 md:my-4 bg-center
                 font-palanquin"
                 `}
