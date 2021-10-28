@@ -22,7 +22,7 @@ import { ThemeProvider } from "./context/ThemeSwitch";
 const App = ({ history }) => {
   return (
     <VolumeProvider>
-      <ThemeProvider initialTheme="dark">
+      <ThemeProvider initialTheme="light">
         <Router history={history}>
           <Switch>
             {/*
