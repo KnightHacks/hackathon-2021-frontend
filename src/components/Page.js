@@ -40,21 +40,21 @@ const Page = ({ children, title }) => {
               <a
                 aria-label="Twitter Icon"
                 href="https://twitter.com/KnightHacks?lang=en/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Instagram Icon"
                 href="https://www.instagram.com/knighthacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Facebook Icon"
                 href="https://www.facebook.com/KnightHacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>
