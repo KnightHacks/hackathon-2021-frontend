@@ -30,7 +30,7 @@ const Landing = () => {
                 `}
             />
           ) : (
-            <img className="w-4/5" src={darkLogo} />
+            <img className="w-4/5 md:w-10/12 lg:5/12" src={darkLogo} />
           )}
           <p className="mt-4 text-xl w-full text-center font-palanquinbold">
             November 12th - November 14th, 2021

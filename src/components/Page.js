@@ -25,7 +25,7 @@ const Page = ({ children, title }) => {
       </Helmet>
       <div
         className={
-          "absolute bg-koi-fish-pond dark:bg-koi-fish-pond-dark bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
+          "absolute bg-koi-fish-pond dark:bg-koi-fish-pond-dark transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
           (open ? "filter blur-md" : "")
         }
       >

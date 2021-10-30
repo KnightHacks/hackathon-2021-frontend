@@ -66,6 +66,7 @@ module.exports = {
       textDecoration: ["focus-visible"],
       borderColor: ["checked"],
       backgroundImage: ["dark"],
+      transitionDuration: ["dark"],
     },
   },
   plugins: [
