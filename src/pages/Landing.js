@@ -50,6 +50,8 @@ const Landing = () => {
               focus:outline-none
               focus:ring-4
               focus:ring-darkblue
+              dark:border-purewhite
+              dark:focus:ring-purewhite
             `}
             to="/register"
           >
@@ -77,6 +79,8 @@ const Landing = () => {
                 focus:ring-4
                 focus:ring-darkblue
                 shadow-sm
+                dark:border-purewhite
+                dark:focus:ring-purewhite
               `}
             >
               <span
@@ -109,6 +113,8 @@ const Landing = () => {
                 focus:ring-4
                 focus:ring-darkblue
                 shadow-sm
+                dark:border-purewhite
+                dark:focus:ring-purewhite
               `}
             >
               <span
@@ -141,6 +147,8 @@ const Landing = () => {
               focus:ring-4
               focus:ring-darkblue
               shadow-sm
+              dark:border-purewhite
+              dark:focus:ring-purewhite
             `}
           >
             <span
