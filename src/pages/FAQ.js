@@ -26,7 +26,7 @@ const FAQ = () => {
                   <Disclosure.Button
                     className={`${
                       open ? "rounded-t-lg" : "rounded-lg"
-                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-darkblue bg-opaque-blue hover:bg-darkblue hover:text-purewhite hover:bg-opacity-70 ease-out duration-300
+                    } flex justify-between w-full px-4 py-2 text-xl font-palanquin text-left cursor-pointer text-darkblue dark:text-purewhite bg-opaque-blue hover:bg-darkblue hover:text-purewhite hover:bg-opacity-70 ease-out duration-300
                     focus:outline-none
                     focus:ring-4
                     focus:ring-darkblue`}
@@ -49,7 +49,7 @@ const FAQ = () => {
                   >
                     <Disclosure.Panel
                       static
-                      className="text-left text-base sm:text-lg text-darkblue px-8 py-2 bg-opaque-blue rounded-b-lg"
+                      className="text-left text-base sm:text-lg text-darkblue dark:text-purewhite px-8 py-2 bg-opaque-blue rounded-b-lg"
                       dangerouslySetInnerHTML={{ __html: item.answer }}
                     />
                   </Transition>

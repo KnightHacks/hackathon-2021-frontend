@@ -30,6 +30,10 @@
     "answer": "<p>Previously, we’ve held workshops and talks for a range of skill levels from beginner to advanced like Intro to Web Development and Virtual Reality. We’ve also had introductory workshops to various programming tools such as APIs, databases and platforms. Whether it’s for relaxation or health, novelty or competition, our team has something exciting prepared for you!</p>"
   },
   {
+    "question": "Can I start my project before the hackathon begins?",
+    "answer": "<p>No, you cannot start working on your project before Hacking time officially begins. This will result in a disqualification of your project for judging.</p>"
+  },
+  {
     "question": "When registering, why are non-EDU emails preferred?",
     "answer": "<p>Due to restrictions and filters that .edu email providers have on self-hosted websites, it blocks you from recieving a verification email after signing up. Those who include their personal emails always recieve their verification emails while those using .edu unfornately don't. Better to be safe than sorry!</p>"
   },
