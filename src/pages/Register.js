@@ -1,6 +1,6 @@
 import { Dialog, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
@@ -12,6 +12,7 @@ import ReactSelect, { createFilter, components } from "react-select";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -217,6 +218,55 @@ const Register = () => {
       </>
     );
   }
+
+  const { theme, setTheme } = useContext(ThemeSwitch);
+  const textColor = theme === "dark" ? "#FFFFFF" : "#0B2D4F";
+  const dropdownTextColor = theme === "dark" ? "#FFFFF" : "#0B2D4F";
+  const darkBackgroundColor =
+    theme === "dark" ? "#204c9c" : "rgba(159, 211, 233, 0.47)";
+  const customStyles = {
+    placeholder: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontFamily: "Palanquin Light, sans-serif",
+    }),
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: darkBackgroundColor,
+      borderWidth: "2px",
+      borderRadius: "0.5rem",
+      borderColor: textColor,
+      "&:hover": {
+        borderColor: textColor,
+      },
+      paddingTop: "0.1rem",
+      paddingBottom: "0.1rem",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontSize: "0.875rem",
+      lineHeight: "1.25rem",
+    }),
+    option: (provided, state) => {
+      const backgroundColor = state.isSelected
+        ? "rgb(219, 234, 254)"
+        : "#204c9c";
+      return {
+        ...provided,
+        backgroundColor: backgroundColor,
+        color: dropdownTextColor,
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      };
+    },
+    input: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontSize: "0.875rem",
+      lineHeight: "1.25rem",
+    }),
+  };
 
   return (
     <Page title="Knight Hacks | Register">
@@ -476,7 +526,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="pronoun">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="font-palanquin text-red-700 dark:text-purewhite font-bold">
                       {msg}
                     </p>
                   )}
@@ -537,49 +587,7 @@ const Register = () => {
                         DropdownIndicator: DropdownIndicator,
                       }}
                       className="text-darkblue dark:text-purewhite"
-                      styles={{
-                        placeholder: (provided) => ({
-                          ...provided,
-                          color: "#0B2D4F",
-                          fontFamily: "Palanquin Light, sans-serif",
-                        }),
-                        control: (provided) => ({
-                          ...provided,
-                          backgroundColor: "rgba(159, 211, 233, 0.47)",
-                          borderWidth: "2px",
-                          borderRadius: "0.5rem",
-                          borderColor: "#0B2D4F",
-                          "&:hover": {
-                            borderColor: "#0B2D4F",
-                          },
-                          paddingTop: "0.1rem",
-                          paddingBottom: "0.1rem",
-                        }),
-                        singleValue: (provided) => ({
-                          ...provided,
-                          color: "#0B2D4F",
-                          fontSize: "0.875rem",
-                          lineHeight: "1.25rem",
-                        }),
-                        option: (provided, state) => {
-                          const backgroundColor = state.isSelected
-                            ? "rgb(219, 234, 254)"
-                            : "";
-                          return {
-                            ...provided,
-                            backgroundColor: backgroundColor,
-                            color: "rgb(17, 24, 39)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          };
-                        },
-                        input: (provided) => ({
-                          ...provided,
-                          color: "rgb(74, 75, 77)",
-                          fontSize: "0.875rem",
-                          lineHeight: "1.25rem",
-                        }),
-                      }}
+                      styles={customStyles}
                       onMenuOpen={() => {
                         setFieldTouched(field.name);
                       }}
@@ -676,50 +684,8 @@ const Register = () => {
                           MenuList: CustomMenuList,
                           DropdownIndicator: DropdownIndicator,
                         }}
-                        className="text-darkblue"
-                        styles={{
-                          placeholder: (provided) => ({
-                            ...provided,
-                            color: "#0B2D4F",
-                            fontFamily: "Palanquin Light, sans-serif",
-                          }),
-                          control: (provided) => ({
-                            ...provided,
-                            backgroundColor: "rgba(159, 211, 233, 0.47)",
-                            borderWidth: "2px",
-                            borderRadius: "0.5rem",
-                            borderColor: "rgb(17, 24, 39)",
-                            "&:hover": {
-                              borderColor: "rgb(17, 24, 39)",
-                            },
-                            paddingTop: "0.1rem",
-                            paddingBottom: "0.1rem",
-                          }),
-                          singleValue: (provided) => ({
-                            ...provided,
-                            color: "rgb(17, 24, 39)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          }),
-                          option: (provided, state) => {
-                            const backgroundColor = state.isSelected
-                              ? "rgb(17, 24, 39)"
-                              : "";
-                            return {
-                              ...provided,
-                              backgroundColor: backgroundColor,
-                              color: "rgb(17, 24, 39)",
-                              fontSize: "0.875rem",
-                              lineHeight: "1.25rem",
-                            };
-                          },
-                          input: (provided) => ({
-                            ...provided,
-                            color: "rgb(74, 75, 77)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          }),
-                        }}
+                        className="text-purewhite"
+                        styles={customStyles}
                         onMenuOpen={() => {
                           setFieldTouched(field.name);
                         }}
@@ -728,7 +694,7 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="school">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700 font-bold">
+                      <p className="font-palanquin text-red-700 dark:text-purewhite font-bold">
                         {msg}
                       </p>
                     )}
