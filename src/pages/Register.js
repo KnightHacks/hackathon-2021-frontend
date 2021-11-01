@@ -221,7 +221,7 @@ const Register = () => {
 
   const { theme, setTheme } = useContext(ThemeSwitch);
   const textColor = theme === "dark" ? "#FFFFFF" : "#0B2D4F";
-  const dropdownTextColor = theme === "dark" ? "#FFFFF" : "#0B2D4F";
+  // const dropdownTextColor = theme === "dark" ? "#FFFFF" : "#0B2D4F";
   const darkBackgroundColor =
     theme === "dark" ? "#204c9c" : "rgba(159, 211, 233, 0.47)";
   const customStyles = {
@@ -249,13 +249,11 @@ const Register = () => {
       lineHeight: "1.25rem",
     }),
     option: (provided, state) => {
-      const backgroundColor = state.isSelected
-        ? "rgb(219, 234, 254)"
-        : "#204c9c";
+      const backgroundColor = state.isSelected ? "rgb(219, 234, 254)" : "";
       return {
         ...provided,
+        color: "rgb(17, 24, 39)",
         backgroundColor: backgroundColor,
-        color: dropdownTextColor,
         fontSize: "0.875rem",
         lineHeight: "1.25rem",
       };
@@ -684,7 +682,7 @@ const Register = () => {
                           MenuList: CustomMenuList,
                           DropdownIndicator: DropdownIndicator,
                         }}
-                        className="text-purewhite"
+                        className="text-darkblue dark:text-purewhite"
                         styles={customStyles}
                         onMenuOpen={() => {
                           setFieldTouched(field.name);
