@@ -1055,8 +1055,8 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
               shadow-md
               max-w-xswidth truncate
               hover:border-darkblue
-              hover:bg-darkblue
-              hover:text-purewhite
+              hover:text-darkblue
+              
               flex justify-center
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite
               `}
