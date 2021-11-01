@@ -1124,7 +1124,7 @@ const OptionSelector = ({
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-gray-400 dark:text-purewhite"
                 aria-hidden="true"
               />
             </span>
@@ -1132,18 +1132,14 @@ const OptionSelector = ({
 
           <Listbox.Options
             style={{ zIndex: zIndex }}
-            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 dark:bg-blue-900 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
+            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 dark:text-darkblue dark:bg-purewhite rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
           >
             {trackOptions.map((track, trackIdx) => (
               <Listbox.Option
                 key={trackIdx}
                 className={({ active }) =>
-                  `${
-                    active
-                      ? "text-blue-900 bg-blue-100 dark:bg-purewhite dark:text-darkblue"
-                      : "text-darkblue dark:text-purewhite"
-                  }
-                          cursor-default select-none relative py-2 pl-10 pr-4`
+                  `${active ? "text-blue-900" : "text-darkblue"}
+                          cursor-default select-none relative py-2 pl-10 pr-4 hover:bg-purewhite dark:hover:bg-menu-transparent-dark`
                 }
                 value={track}
               >
