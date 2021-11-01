@@ -2,15 +2,17 @@ import { useContext } from "react";
 import { IconContext } from "react-icons";
 import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
 import { VolumeContext } from "../context/VolumeContext";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 const VolumeButton = () => {
   const volume = useContext(VolumeContext);
+  const { theme, setTheme } = useContext(ThemeSwitch);
 
   return (
     <IconContext.Provider
       value={{
-        color: "#0B2D4F",
-        className: "text-4xl md:text-5xl cursor-pointer",
+        className:
+          "text-4xl md:text-5xl cursor-pointer text-darkblue dark:text-purewhite",
       }}
     >
       {volume.state.volumeOn ? (

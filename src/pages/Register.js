@@ -1,6 +1,6 @@
 import { Dialog, Listbox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
 import Page from "../components/Page";
 import { useHistory } from "react-router-dom";
@@ -12,6 +12,7 @@ import ReactSelect, { createFilter, components } from "react-select";
 import CustomMenuList from "../components/CustomMenuList";
 import schools from "../assets/content/schools.json";
 import countries from "../assets/content/countries.json";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Registration page where hackers can sign up for the hackathon. After
@@ -121,31 +122,6 @@ const Register = () => {
   const validationErrorFocusRef = useRef(null);
 
   const submitRegistration = async (values) => {
-    // Combining date of birth fields and converting to iso8601
-    // const dateOfBirth = new Date(
-    //   values.year,
-    //   values.month,
-    //   values.day
-    // ).toISOString();
-
-    // let updatedMonth = values.month;
-    // let updatedDay = values.day;
-    // let timestamp = new Date(Math.floor(new Date().getTime() / 1000));
-    // if (parseInt(values.month) < 10 && updatedMonth.length < 2) {
-    //   updatedMonth = "0" + values.month;
-    // }
-    //
-    // if (parseInt(values.day) < 10 && updatedDay.length < 2) {
-    //   updatedDay = "0" + values.day;
-    // }
-    // const formattedDate =
-    //   `${values.year}-${updatedMonth}-${updatedDay} ` +
-    //   timestamp.toTimeString();
-    //
-    // const dateOfBirth = new Date(formattedDate).toISOString();
-
-    // console.log("Date of birth: " + dateOfBirth);
-
     console.log("Date of birth: " + values.dob);
 
     switch (registrationState) {
@@ -191,10 +167,6 @@ const Register = () => {
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  // const dayRegExp = /(0[1-9]|[12][0-9]|3[01])/;
-  // const monthRegExp = /(0[1-9]|1[0-2])/;
-  // const yearRegExp = ^(19|20)\d{2}$;
-
   let registrationSchema = yup.object().shape({
     firstName: yup.string().required("First name is required."),
     lastName: yup.string().required("Last name is required."),
@@ -239,13 +211,60 @@ const Register = () => {
               Get off your phone!
             </div>
             <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-              Head over to our web view to register early.
+              Head over to our web view to register.
             </div>
           </div>
         </Page>
       </>
     );
   }
+
+  const { theme, setTheme } = useContext(ThemeSwitch);
+  const textColor = theme === "dark" ? "#FFFFFF" : "#0B2D4F";
+  // const dropdownTextColor = theme === "dark" ? "#FFFFF" : "#0B2D4F";
+  const darkBackgroundColor =
+    theme === "dark" ? "#204c9c" : "rgba(159, 211, 233, 0.47)";
+  const customStyles = {
+    placeholder: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontFamily: "Palanquin Light, sans-serif",
+    }),
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: darkBackgroundColor,
+      borderWidth: "2px",
+      borderRadius: "0.5rem",
+      borderColor: textColor,
+      "&:hover": {
+        borderColor: textColor,
+      },
+      paddingTop: "0.1rem",
+      paddingBottom: "0.1rem",
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontSize: "0.875rem",
+      lineHeight: "1.25rem",
+    }),
+    option: (provided, state) => {
+      const backgroundColor = state.isSelected ? "rgb(219, 234, 254)" : "";
+      return {
+        ...provided,
+        color: "rgb(17, 24, 39)",
+        backgroundColor: backgroundColor,
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+      };
+    },
+    input: (provided) => ({
+      ...provided,
+      color: textColor,
+      fontSize: "0.875rem",
+      lineHeight: "1.25rem",
+    }),
+  };
 
   return (
     <Page title="Knight Hacks | Register">
@@ -399,7 +418,7 @@ const Register = () => {
             <Form className="flex flex-col">
               <div className="flex flex-col justify-center font-palanquin">
                 <div className="flex flex-col">
-                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                  <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                     Welcome Hacker!
                   </p>
                   <Field type="text" name="firstName">
@@ -472,10 +491,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col mt-2">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                   About You
                 </p>
-                <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
+                <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue dark:text-purewhite">
                   Let&apos;s learn more about you.
                 </p>
                 <Field name="pronoun" type="select">
@@ -505,7 +524,7 @@ const Register = () => {
                 </Field>
                 <ErrorMessage name="pronoun">
                   {(msg) => (
-                    <p className="font-palanquin text-red-700 font-bold">
+                    <p className="font-palanquin text-red-700 dark:text-purewhite font-bold">
                       {msg}
                     </p>
                   )}
@@ -545,7 +564,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <div className="font-palanquin flex flex-col mt-4 w-full space-y-4 font-palanquin text-darkblue">
+              <div className="font-palanquin flex flex-col mt-4 w-full space-y-4 font-palanquin text-darkblue dark:text-purewhite">
                 <Field name="country" type="select">
                   {({ field }) => (
                     <ReactSelect
@@ -565,50 +584,8 @@ const Register = () => {
                       components={{
                         DropdownIndicator: DropdownIndicator,
                       }}
-                      className="text-darkblue"
-                      styles={{
-                        placeholder: (provided) => ({
-                          ...provided,
-                          color: "#0B2D4F",
-                          fontFamily: "Palanquin Light, sans-serif",
-                        }),
-                        control: (provided) => ({
-                          ...provided,
-                          backgroundColor: "rgba(159, 211, 233, 0.47)",
-                          borderWidth: "2px",
-                          borderRadius: "0.5rem",
-                          borderColor: "#0B2D4F",
-                          "&:hover": {
-                            borderColor: "#0B2D4F",
-                          },
-                          paddingTop: "0.1rem",
-                          paddingBottom: "0.1rem",
-                        }),
-                        singleValue: (provided) => ({
-                          ...provided,
-                          color: "#0B2D4F",
-                          fontSize: "0.875rem",
-                          lineHeight: "1.25rem",
-                        }),
-                        option: (provided, state) => {
-                          const backgroundColor = state.isSelected
-                            ? "rgb(219, 234, 254)"
-                            : "";
-                          return {
-                            ...provided,
-                            backgroundColor: backgroundColor,
-                            color: "rgb(17, 24, 39)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          };
-                        },
-                        input: (provided) => ({
-                          ...provided,
-                          color: "rgb(74, 75, 77)",
-                          fontSize: "0.875rem",
-                          lineHeight: "1.25rem",
-                        }),
-                      }}
+                      className="text-darkblue dark:text-purewhite"
+                      styles={customStyles}
                       onMenuOpen={() => {
                         setFieldTouched(field.name);
                       }}
@@ -623,12 +600,12 @@ const Register = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue">
+              <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue dark:text-purewhite">
                 Input your birthday below.
               </p>
               <div className="flex flex-col">
                 <Field
-                  className="mt-2 rounded-lg border-2 border-darkblue font-palanquinregular p-2 px-4 py-2 w-full border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue bg-opaque-blue"
+                  className="mt-2 rounded-lg border-2 font-palanquinregular p-2 px-4 py-2 w-full border-darkblue dark:border-purewhite ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite bg-opaque-blue dark:bg-menu-transparent-dark"
                   type="date"
                   name="dob"
                 />
@@ -641,7 +618,7 @@ const Register = () => {
                 </ErrorMessage>
               </div>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                   Contact Information
                 </p>
                 <div className="flex flex-col">
@@ -658,6 +635,9 @@ const Register = () => {
                     )}
                   </ErrorMessage>
                 </div>
+                <p className="mt-2 w-full space-y-4 font-palanquin text-darkblue dark:text-purewhite">
+                  Non-EDU emails are preferred.
+                </p>
                 <div className="flex flex-col">
                   <Field type="text" name="email">
                     {({ field }) => (
@@ -674,7 +654,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="font-palanquin flex flex-col">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                   School Information
                 </p>
                 <div className="flex flex-col mt-4 text-darkblue">
@@ -702,50 +682,8 @@ const Register = () => {
                           MenuList: CustomMenuList,
                           DropdownIndicator: DropdownIndicator,
                         }}
-                        className="text-darkblue"
-                        styles={{
-                          placeholder: (provided) => ({
-                            ...provided,
-                            color: "#0B2D4F",
-                            fontFamily: "Palanquin Light, sans-serif",
-                          }),
-                          control: (provided) => ({
-                            ...provided,
-                            backgroundColor: "rgba(159, 211, 233, 0.47)",
-                            borderWidth: "2px",
-                            borderRadius: "0.5rem",
-                            borderColor: "rgb(17, 24, 39)",
-                            "&:hover": {
-                              borderColor: "rgb(17, 24, 39)",
-                            },
-                            paddingTop: "0.1rem",
-                            paddingBottom: "0.1rem",
-                          }),
-                          singleValue: (provided) => ({
-                            ...provided,
-                            color: "rgb(17, 24, 39)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          }),
-                          option: (provided, state) => {
-                            const backgroundColor = state.isSelected
-                              ? "rgb(17, 24, 39)"
-                              : "";
-                            return {
-                              ...provided,
-                              backgroundColor: backgroundColor,
-                              color: "rgb(17, 24, 39)",
-                              fontSize: "0.875rem",
-                              lineHeight: "1.25rem",
-                            };
-                          },
-                          input: (provided) => ({
-                            ...provided,
-                            color: "rgb(74, 75, 77)",
-                            fontSize: "0.875rem",
-                            lineHeight: "1.25rem",
-                          }),
-                        }}
+                        className="text-darkblue dark:text-purewhite"
+                        styles={customStyles}
                         onMenuOpen={() => {
                           setFieldTouched(field.name);
                         }}
@@ -754,7 +692,7 @@ const Register = () => {
                   </Field>
                   <ErrorMessage name="school">
                     {(msg) => (
-                      <p className="font-palanquin text-red-700 font-bold">
+                      <p className="font-palanquin text-red-700 dark:text-purewhite font-bold">
                         {msg}
                       </p>
                     )}
@@ -843,7 +781,7 @@ const Register = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+              <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                 Hackathon Information
               </p>
               <div className="flex flex-col justify-center font-palanquin">
@@ -861,12 +799,12 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin mt-4">
                     <div className="w-full space-y-4 flex-1">
                       <label>
-                        <span className="text-darkblue">
+                        <span className="text-darkblue dark:text-purewhite">
                           Why are you attending Knight Hacks?
                         </span>
                         <textarea
                           {...field}
-                          className="text-darkblue h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-darkblue hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue p-2 w-full px-4 py-2"
+                          className="text-darkblue dark:text-purewhite h-20 mt-4 rounded-r-lg rounded-l-lg bg-opaque-blue dark:bg-menu-transparent-dark border-2 border-darkblue dark:border-purewhite hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite p-2 w-full px-4 py-2"
                         />
                       </label>
                     </div>
@@ -885,12 +823,12 @@ const Register = () => {
                   <div className="flex flex-col justify-center font-palanquin my-4">
                     <div className="flex-1">
                       <label>
-                        <span className="text-darkblue">
+                        <span className="text-darkblue dark:text-purewhite">
                           What do you hope to learn at Knight Hacks?
                         </span>
                         <textarea
                           {...field}
-                          className="text-darkblue h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue border-2 border-darkblue hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue p-2 px-4 py-2"
+                          className="text-darkblue dark:text-purewhite h-20 mt-4 w-full rounded-r-lg rounded-l-lg bg-opaque-blue dark:bg-menu-transparent-dark border-2 border-darkblue dark:border-purewhite hover:border-blue-200 ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite p-2 px-4 py-2"
                         />
                       </label>
                     </div>
@@ -905,10 +843,10 @@ const Register = () => {
                 )}
               </Field>
               <div className="flex flex-col justify-center font-palanquin">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                   External Links
                 </p>
-                <p className="mt-4 w-full space-y-4 font-palanquin text-darkblue">
+                <p className="mt-4 w-full space-y-4 font-palanquin text-darkblue dark:text-purewhite">
                   Note: these are{" "}
                   <span className="font-palanquinbold">optional</span>, but most
                   technical applications ask for them! Make a Github / LinkedIn
@@ -924,7 +862,7 @@ const Register = () => {
                 </Field>
               </div>
               <div className="flex flex-col space-y-8 mt-4 ml-4">
-                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue text-xl">
+                <p className="mt-4 w-full space-y-4 font-palanquinbold text-darkblue dark:text-purewhite text-xl">
                   Last Step!
                 </p>
                 <label className="flex flex-col">
@@ -934,13 +872,13 @@ const Register = () => {
                       name="mlh1"
                       className="w-6 h-6 form-checkbox text-darkblue focus:ring-1 focus:ring-darkblue rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-darkblue">
+                    <p className="w-5/6 font-palanquinregular text-darkblue dark:text-purewhite">
                       Have you read and understood the{" "}
                       <a
                         href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-darkblue hover:text-darkblue hover:underline cursor-pointer font-palanquinbold"
+                        className="text-darkblue dark:text-purewhite hover:text-darkblue hover:underline cursor-pointer font-palanquinbold"
                       >
                         MLH Code of Conduct
                       </a>
@@ -963,7 +901,7 @@ const Register = () => {
                       name="mlh2"
                       className="w-6 h-6 form-checkbox text-darkblue focus:ring-1 focus:ring-darkblue rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-darkblue">
+                    <p className="w-5/6 font-palanquinregular text-darkblue dark:text-purewhite">
                       I authorize you to share my application/registration
                       information with Major League Hacking for event
                       administration, ranking, and MLH administration in-line
@@ -973,7 +911,7 @@ const Register = () => {
                         href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-darkblue hover:text-darkblue hover:underline cursor-pointer font-palanquinbold"
+                        className="text-darkblue dark:text-purewhite hover:text-darkblue hover:underline cursor-pointer font-palanquinbold"
                       >
                         MLH Contest Terms and Conditions
                       </a>{" "}
@@ -982,7 +920,7 @@ const Register = () => {
                         href="https://mlh.io/privacy"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-darkblue hover:text-darkblue hover:underline cursor-pointer font-palanquinbold"
+                        className="text-darkblue hover:text-darkblue dark:text-purewhite hover:underline cursor-pointer font-palanquinbold"
                       >
                         MLH Privacy Policy
                       </a>
@@ -1005,7 +943,7 @@ const Register = () => {
                       name="mlh3"
                       className="w-6 h-6 form-checkbox text-darkblue focus:ring-1 focus:ring-darkblue rounded-md"
                     />
-                    <p className="w-5/6 font-palanquinregular text-darkblue">
+                    <p className="w-5/6 font-palanquinregular text-darkblue dark:text-purewhite">
                       I authorize Major League Hacking to send me occasional
                       messages about hackathons including pre- and post-event
                       informational emails.
@@ -1072,7 +1010,7 @@ const TextInputBox = ({ label, field }) => {
         <input
           placeholder={label}
           className={`
-            w-full bg-opaque-blue rounded-xl placeholder-darkblue placeholder-opacity-75 text-darkblue font-light p-2 px-4 py-2 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue break-words shadow-md font-palanquinregular
+            w-full bg-opaque-blue dark:bg-menu-transparent-dark rounded-xl placeholder-darkblue dark:placeholder-purewhite placeholder-opacity-75 text-darkblue dark:text-purewhite dark:border-purewhite font-light p-2 px-4 py-2 border-2 border-darkblue ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite break-words shadow-md font-palanquinregular
             `}
           type="text"
           {...field}
@@ -1105,7 +1043,9 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
 
   return (
     <div className="h-full justify-center items-center flex-1 flex flex-col">
-      <p className="mt-3 font-palanquin text-darkblue">Resume (PDF)</p>
+      <p className="mt-3 font-palanquin text-darkblue dark:text-purewhite">
+        Resume (PDF)
+      </p>
       <button
         onClick={handleClick}
         type="button"
@@ -1114,15 +1054,17 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
               bg-gray-50 border-2 border-darkblue rounded-lg mx-4 md:my-3 py-1.5 px-4
               shadow-md
               max-w-xswidth truncate
-              hover:bg-darkblue
-              hover:text-purewhite
               hover:border-darkblue
+              hover:text-darkblue
+              
               flex justify-center
-              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue
+              ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite
               `}
       >
-        <HiOutlineUpload className="mt-1 mr-2 text-white" />
-        <p className="truncate text-white font-palanquinregular">{title}</p>
+        <HiOutlineUpload className="mt-1 mr-2 dark:text-darkblue" />
+        <p className="truncate text-white dark:text-darkblue font-palanquinregular">
+          {title}
+        </p>
       </button>
       <input
         type="file"
@@ -1163,7 +1105,9 @@ const OptionSelector = ({
     >
       <span
         className={
-          flex === "col" ? "flex self-start text-darkblue text-md" : undefined
+          flex === "col"
+            ? "flex self-start text-darkblue dark:text-purewhite text-md"
+            : undefined
         }
       >
         {title}
@@ -1174,13 +1118,13 @@ const OptionSelector = ({
         onClick={handleTouched}
       >
         <div className="relative mt-1 flex-1 w-full">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-darkblue bg-opaque-blue rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue sm:text-md text-darkblue">
-            <span className="block truncate text-darkblue font-medium">
+          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left border-2 border-darkblue dark:border-purewhite bg-opaque-blue dark:bg-menu-transparent-dark rounded-lg shadow-md cursor-default ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite sm:text-md text-darkblue dark:text-purewhite">
+            <span className="block truncate text-darkblue dark:text-purewhite font-medium">
               {selectedTrack}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-gray-400 dark:text-purewhite"
                 aria-hidden="true"
               />
             </span>
@@ -1188,14 +1132,14 @@ const OptionSelector = ({
 
           <Listbox.Options
             style={{ zIndex: zIndex }}
-            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
+            className={`absolute w-full py-1 mt-1 overflow-auto text-base bg-indigo-50 dark:text-darkblue dark:bg-purewhite rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
           >
             {trackOptions.map((track, trackIdx) => (
               <Listbox.Option
                 key={trackIdx}
                 className={({ active }) =>
-                  `${active ? "text-blue-900 bg-blue-100" : "text-darkblue"}
-                          cursor-default select-none relative py-2 pl-10 pr-4`
+                  `${active ? "text-blue-900" : "text-darkblue"}
+                          cursor-default select-none relative py-2 pl-10 pr-4 hover:bg-purewhite dark:hover:bg-menu-transparent-dark`
                 }
                 value={track}
               >

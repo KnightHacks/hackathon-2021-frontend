@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext, useEffect, createContext } from "react";
 import Menu from "./Menu";
 import { FaInstagram } from "react-icons/fa";
 import { TiSocialFacebook } from "react-icons/ti";
 import { RiTwitterLine } from "react-icons/ri";
+import { RiMoonClearLine } from "react-icons/ri";
+import { BiSun } from "react-icons/bi";
 import { Helmet } from "react-helmet";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Renders template layout for all pages
@@ -13,6 +16,7 @@ import { Helmet } from "react-helmet";
 
 const Page = ({ children, title }) => {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useContext(ThemeSwitch);
 
   return (
     <>
@@ -21,7 +25,7 @@ const Page = ({ children, title }) => {
       </Helmet>
       <div
         className={
-          "absolute bg-koi-fish-pond bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
+          "absolute bg-koi-fish-pond dark:bg-koi-fish-pond-dark transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
           (open ? "filter blur-md" : "")
         }
       >
@@ -29,31 +33,48 @@ const Page = ({ children, title }) => {
           <Menu open={open} setOpen={setOpen} />
         </div>
 
-        <div className="sm:col-span-3 text-darkblue w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
+        <div className="sm:col-span-3 text-darkblue dark:text-purewhite w-19/20 h-17/20 sm:h-19/20 flex justify-center sm:items-center">
           <div className="flex items-center w-full h-19/20 sm:h-full backdrop-filter backdrop-blur-sm bg-landing-transparent rounded-2xl flex-col overflow-y-auto p-2">
             {children}
             <div className="flex flex-row w-full justify-center mb-8 space-x-8 text-4xl sm:text-5xl md:text-6xl mt-auto">
               <a
                 aria-label="Twitter Icon"
                 href="https://twitter.com/KnightHacks?lang=en/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <RiTwitterLine className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Instagram Icon"
                 href="https://www.instagram.com/knighthacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <FaInstagram className="p-2 rounded-xl hover:shadow-md" />
               </a>
               <a
                 aria-label="Facebook Icon"
                 href="https://www.facebook.com/KnightHacks/"
-                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue focus:border-4"
+                className="ease-out duration-300 rounded-xl focus:outline-none focus:ring focus:ring-darkblue dark:focus:ring-purewhite focus:border-4"
               >
                 <TiSocialFacebook className="p-2 rounded-xl hover:shadow-md" />
               </a>
+              <div className="transition duration-500 ease-in-out">
+                {theme === "dark" ? (
+                  <BiSun
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    className="p-2 rounded-xl hover:shadow-md cursor-pointer"
+                  />
+                ) : (
+                  <RiMoonClearLine
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    className="p-2 rounded-xl hover:shadow-md cursor-pointer"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

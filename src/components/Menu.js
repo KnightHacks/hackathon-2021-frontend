@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { CgMenu } from "react-icons/cg";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import VolumeButton from "./VolumeButton";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Renders menu component containing nav menu and volume
@@ -11,6 +12,8 @@ import VolumeButton from "./VolumeButton";
  */
 
 const Menu = ({ open, setOpen }) => {
+  const { theme, setTheme } = useContext(ThemeSwitch);
+
   return (
     <div className="flex justify-center w-screen">
       <div
@@ -20,7 +23,7 @@ const Menu = ({ open, setOpen }) => {
         }
       >
         <CgMenu
-          className="text-4xl md:text-5xl cursor-pointer text-darkblue"
+          className="text-4xl md:text-5xl cursor-pointer text-darkblue dark:text-purewhite"
           onClick={() => setOpen(!open)}
         />
         <div className="flex-1 sm:flex-none flex justify-end">
@@ -51,22 +54,36 @@ const Menu = ({ open, setOpen }) => {
           onClose={() => setOpen(false)}
         >
           <div className="min-h-screen">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Dialog.Overlay className="fixed inset-0 bg-menu-transparent" />
-            </Transition.Child>
+            {theme === "dark" ? (
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Dialog.Overlay className="fixed inset-0 bg-menu-transparent-dark" />
+              </Transition.Child>
+            ) : (
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Dialog.Overlay className="fixed inset-0 bg-menu-transparent" />
+              </Transition.Child>
+            )}
 
             <div className="sm:inline-block px-6 pt-6 mt-8 text-left align-middle transition-all transform">
               <Dialog.Title
                 as="div"
-                className="leading-6 text-darkblue flex flex-row sm:space-x-8 w-full"
+                className="leading-6 text-darkblue dark:text-purewhite flex flex-row sm:space-x-8 w-full"
               >
                 <CgMenu
                   className="text-4xl md:text-5xl cursor-pointer"
@@ -91,7 +108,7 @@ const Menu = ({ open, setOpen }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <div className="mt-2 inline-block">
-                  <ul className="text-4xl sm:text-5xl text-darkblue inline-flex flex-col font-sansita">
+                  <ul className="text-4xl sm:text-5xl text-darkblue dark:text-purewhite inline-flex flex-col font-sansita">
                     <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700 focus:outline-none">
                       <Link
                         to="/"
