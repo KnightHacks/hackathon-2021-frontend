@@ -13,6 +13,8 @@ import Success from "./pages/Success";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
 import VolumeProvider from "./context/VolumeContext";
+import { ThemeProvider } from "./context/ThemeSwitch";
+
 /**
  * @desc See AppWithTransitions; don't make routing changes here
  * @author Abraham Hernandez, Rob
@@ -20,18 +22,20 @@ import VolumeProvider from "./context/VolumeContext";
 const App = ({ history }) => {
   return (
     <VolumeProvider>
-      <Router history={history}>
-        <Switch>
-          {/*
-           * We forward to AppWithTransitions so we can animate the transitions.
-           * Don't put more routes here, instead put them in the
-           * AppWithTransitions component.
-           */}
-          <Route path="*">
-            <AppWithTransitions />
-          </Route>
-        </Switch>
-      </Router>
+      <ThemeProvider initialTheme="light">
+        <Router history={history}>
+          <Switch>
+            {/*
+             * We forward to AppWithTransitions so we can animate the transitions.
+             * Don't put more routes here, instead put them in the
+             * AppWithTransitions component.
+             */}
+            <Route path="*">
+              <AppWithTransitions />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </VolumeProvider>
   );
 };

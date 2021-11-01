@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
-import darklogo from "../assets/Navy_Gi_Logo_-_Transparent.png";
+import darkLogo from "../assets/Navy_Gi_Logo_-_Transparent.png";
+import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
  * @desc Renders Landing page of the site
  * @author Abraham Hernandez
  */
 const Landing = () => {
+  const { theme, setTheme } = useContext(ThemeSwitch);
+
   return (
     <>
       <Helmet>
@@ -15,7 +19,19 @@ const Landing = () => {
       </Helmet>
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-20">
-          <img clasName="scale-50" src={darklogo} />
+          {theme === "dark" ? (
+            <div
+              aria-label="Knight Hacks logo"
+              className={`
+                bg-knight-hacks-logo
+                w-full h-20 md:h-28 lg:h-36 bg-no-repeat
+                my-2 md:my-4 bg-center
+                font-palanquin"
+                `}
+            />
+          ) : (
+            <img className="w-4/5 md:w-10/12 lg:5/12" src={darkLogo} />
+          )}
           <p className="mt-4 text-xl w-full text-center font-palanquinbold">
             November 12th - November 14th, 2021
           </p>
@@ -34,6 +50,8 @@ const Landing = () => {
               focus:outline-none
               focus:ring-4
               focus:ring-darkblue
+              dark:border-purewhite
+              dark:focus:ring-purewhite
             `}
             to="/register"
           >
@@ -61,6 +79,8 @@ const Landing = () => {
                 focus:ring-4
                 focus:ring-darkblue
                 shadow-sm
+                dark:border-purewhite
+                dark:focus:ring-purewhite
               `}
             >
               <span
@@ -93,6 +113,8 @@ const Landing = () => {
                 focus:ring-4
                 focus:ring-darkblue
                 shadow-sm
+                dark:border-purewhite
+                dark:focus:ring-purewhite
               `}
             >
               <span
@@ -125,6 +147,8 @@ const Landing = () => {
               focus:ring-4
               focus:ring-darkblue
               shadow-sm
+              dark:border-purewhite
+              dark:focus:ring-purewhite
             `}
           >
             <span

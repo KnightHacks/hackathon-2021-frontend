@@ -1,6 +1,6 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     textColor: {
       darkblue: "#0B2D4F",
@@ -38,11 +38,15 @@ module.exports = {
       },
       backgroundImage: (theme) => ({
         "koi-fish-pond": "url('/src/assets/KoiFishPond.png')",
+        "koi-fish-pond-dark": "url('/src/assets/KoiFishPondDark.png')",
         "knight-hacks-logo": "url('/src/assets/KnightHacksLogo.svg')",
+        "knight-hacks-dark-logo":
+          "url('/src/assets/Navy_Gi_Logo_-_Transparent.png')",
       }),
       backgroundColor: (theme) => ({
         "landing-transparent": "rgba(191, 219, 254, 0.2)",
         "menu-transparent": "rgba(96, 165, 250, 0.6)",
+        "menu-transparent-dark": "rgba(5, 64, 138, 0.6)",
         "opaque-blue": "rgba(159, 211, 233, 0.47)",
         ...theme("textColor"),
       }),
@@ -62,6 +66,8 @@ module.exports = {
       backgroundColor: ["active", "checked"],
       textDecoration: ["focus-visible"],
       borderColor: ["checked"],
+      backgroundImage: ["dark"],
+      transitionDuration: ["dark"],
     },
   },
   plugins: [
