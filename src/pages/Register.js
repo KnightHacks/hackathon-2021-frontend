@@ -211,7 +211,7 @@ const Register = () => {
               Get off your phone!
             </div>
             <div className="w-3/5 text-center font-palanquin text-xl break-words sm:text-2xl xl:text-3xl my-4">
-              Head over to our web view to register early.
+              Head over to our web view to register.
             </div>
           </div>
         </Page>
