@@ -57,10 +57,10 @@ const Sponsors = () => {
         Our Sponsors
       </h1>
       <div className="mt-14 divide-none font-sansita text-center text-2xl">
-        <div>━━━━━━━━ Gold ━━━━━━━━</div>
+        <div className="text-lg md:text-2xl">━━━━━━━━ Gold ━━━━━━━━</div>
         <div className="mt-6 mx-4 grid grid-cols-3 justify-items-center">
           <div className="self-center col-span-3">
-            <img className="h-24" src={Microsoft} />
+            <img className="h-auto" src={Microsoft} />
           </div>
           <div>
             <img src={Mantech} />
@@ -73,7 +73,7 @@ const Sponsors = () => {
           </div>
         </div>
         <div className="mt-6">
-          <div>━━━━━━━━ Silver ━━━━━━━━</div>
+          <div className="text-lg md:text-2xl">━━━━━━━━ Silver ━━━━━━━━</div>
           <div className="mt-6 ml-12 grid grid-cols-2 justify-items-center">
             <div className="self-center">
               <img className="w-66" src={TIStacked} />
@@ -84,19 +84,19 @@ const Sponsors = () => {
           </div>
         </div>
         <div className="mt-6">
-          <div>━━━━━━━━ Bronze ━━━━━━━━</div>
+          <div className="text-lg md:text-2xl">━━━━━━━ Bronze ━━━━━━━</div>
           <div className="mt-6 ml-12 grid grid-cols-3 justify-items-center">
             <div className=" self-center ">
               <img src={echo3D} />
             </div>
             <div className="col-span-2 ">
-              <img className="h-24" src={Google} />
+              <img className="h-auto" src={Google} />
             </div>
             <div className="col-span-2 mt-4">
               <img src={synopsys} />
             </div>
             <div>
-              <img className="h-24" src={EA} />
+              <img className="h-auto md:h-24" src={EA} />
             </div>
             <div className="col-span-3">
               <img className="w-66" src={Learner} />
@@ -104,12 +104,15 @@ const Sponsors = () => {
           </div>
         </div>
         <div className="mt-6 mb-20">
-          <div>Partner Organizations</div>
+          <div className="text-xl md:text-2xl">Partner Organizations</div>
           <div className="mt-6 ml-12 grid grid-cols-1 justify-items-center">
             <div className="mt-6 self-center">
-              <img className="transform scale-100" src={CareerServices} />
+              <img
+                className="transform scale-100 2xl:scale-125"
+                src={CareerServices}
+              />
             </div>
-            <div className="self-center col-span-2 mt-6">
+            <div className="self-center col-span-2 mt-12">
               <img className="h-3/5" src={CECS} />
             </div>
           </div>
