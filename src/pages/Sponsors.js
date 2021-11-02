@@ -60,26 +60,38 @@ const Sponsors = () => {
         <div className="text-lg md:text-2xl">━━━━━━━━ Gold ━━━━━━━━</div>
         <div className="mt-6 mx-4 grid grid-cols-3 justify-items-center">
           <div className="self-center col-span-3">
-            <img className="h-auto" src={Microsoft} />
+            <a href="https://www.microsoft.com/university">
+              <img className="h-auto" src={Microsoft} />
+            </a>
           </div>
           <div>
-            <img src={Mantech} />
+            <a href="https://www.mantech.com/students-and-new-graduates">
+              <img src={Mantech} />
+            </a>
           </div>
           <div className=" self-center">
-            <img src={darkFacebook} />
+            <a href="https://www.facebook.com/careers/students-and-grads/">
+              <img src={darkFacebook} />
+            </a>
           </div>
           <div>
-            <img className="p-2" src={NSIN} />
+            <a href="https://www.nsin.mil/">
+              <img className="p-2" src={NSIN} />
+            </a>
           </div>
         </div>
         <div className="mt-6">
           <div className="text-lg md:text-2xl">━━━━━━━━ Silver ━━━━━━━━</div>
           <div className="mt-6 ml-12 grid grid-cols-2 justify-items-center">
             <div className="self-center">
-              <img className="w-66" src={TIStacked} />
+              <a href="https://careers.ti.com/">
+                <img className="w-66" src={TIStacked} />
+              </a>
             </div>
             <div>
-              <img className="h-36" src={GSPrimary} />
+              <a href="https://gs.com/careers/">
+                <img className="h-36" src={GSPrimary} />
+              </a>
             </div>
           </div>
         </div>
@@ -87,19 +99,29 @@ const Sponsors = () => {
           <div className="text-lg md:text-2xl">━━━━━━━ Bronze ━━━━━━━</div>
           <div className="mt-6 ml-12 grid grid-cols-3 justify-items-center">
             <div className=" self-center ">
-              <img src={echo3D} />
+              <a href="https://www.echo3d.co/">
+                <img src={echo3D} />
+              </a>
             </div>
             <div className="col-span-2 ">
-              <img className="h-auto" src={Google} />
+              <a href="https://careers.google.com/students/">
+                <img className="h-auto" src={Google} />
+              </a>
             </div>
             <div className="col-span-2 mt-4">
-              <img src={synopsys} />
+              <a href="https://www.synopsys.com/careers.html">
+                <img src={synopsys} />
+              </a>
             </div>
             <div>
-              <img className="h-auto md:h-24" src={EA} />
+              <a href="https://www.ea.com/careers/students">
+                <img className="h-auto md:h-24" src={EA} />
+              </a>
             </div>
             <div className="col-span-3">
-              <img className="w-66" src={Learner} />
+              <a href="https://linktr.ee/leadinglearners">
+                <img className="w-66" src={Learner} />
+              </a>
             </div>
           </div>
         </div>
@@ -107,13 +129,17 @@ const Sponsors = () => {
           <div className="text-xl md:text-2xl">Partner Organizations</div>
           <div className="mt-6 ml-12 grid grid-cols-1 justify-items-center">
             <div className="mt-6 self-center">
-              <img
-                className="transform scale-100 2xl:scale-125"
-                src={CareerServices}
-              />
+              <a href="https://career.ucf.edu/">
+                <img
+                  className="transform scale-100 2xl:scale-125"
+                  src={CareerServices}
+                />
+              </a>
             </div>
             <div className="self-center col-span-2 mt-12">
-              <img className="h-3/5" src={CECS} />
+              <a href="https://www.cecs.ucf.edu/">
+                <img className="h-3/5" src={CECS} />
+              </a>
             </div>
           </div>
         </div>
