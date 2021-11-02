@@ -18,6 +18,7 @@ import Mantech from "../assets/sponsors/Mantech.png";
 import NSIN from "../assets/sponsors/NSIN.png";
 import echo3D from "../assets/sponsors/echo3Dwhite.png";
 import GSPrimary from "../assets/sponsors/GSPrimary.jpg";
+import StickerMule from "../assets/sponsors/stickermule-stacked.png";
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
@@ -118,9 +119,14 @@ const Sponsors = () => {
                 <img className="h-auto md:h-24" src={EA} />
               </a>
             </div>
-            <div className="col-span-3">
+            <div className="self-start">
+              <a href="https://www.stickermule.com/">
+                <img src={StickerMule} />
+              </a>
+            </div>
+            <div className="col-span-2 self-center">
               <a href="https://linktr.ee/leadinglearners">
-                <img className="w-66" src={Learner} />
+                <img src={Learner} />
               </a>
             </div>
           </div>
