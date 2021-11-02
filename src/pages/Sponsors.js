@@ -3,16 +3,21 @@ import { Helmet } from "react-helmet";
 // for testing only, not for final production
 import TestLogo from "../assets/KnightHacksLogo.svg";
 import Facebook from "../assets/sponsors/FBLogo.png";
+import darkFacebook from "../assets/sponsors/miniFB.png";
 import EA from "../assets/sponsors/EA.png";
 import Google from "../assets/sponsors/GoogleCloud.png";
-import UCF from "../assets/sponsors/UCF.png";
+import CareerServices from "../assets/sponsors/UCF.png";
+import CECS from "../assets/sponsors/CECS.png";
 import TI from "../assets/sponsors/TI.png";
+import TIStacked from "../assets/sponsors/TexasInstruments.png";
 import Learner from "../assets/sponsors/Learner.png";
 import synopsys from "../assets/sponsors/synopsys.png";
 import NewEa from "../assets/sponsors/newEA.png";
 import Microsoft from "../assets/sponsors/microsoft.png";
 import Mantech from "../assets/sponsors/Mantech.png";
 import NSIN from "../assets/sponsors/NSIN.png";
+import echo3D from "../assets/sponsors/echo3Dwhite.png";
+import GSPrimary from "../assets/sponsors/GSPrimary.jpg";
 /**
  * @desc sponsors page; still WIP since we are waiting on sponsors
  * @author Rob
@@ -51,48 +56,62 @@ const Sponsors = () => {
       >
         Our Sponsors
       </h1>
-      <div className="mt-14 divide-none font-sansitaregular text-center text-2xl">
-        <div>
-          Gold
-          <div className="flex flex-col -space-y-20 items-center">
-            <img
-              className="transform scale-50"
-              src={Microsoft}
-              alt="Microsoft"
-            />
-            <img className="transform scale-50" src={Mantech} alt="Mantech" />
-            <img
-              className="transform scale-50"
-              src={NSIN}
-              alt="National Security Innovation Network"
-            />
-            <img className="transform scale-75" src={Facebook} alt="Facebook" />
+      <div className="mt-14 divide-none font-sansita text-center text-2xl">
+        <div>━━━━━━━━ Gold ━━━━━━━━</div>
+        <div className="mt-6 mx-4 grid grid-cols-3 justify-items-center">
+          <div className="self-center col-span-3">
+            <img className="h-24" src={Microsoft} />
+          </div>
+          <div>
+            <img src={Mantech} />
+          </div>
+          <div className=" self-center">
+            <img src={darkFacebook} />
+          </div>
+          <div>
+            <img className="p-2" src={NSIN} />
           </div>
         </div>
         <div className="mt-6">
-          Silver
-          <img
-            className="transform scale-75"
-            src={TI}
-            alt="Texas Instruments"
-          />
+          <div>━━━━━━━━ Silver ━━━━━━━━</div>
+          <div className="mt-6 ml-12 grid grid-cols-2 justify-items-center">
+            <div className="self-center">
+              <img className="w-66" src={TIStacked} />
+            </div>
+            <div>
+              <img className="h-36" src={GSPrimary} />
+            </div>
+          </div>
         </div>
         <div className="mt-6">
-          Bronze
-          <div className="flex flex-col -space-y-12 items-center">
-            <img
-              className="transform scale-50"
-              src={Google}
-              alt="Google Cloud"
-            />
-            <img className="transform scale-50" src={synopsys} alt="Synopsys" />
-            <img className="mt-20" src={EA} alt="Electronic Arts" />
+          <div>━━━━━━━━ Bronze ━━━━━━━━</div>
+          <div className="mt-6 ml-12 grid grid-cols-3 justify-items-center">
+            <div className=" self-center ">
+              <img src={echo3D} />
+            </div>
+            <div className="col-span-2 ">
+              <img className="h-24" src={Google} />
+            </div>
+            <div className="col-span-2 mt-4">
+              <img src={synopsys} />
+            </div>
+            <div>
+              <img className="h-24" src={EA} />
+            </div>
+            <div className="col-span-3">
+              <img className="w-66" src={Learner} />
+            </div>
           </div>
         </div>
         <div className="mt-6 mb-20">
-          Partner Organizations
-          <div className="flex flex-col -space-y-12 items-center">
-            <img className="transform my-6 scale-100" src={UCF} alt="UCF" />
+          <div>Partner Organizations</div>
+          <div className="mt-6 ml-12 grid grid-cols-1 justify-items-center">
+            <div className="mt-6 self-center">
+              <img className="transform scale-100" src={CareerServices} />
+            </div>
+            <div className="self-center col-span-2 mt-6">
+              <img className="h-3/5" src={CECS} />
+            </div>
           </div>
         </div>
       </div>
