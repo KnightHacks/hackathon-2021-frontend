@@ -113,52 +113,52 @@ const Menu = ({ open, setOpen }) => {
                       <Link
                         to="/"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         Home
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/about"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         About
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/sponsors"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         Sponsors
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/schedule"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         Schedule
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/faq"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         FAQ
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
+                    <li className="m-2 inline-block">
                       <Link
                         to="/register"
                         onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
+                        className="focus:outline-none hover:text-blue-200 focus:underline"
                       >
                         Register
                       </Link>
