@@ -58,75 +58,76 @@ const Sponsors = () => {
         Our Sponsors
       </h1>
       <div className="mt-14 divide-none font-sansita text-center text-2xl">
-        <div className="text-lg md:text-2xl">━━━━━━━━ Gold ━━━━━━━━</div>
-        <div className="mt-6 mx-4 grid grid-cols-3 justify-items-center">
-          <div className="self-center col-span-3">
+        <div className="text-lg md:text-2xl">━━━━━━━ Gold ━━━━━━━</div>
+        <div className="mt-6 mx-4 grid grid-cols-1 justify-items-center">
+          <div className="self-center ">
             <a href="https://www.microsoft.com/university">
-              <img className="h-auto" src={Microsoft} />
+              <img className="h-20" src={Microsoft} />
             </a>
           </div>
           <div>
             <a href="https://www.mantech.com/students-and-new-graduates">
-              <img src={Mantech} />
+              <img className="h-32" src={Mantech} />
             </a>
           </div>
           <div className=" self-center">
             <a href="https://www.facebook.com/careers/students-and-grads/">
-              <img src={darkFacebook} />
+              <img className="h-auto md:h-20" src={darkFacebook} />
             </a>
           </div>
           <div>
             <a href="https://www.nsin.mil/">
-              <img className="p-2" src={NSIN} />
+              <img className="p-2 mt-6 h-36" src={NSIN} />
             </a>
           </div>
         </div>
         <div className="mt-6">
-          <div className="text-lg md:text-2xl">━━━━━━━━ Silver ━━━━━━━━</div>
-          <div className="mt-6 ml-12 grid grid-cols-2 justify-items-center">
+          <div className="text-lg md:text-2xl">━━━━━━━ Silver ━━━━━━━</div>
+          <div className="mt-6 ml-12 grid grid-cols-1 justify-items-center">
             <div className="self-center">
               <a href="https://careers.ti.com/">
-                <img className="w-66" src={TIStacked} />
+                <img className="w-72" src={TIStacked} />
               </a>
             </div>
             <div>
               <a href="https://gs.com/careers/">
-                <img className="h-36" src={GSPrimary} />
+                <img className="h-36 mt-4" src={GSPrimary} />
               </a>
             </div>
           </div>
         </div>
         <div className="mt-6">
-          <div className="text-lg md:text-2xl">━━━━━━━ Bronze ━━━━━━━</div>
-          <div className="mt-6 ml-12 grid grid-cols-3 justify-items-center">
-            <div className=" self-center ">
-              <a href="https://www.echo3d.co/">
-                <img src={echo3D} />
-              </a>
-            </div>
-            <div className="col-span-2 ">
+          <div className="text-lg md:text-2xl">━━━━━━ Bronze ━━━━━━</div>
+          <div className="mt-6 ml-6 grid grid-cols-1 justify-items-center">
+            <div>
               <a href="https://careers.google.com/students/">
-                <img className="h-auto" src={Google} />
+                <img className="h-auto md:h-24" src={Google} />
               </a>
             </div>
-            <div className="col-span-2 mt-4">
+            <div className="self-center">
+              <a href="https://www.echo3d.co/">
+                <img className="w-60" src={echo3D} />
+              </a>
+            </div>
+            <div>
               <a href="https://www.synopsys.com/careers.html">
-                <img src={synopsys} />
+                <img className="mt-8 h-16" src={synopsys} />
+              </a>
+            </div>
+
+            <div className="self-start">
+              <a href="https://www.stickermule.com/">
+                <img className="h-28" src={StickerMule} />
+              </a>
+            </div>
+            <div className="self-center">
+              <a href="https://linktr.ee/leadinglearners">
+                <img src={Learner} />
               </a>
             </div>
             <div>
               <a href="https://www.ea.com/careers/students">
-                <img className="h-auto md:h-24" src={EA} />
-              </a>
-            </div>
-            <div className="self-start">
-              <a href="https://www.stickermule.com/">
-                <img src={StickerMule} />
-              </a>
-            </div>
-            <div className="col-span-2 self-center">
-              <a href="https://linktr.ee/leadinglearners">
-                <img src={Learner} />
+                <img className="h-24" src={EA} />
               </a>
             </div>
           </div>
