@@ -30,7 +30,7 @@ const Page = ({ children, title }) => {
         className="absolute bottom-0 top-0 left-0 right-0"
         autoplay
         loop
-        rendererSettings={{ preserveAspectRatio: "none meet" }}
+        rendererSettings={{ preserveAspectRatio: "xMinYMin slice" }}
         background="white"
         src={LightAnimation}
         style={{
@@ -43,9 +43,6 @@ const Page = ({ children, title }) => {
           position: "absolute",
           height: "100vh",
           width: "100vw",
-          backgroundSize: "100% 100%",
-          overflow: "auto",
-          objectFit: "contain",
         }}
       />
       <div
