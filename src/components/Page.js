@@ -7,6 +7,9 @@ import { RiMoonClearLine } from "react-icons/ri";
 import { BiSun } from "react-icons/bi";
 import { Helmet } from "react-helmet";
 import { ThemeSwitch } from "../context/ThemeSwitch";
+import LightAnimation from "../assets/lotties/light_mode";
+import DarkAnimation from "../assets/lotties/dark_mode";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 /**
  * @desc Renders template layout for all pages
@@ -23,9 +26,22 @@ const Page = ({ children, title }) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
+      <Player
+        className="absolute bottom-0 top-0 left-0 right-0"
+        autoplay
+        loop
+        background="black"
+        src={LightAnimation}
+        style={{
+          height: "inherit",
+          width: "100%",
+          backgroundSize: "contain",
+          overflow: "auto",
+        }}
+      />
       <div
         className={
-          "absolute bg-koi-fish-pond dark:bg-koi-fish-pond-dark transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
+          "absolute dark:bg-koi-fish-pond-dark transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
           (open ? "filter blur-md" : "")
         }
       >
