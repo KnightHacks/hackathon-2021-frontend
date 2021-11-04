@@ -30,13 +30,21 @@ const Page = ({ children, title }) => {
         className="absolute bottom-0 top-0 left-0 right-0"
         autoplay
         loop
-        background="black"
+        background="white"
         src={LightAnimation}
         style={{
-          height: "inherit",
-          width: "100%",
-          backgroundSize: "contain",
+          margin: 0,
+          padding: 0,
+          bottom: 0,
+          top: 0,
+          right: 0,
+          left: 0,
+          position: "absolute",
+          height: "100vh",
+          width: "100vw",
+          backgroundSize: "100% 100%",
           overflow: "auto",
+          objectFit: "contain",
         }}
       />
       <div
