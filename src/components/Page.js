@@ -30,6 +30,7 @@ const Page = ({ children, title }) => {
         className="absolute bottom-0 top-0 left-0 right-0"
         autoplay
         loop
+        rendererSettings={{ preserveAspectRatio: "none meet" }}
         background="white"
         src={LightAnimation}
         style={{
