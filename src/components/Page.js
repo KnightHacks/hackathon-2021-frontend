@@ -27,12 +27,12 @@ const Page = ({ children, title }) => {
         <title>{title}</title>
       </Helmet>
       <Player
-        className="absolute bottom-0 top-0 left-0 right-0"
+        className=" transition-all duration-500 ease-in-out absolute bottom-0 top-0 left-0 right-0"
         autoplay
         loop
         rendererSettings={{ preserveAspectRatio: "xMinYMin slice" }}
-        background="white"
-        src={LightAnimation}
+        background="black"
+        src={theme === "dark" ? DarkAnimation : LightAnimation}
         style={{
           margin: 0,
           padding: 0,
@@ -47,7 +47,7 @@ const Page = ({ children, title }) => {
       />
       <div
         className={
-          "absolute dark:bg-koi-fish-pond-dark transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
+          "absolute transition-all duration-500 ease-in-out bg-no-repeat bg-cover w-full h-screen flex flex-col items-center sm:items-center sm:grid sm:grid-cols-5 sm:grid-rows-1 sm:grid-flow-col sm:gap-0 " +
           (open ? "filter blur-md" : "")
         }
       >
