@@ -154,15 +154,6 @@ const Menu = ({ open, setOpen }) => {
                         FAQ
                       </Link>
                     </li>
-                    <li className="mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
-                      <Link
-                        to="/register"
-                        onClick={() => setOpen(false)}
-                        className="focus:outline-none focus:ring focus:border-blue-300 px-2"
-                      >
-                        Register
-                      </Link>
-                    </li>
                     <li className=" mt-4 inline-block hover:text-5xl sm:hover:text-6xl hover:transition ease-linear duration-700">
                       <Link
                         to="/attributions"
