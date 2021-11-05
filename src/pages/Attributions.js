@@ -27,8 +27,8 @@ const About = () => {
             <br />
             {""}
             <br />
-            Chinese traditional musicå¤é£Žä¹æ›²--for loveç¼ ç»µæ‚±æ» free By
-            dragonfly & River Current By Back Pocket Sound mix
+            Chinese traditional free By dragonfly & River Current By Back Pocket
+            Sound mix
             <br />
             {""}
             <br />
