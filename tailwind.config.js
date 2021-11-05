@@ -64,6 +64,8 @@ module.exports = {
         "knight-hacks-logo": "url('/src/assets/KnightHacksLogo.svg')",
         "knight-hacks-dark-logo":
           "url('/src/assets/Navy_Gi_Logo_-_Transparent.png')",
+        "anim-koi-fish-pond-light":
+          "url('/src/assets/lotties/light_mode.json')",
       }),
       backgroundColor: (theme) => ({
         "landing-transparent": "rgba(191, 219, 254, 0.2)",

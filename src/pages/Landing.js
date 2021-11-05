@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Page from "../components/Page";
 import darkLogo from "../assets/Navy_Gi_Logo_-_Transparent.png";
+import whiteLogo from "../assets/whitelogo.png";
 import { ThemeSwitch } from "../context/ThemeSwitch";
 
 /**
@@ -19,19 +20,10 @@ const Landing = () => {
       </Helmet>
       <Page onLanding={true}>
         <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-20">
-          {theme === "dark" ? (
-            <div
-              aria-label="Knight Hacks logo"
-              className={`
-                bg-knight-hacks-logo
-                w-full h-20 md:h-28 lg:h-36 bg-no-repeat
-                my-2 md:my-4 bg-center
-                font-palanquin"
-                `}
-            />
-          ) : (
-            <img className="w-4/5 md:w-10/12 lg:5/12" src={darkLogo} />
-          )}
+          <img
+            className="w-4/5 md:w-10/12 lg:5/12"
+            src={theme === "dark" ? whiteLogo : darkLogo}
+          />
           <p className="mt-4 text-xl w-full text-center font-palanquinbold">
             November 12th - November 14th, 2021
           </p>
