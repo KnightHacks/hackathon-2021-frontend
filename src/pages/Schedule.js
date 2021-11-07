@@ -9,7 +9,7 @@ import ColorHash from "color-hash";
 
 const hash = new ColorHash({ lightness: 0.8 });
 const Schedule = () => {
-  const scheduleIncomplete = true;
+  const scheduleIncomplete = false;
 
   if (scheduleIncomplete) {
     return (
@@ -45,7 +45,7 @@ const Schedule = () => {
                 <>
                   <div key={index} className="mb-5">
                     <div className=" mb-1 text-base space-x-4 sm:text-lg md:text-xl xl:text-2xl font-palanquin">
-                      <span className="font-palanquin"> {item.time} </span>{" "}
+                      <span className="font-palanquinbold"> {item.time} </span>{" "}
                       <span> {item.title} </span>
                     </div>
                     {/* Mapping through each string in the tags array in JSON */}
@@ -53,21 +53,12 @@ const Schedule = () => {
                       <span
                         key={index}
                         style={{ backgroundColor: hash.hex(tag) }}
-                        className="font-palanquin rounded-full px-2 py-1 mr-2 text-gray-600"
+                        className="font-palanquin rounded-full px-3 py-.5  mr-2 sm:mt-6 text-gray-600"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  {item.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      style={{ backgroundColor: hash.hex(tag) }}
-                      className="font-palanquin rounded-full px-2 py-1 mr-2 text-gray-600"
-                    >
-                      {tag}
-                    </span>
-                  ))}
                 </>
               ))}
             </div>

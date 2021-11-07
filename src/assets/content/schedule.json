@@ -3,32 +3,32 @@
     "dayName": "Friday",
     "events": [
       {
-        "time": " 6:30 PM",
-        "title": "Check In",
-        "tags": ["Beginner", "Tag"]
+        "time": " 4:00 - 5:00 PM",
+        "title": "Team Building",
+        "tags": ["General"]
       },
       {
-        "time": "7:00 PM",
-        "title": "Dinner",
-        "tags": ["Beginner"]
+        "time": "5:00 - 6:00 PM",
+        "title": "Opening Ceremony",
+        "tags": ["General"]
       },
       {
-        "time": "8:00 PM",
-        "title": "Check In Ends",
-        "tags": ["General Event"]
+        "time": "6:30 - 8:30 PM",
+        "title": "Career Fair",
+        "tags": ["General"]
       },
       {
-        "time": "8:30 PM",
-        "title": "Opening Ceremonies",
-        "tags": ["Social"]
+        "time": "9:00 - 10:00 PM",
+        "title": "Intro to Javascript",
+        "tags": ["Beginner", "Web Development"]
       },
       {
-        "time": "9:30 PM",
-        "title": "Sponsorship Fair",
-        "tags": ["Mini-Competition"]
+        "time": "9:00 - 10:00 PM",
+        "title": "Intro to Python",
+        "tags": ["Beginner", "Backend"]
       },
       {
-        "time": "10:30 PM",
+        "time": "10:30 - 11:30 PM",
         "title": "Hacking Begins",
         "tags": ["Non-Technical Workshop"]
       }
