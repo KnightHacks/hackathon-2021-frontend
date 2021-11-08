@@ -28,7 +28,7 @@ const Landing = () => {
             November 12th - November 14th, 2021
           </p>
           <p className="mt-4 text-md w-full text-center font-sansitaitalic">
-            Registration is now closed. We welcome our 550+ hackers, mentors,
+            Registration is now closed. We welcome our 500+ hackers, mentors,
             and judges to Knight Hacks!
           </p>
           <div className="flex flex-col md:flex-row">
