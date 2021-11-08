@@ -15,22 +15,32 @@
       {
         "time": "6:30 - 8:30 PM",
         "title": "Career Fair",
-        "tags": ["General"]
+        "tags": []
       },
       {
         "time": "9:00 - 10:00 PM",
-        "title": "Intro to Javascript",
-        "tags": ["Beginner", "Web Development"]
+        "title": "Javascript: Everything I Can Fit in One Hour",
+        "tags": ["Backend", "Frontend", "Beginner"]
       },
       {
         "time": "9:00 - 10:00 PM",
         "title": "Intro to Python",
-        "tags": ["Beginner", "Backend"]
+        "tags": ["Backend", "Beginner"]
+      },
+      {
+        "time": "10:00 PM",
+        "title": "Hacking Begins!",
+        "tags": []
       },
       {
         "time": "10:30 - 11:30 PM",
-        "title": "Hacking Begins",
-        "tags": ["Non-Technical Workshop"]
+        "title": "Introduction to Web Development",
+        "tags": ["Beginner", "Frontend"]
+      },
+      {
+        "time": "10:30 - 11:30 PM",
+        "title": "EA: Info Session",
+        "tags": ["Professional Development"]
       }
     ]
   },
@@ -38,24 +48,119 @@
     "dayName": "Saturday",
     "events": [
       {
-        "time": "12:00 AM",
-        "title": "Midnight Snack",
-        "tags": ["Food"]
+        "time": "12:00 - 1:00 AM",
+        "title": "UI/UX Design with Figma",
+        "tags": ["Non-Technical", "Beginner", "Entrepreneurship"]
       },
       {
-        "time": "8:00 AM",
-        "title": "Breakfast",
-        "tags": ["Food"]
+        "time": "12:00 - 1:30 AM",
+        "title": "Introduction to React.js",
+        "tags": ["Frontend", "Beginner"]
       },
       {
-        "time": "1:00 PM",
-        "title": "Lunch",
-        "tags": ["Food"]
+        "time": "9:00 - 10:00 AM",
+        "title": "How to Turn Your Social Media Into Your Professional Brand",
+        "tags": ["Professional Development", "Non-Technical"]
       },
       {
-        "time": "7:00 PM",
-        "title": "Dinner",
+        "time": "9:00 - 10:00 AM",
+        "title": "Synopsys : Defending the Homeland by Securing the Software",
+        "tags": ["Security", "Backend"]
+      },
+      {
+        "time": "10:00 - 11:00 AM",
+        "title": "ManTech Office Hours: Behavioral Interview Questions AMA",
+        "tags": ["Professional Development"]
+      },
+      {
+        "time": "10:30 - 11:30 AM",
+        "title": "Mobile Development with Flutter",
+        "tags": ["Mobile", "Frontend"]
+      },
+      {
+        "time": "10:30 - 11:30 AM",
+        "title": "Introduction to Unity",
+        "tags": ["Game Development"]
+      },
+      {
+        "time": "12:00 - 1:00 PM",
+        "title": "Networking 101 Hosted by the Co-Founder of Leading Learners",
+        "tags": ["Professional Development", "Entrepenurship"]
+      },
+      {
+        "time": "12:00 - 1:00 PM",
+        "title": "Mini-Event: Chess Tournament",
+        "tags": ["Social"]
+      },
+      {
+        "time": "1:00 - 2:00 PM",
+        "title": "MLH: Bob Ross Painting & CTF",
+        "tags": ["Social"]
+      },
+      {
+        "time": "1:30 - 2:30 PM",
+        "title": "Ethics of Hacking and Coding",
+        "tags": ["Non-Technical", "Security"]
+      },
+      {
+        "time": "3:00 - 4:00 PM",
+        "title": "Introduction to the Linux Command Line",
+        "tags": ["Backend", "Security"]
+      },
+      {
+        "time": "3:00 - 4:00 PM",
+        "title": "Professionalism as an Introvert",
+        "tags": ["Professional Development", "Non-Technical", "Beginner"]
+      },
+      {
+        "time": "3:00 - 4:00 PM",
+        "title": "Mini-Event: BinarySearch Contest",
+        "tags": ["Social"]
+      },
+      {
+        "time": "4:30 - 5:30 PM",
+        "title": "Setting Up a Backend API with Express.js",
+        "tags": ["Backend"]
+      },
+      {
+        "time": "4:30 - 5:30 PM",
+        "title": "Interview tips and tricks from Microsoft",
+        "tags": ["Non-Technical", "Professional Development"]
+      },
+      {
+        "time": "6:00 - 7:00 PM",
+        "title": "Web Design with React.js",
+        "tags": ["Web Development", "Frontend"]
+      },
+      {
+        "time": "6:00 - 7:00 PM",
+        "title": "Getting a Government Clearance and Maintaining It",
+        "tags": ["Backend", "Security"]
+      },
+      {
+        "time": "7:30 - 8:30 PM",
+        "title": "Intro to Git and GitHub",
         "tags": ["Beginner"]
+      },
+      {
+        "time": "7:30 - 8:30 PM",
+        "title": "Hello GraphQL",
+        "tags": ["Backend"]
+      },
+      {
+        "time": "8:00 - 9:00 PM",
+        "title": "Introduction to Geospatial Data Science",
+        "tags": []
+      },
+      {
+        "time": "9:00 - 10:00 PM",
+        "title": "Cybersecurity Maturity Model Certfication (CMMC)",
+        "tags": ["Backend", "Security"]
+      },
+      {
+        "time": "9:00 - 10:00 PM",
+        "title": "Mini-Event: Scratch",
+        "tags": ["Social"]
       }
     ]
   },
@@ -63,34 +168,19 @@
     "dayName": "Sunday",
     "events": [
       {
-        "time": "12:00 AM",
-        "title": "Midnight Snack",
-        "tags": ["Food"]
-      },
-      {
-        "time": "7:30 AM",
-        "title": "Breakfast",
-        "tags": ["Food"]
-      },
-      {
-        "time": "8:30 AM",
-        "title": "Submissions to Devpost",
-        "tags": ["General"]
-      },
-      {
-        "time": "10:30 AM",
-        "title": "Hacking Ends! + Lunch",
-        "tags": ["Social", "Food"]
-      },
-      {
-        "time": "11:00 AM",
-        "title": "Demo Fair",
+        "time": "9:00 AM",
+        "title": "Hacking Stops!",
         "tags": []
       },
       {
-        "time": "2:30 PM",
+        "time": "1:00 - 2:00 PM",
+        "title": "Mini-Event: Among Us",
+        "tags": ["Social"]
+      },
+      {
+        "time": "2:00 - 3:00 PM",
         "title": "Closing Ceremony",
-        "tags": []
+        "tags": ["General"]
       }
     ]
   }

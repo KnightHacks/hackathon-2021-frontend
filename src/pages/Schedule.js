@@ -36,9 +36,9 @@ const Schedule = () => {
         </h1>
         {content.map((event, index) => {
           return (
-            <div key={index} className="ml-24">
-              <p className=" text-2xl sm:text-3xl xl:text-4xl my-4 font-palanquin">
-                {event.day}
+            <div key={index} className="ml-10 lg:ml-24">
+              <p className=" text-2xl sm:text-3xl xl:text-4xl my-4 font-sansita">
+                {event.dayName}
               </p>
               {/* Mapping through the content in each events block in JSON */}
               {event.events.map((item, index) => (
