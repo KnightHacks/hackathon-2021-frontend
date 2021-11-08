@@ -27,6 +27,9 @@ const Landing = () => {
           <p className="mt-4 text-xl w-full text-center font-palanquinbold">
             November 12th - November 14th, 2021
           </p>
+          <p className="text-lg w-full text-center font-palanquinbold">
+            Virtual
+          </p>
           <p className="mt-4 text-md w-full text-center font-sansitaitalic">
             Registration is now closed. We welcome our 500+ hackers, mentors,
             and judges to Knight Hacks!

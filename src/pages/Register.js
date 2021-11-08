@@ -51,6 +51,8 @@ const Register = () => {
     "Spring 2024",
     "Summer 2024",
     "Fall 2024",
+    "Spring 2025",
+    "Fall 2025",
   ];
 
   const CustomOption = ({ children, ...props }) => {
@@ -1056,7 +1058,7 @@ const FileUploadBox = ({ handleFile, title, disabled }) => {
               max-w-xswidth truncate
               hover:border-darkblue
               hover:text-darkblue
-              
+
               flex justify-center
               ease-out duration-300 focus:outline-none focus:ring-4 focus:ring-darkblue dark:focus:ring-purewhite
               `}
