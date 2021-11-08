@@ -19,7 +19,7 @@ const Landing = () => {
         <title>Knight Hacks</title>
       </Helmet>
       <Page onLanding={true}>
-        <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-40">
+        <div className="flex justify-center items-center flex-col w-full mt-auto sm:mt-36">
           <img
             className="w-4/5 md:w-10/12 lg:5/12"
             src={theme === "dark" ? whiteLogo : darkLogo}
@@ -28,7 +28,7 @@ const Landing = () => {
             November 12th - November 14th, 2021
           </p>
           <p className="mt-4 text-md w-full text-center font-sansitaitalic">
-            Registration is now closed. We welcome our 500+ hackers, mentors,
+            Registration is now closed. We welcome our 550+ hackers, mentors,
             and judges to Knight Hacks!
           </p>
           <div className="flex flex-col md:flex-row">
