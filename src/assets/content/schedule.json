@@ -15,6 +15,11 @@
       {
         "time": "6:30 - 8:30 pm",
         "title": "Career Fair",
+        "tags": ["General"]
+      },
+      {
+        "time": "9:00 pm",
+        "title": "Hacking Begins!",
         "tags": []
       },
       {
@@ -26,11 +31,6 @@
         "time": "9:00 - 10:00 pm",
         "title": "Intro to Python",
         "tags": ["Backend", "Beginner"]
-      },
-      {
-        "time": "10:00 pm",
-        "title": "Hacking Begins!",
-        "tags": []
       },
       {
         "time": "10:30 - 11:30 pm",
@@ -64,7 +64,7 @@
       },
       {
         "time": "9:00 - 10:00 am",
-        "title": "Synopsys : Defending the Homeland by Securing the Software",
+        "title": "Synopsys: Defending the Homeland by Securing the Software",
         "tags": ["Security", "Backend"]
       },
       {
@@ -75,7 +75,7 @@
       {
         "time": "10:30 - 11:30 am",
         "title": "Mobile Development with Flutter",
-        "tags": ["Mobile", "Frontend"]
+        "tags": ["Frontend", "Mobile"]
       },
       {
         "time": "10:30 - 11:30 am",
@@ -110,7 +110,7 @@
       {
         "time": "3:00 - 4:00 pm",
         "title": "Professionalism as an Introvert",
-        "tags": ["Professional Development", "Non-Technical", "Beginner"]
+        "tags": ["Professional Development", "Non-Technical"]
       },
       {
         "time": "3:00 - 4:00 pm",
@@ -120,7 +120,7 @@
       {
         "time": "4:30 - 5:30 pm",
         "title": "Setting Up a Backend API with Express.js",
-        "tags": ["Backend"]
+        "tags": ["Backend", "Web Development"]
       },
       {
         "time": "4:30 - 5:30 pm",
@@ -143,14 +143,14 @@
         "tags": ["Beginner"]
       },
       {
-        "time": "7:30 - 8:30 pm",
-        "title": "Hello GraphQL",
-        "tags": ["Backend"]
-      },
-      {
         "time": "8:00 - 9:00 pm",
         "title": "Introduction to Geospatial Data Science",
         "tags": []
+      },
+      {
+        "time": "7:30 - 8:30 pm",
+        "title": "Tech Industry AMA",
+        "tags": ["Professional Development"]
       },
       {
         "time": "9:00 - 10:00 pm",

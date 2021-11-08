@@ -53,7 +53,7 @@ const Schedule = () => {
                       <span
                         key={index}
                         style={{ backgroundColor: hash.hex(tag) }}
-                        className="font-palanquin rounded-full px-3 py-.5  mr-2 sm:mt-6 text-gray-600"
+                        className="font-palanquin rounded-full px-3 py-.5  mr-2 sm:mt-6 text-gray-600 dark:text-darkblue"
                       >
                         {tag}
                       </span>
