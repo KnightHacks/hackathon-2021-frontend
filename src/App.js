@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import Register from "./pages/Register";
 import Attributions from "./pages/Attributions";
 import Success from "./pages/Success";
+import BrokenLink from "./pages/BrokenLink";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useLocation } from "react-router-dom";
@@ -57,7 +58,7 @@ const AppWithTransitions = () => {
           <Route path="/sponsors" component={Sponsors} />
           <Route path="/schedule" component={Schedule} />
           <Route path="/faq" component={FAQ} />
-          <Route path="/register" component={Register} />
+          <Route path="/register" component={BrokenLink} />
           <Route path="/attributions" component={Attributions} />
           <Route path="/success" component={Success} />
         </Switch>
