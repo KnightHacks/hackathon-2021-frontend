@@ -31,7 +31,7 @@ const Landing = () => {
             Virtual
           </p>
           <p className="mt-4 text-md w-full text-center font-sansitaitalic">
-            Registration is now closed. We welcome our 500+ hackers, mentors,
+            Registration is now closed. We welcome our 600+ hackers, mentors,
             and judges to Knight Hacks!
           </p>
           <div className="flex flex-col md:flex-row">
