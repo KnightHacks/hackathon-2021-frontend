@@ -77,7 +77,6 @@ module.exports = {
       fontFamily: {
         sansita: ["Sansita Black Italic", "sans-serif"],
         sansitaregular: ["Sansita Regular", "sans-serif"],
-        sansitaitalic: ["Sansita Italic", "sans-serif"],
         palanquin: ["Palanquin Light", "sans-serif"],
         palanquinregular: ["Palanquin Regular", "sans-serif"],
         palanquinbold: ["Palanquin Bold", "sans-serif"],
