@@ -59,6 +59,7 @@ const AppWithTransitions = () => {
           <Route path="/schedule" component={Schedule} />
           <Route path="/faq" component={FAQ} />
           <Route path="/register" component={BrokenLink} />
+          <Route path="/late" component={Register} />
           <Route path="/attributions" component={Attributions} />
           <Route path="/success" component={Success} />
         </Switch>
